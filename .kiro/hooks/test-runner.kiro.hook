@@ -1,0 +1,16 @@
+{
+  "enabled": true,
+  "name": "Test Runner",
+  "description": "Kjører automatisk tester når Python-filer lagres og gir umiddelbar tilbakemelding på kodekvalitet",
+  "version": "1",
+  "when": {
+    "type": "fileEdited",
+    "patterns": [
+      "**/*.py"
+    ]
+  },
+  "then": {
+    "type": "askAgent",
+    "prompt": "A Python file has been modified. Please run the appropriate tests for this file and provide feedback on code quality. Check for syntax errors, run unit tests, and report any issues found. Focus on the specific file that was changed and related test files."
+  }
+}
