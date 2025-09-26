@@ -97,6 +97,9 @@ Project structure is established with all modules created and dependencies insta
   - Display boundary orientation, surface type, and adjacent spaces/elements
   - Show related building elements and their material properties
   - Implement clear visual identification of what each boundary represents
+
+
+
   - Handle cases where space boundaries are missing or incomplete
   - Write unit tests for boundary area calculations and UI display
   - _Requirements: 2.3, 2.7, 2.10, 7.2, 7.3, 7.5, 7.7, 7.8_
@@ -104,6 +107,9 @@ Project structure is established with all modules created and dependencies insta
 - [ ] 7. Create PyQt surface and boundary description editor
   - Build SurfaceEditorWidget using QTextEdit for surface descriptions
   - Extend editor to handle space boundary descriptions
+
+
+
   - Implement real-time saving of both surface and boundary descriptions
   - Add QValidator for user input validation with error messages
   - Ensure descriptions persist when navigating between spaces
@@ -111,10 +117,15 @@ Project structure is established with all modules created and dependencies insta
   - Write integration tests for description editing workflow
   - _Requirements: 2.4, 2.5, 4.4, 5.3_
 
+
+
 - [ ] 8. Implement IFC relationship parsing
   - Parse relationships between IFC spaces and other entities using IfcOpenShell
   - Extract GUID, Name, and Description for related entities
   - Categorize relationships by type (contains, adjacent, serves)
+
+
+
   - Handle cases where no relationships exist
   - Write unit tests for relationship parsing and categorization
   - _Requirements: 6.1, 6.2, 6.3, 6.5_

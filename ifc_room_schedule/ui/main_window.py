@@ -18,6 +18,7 @@ from ..parser.ifc_space_extractor import IfcSpaceExtractor
 from ..parser.ifc_surface_extractor import IfcSurfaceExtractor
 from .space_list_widget import SpaceListWidget
 from .space_detail_widget import SpaceDetailWidget
+from .surface_editor_widget import SurfaceEditorWidget
 
 
 class MainWindow(QMainWindow):
@@ -157,7 +158,7 @@ class MainWindow(QMainWindow):
         left_panel.setMaximumWidth(450)
         self.main_splitter.addWidget(left_panel)
         
-        # Right panel: Space details with enhanced container
+        # Right panel: Space details and editor with enhanced container
         right_panel = QWidget()
         right_panel.setStyleSheet("""
             QWidget {
@@ -168,9 +169,30 @@ class MainWindow(QMainWindow):
         right_layout.setContentsMargins(8, 8, 8, 8)
         right_panel.setLayout(right_layout)
         
-        self.space_detail_widget = SpaceDetailWidget()
-        right_layout.addWidget(self.space_detail_widget)
+        # Create horizontal splitter for details and editor
+        self.details_splitter = QSplitter(Qt.Orientation.Horizontal)
+        self.details_splitter.setStyleSheet("""
+            QSplitter::handle {
+                background-color: #dee2e6;
+                width: 2px;
+            }
+            QSplitter::handle:hover {
+                background-color: #adb5bd;
+            }
+        """)
         
+        # Space details widget
+        self.space_detail_widget = SpaceDetailWidget()
+        self.details_splitter.addWidget(self.space_detail_widget)
+        
+        # Surface editor widget
+        self.surface_editor_widget = SurfaceEditorWidget()
+        self.details_splitter.addWidget(self.surface_editor_widget)
+        
+        # Set proportions (60% details, 40% editor)
+        self.details_splitter.setSizes([600, 400])
+        
+        right_layout.addWidget(self.details_splitter)
         self.main_splitter.addWidget(right_panel)
         
         # Set splitter proportions (30% left, 70% right)
@@ -499,6 +521,10 @@ class MainWindow(QMainWindow):
         self.space_detail_widget.surface_selected.connect(self.on_surface_selected)
         self.space_detail_widget.boundary_selected.connect(self.on_boundary_selected)
         
+        # Connect surface editor signals
+        self.surface_editor_widget.surface_description_changed.connect(self.on_surface_description_changed)
+        self.surface_editor_widget.boundary_description_changed.connect(self.on_boundary_description_changed)
+        
     def load_ifc_file(self):
         """Open file dialog and load selected IFC file."""
         file_dialog = QFileDialog(self)
@@ -703,6 +729,11 @@ class MainWindow(QMainWindow):
         if selected_space:
             # Display space details
             self.space_detail_widget.display_space(selected_space)
+            
+            # Set space context in surface editor and show empty state
+            self.surface_editor_widget.set_space_context(selected_space.guid)
+            self.surface_editor_widget.show_empty_state()
+            
             self.status_bar.showMessage(f"Selected space: {selected_space.number} - {selected_space.name}")
         else:
             self.status_bar.showMessage("Space not found")
@@ -717,12 +748,78 @@ class MainWindow(QMainWindow):
     def on_surface_selected(self, surface_id: str):
         """Handle surface selection from space details."""
         self.status_bar.showMessage(f"Selected surface: {surface_id}")
-        # TODO: Implement surface editing functionality
+        
+        # Find the surface data
+        current_space = self.space_detail_widget.get_current_space()
+        if current_space:
+            for surface in current_space.surfaces:
+                if surface.id == surface_id:
+                    # Prepare surface data for editor
+                    surface_data = {
+                        'type': surface.type,
+                        'area': surface.area,
+                        'material': surface.material,
+                        'user_description': surface.user_description
+                    }
+                    
+                    # Set space context and start editing
+                    self.surface_editor_widget.set_space_context(current_space.guid)
+                    self.surface_editor_widget.edit_surface(surface_id, surface_data)
+                    break
         
     def on_boundary_selected(self, boundary_guid: str):
         """Handle space boundary selection from space details."""
         self.status_bar.showMessage(f"Selected boundary: {boundary_guid}")
-        # TODO: Implement boundary editing functionality
+        
+        # Find the boundary data
+        current_space = self.space_detail_widget.get_current_space()
+        if current_space and hasattr(current_space, 'space_boundaries'):
+            for boundary in current_space.space_boundaries:
+                if boundary.guid == boundary_guid:
+                    # Prepare boundary data for editor
+                    boundary_data = {
+                        'display_label': boundary.display_label,
+                        'physical_or_virtual_boundary': boundary.physical_or_virtual_boundary,
+                        'boundary_orientation': boundary.boundary_orientation,
+                        'calculated_area': boundary.calculated_area,
+                        'related_building_element_type': boundary.related_building_element_type,
+                        'user_description': boundary.user_description
+                    }
+                    
+                    # Set space context and start editing
+                    self.surface_editor_widget.set_space_context(current_space.guid)
+                    self.surface_editor_widget.edit_boundary(boundary_guid, boundary_data)
+                    break
+                    
+    def on_surface_description_changed(self, surface_id: str, description: str):
+        """Handle surface description changes from the editor."""
+        # Find and update the surface
+        current_space = self.space_detail_widget.get_current_space()
+        if current_space:
+            for surface in current_space.surfaces:
+                if surface.id == surface_id:
+                    surface.user_description = description
+                    # Mark space as processed
+                    current_space.processed = True
+                    # Refresh the space details view
+                    self.space_detail_widget.update_surfaces_tab()
+                    self.logger.info(f"Updated surface description for {surface_id}")
+                    break
+                    
+    def on_boundary_description_changed(self, boundary_guid: str, description: str):
+        """Handle boundary description changes from the editor."""
+        # Find and update the boundary
+        current_space = self.space_detail_widget.get_current_space()
+        if current_space and hasattr(current_space, 'space_boundaries'):
+            for boundary in current_space.space_boundaries:
+                if boundary.guid == boundary_guid:
+                    boundary.user_description = description
+                    # Mark space as processed
+                    current_space.processed = True
+                    # Refresh the space details view
+                    self.space_detail_widget.update_boundaries_tab()
+                    self.logger.info(f"Updated boundary description for {boundary_guid}")
+                    break
         
     def get_current_spaces(self):
         """Get the currently loaded spaces."""
