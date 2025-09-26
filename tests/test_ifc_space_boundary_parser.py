@@ -45,7 +45,7 @@ class TestIfcSpaceBoundaryParser:
             self.parser.extract_space_boundaries()
 
     def test_extract_space_boundaries_no_boundaries_found(self):
-        """Test extracting boundaries when no IfcSpaceBoundary entities exist."""
+        """Test extracting boundaries when no IfcRelSpaceBoundary entities exist."""
         mock_file = Mock()
         mock_file.by_type.return_value = []
         
@@ -53,7 +53,7 @@ class TestIfcSpaceBoundaryParser:
         boundaries = self.parser.extract_space_boundaries()
         
         assert boundaries == []
-        mock_file.by_type.assert_called_once_with("IfcSpaceBoundary")
+        mock_file.by_type.assert_called_once_with("IfcRelSpaceBoundary")
 
     def test_extract_space_boundaries_success(self):
         """Test successful space boundary extraction."""

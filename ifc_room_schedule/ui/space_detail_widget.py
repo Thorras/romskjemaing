@@ -123,18 +123,30 @@ class SpaceDetailWidget(QWidget):
         layout = QVBoxLayout()
         tab.setLayout(layout)
         
-        # Boundaries table
+        # Boundaries table with enhanced columns
         self.boundaries_table = QTableWidget()
-        self.boundaries_table.setColumnCount(6)
+        self.boundaries_table.setColumnCount(8)
         self.boundaries_table.setHorizontalHeaderLabels([
-            "Display Label", "Type", "Orientation", "Area (m²)", "Element Type", "Level"
+            "Display Label", "Type", "Int/Ext", "Orientation", "Area (m²)", "Element Type", "Level", "Description"
         ])
         self.boundaries_table.horizontalHeader().setStretchLastSection(True)
         self.boundaries_table.itemClicked.connect(self.on_boundary_clicked)
+        
+        # Set column widths for better display
+        header = self.boundaries_table.horizontalHeader()
+        header.resizeSection(0, 200)  # Display Label
+        header.resizeSection(1, 80)   # Type
+        header.resizeSection(2, 60)   # Int/Ext
+        header.resizeSection(3, 80)   # Orientation
+        header.resizeSection(4, 80)   # Area
+        header.resizeSection(5, 100)  # Element Type
+        header.resizeSection(6, 60)   # Level
+        
         layout.addWidget(self.boundaries_table)
         
-        # Boundary summary
+        # Enhanced boundary summary with more details
         self.boundary_summary_label = QLabel("No space boundaries data")
+        self.boundary_summary_label.setWordWrap(True)
         layout.addWidget(self.boundary_summary_label)
         
         return tab
@@ -254,25 +266,76 @@ class SpaceDetailWidget(QWidget):
         total_area = 0.0
         physical_count = 0
         virtual_count = 0
+        internal_count = 0
+        external_count = 0
+        level_1_count = 0
+        level_2_count = 0
         
         for row, boundary in enumerate(boundaries):
-            label_item = QTableWidgetItem(boundary.display_label or boundary.name)
-            type_item = QTableWidgetItem(boundary.physical_or_virtual_boundary)
-            orientation_item = QTableWidgetItem(boundary.boundary_orientation or "Unknown")
+            # Enhanced display label with better formatting
+            display_label = boundary.display_label or boundary.name or f"Boundary {boundary.guid[-8:]}"
+            label_item = QTableWidgetItem(display_label)
+            
+            # Physical/Virtual type with visual indicators
+            type_text = boundary.physical_or_virtual_boundary
+            type_item = QTableWidgetItem(f"🔲 {type_text}" if boundary.is_physical_boundary() else f"⚪ {type_text}")
+            
+            # Internal/External indicator
+            int_ext_text = boundary.internal_or_external_boundary
+            int_ext_item = QTableWidgetItem(f"🏠 {int_ext_text}" if boundary.is_internal_boundary() else f"🌍 {int_ext_text}")
+            
+            # Orientation with directional indicators
+            orientation = boundary.boundary_orientation or "Unknown"
+            orientation_icons = {
+                "North": "⬆️ North",
+                "South": "⬇️ South", 
+                "East": "➡️ East",
+                "West": "⬅️ West",
+                "Horizontal Up": "🔼 Up",
+                "Horizontal Down": "🔽 Down",
+                "Unknown": "❓ Unknown"
+            }
+            orientation_item = QTableWidgetItem(orientation_icons.get(orientation, f"📐 {orientation}"))
+            
+            # Area with better formatting
             area_item = QTableWidgetItem(f"{boundary.calculated_area:.2f}")
-            element_type_item = QTableWidgetItem(boundary.related_building_element_type or "None")
-            level_item = QTableWidgetItem(f"Level {boundary.boundary_level}")
+            if boundary.calculated_area > 0:
+                area_item.setToolTip(f"Area: {boundary.calculated_area:.3f} m²")
+            else:
+                area_item.setText("0.00")
+                area_item.setToolTip("No area calculated")
+            
+            # Element type with cleaner display
+            element_type = boundary.related_building_element_type or "None"
+            if element_type.startswith("Ifc"):
+                element_type = element_type[3:]  # Remove "Ifc" prefix
+            element_type_item = QTableWidgetItem(element_type)
+            
+            # Level with visual indicator
+            level_text = f"Level {boundary.boundary_level}"
+            level_item = QTableWidgetItem(f"1️⃣ {level_text}" if boundary.boundary_level == 1 else f"2️⃣ {level_text}")
+            
+            # Description (user or auto-generated)
+            description = boundary.user_description or boundary.description or ""
+            description_item = QTableWidgetItem(description)
             
             # Store boundary GUID for selection
             label_item.setData(Qt.ItemDataRole.UserRole, boundary.guid)
             
+            # Apply color coding based on boundary type (keeping simple for now)
+            # Future enhancement: could add subtle background colors to differentiate boundary types
+            
+            # Set items in table
             self.boundaries_table.setItem(row, 0, label_item)
             self.boundaries_table.setItem(row, 1, type_item)
-            self.boundaries_table.setItem(row, 2, orientation_item)
-            self.boundaries_table.setItem(row, 3, area_item)
-            self.boundaries_table.setItem(row, 4, element_type_item)
-            self.boundaries_table.setItem(row, 5, level_item)
+            self.boundaries_table.setItem(row, 2, int_ext_item)
+            self.boundaries_table.setItem(row, 3, orientation_item)
+            self.boundaries_table.setItem(row, 4, area_item)
+            self.boundaries_table.setItem(row, 5, element_type_item)
+            self.boundaries_table.setItem(row, 6, level_item)
+            self.boundaries_table.setItem(row, 7, description_item)
             
+            # Update counters
             total_area += boundary.calculated_area
             
             if boundary.is_physical_boundary():
@@ -280,13 +343,41 @@ class SpaceDetailWidget(QWidget):
             elif boundary.is_virtual_boundary():
                 virtual_count += 1
                 
-        # Update summary
+            if boundary.is_internal_boundary():
+                internal_count += 1
+            elif boundary.is_external_boundary():
+                external_count += 1
+                
+            if boundary.boundary_level == 1:
+                level_1_count += 1
+            elif boundary.boundary_level == 2:
+                level_2_count += 1
+                
+        # Enhanced summary with more detailed statistics
         summary_parts = [
-            f"Total Boundaries: {len(boundaries)}",
-            f"Total Area: {total_area:.2f} m²",
-            f"Physical: {physical_count}",
-            f"Virtual: {virtual_count}"
+            f"📊 Total: {len(boundaries)}",
+            f"📐 Area: {total_area:.2f} m²"
         ]
+        
+        if physical_count > 0 or virtual_count > 0:
+            summary_parts.append(f"🔲 Physical: {physical_count}")
+            summary_parts.append(f"⚪ Virtual: {virtual_count}")
+            
+        if internal_count > 0 or external_count > 0:
+            summary_parts.append(f"🏠 Internal: {internal_count}")
+            summary_parts.append(f"🌍 External: {external_count}")
+            
+        if level_1_count > 0 or level_2_count > 0:
+            summary_parts.append(f"1️⃣ Level 1: {level_1_count}")
+            summary_parts.append(f"2️⃣ Level 2: {level_2_count}")
+        
+        # Add boundary area breakdown by type if available
+        boundary_areas = self.current_space.get_boundary_area_by_type() if hasattr(self.current_space, 'get_boundary_area_by_type') else {}
+        if boundary_areas:
+            summary_parts.append("Areas by Type:")
+            for boundary_type, area in boundary_areas.items():
+                if area > 0:
+                    summary_parts.append(f"  {boundary_type}: {area:.2f} m²")
         
         self.boundary_summary_label.setText(" | ".join(summary_parts))
         

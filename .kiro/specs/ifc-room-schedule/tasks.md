@@ -79,11 +79,24 @@ Project structure is established with all modules created and dependencies insta
   - Write integration tests for PyQt UI components
 
 
+
+
+
+
+
+
+
+
+
+
+
+
   - _Requirements: 4.1, 4.2, 4.3, 2.6_
 
-- [ ] 6. Implement surface data extraction and display
+- [x] 6. Implement surface data extraction and display
   - Extract surface data associated with each IFC space using IfcOpenShell
   - Calculate surface areas by type (walls, floors, ceilings)
+
   - Create SpaceDetailWidget to display surface properties
   - Handle missing or incomplete surface data gracefully in UI
   - Write unit tests for surface calculations and display

@@ -98,39 +98,62 @@ class SpaceBoundaryData:
         Returns:
             Human-readable label like "North Wall to Office 101"
         """
-        # Start with orientation if available
         label_parts = []
         
-        if self.boundary_orientation:
-            label_parts.append(self.boundary_orientation)
+        # Start with orientation if available and not "Unknown"
+        if self.boundary_orientation and self.boundary_orientation != "Unknown":
+            # Clean up orientation text
+            orientation = self.boundary_orientation.replace("Horizontal Up", "Floor").replace("Horizontal Down", "Ceiling")
+            label_parts.append(orientation)
         
-        # Add surface type
-        if self.boundary_surface_type:
+        # Add surface type or element type
+        if self.boundary_surface_type and self.boundary_surface_type != "Unknown":
             label_parts.append(self.boundary_surface_type)
         elif self.related_building_element_type:
             # Convert IFC type to readable format
             element_type = self.related_building_element_type.replace("Ifc", "")
-            if element_type.lower() == "wall":
-                label_parts.append("Wall")
-            elif element_type.lower() == "slab":
-                label_parts.append("Floor/Ceiling")
-            elif element_type.lower() in ["window", "door"]:
-                label_parts.append(element_type)
-            else:
-                label_parts.append(element_type)
+            type_mapping = {
+                "wall": "Wall",
+                "slab": "Slab",
+                "window": "Window", 
+                "door": "Door",
+                "roof": "Roof",
+                "beam": "Beam",
+                "column": "Column",
+                "virtualelement": "Virtual"
+            }
+            readable_type = type_mapping.get(element_type.lower(), element_type.title())
+            label_parts.append(readable_type)
         
         # Add connection information
         if self.is_second_level_boundary() and self.adjacent_space_name:
             label_parts.append(f"to {self.adjacent_space_name}")
         elif self.related_building_element_name:
-            label_parts.append(f"({self.related_building_element_name})")
+            # Clean up element name - remove common prefixes and make more readable
+            element_name = self.related_building_element_name
+            if element_name and len(element_name) > 0:
+                label_parts.append(f"({element_name})")
+        
+        # Add boundary type indicator for clarity
+        if self.is_virtual_boundary():
+            if not any("virtual" in part.lower() for part in label_parts):
+                label_parts.insert(0, "Virtual")
         
         # Fallback to basic information if no specific parts
         if not label_parts:
-            if self.name:
+            if self.name and self.name != "2ndLevel":  # Skip generic names
                 return self.name
             else:
-                return f"Boundary {self.guid[-8:]}"
+                # Create a more descriptive fallback
+                fallback_parts = []
+                if self.physical_or_virtual_boundary != "Undefined":
+                    fallback_parts.append(self.physical_or_virtual_boundary)
+                if self.internal_or_external_boundary != "Undefined":
+                    fallback_parts.append(self.internal_or_external_boundary)
+                fallback_parts.append("Boundary")
+                if self.guid:
+                    fallback_parts.append(f"({self.guid[-8:]})")
+                return " ".join(fallback_parts)
         
         return " ".join(label_parts)
 

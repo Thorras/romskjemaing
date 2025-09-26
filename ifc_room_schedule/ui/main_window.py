@@ -16,6 +16,7 @@ import logging
 from ..parser.ifc_file_reader import IfcFileReader
 from ..parser.ifc_space_extractor import IfcSpaceExtractor
 from ..parser.ifc_surface_extractor import IfcSurfaceExtractor
+from ..parser.ifc_space_boundary_parser import IfcSpaceBoundaryParser
 from .space_list_widget import SpaceListWidget
 from .space_detail_widget import SpaceDetailWidget
 from .surface_editor_widget import SurfaceEditorWidget
@@ -33,6 +34,7 @@ class MainWindow(QMainWindow):
         self.ifc_reader = IfcFileReader()
         self.space_extractor = IfcSpaceExtractor()
         self.surface_extractor = IfcSurfaceExtractor()
+        self.boundary_parser = IfcSpaceBoundaryParser()
         self.current_file_path = None
         self.spaces = []
         
@@ -610,17 +612,19 @@ class MainWindow(QMainWindow):
     def extract_spaces(self):
         """Extract spaces from the loaded IFC file."""
         try:
-            # Set the IFC file for the space extractor
+            # Set the IFC file for the extractors
             self.space_extractor.set_ifc_file(self.ifc_reader.get_ifc_file())
             self.surface_extractor.set_ifc_file(self.ifc_reader.get_ifc_file())
+            self.boundary_parser.set_ifc_file(self.ifc_reader.get_ifc_file())
             
             # Extract spaces
             self.spaces = self.space_extractor.extract_spaces()
             
             if self.spaces:
-                # Extract surfaces for each space
-                self.status_bar.showMessage("Extracting surface data...")
+                # Extract surfaces and boundaries for each space
+                self.status_bar.showMessage("Extracting surface and boundary data...")
                 self.extract_surfaces_for_spaces()
+                self.extract_boundaries_for_spaces()
                 
                 # Load spaces into the list widget
                 self.space_list_widget.load_spaces(self.spaces)
@@ -633,7 +637,8 @@ class MainWindow(QMainWindow):
                 self.update_ui_state(True)
                 
                 total_surfaces = sum(len(space.surfaces) for space in self.spaces)
-                self.status_bar.showMessage(f"Successfully loaded {len(self.spaces)} spaces with {total_surfaces} surfaces")
+                total_boundaries = sum(len(getattr(space, 'space_boundaries', [])) for space in self.spaces)
+                self.status_bar.showMessage(f"Successfully loaded {len(self.spaces)} spaces with {total_surfaces} surfaces and {total_boundaries} boundaries")
             else:
                 self.show_info_message("No Spaces Found", 
                                      "No spaces were found in the IFC file. The file may not contain space data.")
@@ -677,6 +682,36 @@ class MainWindow(QMainWindow):
             self.logger.error(f"Error in surface extraction process: {e}")
             raise
     
+    def extract_boundaries_for_spaces(self):
+        """Extract space boundary data for all loaded spaces."""
+        try:
+            for i, space in enumerate(self.spaces):
+                try:
+                    # Update progress
+                    self.status_bar.showMessage(f"Extracting boundaries for space {i+1}/{len(self.spaces)}: {space.number}")
+                    
+                    # Extract space boundaries for this space
+                    boundaries = self.boundary_parser.extract_space_boundaries(space.guid)
+                    
+                    # Add boundaries to the space
+                    for boundary in boundaries:
+                        space.add_space_boundary(boundary)
+                    
+                    # Validate boundaries
+                    if boundaries:
+                        is_valid, messages = self.boundary_parser.validate_boundaries(boundaries)
+                        if not is_valid:
+                            self.logger.warning(f"Boundary validation issues for space {space.guid}: {messages}")
+                    
+                except Exception as e:
+                    self.logger.error(f"Error extracting boundaries for space {space.guid}: {e}")
+                    # Continue with other spaces
+                    continue
+                    
+        except Exception as e:
+            self.logger.error(f"Error in boundary extraction process: {e}")
+            raise
+    
     def close_file(self):
         """Close the currently loaded IFC file."""
         if self.ifc_reader.is_loaded():
@@ -716,6 +751,10 @@ class MainWindow(QMainWindow):
     def get_space_extractor(self) -> IfcSpaceExtractor:
         """Get the space extractor instance."""
         return self.space_extractor
+        
+    def get_boundary_parser(self) -> IfcSpaceBoundaryParser:
+        """Get the space boundary parser instance."""
+        return self.boundary_parser
         
     def on_space_selected(self, space_guid: str):
         """Handle space selection from the space list."""
