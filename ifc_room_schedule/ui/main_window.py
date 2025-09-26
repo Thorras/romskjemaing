@@ -17,9 +17,11 @@ from ..parser.ifc_file_reader import IfcFileReader
 from ..parser.ifc_space_extractor import IfcSpaceExtractor
 from ..parser.ifc_surface_extractor import IfcSurfaceExtractor
 from ..parser.ifc_space_boundary_parser import IfcSpaceBoundaryParser
+from ..parser.ifc_relationship_parser import IfcRelationshipParser
 from .space_list_widget import SpaceListWidget
 from .space_detail_widget import SpaceDetailWidget
 from .surface_editor_widget import SurfaceEditorWidget
+from .export_dialog_widget import ExportDialogWidget
 
 
 class MainWindow(QMainWindow):
@@ -35,6 +37,7 @@ class MainWindow(QMainWindow):
         self.space_extractor = IfcSpaceExtractor()
         self.surface_extractor = IfcSurfaceExtractor()
         self.boundary_parser = IfcSpaceBoundaryParser()
+        self.relationship_parser = IfcRelationshipParser()
         self.current_file_path = None
         self.spaces = []
         
@@ -616,15 +619,17 @@ class MainWindow(QMainWindow):
             self.space_extractor.set_ifc_file(self.ifc_reader.get_ifc_file())
             self.surface_extractor.set_ifc_file(self.ifc_reader.get_ifc_file())
             self.boundary_parser.set_ifc_file(self.ifc_reader.get_ifc_file())
+            self.relationship_parser.set_ifc_file(self.ifc_reader.get_ifc_file())
             
             # Extract spaces
             self.spaces = self.space_extractor.extract_spaces()
             
             if self.spaces:
-                # Extract surfaces and boundaries for each space
-                self.status_bar.showMessage("Extracting surface and boundary data...")
+                # Extract surfaces, boundaries, and relationships for each space
+                self.status_bar.showMessage("Extracting surface, boundary, and relationship data...")
                 self.extract_surfaces_for_spaces()
                 self.extract_boundaries_for_spaces()
+                self.extract_relationships_for_spaces()
                 
                 # Load spaces into the list widget
                 self.space_list_widget.load_spaces(self.spaces)
@@ -712,12 +717,44 @@ class MainWindow(QMainWindow):
             self.logger.error(f"Error in boundary extraction process: {e}")
             raise
     
+    def extract_relationships_for_spaces(self):
+        """Extract relationship data for all loaded spaces."""
+        try:
+            for i, space in enumerate(self.spaces):
+                try:
+                    # Update progress
+                    self.status_bar.showMessage(f"Extracting relationships for space {i+1}/{len(self.spaces)}: {space.number}")
+                    
+                    # Extract relationships for this space
+                    relationships = self.relationship_parser.get_space_relationships(space.guid)
+                    
+                    # Add relationships to the space
+                    for relationship in relationships:
+                        space.add_relationship(relationship)
+                    
+                    # Log relationship summary
+                    if relationships:
+                        summary = self.relationship_parser.get_relationship_summary(space.guid)
+                        self.logger.info(f"Found {len(relationships)} relationships for space {space.guid}: {summary}")
+                    
+                except Exception as e:
+                    self.logger.error(f"Error extracting relationships for space {space.guid}: {e}")
+                    # Continue with other spaces
+                    continue
+                    
+        except Exception as e:
+            self.logger.error(f"Error in relationship extraction process: {e}")
+            raise
+
     def close_file(self):
         """Close the currently loaded IFC file."""
         if self.ifc_reader.is_loaded():
             self.ifc_reader.close_file()
             self.current_file_path = None
             self.spaces = []
+            
+            # Clear parser caches
+            self.relationship_parser.clear_cache()
             
             # Clear UI
             self.space_list_widget.load_spaces([])
@@ -1023,8 +1060,30 @@ class MainWindow(QMainWindow):
         
     def export_json(self):
         """Export space data to JSON file."""
-        # This will be implemented in a future task
-        self.show_info_message("Export", "JSON export functionality will be implemented in task 9.")
+        if not self.spaces:
+            QMessageBox.warning(self, "No Data", 
+                              "No space data available for export. Please load an IFC file first.")
+            return
+        
+        # Create and show export dialog
+        export_dialog = ExportDialogWidget(
+            spaces=self.spaces,
+            source_file_path=self.current_file_path,
+            parent=self
+        )
+        
+        # Connect export completion signal
+        export_dialog.export_completed.connect(self.on_export_completed)
+        
+        # Show dialog
+        export_dialog.exec()
+    
+    def on_export_completed(self, success: bool, message: str):
+        """Handle export completion from export dialog."""
+        if success:
+            self.status_bar.showMessage(f"Export completed: {message}")
+        else:
+            self.status_bar.showMessage(f"Export failed: {message}")
         
     def show_user_guide(self):
         """Show the user guide."""

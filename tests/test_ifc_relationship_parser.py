@@ -628,3 +628,154 @@ class TestIfcRelationshipParser:
         assert material_info['name'] == "Concrete"
         assert material_info['description'] == "Structural concrete"
         assert material_info['category'] == "Structural"
+
+    def test_classify_boundary_level_relationships(self):
+        """Test classification of boundary level relationships."""
+        # Mock the get_boundary_level_relationships method
+        mock_boundary_relationships = {
+            'first_level': [
+                RelationshipData("WALL1", "Wall 1", "Exterior wall", "BoundedBy", "IfcRelSpaceBoundary"),
+                RelationshipData("FLOOR1", "Floor 1", "Floor slab", "BoundedBy", "IfcRelSpaceBoundary")
+            ],
+            'second_level': [
+                RelationshipData("SPACE2", "Room 102", "Adjacent room", "AdjacentSpace", "IfcRelSpaceBoundary")
+            ]
+        }
+
+        # Mock thermal and material properties extraction
+        mock_properties = {
+            'thermal_properties': {'ThermalConductivity': 0.15, 'ThermalResistance': 2.5},
+            'material_properties': {'MaterialName': 'Concrete', 'Density': 2400}
+        }
+
+        with patch.object(self.parser, 'get_boundary_level_relationships', return_value=mock_boundary_relationships):
+            with patch.object(self.parser, 'extract_thermal_and_material_properties', return_value=mock_properties):
+                self.parser.set_ifc_file(Mock())
+                classification = self.parser.classify_boundary_level_relationships("TEST_GUID")
+                
+                assert classification['first_level']['count'] == 2
+                assert classification['second_level']['count'] == 1
+                assert classification['hierarchy_analysis']['max_depth'] == 2
+                assert classification['hierarchy_analysis']['has_space_to_space_connections'] == True
+                assert len(classification['first_level']['building_elements']) == 2
+                assert len(classification['second_level']['adjacent_spaces']) == 1
+
+    def test_get_boundary_hierarchy_tree(self):
+        """Test getting boundary hierarchy tree."""
+        # Mock the classify_boundary_level_relationships method
+        mock_classification = {
+            'first_level': {
+                'count': 2,
+                'building_elements': {
+                    'WALL1': {
+                        'name': 'Wall 1',
+                        'description': 'Exterior wall',
+                        'thermal_properties': {'ThermalConductivity': 0.15},
+                        'material_properties': {'MaterialName': 'Concrete'}
+                    }
+                },
+                'thermal_properties': {'ThermalConductivity': [0.15]},
+                'material_properties': {'MaterialName': ['Concrete']}
+            },
+            'second_level': {
+                'count': 1,
+                'adjacent_spaces': {
+                    'SPACE2': {
+                        'name': 'Room 102',
+                        'description': 'Adjacent room',
+                        'connection_type': 'space_to_space'
+                    }
+                }
+            },
+            'hierarchy_analysis': {
+                'total_boundary_count': 3,
+                'max_depth': 2
+            }
+        }
+
+        with patch.object(self.parser, 'classify_boundary_level_relationships', return_value=mock_classification):
+            with patch.object(self.parser, '_get_space_name', return_value='Test Space'):
+                self.parser.set_ifc_file(Mock())
+                hierarchy_tree = self.parser.get_boundary_hierarchy_tree("TEST_GUID")
+                
+                assert hierarchy_tree['space_name'] == 'Test Space'
+                assert hierarchy_tree['boundary_levels']['level_1']['count'] == 2
+                assert hierarchy_tree['boundary_levels']['level_2']['count'] == 1
+                assert hierarchy_tree['summary']['total_boundaries'] == 3
+                assert hierarchy_tree['summary']['max_hierarchy_depth'] == 2
+
+    def test_validate_boundary_hierarchy(self):
+        """Test validation of boundary hierarchy."""
+        # Mock the classify_boundary_level_relationships method
+        mock_classification = {
+            'first_level': {
+                'count': 4,
+                'relationships': [
+                    RelationshipData("WALL1", "Wall 1", "Wall", "BoundedBy", "IfcRelSpaceBoundary"),
+                    RelationshipData("WALL2", "Wall 2", "Wall", "BoundedBy", "IfcRelSpaceBoundary"),
+                    RelationshipData("FLOOR1", "Floor 1", "Floor", "BoundedBy", "IfcRelSpaceBoundary"),
+                    RelationshipData("CEILING1", "Ceiling 1", "Ceiling", "BoundedBy", "IfcRelSpaceBoundary")
+                ],
+                'building_elements': {
+                    'WALL1': {'thermal_properties': {'ThermalConductivity': 0.15}, 'material_properties': {'MaterialName': 'Concrete'}},
+                    'WALL2': {'thermal_properties': {}, 'material_properties': {}},
+                    'FLOOR1': {'thermal_properties': {'ThermalConductivity': 0.20}, 'material_properties': {'MaterialName': 'Concrete'}},
+                    'CEILING1': {'thermal_properties': {}, 'material_properties': {}}
+                }
+            },
+            'second_level': {
+                'count': 1,
+                'relationships': [
+                    RelationshipData("SPACE2", "Room 102", "Adjacent", "AdjacentSpace", "IfcRelSpaceBoundary")
+                ]
+            }
+        }
+
+        with patch.object(self.parser, 'classify_boundary_level_relationships', return_value=mock_classification):
+            self.parser.set_ifc_file(Mock())
+            validation = self.parser.validate_boundary_hierarchy("TEST_GUID")
+            
+            assert validation['is_valid'] == True
+            assert validation['statistics']['first_level_boundaries'] == 4
+            assert validation['statistics']['second_level_boundaries'] == 1
+            assert validation['statistics']['elements_with_thermal_properties'] == 2
+            assert validation['statistics']['elements_with_material_properties'] == 2
+
+    def test_extract_thermal_properties_from_materials(self):
+        """Test extraction of thermal properties from materials."""
+        # Create mock material layer
+        mock_layer = Mock()
+        mock_layer.LayerThickness = 0.2
+        mock_layer_material = Mock()
+        mock_layer_material.HasProperties = []
+        mock_layer.Material = mock_layer_material
+
+        # Create mock material layer set
+        mock_material_layer_set = Mock()
+        mock_material_layer_set.is_a.return_value = True
+        mock_material_layer_set.MaterialLayers = [mock_layer]
+
+        # Create mock association
+        mock_association = Mock()
+        mock_association.is_a.return_value = True
+        mock_association.RelatingMaterial = mock_material_layer_set
+
+        # Create mock building element
+        mock_element = Mock()
+        mock_element.HasAssociations = [mock_association]
+
+        def mock_is_a_assoc(type_name):
+            return type_name == 'IfcRelAssociatesMaterial'
+
+        def mock_is_a_material(type_name):
+            return type_name == 'IfcMaterialLayerSet'
+
+        mock_association.is_a = mock_is_a_assoc
+        mock_material_layer_set.is_a = mock_is_a_material
+
+        thermal_props = self.parser._extract_thermal_properties_from_materials(mock_element)
+        
+        assert 'layer_count' in thermal_props
+        assert 'total_thickness' in thermal_props
+        assert thermal_props['layer_count'] == 1
+        assert thermal_props['total_thickness'] == 0.2

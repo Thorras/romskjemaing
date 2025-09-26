@@ -251,8 +251,13 @@ class IfcSpaceBoundaryParser:
 
         try:
             # For 2nd level boundaries, check if there's a corresponding boundary
-            # This is a simplified approach - in reality, this would require more complex logic
-            pass
+            corresponding_boundary = getattr(ifc_boundary, 'CorrespondingBoundary', None)
+            if corresponding_boundary:
+                # Get the space from the corresponding boundary
+                adjacent_space = getattr(corresponding_boundary, 'RelatingSpace', None)
+                if adjacent_space:
+                    adjacent_info['guid'] = getattr(adjacent_space, 'GlobalId', '')
+                    adjacent_info['name'] = getattr(adjacent_space, 'Name', '') or getattr(adjacent_space, 'LongName', '')
         except Exception as e:
             self.logger.warning(f"Error extracting adjacent space: {e}")
 
@@ -540,7 +545,12 @@ class IfcSpaceBoundaryParser:
             if related_element:
                 return 1  # 1st level: space-to-element
             else:
-                return 2  # 2nd level: space-to-space
+                # Check if this is a 2nd level boundary by looking for corresponding boundary
+                corresponding_boundary = getattr(ifc_boundary, 'CorrespondingBoundary', None)
+                if corresponding_boundary:
+                    return 2  # 2nd level: space-to-space
+                else:
+                    return 1  # Default to 1st level if unclear
         except Exception:
             return 1  # Default to 1st level
 
@@ -552,9 +562,34 @@ class IfcSpaceBoundaryParser:
             if not building_element:
                 return properties
 
-            # Extract material information
-            # This would require more sophisticated material property extraction
-            pass
+            # Extract material information from associations
+            for rel in getattr(building_element, 'HasAssociations', []):
+                if rel.is_a('IfcRelAssociatesMaterial'):
+                    material = rel.RelatingMaterial
+                    if material:
+                        # Basic material properties
+                        properties['material_name'] = getattr(material, 'Name', '')
+                        properties['material_description'] = getattr(material, 'Description', '')
+                        properties['material_category'] = getattr(material, 'Category', '')
+                        
+                        # Handle different material types
+                        if material.is_a('IfcMaterialLayerSet'):
+                            layers = []
+                            total_thickness = 0.0
+                            for layer in getattr(material, 'MaterialLayers', []):
+                                layer_thickness = getattr(layer, 'LayerThickness', 0)
+                                layer_material = getattr(layer, 'Material', None)
+                                layer_info = {
+                                    'thickness': layer_thickness,
+                                    'material_name': getattr(layer_material, 'Name', '') if layer_material else '',
+                                    'priority': getattr(layer, 'Priority', 0)
+                                }
+                                layers.append(layer_info)
+                                total_thickness += layer_thickness
+                            
+                            properties['layers'] = layers
+                            properties['total_thickness'] = total_thickness
+                            properties['layer_count'] = len(layers)
 
         except Exception as e:
             self.logger.warning(f"Error extracting material properties: {e}")
@@ -569,9 +604,62 @@ class IfcSpaceBoundaryParser:
             if not building_element:
                 return properties
 
-            # Extract thermal information
-            # This would require more sophisticated thermal property extraction
-            pass
+            # Extract thermal properties from property sets
+            for rel in getattr(building_element, 'IsDefinedBy', []):
+                if rel.is_a('IfcRelDefinesByProperties'):
+                    property_definition = rel.RelatingPropertyDefinition
+                    
+                    if property_definition.is_a('IfcPropertySet'):
+                        property_set_name = getattr(property_definition, 'Name', '').lower()
+                        
+                        # Look for thermal-related property sets
+                        if any(keyword in property_set_name for keyword in ['thermal', 'heat', 'insulation', 'conductivity', 'transmittance']):
+                            for prop in getattr(property_definition, 'HasProperties', []):
+                                prop_name = getattr(prop, 'Name', '')
+                                
+                                if prop.is_a('IfcPropertySingleValue'):
+                                    nominal_value = getattr(prop, 'NominalValue', None)
+                                    if nominal_value:
+                                        properties[prop_name] = nominal_value.wrappedValue
+                                        
+                                        # Also store unit if available
+                                        unit = getattr(prop, 'Unit', None)
+                                        if unit:
+                                            properties[f"{prop_name}_unit"] = str(unit)
+
+            # Extract thermal properties from material constituents
+            for rel in getattr(building_element, 'HasAssociations', []):
+                if rel.is_a('IfcRelAssociatesMaterial'):
+                    material = rel.RelatingMaterial
+                    if material and material.is_a('IfcMaterialLayerSet'):
+                        # Calculate overall thermal properties from layers
+                        total_thermal_resistance = 0.0
+                        total_thickness = 0.0
+                        
+                        for layer in getattr(material, 'MaterialLayers', []):
+                            layer_thickness = getattr(layer, 'LayerThickness', 0)
+                            total_thickness += layer_thickness
+                            
+                            # Look for thermal conductivity in layer material
+                            layer_material = getattr(layer, 'Material', None)
+                            if layer_material:
+                                for prop_rel in getattr(layer_material, 'HasProperties', []):
+                                    if prop_rel.is_a('IfcMaterialProperties'):
+                                        for prop in getattr(prop_rel, 'Properties', []):
+                                            prop_name = getattr(prop, 'Name', '').lower()
+                                            if 'conductivity' in prop_name and prop.is_a('IfcPropertySingleValue'):
+                                                conductivity_value = getattr(prop, 'NominalValue', None)
+                                                if conductivity_value and layer_thickness > 0:
+                                                    # R = thickness / conductivity
+                                                    layer_resistance = layer_thickness / conductivity_value.wrappedValue
+                                                    total_thermal_resistance += layer_resistance
+                        
+                        if total_thermal_resistance > 0:
+                            properties['total_thermal_resistance'] = total_thermal_resistance
+                            properties['overall_u_value'] = 1.0 / total_thermal_resistance  # U = 1/R
+                        
+                        if total_thickness > 0:
+                            properties['total_thickness'] = total_thickness
 
         except Exception as e:
             self.logger.warning(f"Error extracting thermal properties: {e}")
@@ -625,3 +713,158 @@ class IfcSpaceBoundaryParser:
                 errors.append(f"Boundary {boundary.guid}: Negative calculated area")
 
         return len(errors) == 0, errors
+
+    def classify_boundaries_by_level(self, boundaries: List[SpaceBoundaryData]) -> Dict[str, List[SpaceBoundaryData]]:
+        """
+        Classify boundaries by their level (1st or 2nd level).
+        
+        Args:
+            boundaries: List of SpaceBoundaryData objects
+            
+        Returns:
+            Dictionary with 'first_level' and 'second_level' keys containing boundary lists
+        """
+        classification = {
+            'first_level': [],
+            'second_level': []
+        }
+        
+        for boundary in boundaries:
+            if boundary.boundary_level == 1:
+                classification['first_level'].append(boundary)
+            elif boundary.boundary_level == 2:
+                classification['second_level'].append(boundary)
+        
+        return classification
+
+    def get_boundary_hierarchy_summary(self, space_guid: str) -> Dict[str, Any]:
+        """
+        Get a summary of boundary hierarchy for a specific space.
+        
+        Args:
+            space_guid: The GlobalId of the space
+            
+        Returns:
+            Dictionary containing hierarchy summary
+        """
+        try:
+            boundaries = self.get_boundaries_for_space(space_guid)
+            classification = self.classify_boundaries_by_level(boundaries)
+            
+            summary = {
+                'space_guid': space_guid,
+                'total_boundaries': len(boundaries),
+                'first_level_count': len(classification['first_level']),
+                'second_level_count': len(classification['second_level']),
+                'building_elements': {},
+                'adjacent_spaces': {},
+                'thermal_data_available': False,
+                'material_data_available': False
+            }
+            
+            # Analyze 1st level boundaries
+            for boundary in classification['first_level']:
+                if boundary.related_building_element_guid:
+                    element_guid = boundary.related_building_element_guid
+                    summary['building_elements'][element_guid] = {
+                        'name': boundary.related_building_element_name,
+                        'type': boundary.related_building_element_type,
+                        'surface_type': boundary.boundary_surface_type,
+                        'orientation': boundary.boundary_orientation,
+                        'area': boundary.calculated_area,
+                        'has_thermal_properties': len(boundary.thermal_properties) > 0,
+                        'has_material_properties': len(boundary.material_properties) > 0
+                    }
+                    
+                    if boundary.thermal_properties:
+                        summary['thermal_data_available'] = True
+                    if boundary.material_properties:
+                        summary['material_data_available'] = True
+            
+            # Analyze 2nd level boundaries
+            for boundary in classification['second_level']:
+                if boundary.adjacent_space_guid:
+                    space_guid = boundary.adjacent_space_guid
+                    summary['adjacent_spaces'][space_guid] = {
+                        'name': boundary.adjacent_space_name,
+                        'area': boundary.calculated_area,
+                        'orientation': boundary.boundary_orientation
+                    }
+            
+            return summary
+            
+        except Exception as e:
+            self.logger.error(f"Error getting boundary hierarchy summary for space {space_guid}: {e}")
+            return {
+                'space_guid': space_guid,
+                'error': str(e),
+                'total_boundaries': 0,
+                'first_level_count': 0,
+                'second_level_count': 0
+            }
+
+    def analyze_thermal_performance(self, boundaries: List[SpaceBoundaryData]) -> Dict[str, Any]:
+        """
+        Analyze thermal performance based on boundary data.
+        
+        Args:
+            boundaries: List of SpaceBoundaryData objects
+            
+        Returns:
+            Dictionary containing thermal performance analysis
+        """
+        analysis = {
+            'total_boundary_area': 0.0,
+            'thermal_boundaries_count': 0,
+            'average_u_value': 0.0,
+            'total_thermal_resistance': 0.0,
+            'boundary_types': {},
+            'orientations': {}
+        }
+        
+        try:
+            total_u_value_weighted = 0.0
+            total_area_with_u_value = 0.0
+            
+            for boundary in boundaries:
+                area = boundary.calculated_area
+                analysis['total_boundary_area'] += area
+                
+                # Count by boundary type
+                surface_type = boundary.boundary_surface_type
+                if surface_type not in analysis['boundary_types']:
+                    analysis['boundary_types'][surface_type] = {'count': 0, 'total_area': 0.0}
+                analysis['boundary_types'][surface_type]['count'] += 1
+                analysis['boundary_types'][surface_type]['total_area'] += area
+                
+                # Count by orientation
+                orientation = boundary.boundary_orientation
+                if orientation not in analysis['orientations']:
+                    analysis['orientations'][orientation] = {'count': 0, 'total_area': 0.0}
+                analysis['orientations'][orientation]['count'] += 1
+                analysis['orientations'][orientation]['total_area'] += area
+                
+                # Analyze thermal properties
+                if boundary.thermal_properties:
+                    analysis['thermal_boundaries_count'] += 1
+                    
+                    # Look for U-value
+                    u_value = boundary.thermal_properties.get('overall_u_value', 0)
+                    if u_value > 0 and area > 0:
+                        total_u_value_weighted += u_value * area
+                        total_area_with_u_value += area
+                    
+                    # Sum thermal resistance
+                    thermal_resistance = boundary.thermal_properties.get('total_thermal_resistance', 0)
+                    if thermal_resistance > 0:
+                        analysis['total_thermal_resistance'] += thermal_resistance
+            
+            # Calculate average U-value weighted by area
+            if total_area_with_u_value > 0:
+                analysis['average_u_value'] = total_u_value_weighted / total_area_with_u_value
+            
+        except Exception as e:
+            self.logger.error(f"Error analyzing thermal performance: {e}")
+            analysis['error'] = str(e)
+        
+        return analysis

@@ -453,12 +453,12 @@ class IfcRelationshipParser:
                         property_set_name = getattr(property_definition, 'Name', '')
                         
                         # Check if this is a thermal property set
-                        if any(keyword in property_set_name.lower() for keyword in ['thermal', 'heat', 'insulation', 'conductivity']):
+                        if any(keyword in property_set_name.lower() for keyword in ['thermal', 'heat', 'insulation', 'conductivity', 'transmittance', 'resistance']):
                             thermal_props = self._extract_properties_from_set(property_definition)
                             thermal_properties.update(thermal_props)
                         
                         # Check if this is a material property set
-                        elif any(keyword in property_set_name.lower() for keyword in ['material', 'surface', 'finish']):
+                        elif any(keyword in property_set_name.lower() for keyword in ['material', 'surface', 'finish', 'common']):
                             material_props = self._extract_properties_from_set(property_definition)
                             material_properties.update(material_props)
 
@@ -469,6 +469,10 @@ class IfcRelationshipParser:
                     if material:
                         material_info = self._extract_material_info(material)
                         material_properties.update(material_info)
+
+            # Extract thermal properties from material constituents
+            thermal_from_materials = self._extract_thermal_properties_from_materials(element)
+            thermal_properties.update(thermal_from_materials)
 
         except Exception as e:
             self.logger.warning(f"Error extracting properties from building element {building_element_guid}: {e}")
@@ -598,6 +602,273 @@ class IfcRelationshipParser:
             error_msg = f"Failed to analyze boundary hierarchies for space {space_guid}: {e}"
             self.logger.error(error_msg)
             raise RuntimeError(error_msg)
+
+    def _extract_thermal_properties_from_materials(self, building_element) -> Dict[str, Any]:
+        """Extract thermal properties from material constituents."""
+        thermal_properties = {}
+        
+        try:
+            # Look for material layer sets which often contain thermal properties
+            for rel in getattr(building_element, 'HasAssociations', []):
+                if rel.is_a('IfcRelAssociatesMaterial'):
+                    material = rel.RelatingMaterial
+                    
+                    if material and material.is_a('IfcMaterialLayerSet'):
+                        # Extract thermal properties from each layer
+                        total_thermal_resistance = 0.0
+                        layer_count = 0
+                        
+                        for layer in getattr(material, 'MaterialLayers', []):
+                            layer_material = getattr(layer, 'Material', None)
+                            if layer_material:
+                                # Look for thermal properties in the layer material
+                                for prop_rel in getattr(layer_material, 'HasProperties', []):
+                                    if prop_rel.is_a('IfcMaterialProperties'):
+                                        for prop in getattr(prop_rel, 'Properties', []):
+                                            prop_name = getattr(prop, 'Name', '').lower()
+                                            if 'thermal' in prop_name or 'conductivity' in prop_name:
+                                                if prop.is_a('IfcPropertySingleValue'):
+                                                    value = getattr(prop, 'NominalValue', None)
+                                                    if value:
+                                                        thermal_properties[f"layer_{layer_count}_{prop.Name}"] = value.wrappedValue
+                                
+                                # Calculate thermal resistance if thickness and conductivity are available
+                                thickness = getattr(layer, 'LayerThickness', 0)
+                                if thickness > 0:
+                                    # This is a simplified calculation - in reality would need conductivity
+                                    layer_count += 1
+                        
+                        if layer_count > 0:
+                            thermal_properties['layer_count'] = layer_count
+                            thermal_properties['total_thickness'] = sum(
+                                getattr(layer, 'LayerThickness', 0) 
+                                for layer in getattr(material, 'MaterialLayers', [])
+                            )
+
+        except Exception as e:
+            self.logger.debug(f"Error extracting thermal properties from materials: {e}")
+
+        return thermal_properties
+
+    def classify_boundary_level_relationships(self, space_guid: str) -> Dict[str, Any]:
+        """
+        Classify boundary relationships by level with detailed analysis.
+        
+        Args:
+            space_guid: The GlobalId of the space
+            
+        Returns:
+            Dictionary containing detailed boundary level classification
+        """
+        if not self.ifc_file:
+            raise ValueError("No IFC file loaded. Use set_ifc_file() first.")
+
+        try:
+            boundary_relationships = self.get_boundary_level_relationships(space_guid)
+            
+            classification = {
+                'first_level': {
+                    'relationships': boundary_relationships['first_level'],
+                    'count': len(boundary_relationships['first_level']),
+                    'building_elements': {},
+                    'thermal_properties': {},
+                    'material_properties': {}
+                },
+                'second_level': {
+                    'relationships': boundary_relationships['second_level'],
+                    'count': len(boundary_relationships['second_level']),
+                    'adjacent_spaces': {},
+                    'connection_types': {}
+                },
+                'hierarchy_analysis': {
+                    'max_depth': 2 if boundary_relationships['second_level'] else 1,
+                    'has_space_to_space_connections': len(boundary_relationships['second_level']) > 0,
+                    'total_boundary_count': len(boundary_relationships['first_level']) + len(boundary_relationships['second_level'])
+                }
+            }
+
+            # Analyze 1st level boundaries in detail
+            for rel in boundary_relationships['first_level']:
+                element_guid = rel.related_entity_guid
+                element_name = rel.related_entity_name
+                
+                # Extract thermal and material properties for this element
+                properties = self.extract_thermal_and_material_properties(element_guid)
+                
+                classification['first_level']['building_elements'][element_guid] = {
+                    'name': element_name,
+                    'description': rel.related_entity_description,
+                    'thermal_properties': properties['thermal_properties'],
+                    'material_properties': properties['material_properties']
+                }
+                
+                # Aggregate thermal properties
+                for prop_name, prop_value in properties['thermal_properties'].items():
+                    if prop_name not in classification['first_level']['thermal_properties']:
+                        classification['first_level']['thermal_properties'][prop_name] = []
+                    classification['first_level']['thermal_properties'][prop_name].append(prop_value)
+
+            # Analyze 2nd level boundaries
+            for rel in boundary_relationships['second_level']:
+                space_guid = rel.related_entity_guid
+                space_name = rel.related_entity_name
+                
+                classification['second_level']['adjacent_spaces'][space_guid] = {
+                    'name': space_name,
+                    'description': rel.related_entity_description,
+                    'connection_type': 'space_to_space'
+                }
+
+            return classification
+
+        except Exception as e:
+            error_msg = f"Failed to classify boundary level relationships for space {space_guid}: {e}"
+            self.logger.error(error_msg)
+            raise RuntimeError(error_msg)
+
+    def get_boundary_hierarchy_tree(self, space_guid: str) -> Dict[str, Any]:
+        """
+        Get a hierarchical tree representation of boundary relationships.
+        
+        Args:
+            space_guid: The GlobalId of the space
+            
+        Returns:
+            Dictionary representing the boundary hierarchy tree
+        """
+        if not self.ifc_file:
+            raise ValueError("No IFC file loaded. Use set_ifc_file() first.")
+
+        try:
+            classification = self.classify_boundary_level_relationships(space_guid)
+            
+            # Build hierarchy tree
+            hierarchy_tree = {
+                'space_guid': space_guid,
+                'space_name': self._get_space_name(space_guid),
+                'boundary_levels': {
+                    'level_1': {
+                        'description': 'Space to Building Element Boundaries',
+                        'count': classification['first_level']['count'],
+                        'elements': []
+                    },
+                    'level_2': {
+                        'description': 'Space to Space Boundaries',
+                        'count': classification['second_level']['count'],
+                        'spaces': []
+                    }
+                },
+                'summary': {
+                    'total_boundaries': classification['hierarchy_analysis']['total_boundary_count'],
+                    'max_hierarchy_depth': classification['hierarchy_analysis']['max_depth'],
+                    'has_thermal_properties': len(classification['first_level']['thermal_properties']) > 0
+                }
+            }
+
+            # Populate level 1 elements
+            for element_guid, element_data in classification['first_level']['building_elements'].items():
+                hierarchy_tree['boundary_levels']['level_1']['elements'].append({
+                    'guid': element_guid,
+                    'name': element_data['name'],
+                    'description': element_data['description'],
+                    'has_thermal_properties': len(element_data['thermal_properties']) > 0,
+                    'has_material_properties': len(element_data['material_properties']) > 0
+                })
+
+            # Populate level 2 spaces
+            for space_guid, space_data in classification['second_level']['adjacent_spaces'].items():
+                hierarchy_tree['boundary_levels']['level_2']['spaces'].append({
+                    'guid': space_guid,
+                    'name': space_data['name'],
+                    'description': space_data['description'],
+                    'connection_type': space_data['connection_type']
+                })
+
+            return hierarchy_tree
+
+        except Exception as e:
+            error_msg = f"Failed to get boundary hierarchy tree for space {space_guid}: {e}"
+            self.logger.error(error_msg)
+            raise RuntimeError(error_msg)
+
+    def _get_space_name(self, space_guid: str) -> str:
+        """Get the name of a space by its GUID."""
+        try:
+            space_entity = self._find_entity_by_guid(space_guid)
+            if space_entity:
+                return getattr(space_entity, 'Name', '') or getattr(space_entity, 'LongName', '') or space_guid
+            return space_guid
+        except Exception:
+            return space_guid
+
+    def validate_boundary_hierarchy(self, space_guid: str) -> Dict[str, Any]:
+        """
+        Validate the boundary hierarchy for a space.
+        
+        Args:
+            space_guid: The GlobalId of the space
+            
+        Returns:
+            Dictionary containing validation results
+        """
+        if not self.ifc_file:
+            raise ValueError("No IFC file loaded. Use set_ifc_file() first.")
+
+        validation_result = {
+            'is_valid': True,
+            'warnings': [],
+            'errors': [],
+            'statistics': {
+                'first_level_boundaries': 0,
+                'second_level_boundaries': 0,
+                'elements_with_thermal_properties': 0,
+                'elements_with_material_properties': 0
+            }
+        }
+
+        try:
+            classification = self.classify_boundary_level_relationships(space_guid)
+            
+            # Update statistics
+            validation_result['statistics']['first_level_boundaries'] = classification['first_level']['count']
+            validation_result['statistics']['second_level_boundaries'] = classification['second_level']['count']
+            
+            # Count elements with properties
+            for element_data in classification['first_level']['building_elements'].values():
+                if element_data['thermal_properties']:
+                    validation_result['statistics']['elements_with_thermal_properties'] += 1
+                if element_data['material_properties']:
+                    validation_result['statistics']['elements_with_material_properties'] += 1
+
+            # Validation checks
+            if classification['first_level']['count'] == 0:
+                validation_result['warnings'].append("No 1st level boundaries found - space may not be properly bounded")
+            
+            if classification['first_level']['count'] < 4:
+                validation_result['warnings'].append(f"Only {classification['first_level']['count']} 1st level boundaries found - typical rooms have at least 4 (walls, floor, ceiling)")
+            
+            if validation_result['statistics']['elements_with_thermal_properties'] == 0:
+                validation_result['warnings'].append("No thermal properties found for any building elements")
+            
+            if validation_result['statistics']['elements_with_material_properties'] == 0:
+                validation_result['warnings'].append("No material properties found for any building elements")
+
+            # Check for orphaned boundaries
+            for rel in classification['first_level']['relationships']:
+                if not rel.related_entity_guid:
+                    validation_result['errors'].append(f"1st level boundary missing related building element GUID")
+                    validation_result['is_valid'] = False
+
+            for rel in classification['second_level']['relationships']:
+                if not rel.related_entity_guid:
+                    validation_result['errors'].append(f"2nd level boundary missing related space GUID")
+                    validation_result['is_valid'] = False
+
+        except Exception as e:
+            validation_result['is_valid'] = False
+            validation_result['errors'].append(f"Validation failed: {e}")
+
+        return validation_result
 
     def clear_cache(self) -> None:
         """Clear the relationships cache."""
