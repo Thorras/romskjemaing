@@ -91,6 +91,10 @@ class TestMainWindow:
         assert window.space_detail_widget is not None
         assert window.main_splitter is not None
         
+        # Show window to make visibility checks work properly
+        window.show()
+        qapp.processEvents()
+        
         # Check initial state
         assert not window.main_splitter.isVisible()
         assert window.welcome_label.isVisible()
@@ -116,6 +120,8 @@ class TestMainWindow:
     def test_space_extraction_and_ui_update(self, qapp, sample_spaces):
         """Test space extraction and UI updates."""
         window = MainWindow()
+        window.show()
+        qapp.processEvents()
         
         # Mock the space extractor
         with patch.object(window.space_extractor, 'extract_spaces', return_value=sample_spaces):
@@ -253,7 +259,7 @@ class TestSpaceDetailWidget:
         
         assert widget.current_space == sample_spaces[0]
         assert widget.isEnabled()
-        assert "Space: 101" in widget.title_label.text()
+        assert "Space Details: 101" in widget.title_label.text()
 
     def test_properties_tab_update(self, qapp, sample_spaces):
         """Test properties tab updates with space data."""
@@ -310,6 +316,8 @@ class TestUIIntegration:
     def test_complete_workflow(self, qapp, sample_spaces):
         """Test complete workflow from file loading to space selection."""
         window = MainWindow()
+        window.show()
+        qapp.processEvents()
         
         # Mock file operations
         with patch.object(window.ifc_reader, 'validate_file', return_value=(True, "Valid")):

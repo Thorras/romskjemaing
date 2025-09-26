@@ -64,15 +64,21 @@ Project structure is established with all modules created and dependencies insta
 
 
 
+
   - Write unit tests for space boundary extraction, area calculations, and identification
   - _Requirements: 7.1, 7.2, 7.3, 7.5, 7.7, 7.8_
 
-- [ ] 5. Build PyQt main window and space navigation
+- [x] 5. Build PyQt main window and space navigation
+
+
+
   - Enhance MainWindow class with menu bar and toolbar for file operations
   - Implement SpaceListWidget using QListWidget for space navigation
   - Connect file dialog to IFC file loading functionality
   - Display space properties (GUID, Name, LongName, ObjectType) in UI
   - Write integration tests for PyQt UI components
+
+
   - _Requirements: 4.1, 4.2, 4.3, 2.6_
 
 - [ ] 6. Implement surface data extraction and display
