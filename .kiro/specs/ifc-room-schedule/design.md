@@ -48,6 +48,7 @@ The system follows a modular architecture with clear separation between IFC pars
 **Key Classes**:
 - `IfcFileReader`: Manages file loading and initial validation
 - `IfcSpaceExtractor`: Extracts IfcSpace entities and properties
+- `IfcSpaceBoundaryParser`: Extracts and processes IfcSpaceBoundary entities
 - `IfcRelationshipParser`: Processes relationships between IFC entities
 
 **Interface**:
@@ -56,8 +57,10 @@ class IfcParser:
     def load_file(self, file_path: str) -> bool
     def extract_spaces(self) -> List[Dict]
     def get_space_properties(self, space_id: str) -> Dict
+    def get_space_boundaries(self, space_id: str) -> List[Dict]
     def get_related_entities(self, space_id: str) -> List[Dict]
     def validate_file(self, file_path: str) -> Tuple[bool, str]
+    def calculate_boundary_areas(self, boundary_id: str) -> float
 ```
 
 **Key Properties Extracted**:
@@ -77,6 +80,7 @@ class IfcParser:
 **Key Classes**:
 - `SpaceRepository`: CRUD operations for space data
 - `SurfaceManager`: Handle surface data and calculations
+- `SpaceBoundaryManager`: Handle space boundary data and geometric calculations
 - `RelationshipManager`: Manage IFC entity relationships
 
 **Interface**:
@@ -85,9 +89,15 @@ class SpaceDataManager:
     def add_space(self, space_data: Dict) -> None
     def update_space_description(self, space_id: str, description: str) -> None
     def get_surfaces_by_space(self, space_id: str) -> List[Dict]
+    def get_space_boundaries_by_space(self, space_id: str) -> List[Dict]
     def add_surface_description(self, surface_id: str, description: str) -> None
+    def add_boundary_description(self, boundary_id: str, description: str) -> None
     def get_related_entities(self, space_id: str) -> List[Dict]
     def calculate_surface_areas(self, space_id: str) -> Dict
+    def calculate_boundary_areas(self, space_id: str) -> Dict
+    def generate_boundary_display_label(self, boundary_data: Dict) -> str
+    def determine_boundary_orientation(self, boundary_geometry: Dict) -> str
+    def classify_boundary_surface_type(self, building_element_type: str) -> str
 ```
 
 ### 3. PyQt User Interface Components
@@ -154,6 +164,7 @@ class SpaceData:
     elevation: float
     quantities: Dict[str, float]  # height, finishFloorHeight, etc.
     surfaces: List['SurfaceData']
+    space_boundaries: List['SpaceBoundaryData']
     relationships: List['RelationshipData']
     user_descriptions: Dict[str, str]
     processed: bool = False
@@ -186,6 +197,34 @@ class RelationshipData:
     ifc_relationship_type: str
 ```
 
+### Space Boundary Data Model
+
+```python
+@dataclass
+class SpaceBoundaryData:
+    id: str
+    guid: str
+    name: str
+    description: str
+    physical_or_virtual_boundary: str  # "Physical", "Virtual", "Undefined"
+    internal_or_external_boundary: str  # "Internal", "External", "Undefined"
+    related_building_element_guid: str
+    related_building_element_name: str
+    related_building_element_type: str  # "IfcWall", "IfcSlab", "IfcWindow", etc.
+    related_space_guid: str
+    adjacent_space_guid: str = ""  # For 2nd level boundaries
+    adjacent_space_name: str = ""
+    boundary_surface_type: str = ""  # "Wall", "Floor", "Ceiling", "Opening"
+    boundary_orientation: str = ""  # "North", "South", "East", "West", "Horizontal"
+    connection_geometry: Dict[str, Any]  # IFC geometric representation
+    calculated_area: float
+    thermal_properties: Dict[str, Any] = field(default_factory=dict)
+    material_properties: Dict[str, Any] = field(default_factory=dict)
+    user_description: str = ""
+    boundary_level: int = 1  # 1st level (space-to-element) or 2nd level (space-to-space)
+    display_label: str = ""  # Human-readable identification like "North Wall to Office 101"
+```
+
 ### Export JSON Structure
 
 ```python
@@ -201,6 +240,7 @@ class RelationshipData:
             "guid": "string",
             "properties": "SpaceData as dict",
             "surfaces": ["SurfaceData as dict"],
+            "space_boundaries": ["SpaceBoundaryData as dict"],
             "relationships": ["RelationshipData as dict"]
         }
     ],
