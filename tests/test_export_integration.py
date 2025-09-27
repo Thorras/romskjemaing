@@ -374,15 +374,17 @@ class TestExportIntegration:
         main_window = MainWindow()
         main_window.spaces = []
         
-        # Mock QMessageBox to capture warning
-        with patch('ifc_room_schedule.ui.main_window.QMessageBox') as mock_msgbox:
+        # Mock the enhanced error message method to capture warning
+        with patch.object(main_window, 'show_enhanced_error_message') as mock_error:
             main_window.export_json()
             
             # Should have shown warning
-            mock_msgbox.warning.assert_called_once()
-            call_args = mock_msgbox.warning.call_args[0]
-            # Check for the actual message content
-            assert "No space data available" in call_args[1] or "No Data" in call_args[1]
+            mock_error.assert_called_once_with(
+                "No Data", 
+                "No space data available for export. Please load an IFC file first.",
+                "",
+                "warning"
+            )
     
     def test_export_completion_handling(self, app):
         """Test export completion handling in MainWindow."""

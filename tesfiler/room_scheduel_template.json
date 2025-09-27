@@ -1,0 +1,426 @@
+{
+	"meta": {
+		"schema_version": "1.1.0",
+		"locale": "nb-NO",
+		"created_at": null,
+		"revised_at": null,
+		"created_by": null,
+		"revised_by": null,
+		"revision": 0,
+		"status": {
+			"phase": "Forprosjekt | Detaljprosjektering | Utførelse | Ferdigstillelse",
+			"state": "Utkast | Til godkjenning | Godkjent | Endret | Låst"
+		}
+	},
+	"identification": {
+		"project_id": null,
+		"project_name": null,
+		"building_id": null,
+		"building_name": null,
+		"storey_name": null,
+		"storey_elevation_m": null,
+		"room_number": null,
+		"room_name": null,
+		"function": null,
+		"occupancy_type": null
+	},
+	"ifc": {
+		"space_global_id": null,
+		"space_long_name": null,
+		"space_number": null,
+		"site_guid": null,
+		"building_guid": null,
+		"storey_guid": null,
+		"model_source": {
+			"file_name": null,
+			"file_version": "IFC4",
+			"discipline": "ARK | RIV | RIE | RIB | RIA | RIBr | Annet"
+		}
+	},
+	"classification": {
+		"ns3451": null,
+		"tfm": null,
+		"custom_codes": []
+	},
+	"geometry": {
+		"area_nett_m2": null,
+		"area_brutto_m2": null,
+		"perimeter_m": null,
+		"length_m": null,
+		"width_m": null,
+		"clear_height_m": null,
+		"floor_load_kN_m2": null,
+		"room_local_origin": {
+			"x_m": 0.0,
+			"y_m": 0.0,
+			"z_m": 0.0,
+			"description": "Lokal 0,0,0 (m)"
+		}
+	},
+	"performance_requirements": {
+		"fire": {
+			"fire_compartment": null,
+			"fire_class": null,
+			"door_rating": "EI30 | EI60 | EI90 | EI120 | null",
+			"penetration_sealing_class": null
+		},
+		"acoustics": {
+			"class_ns8175": "A | B | C | D | E | null",
+			"rw_dB": null,
+			"ln_w_dB": null,
+			"background_noise_dB": null
+		},
+		"thermal": {
+			"setpoint_heating_C": null,
+			"setpoint_cooling_C": null,
+			"u_values": {
+				"walls_W_m2K": null,
+				"floor_W_m2K": null,
+				"ceiling_W_m2K": null,
+				"window_W_m2K": null
+			}
+		},
+		"ventilation": {
+			"airflow_supply_m3h": null,
+			"airflow_extract_m3h": null,
+			"co2_setpoint_ppm": null,
+			"pressure_room_Pa": null
+		},
+		"lighting": {
+			"task_lux": null,
+			"emergency_lighting": false,
+			"color_rendering_CRI": null,
+			"UGR_max": null
+		},
+		"power_data": {
+			"sockets_count": null,
+			"data_outlets_count": null,
+			"cleaning_socket": false,
+			"circuits": []
+		},
+		"water_sanitary": {
+			"fixtures": [],
+			"hot_cold_water": false,
+			"drainage_required": false
+		}
+	},
+	"finishes": {
+		"floor": {
+			"system": null,
+			"layers": [
+				{
+					"product": null,
+					"thickness_mm": null,
+					"color_code": null,
+					"finish_code": null,
+					"supplier": null,
+					"notes": null
+				}
+			],
+			"tolerances": {
+				"flatness_mm_per_2m": null,
+				"levelness_mm": null
+			}
+		},
+		"ceiling": {
+			"system": null,
+			"height_m": null,
+			"acoustic_class": null,
+			"notes": null
+		},
+		"walls": [
+			{
+				"name": "north | east | south | west | A | B | C | D",
+				"system": null,
+				"finish": null,
+				"color_code": null,
+				"impact_resistance": null,
+				"notes": null
+			}
+		],
+		"skirting": {
+			"type": null,
+			"height_mm": null,
+			"material": null
+		}
+	},
+	"openings": {
+		"doors": [
+			{
+				"id": null,
+				"width_mm": null,
+				"height_mm": null,
+				"fire_rating": null,
+				"sound_rating_Rw_dB": null,
+				"threshold": "yes | no | null",
+				"hardware_set": null,
+				"access_control": false,
+				"notes": null
+			}
+		],
+		"windows": [
+			{
+				"id": null,
+				"width_mm": null,
+				"height_mm": null,
+				"u_value_W_m2K": null,
+				"g_value": null,
+				"safety_glass": false,
+				"solar_shading": null
+			}
+		],
+		"penetrations": []
+	},
+	"fixtures_and_equipment": [
+		{
+			"discipline": "ARK | RIV | RIE | RIB | RIA | RIBr | Annet",
+			"type": null,
+			"id": null,
+			"description": null,
+			"mounting_height_m": null,
+			"location_xyz_m": {
+				"x": null,
+				"y": null,
+				"z": null
+			},
+			"connections": {
+				"power": null,
+				"data": null,
+				"water": null,
+				"drain": null,
+				"vent": null
+			},
+			"supplier": null,
+			"product_code": null,
+			"epd_reference": null,
+			"remarks": null
+		}
+	],
+	"hse_and_accessibility": {
+		"universal_design": true,
+		"turning_radius_m": null,
+		"clear_width_door_mm": null,
+		"slip_resistance_class": "R9 | R10 | R11 | R12 | R13 | null",
+		"emissions_class": "M1 | A+ | null"
+	},
+	"environment": {
+		"breeam_credits": [],
+		"reused_materials": [],
+		"epd_requirements": [],
+		"waste_sorting_fraction": []
+	},
+	"tolerances_and_quality": {
+		"dimensional_tolerances_mm": {
+			"length": null,
+			"width": null,
+			"height": null
+		},
+		"surface_quality": {
+			"paint_class": "Maling klasse 1 | 2 | 3 | null",
+			"tile_evenness_mm": null
+		},
+		"references": [
+			"NS 3420-T",
+			"NS 3420-U",
+			"NS 8175",
+			"TEK17"
+		]
+	},
+	"qa_qc": {
+		"hold_points": [
+			{
+				"code": null,
+				"description": null,
+				"by_trade": null
+			}
+		],
+		"inspections": [
+			{
+				"type": "mottak | underlag | lukking | ferdig",
+				"checklist_id": null,
+				"acceptance_criteria": null,
+				"evidence": "foto | målerapport | sjekkliste",
+				"responsible": null
+			}
+		],
+		"handover_docs_required": [
+			"FDV | produktdatablad | EPD | samsvarserklæring | as-built"
+		]
+	},
+	"interfaces": {
+		"adjacent_rooms": [],
+		"trade_interfaces": [
+			{
+				"from_trade": null,
+				"to_trade": null,
+				"scope_boundary": null
+			}
+		],
+		"sequence_notes": null
+	},
+	"logistics_and_site": {
+		"access_route": null,
+		"work_hours_constraints": null,
+		"noise_constraints": null,
+		"cleanliness_requirements": null,
+		"rigg_drift": {
+			"site_facilities": [
+				"riggområde",
+				"garderobe",
+				"spiserom"
+			],
+			"temporary_utilities": [
+				"byggstrøm",
+				"byggvarme",
+				"midlertidig vann"
+			],
+			"material_handling": {
+				"routes": null,
+				"lifts_or_hoists": null,
+				"cranes": null
+			},
+			"storage": {
+				"indoor": null,
+				"outdoor": null,
+				"temperature_controlled": false
+			},
+			"waste_management": {
+				"fractions": [
+					"Treverk",
+					"Metall",
+					"Plast",
+					"Rest",
+					"Papir/Kartong",
+					"Farlig avfall"
+				],
+				"container_locations": []
+			},
+			"winter_measures": null,
+			"snow_ice_plan": null
+		},
+		"sha_plan": {
+			"risk_activities": [],
+			"permits_required": [
+				"Varmt arbeid",
+				"Stillaser",
+				"Arbeid i høyden"
+			],
+			"ppe": [
+				"Hjelm",
+				"Vernesko",
+				"Vernebriller",
+				"Hansker"
+			],
+			"sja_required": true,
+			"responsible_roles": [
+				"SHA-koordinator (KP/KU)",
+				"Bas",
+				"Anleggsleder"
+			]
+		},
+		"lean_takt": {
+			"takt_area_id": null,
+			"takt_time_days": null,
+			"sequence": [],
+			"constraints": [],
+			"handoff_criteria": []
+		}
+	},
+	"commissioning": {
+		"tests": [
+			{
+				"name": null,
+				"method": null,
+				"criteria": null,
+				"witnessed_by": null
+			}
+		],
+		"balancing": {
+			"ventilation": false,
+			"heating": false,
+			"notes": null
+		}
+	},
+	"attachments": [
+		{
+			"type": "PDF | DWG | IFC | Foto | Annet",
+			"title": null,
+			"uri": null
+		}
+	],
+	"notes": null,
+	"deviations": [],
+	"links": {
+		"model_viewer": {
+			"fragments_id": null,
+			"model_uri": null
+		},
+		"issues": [
+			{
+				"system": "BCF | Jira | Annet",
+				"id": null,
+				"uri": null
+			}
+		]
+	},
+	"catalogs": {
+		"phase": [
+			"Forprosjekt",
+			"Detaljprosjektering",
+			"Utførelse",
+			"Ferdigstillelse"
+		],
+		"state": [
+			"Utkast",
+			"Til godkjenning",
+			"Godkjent",
+			"Endret",
+			"Låst"
+		],
+		"ns8175_acoustic_class": [
+			"A",
+			"B",
+			"C",
+			"D",
+			"E"
+		],
+		"door_fire_ratings": [
+			"EI30",
+			"EI60",
+			"EI90",
+			"EI120"
+		],
+		"slip_resistance": [
+			"R9",
+			"R10",
+			"R11",
+			"R12",
+			"R13"
+		],
+		"emissions_class": [
+			"M1",
+			"A+",
+			"Ingen krav"
+		],
+		"ns3420_sections": [
+			"NS 3420-T Overflater",
+			"NS 3420-U Mur og flis",
+			"NS 3420-F Betong",
+			"NS 3420-K Rør",
+			"NS 3420-L Elektro"
+		],
+		"tek17_chapters": [
+			"§12 Universell utforming",
+			"§13 Miljø og helse",
+			"§14 Energi",
+			"§15 Installasjoner",
+			"§16 Ytre miljø",
+			"§17 Dokumentasjon"
+		],
+		"normative_references": [
+			"NS 3420",
+			"NS 8175",
+			"TEK17"
+		]
+	}
+}

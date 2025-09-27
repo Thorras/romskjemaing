@@ -7,11 +7,15 @@ Main window with file dialog functionality for IFC file loading.
 from PyQt6.QtWidgets import (QMainWindow, QWidget, QVBoxLayout, QHBoxLayout, 
                             QLabel, QPushButton, QFileDialog, QMessageBox, 
                             QMenuBar, QStatusBar, QProgressBar, QSplitter,
-                            QTabWidget, QToolBar)
-from PyQt6.QtCore import Qt, pyqtSignal, QThread, QObject
-from PyQt6.QtGui import QAction, QIcon
+                            QTabWidget, QToolBar, QTextEdit, QDialog, QDialogButtonBox)
+from PyQt6.QtCore import Qt, pyqtSignal, QThread, QObject, QTimer
+from PyQt6.QtGui import QAction, QIcon, QTextCursor
 import os
 import logging
+import traceback
+import sys
+from datetime import datetime
+from typing import Optional, Dict, Any
 
 from ..parser.ifc_file_reader import IfcFileReader
 from ..parser.ifc_space_extractor import IfcSpaceExtractor
@@ -22,6 +26,158 @@ from .space_list_widget import SpaceListWidget
 from .space_detail_widget import SpaceDetailWidget
 from .surface_editor_widget import SurfaceEditorWidget
 from .export_dialog_widget import ExportDialogWidget
+
+
+class ErrorDetailsDialog(QDialog):
+    """Enhanced error dialog with detailed error information and recovery options."""
+    
+    def __init__(self, title: str, message: str, details: str = "", 
+                 error_type: str = "error", parent=None):
+        super().__init__(parent)
+        self.setWindowTitle(title)
+        self.setModal(True)
+        self.resize(600, 400)
+        
+        layout = QVBoxLayout()
+        self.setLayout(layout)
+        
+        # Error icon and main message
+        header_layout = QHBoxLayout()
+        
+        # Icon based on error type
+        icon_label = QLabel()
+        if error_type == "warning":
+            icon_label.setText("⚠️")
+        elif error_type == "info":
+            icon_label.setText("ℹ️")
+        else:
+            icon_label.setText("❌")
+        icon_label.setStyleSheet("font-size: 24px; margin-right: 10px;")
+        header_layout.addWidget(icon_label)
+        
+        # Main message
+        message_label = QLabel(message)
+        message_label.setWordWrap(True)
+        message_label.setStyleSheet("font-size: 14px; font-weight: bold;")
+        header_layout.addWidget(message_label, 1)
+        
+        layout.addLayout(header_layout)
+        
+        # Details section (collapsible)
+        if details:
+            details_label = QLabel("Error Details:")
+            details_label.setStyleSheet("font-weight: bold; margin-top: 10px;")
+            layout.addWidget(details_label)
+            
+            details_text = QTextEdit()
+            details_text.setPlainText(details)
+            details_text.setReadOnly(True)
+            details_text.setMaximumHeight(200)
+            details_text.setStyleSheet("""
+                QTextEdit {
+                    background-color: #f8f9fa;
+                    border: 1px solid #dee2e6;
+                    border-radius: 4px;
+                    font-family: monospace;
+                    font-size: 11px;
+                }
+            """)
+            layout.addWidget(details_text)
+        
+        # Buttons
+        button_box = QDialogButtonBox(QDialogButtonBox.StandardButton.Ok)
+        button_box.accepted.connect(self.accept)
+        layout.addWidget(button_box)
+
+
+class ErrorRecoveryDialog(QDialog):
+    """Dialog for error recovery options."""
+    
+    def __init__(self, error_message: str, recovery_options: Dict[str, str], parent=None):
+        super().__init__(parent)
+        self.setWindowTitle("Error Recovery")
+        self.setModal(True)
+        self.resize(500, 300)
+        self.recovery_choice = None
+        
+        layout = QVBoxLayout()
+        self.setLayout(layout)
+        
+        # Error message
+        error_label = QLabel(f"❌ {error_message}")
+        error_label.setWordWrap(True)
+        error_label.setStyleSheet("font-size: 14px; font-weight: bold; margin-bottom: 15px;")
+        layout.addWidget(error_label)
+        
+        # Recovery options
+        options_label = QLabel("Choose a recovery option:")
+        options_label.setStyleSheet("font-weight: bold;")
+        layout.addWidget(options_label)
+        
+        # Create buttons for each recovery option
+        self.option_buttons = {}
+        for option_key, option_text in recovery_options.items():
+            button = QPushButton(option_text)
+            button.clicked.connect(lambda checked, key=option_key: self.select_option(key))
+            button.setStyleSheet("""
+                QPushButton {
+                    text-align: left;
+                    padding: 10px;
+                    margin: 2px;
+                    border: 1px solid #ced4da;
+                    border-radius: 4px;
+                }
+                QPushButton:hover {
+                    background-color: #e9ecef;
+                }
+            """)
+            layout.addWidget(button)
+            self.option_buttons[option_key] = button
+        
+        # Cancel button
+        cancel_button = QPushButton("Cancel")
+        cancel_button.clicked.connect(self.reject)
+        cancel_button.setStyleSheet("""
+            QPushButton {
+                background-color: #6c757d;
+                color: white;
+                padding: 8px 16px;
+                margin-top: 10px;
+            }
+            QPushButton:hover {
+                background-color: #5a6268;
+            }
+        """)
+        layout.addWidget(cancel_button)
+    
+    def select_option(self, option_key: str):
+        """Select a recovery option and close dialog."""
+        self.recovery_choice = option_key
+        self.accept()
+
+
+class LongRunningOperationWorker(QObject):
+    """Worker for long-running operations with progress reporting."""
+    
+    progress_updated = pyqtSignal(int, str)  # progress, status
+    operation_completed = pyqtSignal(bool, str, object)  # success, message, result
+    error_occurred = pyqtSignal(str, str)  # error_type, error_message
+    
+    def __init__(self, operation_func, *args, **kwargs):
+        super().__init__()
+        self.operation_func = operation_func
+        self.args = args
+        self.kwargs = kwargs
+    
+    def run_operation(self):
+        """Execute the long-running operation."""
+        try:
+            result = self.operation_func(*self.args, **self.kwargs)
+            self.operation_completed.emit(True, "Operation completed successfully", result)
+        except Exception as e:
+            error_details = traceback.format_exc()
+            self.error_occurred.emit("operation_error", f"Operation failed: {str(e)}")
+            self.operation_completed.emit(False, str(e), None)
 
 
 class MainWindow(QMainWindow):
@@ -41,6 +197,15 @@ class MainWindow(QMainWindow):
         self.current_file_path = None
         self.spaces = []
         
+        # Error handling state
+        self.error_count = 0
+        self.last_error_time = None
+        self.operation_thread = None
+        self.operation_worker = None
+        
+        # Setup error handling
+        self.setup_error_handling()
+        
         self.setup_ui()
         self.setup_menu()
         self.setup_toolbar()
@@ -49,6 +214,467 @@ class MainWindow(QMainWindow):
         
         # Ensure initial state is correct
         self.update_file_info()
+    
+    def setup_error_handling(self):
+        """Set up comprehensive error handling system."""
+        # Configure logging
+        logging.basicConfig(
+            level=logging.INFO,
+            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+            handlers=[
+                logging.FileHandler('ifc_room_schedule.log'),
+                logging.StreamHandler(sys.stdout)
+            ]
+        )
+        
+        # Install global exception handler
+        sys.excepthook = self.handle_uncaught_exception
+        
+        # Create error status timer for clearing temporary error messages
+        self.error_clear_timer = QTimer()
+        self.error_clear_timer.setSingleShot(True)
+        self.error_clear_timer.timeout.connect(self.clear_temporary_error_status)
+    
+    def handle_uncaught_exception(self, exc_type, exc_value, exc_traceback):
+        """Handle uncaught exceptions with user-friendly error dialog."""
+        if issubclass(exc_type, KeyboardInterrupt):
+            sys.__excepthook__(exc_type, exc_value, exc_traceback)
+            return
+        
+        error_msg = f"An unexpected error occurred: {exc_value}"
+        error_details = ''.join(traceback.format_exception(exc_type, exc_value, exc_traceback))
+        
+        self.logger.critical(f"Uncaught exception: {error_msg}", exc_info=(exc_type, exc_value, exc_traceback))
+        
+        # Show error dialog with recovery options
+        recovery_options = {
+            'continue': 'Continue working (may cause instability)',
+            'restart': 'Restart application',
+            'exit': 'Exit application'
+        }
+        
+        recovery_dialog = ErrorRecoveryDialog(
+            error_msg, recovery_options, self
+        )
+        
+        if recovery_dialog.exec() == QDialog.DialogCode.Accepted:
+            choice = recovery_dialog.recovery_choice
+            if choice == 'restart':
+                self.restart_application()
+            elif choice == 'exit':
+                self.close()
+            # 'continue' does nothing, just continues execution
+    
+    def show_enhanced_error_message(self, title: str, message: str, 
+                                  details: str = "", error_type: str = "error",
+                                  recovery_options: Optional[Dict[str, str]] = None) -> Optional[str]:
+        """
+        Show enhanced error message with details and optional recovery options.
+        
+        Args:
+            title: Error dialog title
+            message: Main error message
+            details: Detailed error information
+            error_type: Type of error ('error', 'warning', 'info')
+            recovery_options: Dict of recovery option keys and descriptions
+            
+        Returns:
+            Selected recovery option key if recovery options provided, None otherwise
+        """
+        self.error_count += 1
+        self.last_error_time = datetime.now()
+        
+        # Log the error
+        if error_type == "error":
+            self.logger.error(f"{title}: {message}")
+        elif error_type == "warning":
+            self.logger.warning(f"{title}: {message}")
+        else:
+            self.logger.info(f"{title}: {message}")
+        
+        if details:
+            self.logger.debug(f"Error details: {details}")
+        
+        # Update status bar with error count
+        self.update_error_status(f"Error #{self.error_count}: {message}")
+        
+        # Show recovery dialog if options provided
+        if recovery_options:
+            recovery_dialog = ErrorRecoveryDialog(message, recovery_options, self)
+            if recovery_dialog.exec() == QDialog.DialogCode.Accepted:
+                return recovery_dialog.recovery_choice
+            return None
+        
+        # Show detailed error dialog
+        error_dialog = ErrorDetailsDialog(title, message, details, error_type, self)
+        error_dialog.exec()
+        return None
+    
+    def update_error_status(self, message: str, temporary: bool = True):
+        """Update status bar with error message."""
+        self.status_bar.showMessage(f"❌ {message}")
+        self.status_bar.setStyleSheet("QStatusBar { color: #dc3545; }")
+        
+        if temporary:
+            # Clear error status after 10 seconds
+            self.error_clear_timer.start(10000)
+    
+    def clear_temporary_error_status(self):
+        """Clear temporary error status and restore normal status."""
+        self.status_bar.setStyleSheet("")  # Reset to default style
+        if self.ifc_reader.is_loaded():
+            self.status_bar.showMessage("Ready")
+        else:
+            self.status_bar.showMessage("Ready to load IFC file...")
+    
+    def show_operation_progress(self, title: str, operation_func, *args, **kwargs):
+        """
+        Execute long-running operation in separate thread with progress dialog.
+        
+        Args:
+            title: Progress dialog title
+            operation_func: Function to execute
+            *args, **kwargs: Arguments for the operation function
+        """
+        # Create progress dialog
+        progress_dialog = QMessageBox(self)
+        progress_dialog.setWindowTitle(title)
+        progress_dialog.setText("Operation in progress...")
+        progress_dialog.setStandardButtons(QMessageBox.StandardButton.Cancel)
+        progress_dialog.setModal(True)
+        
+        # Create worker thread
+        self.operation_thread = QThread()
+        self.operation_worker = LongRunningOperationWorker(operation_func, *args, **kwargs)
+        self.operation_worker.moveToThread(self.operation_thread)
+        
+        # Connect signals
+        self.operation_worker.progress_updated.connect(
+            lambda progress, status: progress_dialog.setText(f"{status}\n{progress}% complete")
+        )
+        self.operation_worker.operation_completed.connect(self.on_operation_completed)
+        self.operation_worker.error_occurred.connect(self.on_operation_error)
+        
+        self.operation_thread.started.connect(self.operation_worker.run_operation)
+        self.operation_thread.finished.connect(self.operation_thread.deleteLater)
+        
+        # Handle cancel button
+        progress_dialog.rejected.connect(self.cancel_operation)
+        
+        # Start operation
+        self.operation_thread.start()
+        
+        # Don't block in test environment
+        if not hasattr(self, '_testing_mode'):
+            progress_dialog.exec()
+    
+    def on_operation_completed(self, success: bool, message: str, result: Any):
+        """Handle completion of long-running operation."""
+        if self.operation_thread:
+            self.operation_thread.quit()
+            self.operation_thread.wait()
+            self.operation_thread = None
+        self.operation_worker = None
+        
+        if success:
+            self.status_bar.showMessage(f"✅ {message}")
+            self.status_bar.setStyleSheet("QStatusBar { color: #28a745; }")
+            QTimer.singleShot(5000, self.clear_temporary_error_status)
+        else:
+            self.show_enhanced_error_message("Operation Failed", message)
+    
+    def on_operation_error(self, error_type: str, error_message: str):
+        """Handle error during long-running operation."""
+        self.show_enhanced_error_message("Operation Error", error_message)
+    
+    def cancel_operation(self):
+        """Cancel the current long-running operation."""
+        if self.operation_thread and self.operation_thread.isRunning():
+            self.operation_thread.terminate()
+            self.operation_thread.wait()
+            self.operation_thread = None
+        self.operation_worker = None
+        self.status_bar.showMessage("Operation cancelled")
+    
+    def handle_memory_error(self, operation: str, error: MemoryError) -> bool:
+        """
+        Handle memory errors with recovery options.
+        
+        Args:
+            operation: Description of the operation that caused the memory error
+            error: The MemoryError that occurred
+            
+        Returns:
+            True if operation should be retried with reduced scope, False otherwise
+        """
+        recovery_options = {
+            'reduce_scope': 'Reduce operation scope and retry',
+            'free_memory': 'Free memory and retry',
+            'abort': 'Abort operation'
+        }
+        
+        choice = self.show_enhanced_error_message(
+            "Memory Error",
+            f"Insufficient memory for {operation}. The operation requires more memory than available.",
+            f"Error: {str(error)}\n\nSuggestions:\n"
+            f"- Close other applications to free memory\n"
+            f"- Process smaller batches of data\n"
+            f"- Restart the application to clear memory leaks",
+            "error",
+            recovery_options
+        )
+        
+        if choice == 'free_memory':
+            self.free_memory_resources()
+            return True
+        elif choice == 'reduce_scope':
+            return True
+        
+        return False
+    
+    def free_memory_resources(self):
+        """Free memory resources and perform garbage collection."""
+        import gc
+        
+        try:
+            # Clear all extractor caches
+            extractors = [
+                self.space_extractor,
+                self.surface_extractor, 
+                self.boundary_parser,
+                self.relationship_parser
+            ]
+            
+            for extractor in extractors:
+                if extractor:
+                    # Clear various cache attributes that might exist
+                    cache_attrs = ['_spaces_cache', '_surfaces_cache', '_boundaries_cache', 
+                                 '_relationships_cache', '_cache', '_data_cache']
+                    for attr in cache_attrs:
+                        if hasattr(extractor, attr):
+                            setattr(extractor, attr, None)
+                            self.logger.debug(f"Cleared {attr} from {extractor.__class__.__name__}")
+            
+            # Clear main window data
+            if hasattr(self, 'spaces'):
+                self.spaces.clear()
+            
+            # Clear UI data
+            if hasattr(self, 'space_list_widget') and self.space_list_widget:
+                self.space_list_widget.clear()
+            if hasattr(self, 'space_detail_widget') and self.space_detail_widget:
+                self.space_detail_widget.clear_selection()
+            
+            # Force multiple garbage collection passes for better cleanup
+            for _ in range(3):
+                gc.collect()
+            
+            # Log memory usage if psutil is available
+            try:
+                import psutil
+                memory_info = psutil.virtual_memory()
+                self.logger.info(f"Memory freed. Available: {memory_info.available/(1024*1024):.1f}MB "
+                               f"({memory_info.percent:.1f}% used)")
+            except ImportError:
+                self.logger.info("Memory resources freed")
+            
+            self.status_bar.showMessage("Memory resources freed", 3000)
+            
+        except Exception as e:
+            self.logger.error(f"Error during memory cleanup: {e}")
+            self.status_bar.showMessage(f"Memory cleanup error: {str(e)}", 5000)
+    
+    def handle_resource_cleanup_error(self, resource_name: str, error: Exception):
+        """
+        Handle errors during resource cleanup.
+        
+        Args:
+            resource_name: Name of the resource being cleaned up
+            error: The exception that occurred during cleanup
+        """
+        self.logger.warning(f"Failed to cleanup {resource_name}: {str(error)}")
+        
+        # Don't show dialog for cleanup errors unless they're critical
+        if isinstance(error, (OSError, IOError)):
+            self.show_enhanced_error_message(
+                "Resource Cleanup Warning",
+                f"Failed to properly cleanup {resource_name}. This may cause resource leaks.",
+                f"Error: {str(error)}\n\nThis is usually not critical but may affect performance.",
+                "warning"
+            )
+    
+    def restart_application(self):
+        """Restart the application."""
+        self.logger.info("Restarting application...")
+        self.close()
+        os.execl(sys.executable, sys.executable, *sys.argv)
+    
+    def handle_batch_operation_errors(self, operation_name: str, total_items: int, 
+                                    failed_items: list, skipped_items: list) -> str:
+        """
+        Handle errors from batch operations with user choice for continuation.
+        
+        Args:
+            operation_name: Name of the operation being performed
+            total_items: Total number of items being processed
+            failed_items: List of (item_id, error_message) tuples for failed items
+            skipped_items: List of (item_id, reason) tuples for skipped items
+            
+        Returns:
+            User's choice: 'continue', 'retry_failed', 'abort'
+        """
+        if not failed_items and not skipped_items:
+            return 'continue'
+        
+        success_count = total_items - len(failed_items) - len(skipped_items)
+        
+        summary_parts = []
+        if success_count > 0:
+            summary_parts.append(f"{success_count} successful")
+        if failed_items:
+            summary_parts.append(f"{len(failed_items)} failed")
+        if skipped_items:
+            summary_parts.append(f"{len(skipped_items)} skipped")
+        
+        summary = f"{operation_name} results: {', '.join(summary_parts)} out of {total_items} items"
+        
+        recovery_options = {
+            'continue': 'Continue with successful items',
+            'abort': 'Abort the entire operation'
+        }
+        
+        if failed_items:
+            recovery_options['retry_failed'] = f'Retry {len(failed_items)} failed items'
+        
+        choice = self.show_enhanced_error_message(
+            f"{operation_name} Partial Failure",
+            summary,
+            self._format_batch_error_details(failed_items, skipped_items),
+            "warning",
+            recovery_options
+        )
+        
+        return choice if choice else 'abort'
+    
+    def _format_batch_error_details(self, failed_items: list, skipped_items: list) -> str:
+        """Format detailed error information for batch operations."""
+        details = []
+        
+        if failed_items:
+            details.append("Failed items:")
+            for item_id, error in failed_items[:10]:  # Limit to first 10
+                details.append(f"  - {item_id}: {str(error)[:100]}...")
+            if len(failed_items) > 10:
+                details.append(f"  ... and {len(failed_items) - 10} more failed items")
+        
+        if skipped_items:
+            if details:
+                details.append("")
+            details.append("Skipped items:")
+            for item_id, reason in skipped_items[:10]:  # Limit to first 10
+                details.append(f"  - {item_id}: {reason}")
+            if len(skipped_items) > 10:
+                details.append(f"  ... and {len(skipped_items) - 10} more skipped items")
+        
+        return '\n'.join(details)
+    
+    def validate_operation_prerequisites(self, operation_name: str, prerequisites: dict) -> bool:
+        """
+        Validate prerequisites for an operation and show appropriate error messages.
+        
+        Args:
+            operation_name: Name of the operation
+            prerequisites: Dict of prerequisite_name -> (is_met, error_message)
+            
+        Returns:
+            True if all prerequisites are met, False otherwise
+        """
+        failed_prerequisites = []
+        
+        for prereq_name, (is_met, error_msg) in prerequisites.items():
+            if not is_met:
+                failed_prerequisites.append((prereq_name, error_msg))
+        
+        if failed_prerequisites:
+            error_details = []
+            for prereq_name, error_msg in failed_prerequisites:
+                error_details.append(f"- {prereq_name}: {error_msg}")
+            
+            self.show_enhanced_error_message(
+                f"Cannot {operation_name}",
+                f"Operation cannot proceed due to {len(failed_prerequisites)} unmet prerequisites",
+                '\n'.join(error_details),
+                "error"
+            )
+            return False
+        
+        return True
+    
+    def handle_file_operation_error(self, operation: str, file_path: str, error: Exception) -> bool:
+        """
+        Handle file operation errors with recovery options.
+        
+        Args:
+            operation: Description of the operation that failed
+            file_path: Path to the file involved
+            error: The exception that occurred
+            
+        Returns:
+            True if operation should be retried, False otherwise
+        """
+        error_msg = f"Failed to {operation}: {str(error)}"
+        
+        recovery_options = {
+            'retry': f'Retry {operation}',
+            'select_different': 'Select a different file',
+            'cancel': 'Cancel operation'
+        }
+        
+        choice = self.show_enhanced_error_message(
+            f"File Operation Error",
+            error_msg,
+            f"File: {file_path}\nError: {str(error)}",
+            "error",
+            recovery_options
+        )
+        
+        if choice == 'retry':
+            return True
+        elif choice == 'select_different':
+            self.load_ifc_file()
+            return False
+        else:  # cancel
+            return False
+    
+    def handle_parsing_error(self, parser_name: str, entity_id: str, error: Exception) -> bool:
+        """
+        Handle parsing errors with graceful degradation options.
+        
+        Args:
+            parser_name: Name of the parser that failed
+            entity_id: ID of the entity being parsed
+            error: The exception that occurred
+            
+        Returns:
+            True if parsing should continue with other entities, False to stop
+        """
+        error_msg = f"{parser_name} failed to parse entity {entity_id}"
+        
+        recovery_options = {
+            'continue': 'Continue with remaining entities',
+            'skip_type': f'Skip all entities of this type',
+            'stop': 'Stop processing'
+        }
+        
+        choice = self.show_enhanced_error_message(
+            "Parsing Error",
+            error_msg,
+            f"Entity: {entity_id}\nParser: {parser_name}\nError: {str(error)}",
+            "warning",
+            recovery_options
+        )
+        
+        return choice in ['continue', 'skip_type']
         
     def setup_ui(self):
         """Set up the main user interface."""
@@ -543,7 +1169,7 @@ class MainWindow(QMainWindow):
                 self.process_ifc_file(file_paths[0])
     
     def process_ifc_file(self, file_path: str):
-        """Process the selected IFC file."""
+        """Process the selected IFC file with comprehensive error handling."""
         self.status_bar.showMessage("Loading IFC file...")
         self.progress_bar.setVisible(True)
         self.progress_bar.setRange(0, 0)  # Indeterminate progress
@@ -553,10 +1179,29 @@ class MainWindow(QMainWindow):
             is_valid, validation_message = self.ifc_reader.validate_file(file_path)
             
             if not is_valid:
-                self.show_error_message("File Validation Error", validation_message)
-                self.progress_bar.setVisible(False)
-                self.status_bar.showMessage("File validation failed")
-                return
+                recovery_options = {
+                    'select_different': 'Select a different IFC file',
+                    'force_load': 'Try to load anyway (may cause errors)',
+                    'cancel': 'Cancel operation'
+                }
+                
+                choice = self.show_enhanced_error_message(
+                    "File Validation Error", 
+                    validation_message,
+                    f"File: {file_path}",
+                    "error",
+                    recovery_options
+                )
+                
+                if choice == 'select_different':
+                    self.load_ifc_file()
+                elif choice == 'force_load':
+                    self.logger.warning(f"Force loading invalid file: {file_path}")
+                    # Continue with loading
+                else:
+                    self.progress_bar.setVisible(False)
+                    self.status_bar.showMessage("File validation cancelled")
+                    return
             
             # Load the file
             success, load_message = self.ifc_reader.load_file(file_path)
@@ -567,17 +1212,37 @@ class MainWindow(QMainWindow):
                 self.update_ui_state(True)  # Enable file-related actions
                 self.status_bar.showMessage("File loaded successfully. Extracting spaces...")
                 
-                # Extract spaces
-                self.extract_spaces()
+                # Extract spaces using threaded operation
+                self.extract_spaces_threaded()
                 
                 self.ifc_file_loaded.emit(file_path)
             else:
-                self.show_error_message("File Loading Error", load_message)
-                self.status_bar.showMessage("File loading failed")
-                self.update_ui_state(False)  # Keep actions disabled
+                # Handle load failure with recovery options
+                if not self.handle_file_operation_error("load IFC file", file_path, Exception(load_message)):
+                    self.status_bar.showMessage("File loading cancelled")
+                    self.update_ui_state(False)
                 
         except Exception as e:
-            self.show_error_message("Unexpected Error", f"An unexpected error occurred: {str(e)}")
+            error_details = traceback.format_exc()
+            recovery_options = {
+                'retry': 'Retry loading the file',
+                'select_different': 'Select a different file',
+                'cancel': 'Cancel operation'
+            }
+            
+            choice = self.show_enhanced_error_message(
+                "Unexpected Error", 
+                f"An unexpected error occurred while loading the file: {str(e)}",
+                error_details,
+                "error",
+                recovery_options
+            )
+            
+            if choice == 'retry':
+                self.process_ifc_file(file_path)
+            elif choice == 'select_different':
+                self.load_ifc_file()
+            
             self.status_bar.showMessage("Error loading file")
         
         finally:
@@ -612,8 +1277,16 @@ class MainWindow(QMainWindow):
         except:
             return "Unknown size"
         
-    def extract_spaces(self):
-        """Extract spaces from the loaded IFC file."""
+    def extract_spaces_threaded(self):
+        """Extract spaces using threaded operation for better UI responsiveness."""
+        def extraction_operation():
+            return self.extract_spaces_internal()
+        
+        # Show progress dialog for space extraction
+        self.show_operation_progress("Extracting Spaces", extraction_operation)
+    
+    def extract_spaces_internal(self):
+        """Internal method for extracting spaces with comprehensive error handling."""
         try:
             # Set the IFC file for the extractors
             self.space_extractor.set_ifc_file(self.ifc_reader.get_ifc_file())
@@ -626,44 +1299,70 @@ class MainWindow(QMainWindow):
             
             if self.spaces:
                 # Extract surfaces, boundaries, and relationships for each space
-                self.status_bar.showMessage("Extracting surface, boundary, and relationship data...")
-                self.extract_surfaces_for_spaces()
-                self.extract_boundaries_for_spaces()
-                self.extract_relationships_for_spaces()
+                self.extract_surfaces_for_spaces_with_error_handling()
+                self.extract_boundaries_for_spaces_with_error_handling()
+                self.extract_relationships_for_spaces_with_error_handling()
                 
-                # Load spaces into the list widget
-                self.space_list_widget.load_spaces(self.spaces)
+                # Load spaces into the list widget (must be done in main thread)
+                QTimer.singleShot(0, lambda: self.finalize_space_extraction())
                 
-                # Show the main interface
-                self.main_splitter.setVisible(True)
-                self.welcome_label.setVisible(False)
-                
-                # Update UI state with spaces loaded
-                self.update_ui_state(True)
-                
-                total_surfaces = sum(len(space.surfaces) for space in self.spaces)
-                total_boundaries = sum(len(getattr(space, 'space_boundaries', [])) for space in self.spaces)
-                self.status_bar.showMessage(f"Successfully loaded {len(self.spaces)} spaces with {total_surfaces} surfaces and {total_boundaries} boundaries")
+                return f"Successfully extracted {len(self.spaces)} spaces"
             else:
-                self.show_info_message("No Spaces Found", 
-                                     "No spaces were found in the IFC file. The file may not contain space data.")
-                self.status_bar.showMessage("No spaces found in file")
-                # Update UI state - file loaded but no spaces
-                self.update_ui_state(True)
+                QTimer.singleShot(0, lambda: self.show_enhanced_error_message(
+                    "No Spaces Found", 
+                    "No spaces were found in the IFC file. The file may not contain space data.",
+                    "",
+                    "info"
+                ))
+                return "No spaces found in file"
                 
         except Exception as e:
-            self.show_error_message("Space Extraction Error", 
-                                  f"Error extracting spaces from IFC file: {str(e)}")
-            self.status_bar.showMessage("Space extraction failed")
-            self.update_ui_state(False)
+            error_details = traceback.format_exc()
+            QTimer.singleShot(0, lambda: self.show_enhanced_error_message(
+                "Space Extraction Error", 
+                f"Error extracting spaces from IFC file: {str(e)}",
+                error_details,
+                "error"
+            ))
+            raise e
     
-    def extract_surfaces_for_spaces(self):
-        """Extract surface data for all loaded spaces."""
+    def finalize_space_extraction(self):
+        """Finalize space extraction in the main thread."""
+        try:
+            # Load spaces into the list widget
+            self.space_list_widget.load_spaces(self.spaces)
+            
+            # Show the main interface
+            self.main_splitter.setVisible(True)
+            self.welcome_label.setVisible(False)
+            
+            # Update UI state with spaces loaded
+            self.update_ui_state(True)
+            
+            total_surfaces = sum(len(space.surfaces) for space in self.spaces)
+            total_boundaries = sum(len(getattr(space, 'space_boundaries', [])) for space in self.spaces)
+            self.status_bar.showMessage(f"Successfully loaded {len(self.spaces)} spaces with {total_surfaces} surfaces and {total_boundaries} boundaries")
+            self.status_bar.setStyleSheet("QStatusBar { color: #28a745; }")
+            QTimer.singleShot(5000, self.clear_temporary_error_status)
+            
+        except Exception as e:
+            self.show_enhanced_error_message(
+                "UI Update Error",
+                f"Error updating interface after space extraction: {str(e)}",
+                traceback.format_exc(),
+                "error"
+            )
+    
+    def extract_surfaces_for_spaces_with_error_handling(self):
+        """Extract surface data for all loaded spaces with comprehensive error handling."""
+        failed_spaces = []
+        skipped_spaces = []
+        
         try:
             for i, space in enumerate(self.spaces):
                 try:
                     # Update progress
-                    self.status_bar.showMessage(f"Extracting surfaces for space {i+1}/{len(self.spaces)}: {space.number}")
+                    self.logger.info(f"Extracting surfaces for space {i+1}/{len(self.spaces)}: {space.number}")
                     
                     # Extract surfaces for this space
                     surfaces = self.surface_extractor.extract_surfaces_for_space(space.guid)
@@ -680,20 +1379,39 @@ class MainWindow(QMainWindow):
                     
                 except Exception as e:
                     self.logger.error(f"Error extracting surfaces for space {space.guid}: {e}")
+                    failed_spaces.append((space.guid, str(e)))
+                    
+                    # Ask user how to handle this error
+                    should_continue = self.handle_parsing_error(
+                        "Surface Extractor", 
+                        space.guid, 
+                        e
+                    )
+                    
+                    if not should_continue:
+                        break
+                    
                     # Continue with other spaces
                     continue
                     
         except Exception as e:
-            self.logger.error(f"Error in surface extraction process: {e}")
+            self.logger.error(f"Critical error in surface extraction process: {e}")
             raise
+        
+        # Report summary of extraction issues
+        if failed_spaces or skipped_spaces:
+            self.report_extraction_issues("Surface Extraction", failed_spaces, skipped_spaces)
     
-    def extract_boundaries_for_spaces(self):
-        """Extract space boundary data for all loaded spaces."""
+    def extract_boundaries_for_spaces_with_error_handling(self):
+        """Extract space boundary data for all loaded spaces with comprehensive error handling."""
+        failed_spaces = []
+        skipped_spaces = []
+        
         try:
             for i, space in enumerate(self.spaces):
                 try:
                     # Update progress
-                    self.status_bar.showMessage(f"Extracting boundaries for space {i+1}/{len(self.spaces)}: {space.number}")
+                    self.logger.info(f"Extracting boundaries for space {i+1}/{len(self.spaces)}: {space.number}")
                     
                     # Extract space boundaries for this space
                     boundaries = self.boundary_parser.extract_space_boundaries(space.guid)
@@ -710,20 +1428,39 @@ class MainWindow(QMainWindow):
                     
                 except Exception as e:
                     self.logger.error(f"Error extracting boundaries for space {space.guid}: {e}")
+                    failed_spaces.append((space.guid, str(e)))
+                    
+                    # Ask user how to handle this error
+                    should_continue = self.handle_parsing_error(
+                        "Boundary Parser", 
+                        space.guid, 
+                        e
+                    )
+                    
+                    if not should_continue:
+                        break
+                    
                     # Continue with other spaces
                     continue
                     
         except Exception as e:
-            self.logger.error(f"Error in boundary extraction process: {e}")
+            self.logger.error(f"Critical error in boundary extraction process: {e}")
             raise
+        
+        # Report summary of extraction issues
+        if failed_spaces or skipped_spaces:
+            self.report_extraction_issues("Boundary Extraction", failed_spaces, skipped_spaces)
     
-    def extract_relationships_for_spaces(self):
-        """Extract relationship data for all loaded spaces."""
+    def extract_relationships_for_spaces_with_error_handling(self):
+        """Extract relationship data for all loaded spaces with comprehensive error handling."""
+        failed_spaces = []
+        skipped_spaces = []
+        
         try:
             for i, space in enumerate(self.spaces):
                 try:
                     # Update progress
-                    self.status_bar.showMessage(f"Extracting relationships for space {i+1}/{len(self.spaces)}: {space.number}")
+                    self.logger.info(f"Extracting relationships for space {i+1}/{len(self.spaces)}: {space.number}")
                     
                     # Extract relationships for this space
                     relationships = self.relationship_parser.get_space_relationships(space.guid)
@@ -739,12 +1476,61 @@ class MainWindow(QMainWindow):
                     
                 except Exception as e:
                     self.logger.error(f"Error extracting relationships for space {space.guid}: {e}")
+                    failed_spaces.append((space.guid, str(e)))
+                    
+                    # Ask user how to handle this error
+                    should_continue = self.handle_parsing_error(
+                        "Relationship Parser", 
+                        space.guid, 
+                        e
+                    )
+                    
+                    if not should_continue:
+                        break
+                    
                     # Continue with other spaces
                     continue
                     
         except Exception as e:
-            self.logger.error(f"Error in relationship extraction process: {e}")
+            self.logger.error(f"Critical error in relationship extraction process: {e}")
             raise
+        
+        # Report summary of extraction issues
+        if failed_spaces or skipped_spaces:
+            self.report_extraction_issues("Relationship Extraction", failed_spaces, skipped_spaces)
+    
+    def report_extraction_issues(self, operation_name: str, failed_spaces: list, skipped_spaces: list):
+        """Report summary of extraction issues to the user."""
+        if not failed_spaces and not skipped_spaces:
+            return
+        
+        issue_summary = []
+        if failed_spaces:
+            issue_summary.append(f"Failed to process {len(failed_spaces)} spaces")
+        if skipped_spaces:
+            issue_summary.append(f"Skipped {len(skipped_spaces)} spaces")
+        
+        details = []
+        if failed_spaces:
+            details.append("Failed spaces:")
+            for space_guid, error in failed_spaces[:10]:  # Limit to first 10
+                details.append(f"  - {space_guid}: {error}")
+            if len(failed_spaces) > 10:
+                details.append(f"  ... and {len(failed_spaces) - 10} more")
+        
+        if skipped_spaces:
+            details.append("Skipped spaces:")
+            for space_guid, reason in skipped_spaces[:10]:  # Limit to first 10
+                details.append(f"  - {space_guid}: {reason}")
+            if len(skipped_spaces) > 10:
+                details.append(f"  ... and {len(skipped_spaces) - 10} more")
+        
+        self.show_enhanced_error_message(
+            f"{operation_name} Issues",
+            f"{operation_name} completed with issues: {', '.join(issue_summary)}",
+            '\n'.join(details),
+            "warning"
+        )
 
     def close_file(self):
         """Close the currently loaded IFC file."""
@@ -764,22 +1550,12 @@ class MainWindow(QMainWindow):
             self.status_bar.showMessage("File closed")
     
     def show_error_message(self, title: str, message: str):
-        """Show an error message dialog."""
-        msg_box = QMessageBox(self)
-        msg_box.setIcon(QMessageBox.Icon.Critical)
-        msg_box.setWindowTitle(title)
-        msg_box.setText(message)
-        msg_box.setStandardButtons(QMessageBox.StandardButton.Ok)
-        msg_box.exec()
+        """Show an error message dialog (legacy method - use show_enhanced_error_message for new code)."""
+        self.show_enhanced_error_message(title, message, "", "error")
     
     def show_info_message(self, title: str, message: str):
-        """Show an information message dialog."""
-        msg_box = QMessageBox(self)
-        msg_box.setIcon(QMessageBox.Icon.Information)
-        msg_box.setWindowTitle(title)
-        msg_box.setText(message)
-        msg_box.setStandardButtons(QMessageBox.StandardButton.Ok)
-        msg_box.exec()
+        """Show an information message dialog (legacy method - use show_enhanced_error_message for new code)."""
+        self.show_enhanced_error_message(title, message, "", "info")
     
     def get_ifc_reader(self) -> IfcFileReader:
         """Get the IFC file reader instance."""
@@ -1059,24 +1835,38 @@ class MainWindow(QMainWindow):
         self.show_info_message("Data Validation Results", "\n".join(validation_results))
         
     def export_json(self):
-        """Export space data to JSON file."""
+        """Export space data to JSON file with enhanced error handling."""
         if not self.spaces:
-            QMessageBox.warning(self, "No Data", 
-                              "No space data available for export. Please load an IFC file first.")
+            self.show_enhanced_error_message(
+                "No Data", 
+                "No space data available for export. Please load an IFC file first.",
+                "",
+                "warning"
+            )
             return
         
-        # Create and show export dialog
-        export_dialog = ExportDialogWidget(
-            spaces=self.spaces,
-            source_file_path=self.current_file_path,
-            parent=self
-        )
-        
-        # Connect export completion signal
-        export_dialog.export_completed.connect(self.on_export_completed)
-        
-        # Show dialog
-        export_dialog.exec()
+        try:
+            # Create and show export dialog
+            export_dialog = ExportDialogWidget(
+                spaces=self.spaces,
+                source_file_path=self.current_file_path,
+                parent=self
+            )
+            
+            # Connect export completion signal
+            export_dialog.export_completed.connect(self.on_export_completed)
+            
+            # Show dialog
+            export_dialog.exec()
+            
+        except Exception as e:
+            error_details = traceback.format_exc()
+            self.show_enhanced_error_message(
+                "Export Dialog Error",
+                f"Failed to open export dialog: {str(e)}",
+                error_details,
+                "error"
+            )
     
     def on_export_completed(self, success: bool, message: str):
         """Handle export completion from export dialog."""

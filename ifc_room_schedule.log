@@ -1,0 +1,7 @@
+2025-09-26 21:37:46,071 - ifc_room_schedule.ui.main_window - INFO - Demo Error: This demonstrates the enhanced error handling in the main application.
+2025-09-26 21:38:05,173 - ifc_room_schedule.ui.main_window - WARNING - Space Processing Demo Partial Failure: Space Processing Demo results: 15 successful, 3 failed, 2 skipped out of 20 items
+2025-09-26 21:38:08,688 - ifc_room_schedule.ui.main_window - WARNING - Space Processing Demo Partial Failure: Space Processing Demo results: 15 successful, 3 failed, 2 skipped out of 20 items
+2025-09-26 21:38:12,392 - ifc_room_schedule.ui.main_window - ERROR - Memory Error: Insufficient memory for large IFC file processing. The operation requires more memory than available.
+2025-09-26 21:38:16,024 - ifc_room_schedule.ui.main_window - ERROR - Memory Error: Insufficient memory for large IFC file processing. The operation requires more memory than available.
+2025-09-26 21:38:17,320 - ifc_room_schedule.ui.main_window - INFO - Memory resources freed
+2025-09-26 21:38:18,994 - ifc_room_schedule.ui.main_window - ERROR - Memory Error: Insufficient memory for large IFC file processing. The operation requires more memory than available.

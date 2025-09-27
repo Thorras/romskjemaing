@@ -18,6 +18,9 @@ from PyQt6.QtGui import QFont, QIcon
 
 from ..data.space_model import SpaceData
 from ..export.json_builder import JsonBuilder
+from ..export.csv_exporter import CsvExporter
+from ..export.excel_exporter import ExcelExporter
+from ..export.pdf_exporter import PdfExporter
 
 
 class ExportWorker(QObject):
@@ -33,57 +36,142 @@ class ExportWorker(QObject):
         self.spaces = spaces
         self.export_path = export_path
         self.export_options = export_options
+        
+        # Initialize exporters
         self.json_builder = JsonBuilder()
+        self.csv_exporter = CsvExporter()
+        self.excel_exporter = ExcelExporter()
+        self.pdf_exporter = PdfExporter()
     
     def run_export(self):
         """Execute the export operation."""
         try:
+            format_name = self.export_options.get('format', 'JSON')
+            
             self.status_updated.emit("Preparing export data...")
             self.progress_updated.emit(10)
             
             # Set source file information if available
-            if 'source_file' in self.export_options:
-                self.json_builder.set_source_file(self.export_options['source_file'])
-            if 'ifc_version' in self.export_options:
-                self.json_builder.set_ifc_version(self.export_options['ifc_version'])
+            source_file = self.export_options.get('source_file')
+            if source_file:
+                self.json_builder.set_source_file(source_file)
+                self.csv_exporter.set_source_file(source_file)
+                self.excel_exporter.set_source_file(source_file)
+                self.pdf_exporter.set_source_file(source_file)
             
-            self.status_updated.emit("Building JSON structure...")
+            ifc_version = self.export_options.get('ifc_version')
+            if ifc_version:
+                self.json_builder.set_ifc_version(ifc_version)
+            
+            self.status_updated.emit(f"Building {format_name} export...")
             self.progress_updated.emit(30)
             
-            # Build JSON structure
-            metadata = self.export_options.get('metadata', {})
-            json_data = self.json_builder.build_json_structure(self.spaces, metadata)
-            
-            self.status_updated.emit("Validating export data...")
-            self.progress_updated.emit(60)
-            
-            # Validate data if requested
-            if self.export_options.get('validate', True):
-                is_valid, validation_errors = self.json_builder.validate_export_data(json_data)
-                if not is_valid:
-                    error_msg = "Data validation failed:\n" + "\n".join(validation_errors)
-                    self.export_completed.emit(False, error_msg)
-                    return
-            
-            self.status_updated.emit("Writing JSON file...")
-            self.progress_updated.emit(80)
-            
-            # Write to file
-            indent = self.export_options.get('indent', 2)
-            success = self.json_builder.write_json_file(self.export_path, json_data, indent)
+            # Export based on format
+            if format_name == "JSON":
+                success, message = self._export_json()
+            elif format_name == "CSV":
+                success, message = self._export_csv()
+            elif format_name == "Excel":
+                success, message = self._export_excel()
+            elif format_name == "PDF":
+                success, message = self._export_pdf()
+            else:
+                success, message = False, f"Unsupported export format: {format_name}"
             
             self.progress_updated.emit(100)
             
             if success:
                 file_size = os.path.getsize(self.export_path)
                 size_str = self._format_file_size(file_size)
-                success_msg = f"Successfully exported {len(self.spaces)} spaces to {Path(self.export_path).name} ({size_str})"
+                success_msg = f"{message} ({size_str})"
                 self.export_completed.emit(True, success_msg)
             else:
-                self.export_completed.emit(False, "Failed to write JSON file")
+                self.export_completed.emit(False, message)
                 
         except Exception as e:
             self.export_completed.emit(False, f"Export failed: {str(e)}")
+    
+    def _export_json(self) -> Tuple[bool, str]:
+        """Export to JSON format."""
+        self.status_updated.emit("Building JSON structure...")
+        self.progress_updated.emit(40)
+        
+        # Build JSON structure
+        metadata = self.export_options.get('metadata', {})
+        json_data = self.json_builder.build_json_structure(self.spaces, metadata)
+        
+        self.status_updated.emit("Validating export data...")
+        self.progress_updated.emit(60)
+        
+        # Validate data if requested
+        if self.export_options.get('validate', True):
+            is_valid, validation_errors = self.json_builder.validate_export_data(json_data)
+            if not is_valid:
+                error_msg = "Data validation failed:\n" + "\n".join(validation_errors)
+                return False, error_msg
+        
+        self.status_updated.emit("Writing JSON file...")
+        self.progress_updated.emit(80)
+        
+        # Write to file
+        indent = self.export_options.get('indent', 2)
+        success = self.json_builder.write_json_file(self.export_path, json_data, indent)
+        
+        if success:
+            return True, f"Successfully exported {len(self.spaces)} spaces to {Path(self.export_path).name}"
+        else:
+            return False, "Failed to write JSON file"
+    
+    def _export_csv(self) -> Tuple[bool, str]:
+        """Export to CSV format."""
+        self.status_updated.emit("Writing CSV file...")
+        self.progress_updated.emit(60)
+        
+        include_surfaces = self.export_options.get('include_surfaces', True)
+        include_boundaries = self.export_options.get('include_boundaries', True)
+        include_relationships = self.export_options.get('include_relationships', True)
+        
+        return self.csv_exporter.export_to_csv(
+            self.spaces, 
+            self.export_path,
+            include_surfaces=include_surfaces,
+            include_boundaries=include_boundaries,
+            include_relationships=include_relationships
+        )
+    
+    def _export_excel(self) -> Tuple[bool, str]:
+        """Export to Excel format."""
+        self.status_updated.emit("Writing Excel file...")
+        self.progress_updated.emit(60)
+        
+        include_surfaces = self.export_options.get('include_surfaces', True)
+        include_boundaries = self.export_options.get('include_boundaries', True)
+        include_relationships = self.export_options.get('include_relationships', True)
+        
+        return self.excel_exporter.export_to_excel(
+            self.spaces,
+            self.export_path,
+            include_surfaces=include_surfaces,
+            include_boundaries=include_boundaries,
+            include_relationships=include_relationships
+        )
+    
+    def _export_pdf(self) -> Tuple[bool, str]:
+        """Export to PDF format."""
+        self.status_updated.emit("Writing PDF file...")
+        self.progress_updated.emit(60)
+        
+        include_surfaces = self.export_options.get('include_surfaces', True)
+        include_boundaries = self.export_options.get('include_boundaries', True)
+        include_relationships = self.export_options.get('include_relationships', True)
+        
+        return self.pdf_exporter.export_to_pdf(
+            self.spaces,
+            self.export_path,
+            include_surfaces=include_surfaces,
+            include_boundaries=include_boundaries,
+            include_relationships=include_relationships
+        )
     
     def _format_file_size(self, size_bytes: int) -> str:
         """Format file size in human-readable format."""
@@ -235,12 +323,42 @@ class ExportDialogWidget(QDialog):
         options_layout = QFormLayout()
         options_group.setLayout(options_layout)
         
-        # JSON formatting options
+        # Export format selection
+        self.format_combo = QComboBox()
+        self.format_combo.addItems(["JSON", "CSV", "Excel", "PDF"])
+        self.format_combo.setCurrentText("JSON")
+        self.format_combo.setToolTip("Select export format")
+        self.format_combo.currentTextChanged.connect(self.on_format_changed)
+        options_layout.addRow("Export Format:", self.format_combo)
+        
+        # JSON formatting options (initially visible)
+        self.json_options_frame = QFrame()
+        json_options_layout = QFormLayout()
+        self.json_options_frame.setLayout(json_options_layout)
+        
         self.indent_spinbox = QSpinBox()
         self.indent_spinbox.setRange(0, 8)
         self.indent_spinbox.setValue(2)
         self.indent_spinbox.setToolTip("Number of spaces for JSON indentation (0 for compact)")
-        options_layout.addRow("JSON Indentation:", self.indent_spinbox)
+        json_options_layout.addRow("JSON Indentation:", self.indent_spinbox)
+        
+        options_layout.addRow("", self.json_options_frame)
+        
+        # Data inclusion options
+        self.include_surfaces_checkbox = QCheckBox("Include surfaces data")
+        self.include_surfaces_checkbox.setChecked(True)
+        self.include_surfaces_checkbox.setToolTip("Include surface information in export")
+        options_layout.addRow("", self.include_surfaces_checkbox)
+        
+        self.include_boundaries_checkbox = QCheckBox("Include space boundaries data")
+        self.include_boundaries_checkbox.setChecked(True)
+        self.include_boundaries_checkbox.setToolTip("Include space boundary information in export")
+        options_layout.addRow("", self.include_boundaries_checkbox)
+        
+        self.include_relationships_checkbox = QCheckBox("Include relationships data")
+        self.include_relationships_checkbox.setChecked(True)
+        self.include_relationships_checkbox.setToolTip("Include relationship information in export")
+        options_layout.addRow("", self.include_relationships_checkbox)
         
         # Validation option
         self.validate_checkbox = QCheckBox("Validate data before export")
@@ -344,6 +462,33 @@ class ExportDialogWidget(QDialog):
         """Connect widget signals."""
         self.file_path_edit.textChanged.connect(self.update_export_button_state)
     
+    def on_format_changed(self, format_name: str):
+        """Handle export format change."""
+        # Show/hide JSON-specific options
+        self.json_options_frame.setVisible(format_name == "JSON")
+        
+        # Update export button text
+        self.export_button.setText(f"Export {format_name}")
+        
+        # Clear current file path to force user to select new file
+        current_path = self.file_path_edit.text()
+        if current_path:
+            # Update extension based on format
+            path_obj = Path(current_path)
+            base_name = path_obj.stem
+            
+            extension_map = {
+                "JSON": ".json",
+                "CSV": ".csv", 
+                "Excel": ".xlsx",
+                "PDF": ".pdf"
+            }
+            
+            new_extension = extension_map.get(format_name, ".json")
+            new_path = path_obj.parent / (base_name + new_extension)
+            self.file_path_edit.setText(str(new_path))
+            self.update_file_info(str(new_path))
+    
     def validate_data_completeness(self):
         """Validate data completeness and show warnings if needed."""
         if not self.spaces:
@@ -368,22 +513,50 @@ class ExportDialogWidget(QDialog):
     
     def browse_export_file(self):
         """Open file dialog to select export file location."""
-        default_filename = "room_schedule_export.json"
+        format_name = self.format_combo.currentText()
+        
+        # Define file filters and extensions for each format
+        format_config = {
+            "JSON": {
+                "extension": ".json",
+                "filter": "JSON Files (*.json);;All Files (*)",
+                "default_name": "room_schedule_export.json"
+            },
+            "CSV": {
+                "extension": ".csv",
+                "filter": "CSV Files (*.csv);;All Files (*)",
+                "default_name": "room_schedule_export.csv"
+            },
+            "Excel": {
+                "extension": ".xlsx",
+                "filter": "Excel Files (*.xlsx);;All Files (*)",
+                "default_name": "room_schedule_export.xlsx"
+            },
+            "PDF": {
+                "extension": ".pdf",
+                "filter": "PDF Files (*.pdf);;All Files (*)",
+                "default_name": "room_schedule_export.pdf"
+            }
+        }
+        
+        config = format_config.get(format_name, format_config["JSON"])
+        
+        default_filename = config["default_name"]
         if self.source_file_path:
             source_name = Path(self.source_file_path).stem
-            default_filename = f"{source_name}_room_schedule.json"
+            default_filename = f"{source_name}_room_schedule{config['extension']}"
         
         file_path, _ = QFileDialog.getSaveFileName(
             self,
-            "Save Export File",
+            f"Save {format_name} Export File",
             default_filename,
-            "JSON Files (*.json);;All Files (*)"
+            config["filter"]
         )
         
         if file_path:
-            # Ensure .json extension
-            if not file_path.lower().endswith('.json'):
-                file_path += '.json'
+            # Ensure correct extension
+            if not file_path.lower().endswith(config['extension']):
+                file_path += config['extension']
             
             self.file_path_edit.setText(file_path)
             self.update_file_info(file_path)
@@ -429,10 +602,14 @@ class ExportDialogWidget(QDialog):
         
         # Prepare export options
         export_options = {
+            'format': self.format_combo.currentText(),
             'indent': self.indent_spinbox.value(),
             'validate': self.validate_checkbox.isChecked(),
             'include_metadata': self.include_metadata_checkbox.isChecked(),
-            'include_summary': self.include_summary_checkbox.isChecked()
+            'include_summary': self.include_summary_checkbox.isChecked(),
+            'include_surfaces': self.include_surfaces_checkbox.isChecked(),
+            'include_boundaries': self.include_boundaries_checkbox.isChecked(),
+            'include_relationships': self.include_relationships_checkbox.isChecked()
         }
         
         if self.source_file_path:

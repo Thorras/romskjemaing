@@ -36,6 +36,8 @@ class SpaceData:
             raise ValueError("GUID is required for space data")
         if not isinstance(self.guid, str):
             raise TypeError("GUID must be a string")
+        if not self.name:
+            raise ValueError("Name is required")
         if not isinstance(self.elevation, (int, float)):
             raise TypeError("Elevation must be a number")
 

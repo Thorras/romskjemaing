@@ -46,35 +46,58 @@ class IfcSpaceExtractor:
         Raises:
             ValueError: If no IFC file is loaded
             RuntimeError: If extraction fails
+            MemoryError: If insufficient memory for extraction
         """
         if not self.ifc_file:
             raise ValueError("No IFC file loaded. Use set_ifc_file() first.")
 
         try:
             # Get all IfcSpace entities
-            ifc_spaces = self.ifc_file.by_type("IfcSpace")
+            try:
+                ifc_spaces = self.ifc_file.by_type("IfcSpace")
+            except MemoryError as e:
+                raise MemoryError(f"Insufficient memory to load IfcSpace entities: {e}")
+            except Exception as e:
+                raise RuntimeError(f"Failed to access IfcSpace entities: {e}")
             
             if not ifc_spaces:
                 self.logger.warning("No IfcSpace entities found in the file")
                 return []
 
             spaces = []
-            for ifc_space in ifc_spaces:
+            failed_extractions = []
+            
+            for i, ifc_space in enumerate(ifc_spaces):
                 try:
                     space_data = self._extract_space_properties(ifc_space)
                     if space_data:
                         spaces.append(space_data)
+                    else:
+                        failed_extractions.append((getattr(ifc_space, 'GlobalId', f'Space_{i}'), "Failed to extract properties"))
+                except MemoryError as e:
+                    # For memory errors, we should stop processing
+                    self.logger.error(f"Memory error extracting space {getattr(ifc_space, 'GlobalId', f'Space_{i}')}: {e}")
+                    raise MemoryError(f"Insufficient memory to extract spaces. Processed {len(spaces)} of {len(ifc_spaces)} spaces.")
                 except Exception as e:
-                    self.logger.error(
-                        f"Error extracting space {getattr(ifc_space, 'GlobalId', 'Unknown')}: {e}"
-                    )
+                    space_id = getattr(ifc_space, 'GlobalId', f'Space_{i}')
+                    self.logger.error(f"Error extracting space {space_id}: {e}")
+                    failed_extractions.append((space_id, str(e)))
                     # Continue processing other spaces
                     continue
 
+            # Log summary
+            if failed_extractions:
+                self.logger.warning(f"Failed to extract {len(failed_extractions)} spaces out of {len(ifc_spaces)}")
+                for space_id, error in failed_extractions[:5]:  # Log first 5 failures
+                    self.logger.debug(f"  - {space_id}: {error}")
+            
             self.logger.info(f"Successfully extracted {len(spaces)} spaces from {len(ifc_spaces)} IfcSpace entities")
             self._spaces_cache = spaces
             return spaces
 
+        except (ValueError, MemoryError):
+            # Re-raise these specific exceptions
+            raise
         except Exception as e:
             error_msg = f"Failed to extract spaces from IFC file: {e}"
             self.logger.error(error_msg)
