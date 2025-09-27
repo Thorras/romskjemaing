@@ -180,24 +180,32 @@ class TestSurfaceDisplayIntegration:
         
         assert found_description, "User descriptions should be displayed in the table"
 
-    @patch('ifc_room_schedule.ui.main_window.MainWindow.extract_surfaces_for_spaces')
+    @patch('ifc_room_schedule.ui.main_window.MainWindow.extract_surfaces_for_spaces_with_error_handling')
     def test_main_window_surface_extraction_integration(self, mock_extract_surfaces):
         """Test integration of surface extraction in main window."""
+        self.main_window._testing_mode = True  # Enable testing mode
+        
         # Mock the IFC file loading
         with patch.object(self.main_window.ifc_reader, 'is_loaded', return_value=True):
             with patch.object(self.main_window.ifc_reader, 'validate_file', return_value=(True, "Valid")):
                 with patch.object(self.main_window.ifc_reader, 'load_file', return_value=(True, "Loaded")):
                     with patch.object(self.main_window.space_extractor, 'extract_spaces') as mock_extract_spaces:
-                        
-                        # Create test spaces
-                        test_spaces = [self.create_test_space_with_surfaces()]
-                        mock_extract_spaces.return_value = test_spaces
-                        
-                        # Process a mock file
-                        self.main_window.process_ifc_file("test.ifc")
-                        
-                        # Verify that surface extraction was called
-                        mock_extract_surfaces.assert_called_once()
+                        with patch.object(self.main_window.ifc_reader, 'get_ifc_file', return_value=Mock()):
+                            with patch.object(self.main_window.surface_extractor, 'set_ifc_file'):
+                                with patch.object(self.main_window.boundary_parser, 'set_ifc_file'):
+                                    with patch.object(self.main_window.relationship_parser, 'set_ifc_file'):
+                                        with patch.object(self.main_window, 'extract_boundaries_for_spaces_with_error_handling'):
+                                            with patch.object(self.main_window, 'extract_relationships_for_spaces_with_error_handling'):
+                                                
+                                                # Create test spaces
+                                                test_spaces = [self.create_test_space_with_surfaces()]
+                                                mock_extract_spaces.return_value = test_spaces
+                                                
+                                                # Process a mock file
+                                                self.main_window.process_ifc_file("test.ifc")
+                                                
+                                                # Verify that surface extraction was called
+                                                mock_extract_surfaces.assert_called_once()
                         
                         # Verify spaces were loaded
                         assert len(self.main_window.spaces) == 1

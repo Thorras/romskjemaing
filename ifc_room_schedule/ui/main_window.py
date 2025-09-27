@@ -298,6 +298,13 @@ class MainWindow(QMainWindow):
         # Update status bar with error count
         self.update_error_status(f"Error #{self.error_count}: {message}")
         
+        # In testing mode, don't show dialogs to avoid blocking tests
+        if hasattr(self, '_testing_mode') and self._testing_mode:
+            # Return first recovery option if available, otherwise None
+            if recovery_options:
+                return list(recovery_options.keys())[0]
+            return None
+        
         # Show recovery dialog if options provided
         if recovery_options:
             recovery_dialog = ErrorRecoveryDialog(message, recovery_options, self)
@@ -336,6 +343,16 @@ class MainWindow(QMainWindow):
             operation_func: Function to execute
             *args, **kwargs: Arguments for the operation function
         """
+        # In test mode, execute synchronously to avoid threading issues
+        if hasattr(self, '_testing_mode') and self._testing_mode:
+            try:
+                result = operation_func(*args, **kwargs)
+                self.on_operation_completed(True, "Operation completed successfully", result)
+                return
+            except Exception as e:
+                self.on_operation_error("operation_error", f"Operation failed: {str(e)}")
+                return
+        
         # Create progress dialog
         progress_dialog = QMessageBox(self)
         progress_dialog.setWindowTitle(title)
@@ -364,9 +381,8 @@ class MainWindow(QMainWindow):
         # Start operation
         self.operation_thread.start()
         
-        # Don't block in test environment
-        if not hasattr(self, '_testing_mode'):
-            progress_dialog.exec()
+        # Show progress dialog
+        progress_dialog.exec()
     
     def on_operation_completed(self, success: bool, message: str, result: Any):
         """Handle completion of long-running operation."""
@@ -461,7 +477,10 @@ class MainWindow(QMainWindow):
             
             # Clear UI data
             if hasattr(self, 'space_list_widget') and self.space_list_widget:
-                self.space_list_widget.clear()
+                self.space_list_widget.clear_selection()
+                # Clear the spaces list in the widget
+                if hasattr(self.space_list_widget, 'spaces'):
+                    self.space_list_widget.spaces.clear()
             if hasattr(self, 'space_detail_widget') and self.space_detail_widget:
                 self.space_detail_widget.clear_selection()
             
@@ -1277,8 +1296,27 @@ class MainWindow(QMainWindow):
         except:
             return "Unknown size"
         
+    def extract_spaces(self):
+        """Extract spaces - public method for tests and direct calls."""
+        return self.extract_spaces_internal()
+    
     def extract_spaces_threaded(self):
         """Extract spaces using threaded operation for better UI responsiveness."""
+        # In test mode, call extract_spaces directly for synchronous behavior
+        if hasattr(self, '_testing_mode') and self._testing_mode:
+            try:
+                result = self.extract_spaces_internal()
+                self.finalize_space_extraction()
+                return result
+            except Exception as e:
+                self.show_enhanced_error_message(
+                    "Space Extraction Error", 
+                    f"Error extracting spaces from IFC file: {str(e)}",
+                    traceback.format_exc(),
+                    "error"
+                )
+                return None
+        
         def extraction_operation():
             return self.extract_spaces_internal()
         
@@ -1304,26 +1342,51 @@ class MainWindow(QMainWindow):
                 self.extract_relationships_for_spaces_with_error_handling()
                 
                 # Load spaces into the list widget (must be done in main thread)
-                QTimer.singleShot(0, lambda: self.finalize_space_extraction())
+                if hasattr(self, '_testing_mode') and self._testing_mode:
+                    # In test mode, call directly to avoid timing issues
+                    self.finalize_space_extraction()
+                else:
+                    # In normal mode, use QTimer to ensure main thread execution
+                    QTimer.singleShot(0, lambda: self.finalize_space_extraction())
                 
                 return f"Successfully extracted {len(self.spaces)} spaces"
             else:
-                QTimer.singleShot(0, lambda: self.show_enhanced_error_message(
-                    "No Spaces Found", 
-                    "No spaces were found in the IFC file. The file may not contain space data.",
-                    "",
-                    "info"
-                ))
+                if hasattr(self, '_testing_mode') and self._testing_mode:
+                    # In test mode, call directly
+                    self.show_enhanced_error_message(
+                        "No Spaces Found", 
+                        "No spaces were found in the IFC file. The file may not contain space data.",
+                        "",
+                        "info"
+                    )
+                else:
+                    # In normal mode, use QTimer
+                    QTimer.singleShot(0, lambda: self.show_enhanced_error_message(
+                        "No Spaces Found", 
+                        "No spaces were found in the IFC file. The file may not contain space data.",
+                        "",
+                        "info"
+                    ))
                 return "No spaces found in file"
                 
         except Exception as e:
             error_details = traceback.format_exc()
-            QTimer.singleShot(0, lambda: self.show_enhanced_error_message(
-                "Space Extraction Error", 
-                f"Error extracting spaces from IFC file: {str(e)}",
-                error_details,
-                "error"
-            ))
+            if hasattr(self, '_testing_mode') and self._testing_mode:
+                # In test mode, call directly
+                self.show_enhanced_error_message(
+                    "Space Extraction Error", 
+                    f"Error extracting spaces from IFC file: {str(e)}",
+                    error_details,
+                    "error"
+                )
+            else:
+                # In normal mode, use QTimer
+                QTimer.singleShot(0, lambda: self.show_enhanced_error_message(
+                    "Space Extraction Error", 
+                    f"Error extracting spaces from IFC file: {str(e)}",
+                    error_details,
+                    "error"
+                ))
             raise e
     
     def finalize_space_extraction(self):

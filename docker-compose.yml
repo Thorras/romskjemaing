@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  ifc-room-schedule:
+    build: .
+    container_name: ifc-room-schedule-app
+    volumes:
+      - ./data:/app/data
+      - ./exports:/app/exports
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_QPA_PLATFORM=xcb
+    network_mode: host
+    stdin_open: true
+    tty: true
+    restart: unless-stopped
+    
+  # Optional: Web interface service
+  web-interface:
+    build: .
+    container_name: ifc-room-schedule-web
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./data:/app/data
+      - ./exports:/app/exports
+    environment:
+      - PYTHONPATH=/app
+      - WEB_MODE=true
+    command: ["python", "-m", "http.server", "8080"]
+    restart: unless-stopped
+
+volumes:
+  data:
+  exports:

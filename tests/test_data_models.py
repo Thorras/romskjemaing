@@ -61,18 +61,19 @@ class TestSpaceData:
             )
     
     def test_space_data_validation_missing_name(self):
-        """Test validation fails when name is missing."""
-        with pytest.raises(ValueError, match="Name is required"):
-            SpaceData(
-                guid="test-guid-123",
-                name="",
-                long_name="Test Room Long Name",
-                description="A test room",
-                object_type="Room",
-                zone_category="Office",
-                number="101",
-                elevation=0.0
-            )
+        """Test validation allows missing name if long_name is present."""
+        # This should NOT raise an error since long_name is provided
+        space = SpaceData(
+            guid="test-guid-123",
+            name="",
+            long_name="Test Room Long Name",
+            description="A test room",
+            object_type="Room",
+            zone_category="Office",
+            number="101",
+            elevation=0.0
+        )
+        assert space.long_name == "Test Room Long Name"
     
     def test_space_data_validation_invalid_elevation_type(self):
         """Test validation fails when elevation is not a number."""

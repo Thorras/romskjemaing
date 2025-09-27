@@ -102,16 +102,18 @@ class TestMainWindow:
     def test_file_loading_ui_updates(self, qapp):
         """Test UI updates during file loading process."""
         window = MainWindow()
+        window._testing_mode = True  # Enable testing mode for synchronous behavior
         
         # Mock successful file loading
         with patch.object(window.ifc_reader, 'validate_file', return_value=(True, "Valid file")):
             with patch.object(window.ifc_reader, 'load_file', return_value=(True, "File loaded")):
-                with patch.object(window, 'extract_spaces') as mock_extract:
+                with patch.object(window, 'extract_spaces_internal') as mock_extract:
+                    mock_extract.return_value = "Successfully extracted 0 spaces"
                     
                     # Simulate file loading
                     window.process_ifc_file("/fake/path/test.ifc")
                     
-                    # Check that extract_spaces was called
+                    # Check that extract_spaces_internal was called
                     mock_extract.assert_called_once()
                     
                     # Check file path is set
@@ -120,20 +122,27 @@ class TestMainWindow:
     def test_space_extraction_and_ui_update(self, qapp, sample_spaces):
         """Test space extraction and UI updates."""
         window = MainWindow()
+        window._testing_mode = True  # Enable testing mode for synchronous behavior
         window.show()
         qapp.processEvents()
         
         # Mock the space extractor
         with patch.object(window.space_extractor, 'extract_spaces', return_value=sample_spaces):
             with patch.object(window.ifc_reader, 'get_ifc_file', return_value=Mock()):
-                
-                # Extract spaces
-                window.extract_spaces()
-                
-                # Check spaces are loaded
-                assert len(window.spaces) == 3
-                assert window.main_splitter.isVisible()
-                assert not window.welcome_label.isVisible()
+                with patch.object(window.surface_extractor, 'set_ifc_file'):
+                    with patch.object(window.boundary_parser, 'set_ifc_file'):
+                        with patch.object(window.relationship_parser, 'set_ifc_file'):
+                            with patch.object(window, 'extract_surfaces_for_spaces_with_error_handling'):
+                                with patch.object(window, 'extract_boundaries_for_spaces_with_error_handling'):
+                                    with patch.object(window, 'extract_relationships_for_spaces_with_error_handling'):
+                                        
+                                        # Extract spaces
+                                        window.extract_spaces()
+                                        
+                                        # Check spaces are loaded
+                                        assert len(window.spaces) == 3
+                                        assert window.main_splitter.isVisible()
+                                        assert not window.welcome_label.isVisible()
 
     def test_space_selection_integration(self, qapp, sample_spaces):
         """Test space selection between list and detail widgets."""
@@ -316,36 +325,44 @@ class TestUIIntegration:
     def test_complete_workflow(self, qapp, sample_spaces):
         """Test complete workflow from file loading to space selection."""
         window = MainWindow()
+        window._testing_mode = True  # Enable testing mode for synchronous behavior
         window.show()
         qapp.processEvents()
         
-        # Mock file operations
+        # Mock file operations and all extraction methods
         with patch.object(window.ifc_reader, 'validate_file', return_value=(True, "Valid")):
             with patch.object(window.ifc_reader, 'load_file', return_value=(True, "Loaded")):
                 with patch.object(window.space_extractor, 'extract_spaces', return_value=sample_spaces):
                     with patch.object(window.ifc_reader, 'get_ifc_file', return_value=Mock()):
-                        
-                        # Simulate file loading
-                        window.process_ifc_file("/fake/test.ifc")
-                        
-                        # Check file is loaded and spaces extracted
-                        assert len(window.spaces) == 3
-                        assert window.main_splitter.isVisible()
-                        
-                        # Simulate space selection
-                        window.on_space_selected("SPACE001")
-                        
-                        # Check space is displayed in detail widget
-                        current_space = window.space_detail_widget.get_current_space()
-                        assert current_space.guid == "SPACE001"
+                        with patch.object(window.surface_extractor, 'set_ifc_file'):
+                            with patch.object(window.boundary_parser, 'set_ifc_file'):
+                                with patch.object(window.relationship_parser, 'set_ifc_file'):
+                                    with patch.object(window, 'extract_surfaces_for_spaces_with_error_handling'):
+                                        with patch.object(window, 'extract_boundaries_for_spaces_with_error_handling'):
+                                            with patch.object(window, 'extract_relationships_for_spaces_with_error_handling'):
+                                                
+                                                # Simulate file loading
+                                                window.process_ifc_file("/fake/test.ifc")
+                                                
+                                                # Check file is loaded and spaces extracted
+                                                assert len(window.spaces) == 3
+                                                assert window.main_splitter.isVisible()
+                                                
+                                                # Simulate space selection
+                                                window.on_space_selected("SPACE001")
+                                                
+                                                # Check space is displayed in detail widget
+                                                current_space = window.space_detail_widget.get_current_space()
+                                                assert current_space.guid == "SPACE001"
 
     def test_error_handling_in_ui(self, qapp):
         """Test error handling in UI components."""
         window = MainWindow()
+        window._testing_mode = True  # Enable testing mode
         
         # Mock file validation failure
         with patch.object(window.ifc_reader, 'validate_file', return_value=(False, "Invalid file")):
-            with patch.object(window, 'show_error_message') as mock_error:
+            with patch.object(window, 'show_enhanced_error_message') as mock_error:
                 
                 # Try to process invalid file
                 window.process_ifc_file("/fake/invalid.ifc")
