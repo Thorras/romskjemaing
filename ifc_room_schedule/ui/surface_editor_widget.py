@@ -10,7 +10,8 @@ from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QTabWidget,
 from PyQt6.QtCore import Qt, pyqtSignal, QTimer
 from PyQt6.QtGui import QFont, QValidator
 from typing import Dict, Any
-import logging
+
+from ..utils.enhanced_logging import enhanced_logger
 
 
 class DescriptionValidator(QValidator):
@@ -36,7 +37,7 @@ class SurfaceEditorWidget(QWidget):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.logger = logging.getLogger(__name__)
+        self.logger = enhanced_logger.logger
 
         # Current editing state
         self.current_surface_id = None

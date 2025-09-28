@@ -1,0 +1,28 @@
+[flake8]
+max-line-length = 88
+extend-ignore = E203, W503
+exclude = 
+    .git,
+    __pycache__,
+    build,
+    dist,
+    .venv,
+    venv,
+    .eggs,
+    *.egg-info,
+    .tox,
+    .coverage,
+    .coverage.*,
+    .cache,
+    nosetests.xml,
+    coverage.xml,
+    *.cover,
+    *.py,cover,
+    .hypothesis,
+    .pytest_cache,
+    .mypy_cache
+
+# PyQt specific ignores
+per-file-ignores = 
+    **/ui/*.py: E501
+    **/test_*.py: E501

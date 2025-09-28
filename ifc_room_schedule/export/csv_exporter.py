@@ -5,6 +5,7 @@ Handles exporting room schedule data to CSV format.
 """
 
 import csv
+import os
 from datetime import datetime
 from pathlib import Path
 from typing import List, Dict, Any, Optional, Tuple
@@ -42,33 +43,86 @@ class CsvExporter:
             Tuple of (success, message)
         """
         try:
+            # Validate input
+            if not filename:
+                return False, "Filename cannot be empty"
+            
+            if not spaces:
+                return False, "No spaces data to export"
+            
             # Ensure .csv extension
             if not filename.lower().endswith('.csv'):
                 filename += '.csv'
             
-            with open(filename, 'w', newline='', encoding='utf-8') as csvfile:
-                writer = csv.writer(csvfile)
-                
-                # Write metadata header
-                self._write_metadata_header(writer, spaces)
-                
-                # Write spaces data
-                self._write_spaces_data(writer, spaces)
-                
-                if include_surfaces:
-                    self._write_surfaces_data(writer, spaces)
-                
-                if include_boundaries:
-                    self._write_boundaries_data(writer, spaces)
-                
-                if include_relationships:
-                    self._write_relationships_data(writer, spaces)
-                
-                # Write summary
-                self._write_summary_data(writer, spaces)
+            file_path = Path(filename)
             
-            return True, f"Successfully exported {len(spaces)} spaces to {Path(filename).name}"
+            # Check write permissions and disk space
+            try:
+                # Create directory if needed
+                file_path.parent.mkdir(parents=True, exist_ok=True)
+                
+                # Check write permissions
+                if file_path.exists():
+                    if not os.access(file_path, os.W_OK):
+                        return False, f"No write permission for file: {filename}"
+                else:
+                    if not os.access(file_path.parent, os.W_OK):
+                        return False, f"No write permission for directory: {file_path.parent}"
+                
+                # Check disk space (require at least 1MB for CSV files)
+                import shutil
+                free_space = shutil.disk_usage(file_path.parent).free
+                if free_space < 1024 * 1024:  # 1MB minimum
+                    return False, f"Insufficient disk space. Available: {free_space / (1024*1024):.1f}MB"
+                    
+            except OSError as e:
+                return False, f"File system error: {str(e)}"
             
+            # Write to temporary file first for atomic operation
+            temp_filename = str(file_path) + '.tmp'
+            try:
+                with open(temp_filename, 'w', newline='', encoding='utf-8') as csvfile:
+                    writer = csv.writer(csvfile)
+                    
+                    # Write metadata header
+                    self._write_metadata_header(writer, spaces)
+                    
+                    # Write spaces data
+                    self._write_spaces_data(writer, spaces)
+                    
+                    if include_surfaces:
+                        self._write_surfaces_data(writer, spaces)
+                    
+                    if include_boundaries:
+                        self._write_boundaries_data(writer, spaces)
+                    
+                    if include_relationships:
+                        self._write_relationships_data(writer, spaces)
+                    
+                    # Write summary
+                    self._write_summary_data(writer, spaces)
+                
+                # Atomic rename
+                if os.name == 'nt':  # Windows
+                    if file_path.exists():
+                        os.remove(file_path)
+                os.rename(temp_filename, filename)
+                
+                return True, f"Successfully exported {len(spaces)} spaces to {Path(filename).name}"
+                
+            except Exception as e:
+                # Clean up temp file
+                if os.path.exists(temp_filename):
+                    try:
+                        os.remove(temp_filename)
+                    except:
+                        pass
+                return False, f"Error writing CSV file: {str(e)}"
+            
+        except PermissionError as e:
+            return False, f"Permission denied: {str(e)}"
+        except OSError as e:
+            return False, f"OS error: {str(e)}"
         except Exception as e:
             return False, f"CSV export failed: {str(e)}"
     

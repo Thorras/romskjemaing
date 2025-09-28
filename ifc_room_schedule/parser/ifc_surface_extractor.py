@@ -4,11 +4,11 @@ IFC Surface Extractor
 Extracts surface information from IFC files using IfcOpenShell.
 """
 
-import logging
 from typing import List, Dict, Optional, Any, Tuple
 import ifcopenshell
 import ifcopenshell.util.element
 import ifcopenshell.util.unit
+from ..utils.enhanced_logging import enhanced_logger
 from ..data.surface_model import SurfaceData
 
 
@@ -23,7 +23,7 @@ class IfcSurfaceExtractor:
             ifc_file: IfcOpenShell file object (optional)
         """
         self.ifc_file = ifc_file
-        self.logger = logging.getLogger(__name__)
+        self.logger = enhanced_logger.logger
 
     def set_ifc_file(self, ifc_file) -> None:
         """

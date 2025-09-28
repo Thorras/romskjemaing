@@ -4,6 +4,7 @@ Excel Exporter
 Handles exporting room schedule data to Excel format using openpyxl.
 """
 
+import os
 from datetime import datetime
 from pathlib import Path
 from typing import List, Dict, Any, Optional, Tuple
@@ -65,9 +66,40 @@ class ExcelExporter:
             Tuple of (success, message)
         """
         try:
+            # Validate input
+            if not filename:
+                return False, "Filename cannot be empty"
+            
+            if not spaces:
+                return False, "No spaces data to export"
+            
             # Ensure .xlsx extension
             if not filename.lower().endswith(('.xlsx', '.xls')):
                 filename += '.xlsx'
+            
+            file_path = Path(filename)
+            
+            # Check write permissions and disk space
+            try:
+                # Create directory if needed
+                file_path.parent.mkdir(parents=True, exist_ok=True)
+                
+                # Check write permissions
+                if file_path.exists():
+                    if not os.access(file_path, os.W_OK):
+                        return False, f"No write permission for file: {filename}"
+                else:
+                    if not os.access(file_path.parent, os.W_OK):
+                        return False, f"No write permission for directory: {file_path.parent}"
+                
+                # Check disk space (require at least 5MB for Excel files)
+                import shutil
+                free_space = shutil.disk_usage(file_path.parent).free
+                if free_space < 5 * 1024 * 1024:  # 5MB minimum
+                    return False, f"Insufficient disk space. Available: {free_space / (1024*1024):.1f}MB"
+                    
+            except OSError as e:
+                return False, f"File system error: {str(e)}"
             
             # Create workbook
             wb = Workbook()
@@ -75,26 +107,51 @@ class ExcelExporter:
             # Remove default sheet
             wb.remove(wb.active)
             
-            # Create sheets
-            self._create_overview_sheet(wb, spaces)
-            self._create_spaces_sheet(wb, spaces)
+            # Create sheets with error handling
+            try:
+                self._create_overview_sheet(wb, spaces)
+                self._create_spaces_sheet(wb, spaces)
+                
+                if include_surfaces:
+                    self._create_surfaces_sheet(wb, spaces)
+                
+                if include_boundaries:
+                    self._create_boundaries_sheet(wb, spaces)
+                
+                if include_relationships:
+                    self._create_relationships_sheet(wb, spaces)
+                
+                self._create_summary_sheet(wb, spaces)
+                
+            except Exception as e:
+                return False, f"Error creating Excel sheets: {str(e)}"
             
-            if include_surfaces:
-                self._create_surfaces_sheet(wb, spaces)
+            # Save workbook with atomic operation
+            temp_filename = str(file_path) + '.tmp'
+            try:
+                wb.save(temp_filename)
+                
+                # Atomic rename
+                if os.name == 'nt':  # Windows
+                    if file_path.exists():
+                        os.remove(file_path)
+                os.rename(temp_filename, filename)
+                
+                return True, f"Successfully exported {len(spaces)} spaces to {Path(filename).name}"
+                
+            except Exception as e:
+                # Clean up temp file
+                if os.path.exists(temp_filename):
+                    try:
+                        os.remove(temp_filename)
+                    except:
+                        pass
+                return False, f"Error saving Excel file: {str(e)}"
             
-            if include_boundaries:
-                self._create_boundaries_sheet(wb, spaces)
-            
-            if include_relationships:
-                self._create_relationships_sheet(wb, spaces)
-            
-            self._create_summary_sheet(wb, spaces)
-            
-            # Save workbook
-            wb.save(filename)
-            
-            return True, f"Successfully exported {len(spaces)} spaces to {Path(filename).name}"
-            
+        except PermissionError as e:
+            return False, f"Permission denied: {str(e)}"
+        except OSError as e:
+            return False, f"OS error: {str(e)}"
         except Exception as e:
             return False, f"Excel export failed: {str(e)}"
     

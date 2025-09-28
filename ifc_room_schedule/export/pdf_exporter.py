@@ -4,6 +4,7 @@ PDF Exporter
 Handles exporting room schedule data to PDF format using reportlab.
 """
 
+import os
 from datetime import datetime
 from pathlib import Path
 from typing import List, Dict, Any, Optional, Tuple
@@ -98,59 +99,115 @@ class PdfExporter:
             Tuple of (success, message)
         """
         try:
+            # Validate input
+            if not filename:
+                return False, "Filename cannot be empty"
+            
+            if not spaces:
+                return False, "No spaces data to export"
+            
             # Ensure .pdf extension
             if not filename.lower().endswith('.pdf'):
                 filename += '.pdf'
             
-            # Create document
-            doc = SimpleDocTemplate(
-                filename,
-                pagesize=page_size,
-                rightMargin=72,
-                leftMargin=72,
-                topMargin=72,
-                bottomMargin=18
-            )
+            file_path = Path(filename)
             
-            # Build story (content)
-            story = []
+            # Check write permissions and disk space
+            try:
+                # Create directory if needed
+                file_path.parent.mkdir(parents=True, exist_ok=True)
+                
+                # Check write permissions
+                if file_path.exists():
+                    if not os.access(file_path, os.W_OK):
+                        return False, f"No write permission for file: {filename}"
+                else:
+                    if not os.access(file_path.parent, os.W_OK):
+                        return False, f"No write permission for directory: {file_path.parent}"
+                
+                # Check disk space (require at least 10MB for PDF files)
+                import shutil
+                free_space = shutil.disk_usage(file_path.parent).free
+                if free_space < 10 * 1024 * 1024:  # 10MB minimum
+                    return False, f"Insufficient disk space. Available: {free_space / (1024*1024):.1f}MB"
+                    
+            except OSError as e:
+                return False, f"File system error: {str(e)}"
             
-            # Title page
-            self._add_title_page(story, spaces)
+            # Create document with temp file for atomic operation
+            temp_filename = str(file_path) + '.tmp'
+            try:
+                doc = SimpleDocTemplate(
+                    temp_filename,
+                    pagesize=page_size,
+                    rightMargin=72,
+                    leftMargin=72,
+                    topMargin=72,
+                    bottomMargin=18
+                )
+                
+                # Build story (content) with error handling
+                story = []
+                
+                try:
+                    # Title page
+                    self._add_title_page(story, spaces)
+                    
+                    # Table of contents
+                    story.append(PageBreak())
+                    self._add_table_of_contents(story)
+                    
+                    # Overview section
+                    story.append(PageBreak())
+                    self._add_overview_section(story, spaces)
+                    
+                    # Spaces section
+                    story.append(PageBreak())
+                    self._add_spaces_section(story, spaces)
+                    
+                    if include_surfaces:
+                        story.append(PageBreak())
+                        self._add_surfaces_section(story, spaces)
+                    
+                    if include_boundaries:
+                        story.append(PageBreak())
+                        self._add_boundaries_section(story, spaces)
+                    
+                    if include_relationships:
+                        story.append(PageBreak())
+                        self._add_relationships_section(story, spaces)
+                    
+                    # Summary section
+                    story.append(PageBreak())
+                    self._add_summary_section(story, spaces)
+                    
+                except Exception as e:
+                    return False, f"Error building PDF content: {str(e)}"
+                
+                # Build PDF
+                doc.build(story)
+                
+                # Atomic rename
+                if os.name == 'nt':  # Windows
+                    if file_path.exists():
+                        os.remove(file_path)
+                os.rename(temp_filename, filename)
+                
+                return True, f"Successfully exported {len(spaces)} spaces to {Path(filename).name}"
+                
+            except Exception as e:
+                # Clean up temp file
+                if os.path.exists(temp_filename):
+                    try:
+                        os.remove(temp_filename)
+                    except:
+                        pass
+                return False, f"Error creating PDF: {str(e)}"
             
-            # Table of contents
-            story.append(PageBreak())
-            self._add_table_of_contents(story)
-            
-            # Overview section
-            story.append(PageBreak())
-            self._add_overview_section(story, spaces)
-            
-            # Spaces section
-            story.append(PageBreak())
-            self._add_spaces_section(story, spaces)
-            
-            if include_surfaces:
-                story.append(PageBreak())
-                self._add_surfaces_section(story, spaces)
-            
-            if include_boundaries:
-                story.append(PageBreak())
-                self._add_boundaries_section(story, spaces)
-            
-            if include_relationships:
-                story.append(PageBreak())
-                self._add_relationships_section(story, spaces)
-            
-            # Summary section
-            story.append(PageBreak())
-            self._add_summary_section(story, spaces)
-            
-            # Build PDF
-            doc.build(story)
-            
-            return True, f"Successfully exported {len(spaces)} spaces to {Path(filename).name}"
-            
+        except PermissionError as e:
+            return False, f"Permission denied: {str(e)}"
+        except OSError as e:
+            return False, f"OS error: {str(e)}"
         except Exception as e:
             return False, f"PDF export failed: {str(e)}"
     

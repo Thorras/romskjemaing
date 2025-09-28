@@ -5,6 +5,8 @@ Handles building JSON export structure for room schedule data.
 """
 
 import json
+import os
+import shutil
 from datetime import datetime
 from typing import Dict, List, Any, Tuple, Optional
 from pathlib import Path
@@ -342,9 +344,9 @@ class JsonBuilder:
         
         return errors
     
-    def write_json_file(self, filename: str, data: Dict[str, Any], indent: int = 2) -> bool:
+    def write_json_file(self, filename: str, data: Dict[str, Any], indent: int = 2) -> Tuple[bool, str]:
         """
-        Write JSON data to file.
+        Write JSON data to file with enhanced error handling.
         
         Args:
             filename: Output filename
@@ -352,15 +354,67 @@ class JsonBuilder:
             indent: JSON indentation level
             
         Returns:
-            True if successful, False otherwise
+            Tuple of (success, error_message)
         """
         try:
-            with open(filename, 'w', encoding='utf-8') as f:
-                json.dump(data, f, indent=indent, ensure_ascii=False)
-            return True
+            # Validate filename and path
+            if not filename:
+                return False, "Filename cannot be empty"
+            
+            file_path = Path(filename)
+            
+            # Check if directory exists, create if needed
+            file_path.parent.mkdir(parents=True, exist_ok=True)
+            
+            # Check write permissions
+            if file_path.exists():
+                if not os.access(file_path, os.W_OK):
+                    return False, f"No write permission for file: {filename}"
+            else:
+                # Check parent directory write permission
+                if not os.access(file_path.parent, os.W_OK):
+                    return False, f"No write permission for directory: {file_path.parent}"
+            
+            # Check available disk space (require at least 1MB)
+            free_space = shutil.disk_usage(file_path.parent).free
+            if free_space < 1024 * 1024:  # 1MB minimum
+                return False, f"Insufficient disk space. Available: {free_space / (1024*1024):.1f}MB"
+            
+            # Validate JSON data can be serialized
+            try:
+                json.dumps(data, indent=indent, ensure_ascii=False)
+            except (TypeError, ValueError) as e:
+                return False, f"Data cannot be serialized to JSON: {str(e)}"
+            
+            # Write to temporary file first, then rename for atomic operation
+            temp_filename = str(file_path) + '.tmp'
+            try:
+                with open(temp_filename, 'w', encoding='utf-8') as f:
+                    json.dump(data, f, indent=indent, ensure_ascii=False)
+                
+                # Atomic rename
+                if os.name == 'nt':  # Windows
+                    if file_path.exists():
+                        os.remove(file_path)
+                os.rename(temp_filename, filename)
+                
+                return True, "File written successfully"
+                
+            except Exception as e:
+                # Clean up temp file if it exists
+                if os.path.exists(temp_filename):
+                    try:
+                        os.remove(temp_filename)
+                    except:
+                        pass
+                raise e
+            
+        except PermissionError as e:
+            return False, f"Permission denied: {str(e)}"
+        except OSError as e:
+            return False, f"OS error: {str(e)}"
         except Exception as e:
-            print(f"Error writing JSON file: {e}")
-            return False
+            return False, f"Unexpected error writing JSON file: {str(e)}"
     
     def export_to_json(self, spaces: List[SpaceData], filename: str, 
                       metadata: Optional[Dict[str, Any]] = None, 
@@ -388,11 +442,11 @@ class JsonBuilder:
                     return False, validation_errors
             
             # Write to file
-            success = self.write_json_file(filename, json_data)
+            success, write_message = self.write_json_file(filename, json_data)
             if success:
                 return True, [f"Successfully exported {len(spaces)} spaces to {filename}"]
             else:
-                return False, ["Failed to write JSON file"]
+                return False, [f"Failed to write JSON file: {write_message}"]
                 
         except Exception as e:
             return False, [f"Export failed: {str(e)}"]
