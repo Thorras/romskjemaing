@@ -308,6 +308,17 @@ class MainWindow(QMainWindow):
             'fallback_reasons': []
         }
         
+        # Resource monitoring and cleanup verification
+        self.resource_monitor = {
+            'active_threads': set(),
+            'active_workers': set(),
+            'active_timers': set(),
+            'memory_snapshots': [],
+            'cleanup_history': [],
+            'resource_leaks_detected': 0,
+            'last_cleanup_verification': None
+        }
+        
         # Setup error handling
         self.setup_error_handling()
         
@@ -316,6 +327,9 @@ class MainWindow(QMainWindow):
         self.setup_toolbar()
         self.setup_status_bar()
         self.connect_signals()
+        
+        # Setup resource monitoring timer
+        self.setup_resource_monitoring()
         
         # Ensure initial state is correct
         self.update_file_info()
@@ -555,6 +569,10 @@ class MainWindow(QMainWindow):
             self.operation_thread = QThread()
             self.operation_worker = LongRunningOperationWorker(operation_func, *args, **kwargs)
             self.operation_worker.moveToThread(self.operation_thread)
+            
+            # Register thread and worker for monitoring
+            self.register_thread(self.operation_thread, operation_name)
+            self.register_worker(self.operation_worker, operation_name)
             
             # Connect signals for non-blocking progress updates
             self.operation_worker.progress_updated.connect(self.update_progress_status)
@@ -923,7 +941,7 @@ class MainWindow(QMainWindow):
         QTimer.singleShot(5000, self.clear_temporary_error_status)
     
     def cancel_operation(self):
-        """Cancel the current long-running operation with proper cleanup."""
+        """Cancel the current long-running operation with comprehensive cleanup."""
         self.logger.info("Cancelling current operation...")
         
         # Calculate elapsed time if available
@@ -935,42 +953,24 @@ class MainWindow(QMainWindow):
                 # Handle case where operation_start_time might be a timestamp
                 elapsed_time = time.time() - float(self.operation_start_time)
         
-        # Request cancellation from worker first (graceful cancellation)
-        if self.operation_worker:
-            self.logger.info("Requesting graceful cancellation from worker...")
-            self.operation_worker.request_cancellation()
+        # Use the comprehensive cleanup method
+        self._cleanup_thread_worker_pair(self.operation_thread, self.operation_worker, "cancelled operation")
         
-        # Give worker a chance to cancel gracefully
-        if self.operation_thread and self.operation_thread.isRunning():
-            self.logger.info(f"Waiting for graceful thread termination after {elapsed_time:.1f}s")
-            
-            # Wait for graceful termination first (2 seconds)
-            if not self.operation_thread.wait(2000):
-                self.logger.warning("Graceful termination failed, forcing thread termination")
-                self.operation_thread.terminate()
-                
-                # Wait for forced termination (3 more seconds)
-                if not self.operation_thread.wait(3000):
-                    self.logger.error("Thread did not terminate even after forcing, may cause resource leaks")
-            else:
-                self.logger.info("Thread terminated gracefully")
-            
-            self.operation_thread = None
-        
-        # Clean up worker
-        if self.operation_worker:
-            self.operation_worker = None
+        # Clear references
+        self.operation_thread = None
+        self.operation_worker = None
         
         # Clean up timeout timer
         if hasattr(self, 'operation_timeout_timer') and self.operation_timeout_timer:
             self.operation_timeout_timer.stop()
+            self.operation_timeout_timer.deleteLater()
             self.operation_timeout_timer = None
         
+        # Perform memory cleanup for cancelled operation
+        self._cleanup_cancelled_operation_memory()
+        
         # Reset operation state
-        if hasattr(self, 'operation_start_time'):
-            self.operation_start_time = None
-        if hasattr(self, 'current_timeout_seconds'):
-            self.current_timeout_seconds = None
+        self._reset_operation_state()
         
         # Hide progress bar and cancel button, update UI
         self.progress_bar.setVisible(False)
@@ -985,6 +985,37 @@ class MainWindow(QMainWindow):
             self.status_bar.showMessage("Operation cancelled")
         
         self.logger.info("Operation cancellation completed")
+    
+    def _cleanup_cancelled_operation_memory(self):
+        """Clean up memory specifically for cancelled operations."""
+        try:
+            self.logger.debug("Cleaning up memory for cancelled operation...")
+            
+            # Clear any partially loaded data
+            if hasattr(self, '_partial_spaces_data'):
+                self._partial_spaces_data = None
+            if hasattr(self, '_partial_surfaces_data'):
+                self._partial_surfaces_data = None
+            if hasattr(self, '_processing_cache'):
+                self._processing_cache = None
+            
+            # Clear extractor state that might be in progress
+            extractors = [self.space_extractor, self.surface_extractor, 
+                         self.boundary_parser, self.relationship_parser]
+            
+            for extractor in extractors:
+                if extractor and hasattr(extractor, '_processing_state'):
+                    extractor._processing_state = None
+                if extractor and hasattr(extractor, '_current_file'):
+                    extractor._current_file = None
+            
+            # Force garbage collection for cancelled operation cleanup
+            import gc
+            collected = gc.collect()
+            self.logger.debug(f"Cancelled operation cleanup: collected {collected} objects")
+            
+        except Exception as e:
+            self.logger.warning(f"Error during cancelled operation memory cleanup: {e}")
     
     def _is_threading_error(self, error_type: str, error_message: str) -> bool:
         """
@@ -1420,9 +1451,16 @@ class MainWindow(QMainWindow):
     def free_memory_resources(self):
         """Free memory resources and perform garbage collection."""
         import gc
+        import weakref
         
         try:
-            # Clear all extractor caches
+            self.logger.info("Starting comprehensive memory cleanup...")
+            initial_memory = self._get_memory_usage()
+            
+            # 1. Clean up threads and workers first
+            self._cleanup_all_threads_and_workers()
+            
+            # 2. Clear all extractor caches
             extractors = [
                 self.space_extractor,
                 self.surface_extractor, 
@@ -1432,45 +1470,419 @@ class MainWindow(QMainWindow):
             
             for extractor in extractors:
                 if extractor:
-                    # Clear various cache attributes that might exist
-                    cache_attrs = ['_spaces_cache', '_surfaces_cache', '_boundaries_cache', 
-                                 '_relationships_cache', '_cache', '_data_cache']
-                    for attr in cache_attrs:
-                        if hasattr(extractor, attr):
-                            setattr(extractor, attr, None)
-                            self.logger.debug(f"Cleared {attr} from {extractor.__class__.__name__}")
+                    try:
+                        # Clear various cache attributes that might exist
+                        cache_attrs = ['_spaces_cache', '_surfaces_cache', '_boundaries_cache', 
+                                     '_relationships_cache', '_cache', '_data_cache', 
+                                     '_ifc_file', '_parsed_data', '_entity_cache']
+                        for attr in cache_attrs:
+                            if hasattr(extractor, attr):
+                                old_value = getattr(extractor, attr)
+                                setattr(extractor, attr, None)
+                                # Force deletion of the old value if it's a large object
+                                if old_value is not None:
+                                    del old_value
+                                self.logger.debug(f"Cleared {attr} from {extractor.__class__.__name__}")
+                        
+                        # Call clear_cache method if available
+                        if hasattr(extractor, 'clear_cache'):
+                            extractor.clear_cache()
+                            
+                    except Exception as e:
+                        self.handle_resource_cleanup_error(f"{extractor.__class__.__name__}", e)
             
-            # Clear main window data
+            # 3. Clear IFC file reader data
+            if hasattr(self, 'ifc_reader') and self.ifc_reader:
+                try:
+                    if hasattr(self.ifc_reader, 'ifc_file'):
+                        self.ifc_reader.ifc_file = None
+                    if hasattr(self.ifc_reader, '_file_cache'):
+                        self.ifc_reader._file_cache = None
+                except Exception as e:
+                    self.handle_resource_cleanup_error("IFC Reader", e)
+            
+            # 4. Clear main window data
             if hasattr(self, 'spaces'):
-                self.spaces.clear()
+                try:
+                    self.spaces.clear()
+                    self.spaces = []
+                except Exception as e:
+                    self.handle_resource_cleanup_error("spaces data", e)
             
-            # Clear UI data
-            if hasattr(self, 'space_list_widget') and self.space_list_widget:
-                self.space_list_widget.clear_selection()
-                # Clear the spaces list in the widget
-                if hasattr(self.space_list_widget, 'spaces'):
-                    self.space_list_widget.spaces.clear()
-            if hasattr(self, 'space_detail_widget') and self.space_detail_widget:
-                self.space_detail_widget.clear_selection()
+            # 5. Clear UI data
+            self._cleanup_ui_data()
             
-            # Force multiple garbage collection passes for better cleanup
-            for _ in range(3):
-                gc.collect()
+            # 6. Clear operation state
+            self._reset_operation_state()
             
-            # Log memory usage if psutil is available
-            try:
-                import psutil
-                memory_info = psutil.virtual_memory()
-                self.logger.info(f"Memory freed. Available: {memory_info.available/(1024*1024):.1f}MB "
-                               f"({memory_info.percent:.1f}% used)")
-            except ImportError:
-                self.logger.info("Memory resources freed")
+            # 7. Force multiple garbage collection passes for better cleanup
+            for i in range(3):
+                collected = gc.collect()
+                self.logger.debug(f"Garbage collection pass {i+1}: collected {collected} objects")
+            
+            # 8. Log memory usage comparison
+            final_memory = self._get_memory_usage()
+            if initial_memory and final_memory:
+                freed_mb = (initial_memory - final_memory) / (1024 * 1024)
+                self.logger.info(f"Memory cleanup completed. Freed: {freed_mb:.1f}MB")
             
             self.status_bar.showMessage("Memory resources freed", 3000)
             
         except Exception as e:
             self.logger.error(f"Error during memory cleanup: {e}")
             self.status_bar.showMessage(f"Memory cleanup error: {str(e)}", 5000)
+    
+    def _cleanup_all_threads_and_workers(self):
+        """Clean up all active threads and workers with proper resource management."""
+        try:
+            # Clean up main operation thread and worker
+            if hasattr(self, 'operation_thread') and self.operation_thread:
+                self._cleanup_thread_worker_pair(self.operation_thread, self.operation_worker, "main operation")
+                self.operation_thread = None
+                self.operation_worker = None
+            
+            # Clean up any other threads that might be running
+            active_threads = []
+            for attr_name in dir(self):
+                if attr_name.endswith('_thread') and hasattr(self, attr_name):
+                    thread = getattr(self, attr_name)
+                    if thread and hasattr(thread, 'isRunning') and thread.isRunning():
+                        active_threads.append((attr_name, thread))
+            
+            for thread_name, thread in active_threads:
+                self.logger.info(f"Cleaning up active thread: {thread_name}")
+                self._cleanup_thread_worker_pair(thread, None, thread_name)
+                setattr(self, thread_name, None)
+            
+            # Clean up timeout timers
+            if hasattr(self, 'operation_timeout_timer') and self.operation_timeout_timer:
+                self.operation_timeout_timer.stop()
+                self.operation_timeout_timer.deleteLater()
+                self.operation_timeout_timer = None
+                
+        except Exception as e:
+            self.logger.error(f"Error during thread cleanup: {e}")
+    
+    def _cleanup_thread_worker_pair(self, thread, worker, operation_name="unknown"):
+        """Clean up a specific thread-worker pair with proper resource management."""
+        try:
+            cleanup_start_time = datetime.now()
+            
+            # Clean up worker first
+            if worker:
+                try:
+                    # Unregister from monitoring
+                    self.unregister_worker(worker, operation_name)
+                    
+                    # Request cancellation if possible
+                    if hasattr(worker, 'request_cancellation'):
+                        worker.request_cancellation()
+                    
+                    # Disconnect all signals to prevent callbacks during cleanup
+                    if hasattr(worker, 'disconnect'):
+                        worker.disconnect()
+                    
+                    # Delete the worker
+                    worker.deleteLater()
+                    self.logger.debug(f"Worker for {operation_name} cleaned up")
+                except Exception as e:
+                    self.logger.warning(f"Error cleaning up worker for {operation_name}: {e}")
+            
+            # Clean up thread
+            if thread and hasattr(thread, 'isRunning'):
+                try:
+                    # Unregister from monitoring
+                    self.unregister_thread(thread, operation_name)
+                    
+                    if thread.isRunning():
+                        self.logger.info(f"Terminating running thread for {operation_name}")
+                        
+                        # Try graceful shutdown first
+                        thread.quit()
+                        if not thread.wait(2000):  # Wait 2 seconds
+                            self.logger.warning(f"Graceful shutdown failed for {operation_name}, forcing termination")
+                            thread.terminate()
+                            
+                            # Wait for forced termination
+                            if not thread.wait(3000):  # Wait 3 more seconds
+                                self.logger.error(f"Thread for {operation_name} did not terminate, potential resource leak")
+                                
+                                # Record resource leak
+                                self.resource_monitor['cleanup_history'].append({
+                                    'timestamp': datetime.now(),
+                                    'event': 'thread_cleanup_failed',
+                                    'operation': operation_name,
+                                    'details': 'Thread did not terminate after forced termination'
+                                })
+                            else:
+                                self.logger.info(f"Thread for {operation_name} terminated successfully")
+                        else:
+                            self.logger.info(f"Thread for {operation_name} shut down gracefully")
+                    
+                    # Delete the thread
+                    thread.deleteLater()
+                    self.logger.debug(f"Thread for {operation_name} cleaned up")
+                    
+                except Exception as e:
+                    self.logger.warning(f"Error cleaning up thread for {operation_name}: {e}")
+            
+            # Record successful cleanup
+            cleanup_duration = (datetime.now() - cleanup_start_time).total_seconds()
+            self.resource_monitor['cleanup_history'].append({
+                'timestamp': cleanup_start_time,
+                'event': 'thread_worker_cleanup',
+                'operation': operation_name,
+                'duration_seconds': cleanup_duration,
+                'success': True
+            })
+                    
+        except Exception as e:
+            self.logger.error(f"Error in thread-worker cleanup for {operation_name}: {e}")
+            
+            # Record failed cleanup
+            self.resource_monitor['cleanup_history'].append({
+                'timestamp': datetime.now(),
+                'event': 'thread_worker_cleanup',
+                'operation': operation_name,
+                'success': False,
+                'error': str(e)
+            })
+    
+    def _cleanup_ui_data(self):
+        """Clean up UI-related data and widgets."""
+        try:
+            # Clear UI data
+            if hasattr(self, 'space_list_widget') and self.space_list_widget:
+                try:
+                    self.space_list_widget.clear_selection()
+                    # Clear the spaces list in the widget
+                    if hasattr(self.space_list_widget, 'spaces'):
+                        self.space_list_widget.spaces.clear()
+                    if hasattr(self.space_list_widget, '_cached_data'):
+                        self.space_list_widget._cached_data = None
+                except Exception as e:
+                    self.handle_resource_cleanup_error("space list widget", e)
+                    
+            if hasattr(self, 'space_detail_widget') and self.space_detail_widget:
+                try:
+                    self.space_detail_widget.clear_selection()
+                    if hasattr(self.space_detail_widget, '_current_space'):
+                        self.space_detail_widget._current_space = None
+                except Exception as e:
+                    self.handle_resource_cleanup_error("space detail widget", e)
+                    
+            if hasattr(self, 'surface_editor_widget') and self.surface_editor_widget:
+                try:
+                    if hasattr(self.surface_editor_widget, 'clear_data'):
+                        self.surface_editor_widget.clear_data()
+                    if hasattr(self.surface_editor_widget, '_surfaces_data'):
+                        self.surface_editor_widget._surfaces_data = None
+                except Exception as e:
+                    self.handle_resource_cleanup_error("surface editor widget", e)
+                    
+        except Exception as e:
+            self.logger.error(f"Error during UI data cleanup: {e}")
+    
+    def _reset_operation_state(self):
+        """Reset all operation-related state variables."""
+        try:
+            # Reset operation tracking
+            self.current_file_path = None
+            if hasattr(self, 'current_operation_id'):
+                self.current_operation_id = None
+            if hasattr(self, 'operation_start_time'):
+                self.operation_start_time = None
+            if hasattr(self, 'current_timeout_seconds'):
+                self.current_timeout_seconds = None
+            
+            # Reset fallback statistics
+            if hasattr(self, 'fallback_stats'):
+                self.fallback_stats = {
+                    'threading_failures': 0,
+                    'fallback_attempts': 0,
+                    'fallback_successes': 0,
+                    'fallback_failures': 0,
+                    'last_fallback_time': None,
+                    'fallback_reasons': []
+                }
+            
+        except Exception as e:
+            self.logger.error(f"Error resetting operation state: {e}")
+    
+    def _get_memory_usage(self):
+        """Get current memory usage in bytes, return None if unavailable."""
+        try:
+            import psutil
+            return psutil.Process().memory_info().rss
+        except (ImportError, Exception):
+            return None
+    
+    def setup_resource_monitoring(self):
+        """Setup periodic resource monitoring and cleanup verification."""
+        try:
+            # Create a timer for periodic resource monitoring
+            self.resource_monitor_timer = QTimer()
+            self.resource_monitor_timer.timeout.connect(self.verify_resource_cleanup)
+            self.resource_monitor_timer.start(30000)  # Check every 30 seconds
+            
+            # Register the timer in our monitor
+            self.resource_monitor['active_timers'].add(id(self.resource_monitor_timer))
+            
+            self.logger.debug("Resource monitoring setup completed")
+            
+        except Exception as e:
+            self.logger.error(f"Error setting up resource monitoring: {e}")
+    
+    def register_thread(self, thread, operation_name="unknown"):
+        """Register a thread for monitoring."""
+        if thread:
+            thread_id = id(thread)
+            self.resource_monitor['active_threads'].add(thread_id)
+            self.logger.debug(f"Registered thread {thread_id} for operation: {operation_name}")
+    
+    def register_worker(self, worker, operation_name="unknown"):
+        """Register a worker for monitoring."""
+        if worker:
+            worker_id = id(worker)
+            self.resource_monitor['active_workers'].add(worker_id)
+            self.logger.debug(f"Registered worker {worker_id} for operation: {operation_name}")
+    
+    def unregister_thread(self, thread, operation_name="unknown"):
+        """Unregister a thread from monitoring."""
+        if thread:
+            thread_id = id(thread)
+            self.resource_monitor['active_threads'].discard(thread_id)
+            self.logger.debug(f"Unregistered thread {thread_id} for operation: {operation_name}")
+    
+    def unregister_worker(self, worker, operation_name="unknown"):
+        """Unregister a worker from monitoring."""
+        if worker:
+            worker_id = id(worker)
+            self.resource_monitor['active_workers'].discard(worker_id)
+            self.logger.debug(f"Unregistered worker {worker_id} for operation: {operation_name}")
+    
+    def verify_resource_cleanup(self):
+        """Verify that resources have been properly cleaned up."""
+        try:
+            from datetime import datetime
+            verification_time = datetime.now()
+            
+            # Take memory snapshot
+            current_memory = self._get_memory_usage()
+            if current_memory:
+                self.resource_monitor['memory_snapshots'].append({
+                    'timestamp': verification_time,
+                    'memory_bytes': current_memory,
+                    'memory_mb': current_memory / (1024 * 1024)
+                })
+                
+                # Keep only last 10 snapshots
+                if len(self.resource_monitor['memory_snapshots']) > 10:
+                    self.resource_monitor['memory_snapshots'].pop(0)
+            
+            # Check for resource leaks
+            leaks_detected = 0
+            leak_details = []
+            
+            # Check for orphaned threads
+            active_threads = []
+            for attr_name in dir(self):
+                if attr_name.endswith('_thread') and hasattr(self, attr_name):
+                    thread = getattr(self, attr_name)
+                    if thread and hasattr(thread, 'isRunning') and thread.isRunning():
+                        active_threads.append(attr_name)
+            
+            if active_threads:
+                leaks_detected += len(active_threads)
+                leak_details.append(f"Active threads: {', '.join(active_threads)}")
+            
+            # Check for orphaned timers
+            active_timers = 0
+            for attr_name in dir(self):
+                if attr_name.endswith('_timer') and hasattr(self, attr_name):
+                    timer = getattr(self, attr_name)
+                    if timer and hasattr(timer, 'isActive') and timer.isActive():
+                        active_timers += 1
+            
+            if active_timers > 1:  # Allow resource_monitor_timer
+                leaks_detected += active_timers - 1
+                leak_details.append(f"Unexpected active timers: {active_timers - 1}")
+            
+            # Update resource monitor
+            self.resource_monitor['resource_leaks_detected'] = leaks_detected
+            self.resource_monitor['last_cleanup_verification'] = verification_time
+            
+            # Log results
+            if leaks_detected > 0:
+                self.logger.warning(f"Resource leaks detected: {leaks_detected} - {'; '.join(leak_details)}")
+            else:
+                self.logger.debug("Resource cleanup verification: all clean")
+            
+            # Check memory growth
+            self._check_memory_growth()
+            
+        except Exception as e:
+            self.logger.error(f"Error during resource cleanup verification: {e}")
+    
+    def _check_memory_growth(self):
+        """Check for concerning memory growth patterns."""
+        try:
+            snapshots = self.resource_monitor['memory_snapshots']
+            if len(snapshots) < 5:
+                return  # Need at least 5 snapshots to detect trends
+            
+            # Check if memory has grown consistently over last 5 snapshots
+            recent_snapshots = snapshots[-5:]
+            memory_values = [s['memory_mb'] for s in recent_snapshots]
+            
+            # Simple trend detection: check if each value is larger than the previous
+            is_growing = all(memory_values[i] > memory_values[i-1] for i in range(1, len(memory_values)))
+            
+            if is_growing:
+                growth = memory_values[-1] - memory_values[0]
+                if growth > 50:  # More than 50MB growth
+                    self.logger.warning(f"Significant memory growth detected: {growth:.1f}MB over last 5 checks")
+                    
+                    # Record this in cleanup history
+                    self.resource_monitor['cleanup_history'].append({
+                        'timestamp': datetime.now(),
+                        'event': 'memory_growth_detected',
+                        'details': f"Growth: {growth:.1f}MB",
+                        'memory_mb': memory_values[-1]
+                    })
+                    
+        except Exception as e:
+            self.logger.error(f"Error checking memory growth: {e}")
+    
+    def get_resource_monitor_report(self):
+        """Get a comprehensive resource monitoring report."""
+        try:
+            report = {
+                'active_threads_count': len(self.resource_monitor['active_threads']),
+                'active_workers_count': len(self.resource_monitor['active_workers']),
+                'active_timers_count': len(self.resource_monitor['active_timers']),
+                'resource_leaks_detected': self.resource_monitor['resource_leaks_detected'],
+                'last_verification': self.resource_monitor['last_cleanup_verification'],
+                'cleanup_events': len(self.resource_monitor['cleanup_history']),
+                'memory_snapshots_count': len(self.resource_monitor['memory_snapshots'])
+            }
+            
+            # Add current memory if available
+            current_memory = self._get_memory_usage()
+            if current_memory:
+                report['current_memory_mb'] = current_memory / (1024 * 1024)
+            
+            # Add memory trend if we have enough snapshots
+            if len(self.resource_monitor['memory_snapshots']) >= 2:
+                first_snapshot = self.resource_monitor['memory_snapshots'][0]['memory_mb']
+                last_snapshot = self.resource_monitor['memory_snapshots'][-1]['memory_mb']
+                report['memory_change_mb'] = last_snapshot - first_snapshot
+            
+            return report
+            
+        except Exception as e:
+            self.logger.error(f"Error generating resource monitor report: {e}")
+            return {'error': str(e)}
     
     def handle_resource_cleanup_error(self, resource_name: str, error: Exception):
         """

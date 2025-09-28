@@ -795,3 +795,216 @@
 2025-09-28 15:07:43,337 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:658] - Operation timeout set to 120 seconds
 2025-09-28 15:07:43,340 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:658] - Operation timeout set to 60 seconds
 2025-09-28 15:07:43,341 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:712] - Operation timeout extended by 60s (total elapsed: 0.0s)
+2025-09-28 16:02:45,232 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1731] - Resource monitoring setup completed
+2025-09-28 16:03:15,232 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1819] - Resource cleanup verification: all clean
+2025-09-28 16:03:28,784 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:369] - File categorized as small: 2.3 MB
+2025-09-28 16:03:28,784 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:2614] - Processing small file: 2.3 MB
+2025-09-28 16:03:28,906 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:2647] - Using direct loading strategy for small file
+2025-09-28 16:03:28,907 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:2751] - Loading file directly: C:/Users/johtho/Git-Repos/romskjemaing/romskjemaing/tesfiler/AkkordSvingen 23_ARK.ifc
+2025-09-28 16:03:28,908 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_file_load (file_size=2.3MB, memory_usage=238.5MB)
+2025-09-28 16:03:28,908 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:38] - Starting IFC file validation: C:/Users/johtho/Git-Repos/romskjemaing/romskjemaing/tesfiler/AkkordSvingen 23_ARK.ifc
+2025-09-28 16:03:28,909 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:52] - Processing file path: C:/Users/johtho/Git-Repos/romskjemaing/romskjemaing/tesfiler/AkkordSvingen 23_ARK.ifc
+2025-09-28 16:03:28,909 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:119] - File size analysis: 2.3MB (2,426,366 bytes)
+2025-09-28 16:03:28,911 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:137] - Memory recommendations: {'recommended_ram': '4GB or more', 'processing_time': 'Under 30 seconds', 'memory_usage': '~5MB'}
+2025-09-28 16:03:28,911 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:141] - Small file detected (2.3MB) - using optimized loading
+2025-09-28 16:03:28,912 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_parsing (file_size=2.3MB, memory_usage=238.5MB)
+2025-09-28 16:03:28,913 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:265] - Starting IFC parsing: C:/Users/johtho/Git-Repos/romskjemaing/romskjemaing/tesfiler/AkkordSvingen 23_ARK.ifc (2.3MB)
+2025-09-28 16:03:29,022 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_parsing (duration=0.11s, file_size=2.3MB, rate=21.05MB/s, memory_usage=238.5MB)
+2025-09-28 16:03:29,023 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:269] - IFC file parsed successfully in 0.11s
+2025-09-28 16:03:29,024 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_validation (file_size=2.3MB, memory_usage=249.0MB)
+2025-09-28 16:03:29,025 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:382] - Starting IFC file structure validation...
+2025-09-28 16:03:29,025 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_validation (duration=0.00s, file_size=2.3MB, rate=1782.71MB/s, memory_usage=249.0MB)
+2025-09-28 16:03:29,026 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:406] - Found 341 building products in 0.00s
+2025-09-28 16:03:29,027 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: space_validation (file_size=2.3MB, memory_usage=249.1MB)
+2025-09-28 16:03:29,028 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:464] - Starting IfcSpace entity validation...
+2025-09-28 16:03:29,028 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:489] - Found 34 IfcSpace entities
+2025-09-28 16:03:29,029 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: space_validation (duration=0.00s, file_size=2.3MB, rate=1250.79MB/s, memory_usage=249.1MB)
+2025-09-28 16:03:29,030 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:506] - Space quality analysis completed in 0.00s:
+2025-09-28 16:03:29,030 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:507] -   - Valid spaces: 10/10
+2025-09-28 16:03:29,031 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:508] -   - Named spaces: 10/10
+2025-09-28 16:03:29,032 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:509] -   - Spaces with geometry: 10/10
+2025-09-28 16:03:29,032 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:524] - Good space data quality: 100% of sampled spaces have valid data
+2025-09-28 16:03:29,033 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_file_load (duration=0.12s, file_size=2.3MB, rate=18.52MB/s, memory_usage=238.5MB)
+2025-09-28 16:03:29,034 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:602] - Small file processing completed efficiently: 2.3MB in 0.12s
+2025-09-28 16:03:29,035 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:604] - IFC file load operation completed successfully: Successfully loaded IFC file (IFC4) with 34 spaces found in 0.12s.
+2025-09-28 16:03:29,036 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:2763] - Extracting spaces directly for small file
+2025-09-28 16:03:29,042 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 1/34: 01
+2025-09-28 16:03:29,044 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 2oghQ1cAf6c9BmWD1pMdIj: ['Duplicate surface IDs found: 01LR8n0gb41fXDw7I3tUWy', '1 surfaces have zero or invalid area']
+2025-09-28 16:03:29,044 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 2/34: 01
+2025-09-28 16:03:29,046 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 3/34: 01
+2025-09-28 16:03:29,048 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 0etOdx4gn7QOeFM3DkCACZ: ['Duplicate surface IDs found: 0e3eGU1HrEb9ye2pDlv04O, 2BaCfuKIH2Ig_ALPcivZA2', '1 surfaces have zero or invalid area']
+2025-09-28 16:03:29,048 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 4/34: 01
+2025-09-28 16:03:29,053 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 0RGRVCyE13zRvWx_wbQh5R: ['Duplicate surface IDs found: 0lGbLiw0X4Vu4n$6tqyP_s, 01LR8n0gb41fXDw7I3tUWy, 3kO9NO6mvABAhIWNqlFUlo', '1 surfaces have zero or invalid area']
+2025-09-28 16:03:29,054 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 5/34: 01
+2025-09-28 16:03:29,055 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 0Lfq9rWmDEZAgA0xL$m$Bk: ['Duplicate surface IDs found: 0lGbLiw0X4Vu4n$6tqyP_s, 2HiaYxzmbFC9RWBDGOoUf4', '1 surfaces have zero or invalid area']
+2025-09-28 16:03:29,056 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 6/34: 02
+2025-09-28 16:03:29,058 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 3JXfZI11rEbPVPppj4Jxf1: ['Duplicate surface IDs found: 0wxr7RKCX9XBOiag7i_wCA, 374BUd6V1B480tJaEMN2iu, 2LG9WHqjr7leWRzxd67kbB', '1 surfaces have zero or invalid area']
+2025-09-28 16:03:29,059 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 7/34: 02
+2025-09-28 16:03:29,061 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 0rF7q_xCj62PipnnzfNzKW: ['Duplicate surface IDs found: 374BUd6V1B480tJaEMN2iu', '1 surfaces have zero or invalid area']
+2025-09-28 16:03:29,062 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 8/34: 02
+2025-09-28 16:03:29,064 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 9/34: 02
+2025-09-28 16:03:29,067 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 10/34: 02
+2025-09-28 16:03:29,071 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 1hcSgXD6nB8Qls7RqiVt36: ['Duplicate surface IDs found: 0wxr7RKCX9XBOiag7i_wCA, 374BUd6V1B480tJaEMN2iu, 3zzm$YeIP3KwFw6TnLeBpn', '1 surfaces have zero or invalid area']
+2025-09-28 16:03:29,071 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 11/34: 01
+2025-09-28 16:03:29,073 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 2g7n5wXHHFjvfjzRMFL7Ag: ['Duplicate surface IDs found: 3kO9NO6mvABAhIWNqlFUlo', '1 surfaces have zero or invalid area']
+2025-09-28 16:03:29,074 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 12/34: 02
+2025-09-28 16:03:29,075 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 3ueW3dBRL2R9WoR8xGTA9E: ['Duplicate surface IDs found: 0wxr7RKCX9XBOiag7i_wCA, 3c38nW$s52ROpD4RNXvJwF', '1 surfaces have zero or invalid area']
+2025-09-28 16:03:29,076 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 13/34: 02
+2025-09-28 16:03:29,078 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 0pwWNonAvEzRBvwhqxSoC6: ['Duplicate surface IDs found: 3zzm$YeIP3KwFw6TnLeBpn', '1 surfaces have zero or invalid area']
+2025-09-28 16:03:29,078 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 14/34: 01
+2025-09-28 16:03:29,093 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 1lBJWr459BIP7TCLnlZ7Rr: ['Duplicate surface IDs found: 374BUd6V1B480tJaEMN2iu, 1ZHs$C_91CyvindHAOIiIy, 011xFod8vCxADo9BCQFXAF, 2J7bZ4tXrAHR66jCNg8F0r, 0FHZ$Ev4T0VgRvhCvO7_zY, 1rQA2bC992bOMfd2Tb96_k, 119so98uP1xggSFjmpDBVH, 3kO9NO6mvABAhIWNqlFUlo, 30QeuDIbb7WRfj6Cyg3v5b, 2CrJaFXorFmwa7wEwTvbdy, 0wxr7RKCX9XBOiag7i_wCA, 0lGbLiw0X4Vu4n$6tqyP_s, 12pjW8B$LCUfUf6hpM6E8i, 01LR8n0gb41fXDw7I3tUWy, 17ZetX$JjBVQavDZvMPiWb, 1SLZ6EUWz9ofFRTcVtfH5E, 0e3eGU1HrEb9ye2pDlv04O, 3zzm$YeIP3KwFw6TnLeBpn', '6 surfaces have zero or invalid area']
+2025-09-28 16:03:29,093 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 15/34: 01
+2025-09-28 16:03:29,095 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 32WTxU1Oj9QRi0av4ikK8J: ['Duplicate surface IDs found: 0lGbLiw0X4Vu4n$6tqyP_s, 01LR8n0gb41fXDw7I3tUWy', '1 surfaces have zero or invalid area']
+2025-09-28 16:03:29,095 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 16/34: 03
+2025-09-28 16:03:29,098 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 1BdfIYzF1BSQ8tBqjv4keq: ['Duplicate surface IDs found: 3i_MxBIRb2dQSdCKkEB2bT, 1_rzqOLQv2YQq20UtRA2Bj, 0rZd5xjqr1BgBbZPmzNPcG, 3wF8HWUJD9kQrq1dwn0poO, 2t637aIc18dPbS$LhlLZ$8']
+2025-09-28 16:03:29,099 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 17/34: 03
+2025-09-28 16:03:29,101 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 1Chpbbz1P2zRAU0ARRIKOs: ['Duplicate surface IDs found: 3_zXnz1VnC2RAbUY6OsKyx, 0rZd5xjqr1BgBbZPmzNPcG']
+2025-09-28 16:03:29,102 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 18/34: 03
+2025-09-28 16:03:29,103 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 19/34: 03
+2025-09-28 16:03:29,105 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 1Abuh2hqP3MxoJVtTeNJZJ: ['Duplicate surface IDs found: 37h8Sgu7D0F9HKGc0lkAsK, 37rSpTisL4SPxRTvS$ay4_']
+2025-09-28 16:03:29,105 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 20/34: 03
+2025-09-28 16:03:29,108 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 20e785kif8MhL29lIzXRhQ: ['Duplicate surface IDs found: 385DVPGnvDmgZ_vVwOypGc, 1NqhveuRTBRxUWsl4Apb86, 1oJKHYXt9AgBACZ_H73n7j']
+2025-09-28 16:03:29,108 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 21/34: 03
+2025-09-28 16:03:29,110 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 37au_BtkfEU8d59K6L2ldX: ['Duplicate surface IDs found: 1_rzqOLQv2YQq20UtRA2Bj, 1tiYEuCsLEVQF1bnhZGbvD']
+2025-09-28 16:03:29,111 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 22/34: 04
+2025-09-28 16:03:29,113 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 02sq4HuYP3E9UVow$9C7Ud: ['Duplicate surface IDs found: 2n7GZify51Th$Z2_nMpHTk, 2W_WVwH_f5RhHsIOViFMf8, 0QNbGf$hX4WgdeoawMyOe$']
+2025-09-28 16:03:29,113 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 23/34: 04
+2025-09-28 16:03:29,115 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 1kqaFJe_n95uburgU8d__1: ['Duplicate surface IDs found: 2n7GZify51Th$Z2_nMpHTk, 3LN0A5aT9Btvo_bVwnmbDl']
+2025-09-28 16:03:29,116 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 24/34: 04
+2025-09-28 16:03:29,118 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 25/34: 04
+2025-09-28 16:03:29,120 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 26/34: 04
+2025-09-28 16:03:29,121 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 2J6Ny8LSj3LeIMUsY4hI2s: ['Duplicate surface IDs found: 0QNbGf$hX4WgdeoawMyOe$, 2FINKUTsH1ngFpsHH72eqy']
+2025-09-28 16:03:29,121 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 27/34: 04
+2025-09-28 16:03:29,124 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 0hcW2B0zjFoesYviOiMrjT: ['Duplicate surface IDs found: 3Y$dkOJNz9V9Cs3zyoxDFr, 2Zw3lvml971QLRubHbvXpI, 0PVsWFqWbAf90LeX24rvR6']
+2025-09-28 16:03:29,125 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 28/34: 02
+2025-09-28 16:03:29,156 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 3qGJVsrovCCOERwRIM9M9F: ['Duplicate surface IDs found: 2_iHNUetH89haAeFM0v9sF, 385DVPGnvDmgZ_vVwOypGc, 1_rzqOLQv2YQq20UtRA2Bj, 2tnWv1N6T2g81J8UBlFwKe, 1NqhveuRTBRxUWsl4Apb86, 2EnhrbM8b6kftnV9j08HkH, 3CWQv_Krf8Tv9kqhOuGXPx, 1k7aptnfzAr8XC2EW6UDg6, 2n7GZify51Th$Z2_nMpHTk, 2Zw3lvml971QLRubHbvXpI, 0rZd5xjqr1BgBbZPmzNPcG, 0gRoDum7937vfwhs1niPj5, 3wF8HWUJD9kQrq1dwn0poO, 0QNbGf$hX4WgdeoawMyOe$, 2P0tgmtoD858UwkjVZsw64, 3_zXnz1VnC2RAbUY6OsKyx, 1oJKHYXt9AgBACZ_H73n7j, 2UOJsgQl5CeBsHx3tFxKdC, 0OMdwkKMH34hDRjeVNngyz, 3Y$dkOJNz9V9Cs3zyoxDFr, 3U_Jx5uwfAnPL4KOAyS$1I, 3mztZ8eFv2swCqHmIxMvHn, 0PVsWFqWbAf90LeX24rvR6, 1onrunXczCMO_SxJEcsYFR, 1yLTToSpn5luBGfDP61HGQ, 2$3ty86p96owTvqm1LUvlD, 3GxUex2LXFDQk4naAj6zEj, 2W6yeJmY104eu62rCyQ3O0', '4 surfaces have zero or invalid area']
+2025-09-28 16:03:29,157 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 29/34: 03
+2025-09-28 16:03:29,162 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 3quWfdPA12heO5M9sToywJ: ['Duplicate surface IDs found: 3_zXnz1VnC2RAbUY6OsKyx, 385DVPGnvDmgZ_vVwOypGc, 1_rzqOLQv2YQq20UtRA2Bj, 1NqhveuRTBRxUWsl4Apb86, 1oJKHYXt9AgBACZ_H73n7j, 0rZd5xjqr1BgBbZPmzNPcG, 3wF8HWUJD9kQrq1dwn0poO', '8 surfaces have zero or invalid area']
+2025-09-28 16:03:29,163 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 30/34: 04
+2025-09-28 16:03:29,168 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 2ygnsTAGr3ruU6hrha99xQ: ['Duplicate surface IDs found: 2Zw3lvml971QLRubHbvXpI, 0$0jjesOT8lv70iEsbTHTJ, 0PVsWFqWbAf90LeX24rvR6, 3Y$dkOJNz9V9Cs3zyoxDFr, 1yObTqoOHDXB15tQZuXljW, 2n7GZify51Th$Z2_nMpHTk, 0QNbGf$hX4WgdeoawMyOe$', '8 surfaces have zero or invalid area']
+2025-09-28 16:03:29,169 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 31/34: 03
+2025-09-28 16:03:29,175 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 0hmZNwjDX0ZwJbO6AmrrjO: ['Duplicate surface IDs found: 3_zXnz1VnC2RAbUY6OsKyx, 2tnWv1N6T2g81J8UBlFwKe, 36hnrR$zHBI9Z0XSe8Y_gm, 0rZd5xjqr1BgBbZPmzNPcG, 1k7aptnfzAr8XC2EW6UDg6, 2n7GZify51Th$Z2_nMpHTk, 3wF8HWUJD9kQrq1dwn0poO', '3 surfaces have zero or invalid area']
+2025-09-28 16:03:29,175 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 32/34: 03
+2025-09-28 16:03:29,179 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 02MoDbUmz2fQYwzHjhQuhV: ['Duplicate surface IDs found: 3mztZ8eFv2swCqHmIxMvHn, 1_rzqOLQv2YQq20UtRA2Bj, 12OorI3HbCkA_rAwe4GgMT', '4 surfaces have zero or invalid area']
+2025-09-28 16:03:29,181 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 33/34: 04
+2025-09-28 16:03:29,187 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:3041] - Surface validation issues for space 1fmOvhTur4SAytWzlO9cvT: ['Duplicate surface IDs found: 385DVPGnvDmgZ_vVwOypGc, 2Zw3lvml971QLRubHbvXpI, 1NqhveuRTBRxUWsl4Apb86, 1oJKHYXt9AgBACZ_H73n7j, 0PVsWFqWbAf90LeX24rvR6, 2UOJsgQl5CeBsHx3tFxKdC, 2MlGu3SqnBqxCeAC$z39PI, 3Y$dkOJNz9V9Cs3zyoxDFr, 1onrunXczCMO_SxJEcsYFR, 2EnhrbM8b6kftnV9j08HkH, 3U_Jx5uwfAnPL4KOAyS$1I, 0gRoDum7937vfwhs1niPj5, 2P0tgmtoD858UwkjVZsw64', '5 surfaces have zero or invalid area']
+2025-09-28 16:03:29,188 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3028] - Extracting surfaces for space 34/34: 05
+2025-09-28 16:03:29,189 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 1/34: 01
+2025-09-28 16:03:29,218 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 2/34: 01
+2025-09-28 16:03:29,233 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 3/34: 01
+2025-09-28 16:03:29,251 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 4/34: 01
+2025-09-28 16:03:29,278 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 5/34: 01
+2025-09-28 16:03:29,297 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 6/34: 02
+2025-09-28 16:03:29,332 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 7/34: 02
+2025-09-28 16:03:29,349 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 8/34: 02
+2025-09-28 16:03:29,367 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 9/34: 02
+2025-09-28 16:03:29,379 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 10/34: 02
+2025-09-28 16:03:29,404 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 11/34: 01
+2025-09-28 16:03:29,422 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 12/34: 02
+2025-09-28 16:03:29,436 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 13/34: 02
+2025-09-28 16:03:29,452 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 14/34: 01
+2025-09-28 16:03:29,573 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 15/34: 01
+2025-09-28 16:03:29,598 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 16/34: 03
+2025-09-28 16:03:29,632 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 17/34: 03
+2025-09-28 16:03:29,654 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 18/34: 03
+2025-09-28 16:03:29,663 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 19/34: 03
+2025-09-28 16:03:29,690 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 20/34: 03
+2025-09-28 16:03:29,716 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 21/34: 03
+2025-09-28 16:03:29,741 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 22/34: 04
+2025-09-28 16:03:29,774 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 23/34: 04
+2025-09-28 16:03:29,796 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 24/34: 04
+2025-09-28 16:03:29,813 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 25/34: 04
+2025-09-28 16:03:29,828 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 26/34: 04
+2025-09-28 16:03:29,844 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 27/34: 04
+2025-09-28 16:03:29,863 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 28/34: 02
+2025-09-28 16:03:30,080 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 29/34: 03
+2025-09-28 16:03:30,122 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 30/34: 04
+2025-09-28 16:03:30,158 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 31/34: 03
+2025-09-28 16:03:30,197 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 32/34: 03
+2025-09-28 16:03:30,225 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 33/34: 04
+2025-09-28 16:03:30,273 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3077] - Extracting boundaries for space 34/34: 05
+2025-09-28 16:03:30,284 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 1/34: 01
+2025-09-28 16:03:30,285 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 5 relationships for space 2oghQ1cAf6c9BmWD1pMdIj: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 16:03:30,285 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 2/34: 01
+2025-09-28 16:03:30,286 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 9 relationships for space 0lvmW1C_r0DwLHYilhW$yq: {'Contains': 6, 'DefinedBy': 3}
+2025-09-28 16:03:30,286 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 3/34: 01
+2025-09-28 16:03:30,287 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 7 relationships for space 0etOdx4gn7QOeFM3DkCACZ: {'Contains': 4, 'DefinedBy': 3}
+2025-09-28 16:03:30,287 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 4/34: 01
+2025-09-28 16:03:30,288 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 15 relationships for space 0RGRVCyE13zRvWx_wbQh5R: {'Contains': 12, 'DefinedBy': 3}
+2025-09-28 16:03:30,288 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 5/34: 01
+2025-09-28 16:03:30,289 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 3 relationships for space 0Lfq9rWmDEZAgA0xL$m$Bk: {'DefinedBy': 3}
+2025-09-28 16:03:30,289 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 6/34: 02
+2025-09-28 16:03:30,290 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 5 relationships for space 3JXfZI11rEbPVPppj4Jxf1: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 16:03:30,290 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 7/34: 02
+2025-09-28 16:03:30,291 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 5 relationships for space 0rF7q_xCj62PipnnzfNzKW: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 16:03:30,291 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 8/34: 02
+2025-09-28 16:03:30,292 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 6 relationships for space 30Mh9i1JvBjAVAs5qwyGFC: {'Contains': 3, 'DefinedBy': 3}
+2025-09-28 16:03:30,292 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 9/34: 02
+2025-09-28 16:03:30,293 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 10 relationships for space 1a0oo6Njb7gxF512nxSYuJ: {'Contains': 7, 'DefinedBy': 3}
+2025-09-28 16:03:30,293 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 10/34: 02
+2025-09-28 16:03:30,294 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 14 relationships for space 1hcSgXD6nB8Qls7RqiVt36: {'Contains': 11, 'DefinedBy': 3}
+2025-09-28 16:03:30,294 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 11/34: 01
+2025-09-28 16:03:30,295 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 3 relationships for space 2g7n5wXHHFjvfjzRMFL7Ag: {'DefinedBy': 3}
+2025-09-28 16:03:30,295 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 12/34: 02
+2025-09-28 16:03:30,296 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 3 relationships for space 3ueW3dBRL2R9WoR8xGTA9E: {'DefinedBy': 3}
+2025-09-28 16:03:30,296 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 13/34: 02
+2025-09-28 16:03:30,297 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 3 relationships for space 0pwWNonAvEzRBvwhqxSoC6: {'DefinedBy': 3}
+2025-09-28 16:03:30,297 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 14/34: 01
+2025-09-28 16:03:30,299 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 24 relationships for space 1lBJWr459BIP7TCLnlZ7Rr: {'Contains': 21, 'DefinedBy': 3}
+2025-09-28 16:03:30,299 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 15/34: 01
+2025-09-28 16:03:30,300 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 3 relationships for space 32WTxU1Oj9QRi0av4ikK8J: {'DefinedBy': 3}
+2025-09-28 16:03:30,300 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 16/34: 03
+2025-09-28 16:03:30,301 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 5 relationships for space 1BdfIYzF1BSQ8tBqjv4keq: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 16:03:30,302 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 17/34: 03
+2025-09-28 16:03:30,302 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 5 relationships for space 1Chpbbz1P2zRAU0ARRIKOs: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 16:03:30,303 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 18/34: 03
+2025-09-28 16:03:30,303 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 9 relationships for space 1PXeoJQRHDY9mYm_2dV5Zw: {'Contains': 6, 'DefinedBy': 3}
+2025-09-28 16:03:30,303 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 19/34: 03
+2025-09-28 16:03:30,304 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 7 relationships for space 1Abuh2hqP3MxoJVtTeNJZJ: {'Contains': 4, 'DefinedBy': 3}
+2025-09-28 16:03:30,304 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 20/34: 03
+2025-09-28 16:03:30,305 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 5 relationships for space 20e785kif8MhL29lIzXRhQ: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 16:03:30,305 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 21/34: 03
+2025-09-28 16:03:30,306 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 3 relationships for space 37au_BtkfEU8d59K6L2ldX: {'DefinedBy': 3}
+2025-09-28 16:03:30,306 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 22/34: 04
+2025-09-28 16:03:30,307 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 5 relationships for space 02sq4HuYP3E9UVow$9C7Ud: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 16:03:30,307 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 23/34: 04
+2025-09-28 16:03:30,308 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 5 relationships for space 1kqaFJe_n95uburgU8d__1: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 16:03:30,308 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 24/34: 04
+2025-09-28 16:03:30,308 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 6 relationships for space 3rYbhuSJj32fm1Vmztk9Qe: {'Contains': 3, 'DefinedBy': 3}
+2025-09-28 16:03:30,309 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 25/34: 04
+2025-09-28 16:03:30,309 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 10 relationships for space 2oJi_gbc12FBtZgPM9SlEi: {'Contains': 7, 'DefinedBy': 3}
+2025-09-28 16:03:30,310 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 26/34: 04
+2025-09-28 16:03:30,310 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 3 relationships for space 2J6Ny8LSj3LeIMUsY4hI2s: {'DefinedBy': 3}
+2025-09-28 16:03:30,311 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 27/34: 04
+2025-09-28 16:03:30,311 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 5 relationships for space 0hcW2B0zjFoesYviOiMrjT: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 16:03:30,311 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 28/34: 02
+2025-09-28 16:03:30,314 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 37 relationships for space 3qGJVsrovCCOERwRIM9M9F: {'Contains': 34, 'DefinedBy': 3}
+2025-09-28 16:03:30,314 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 29/34: 03
+2025-09-28 16:03:30,315 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 8 relationships for space 3quWfdPA12heO5M9sToywJ: {'Contains': 5, 'DefinedBy': 3}
+2025-09-28 16:03:30,316 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 30/34: 04
+2025-09-28 16:03:30,317 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 8 relationships for space 2ygnsTAGr3ruU6hrha99xQ: {'Contains': 5, 'DefinedBy': 3}
+2025-09-28 16:03:30,317 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 31/34: 03
+2025-09-28 16:03:30,318 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 10 relationships for space 0hmZNwjDX0ZwJbO6AmrrjO: {'Contains': 7, 'DefinedBy': 3}
+2025-09-28 16:03:30,318 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 32/34: 03
+2025-09-28 16:03:30,319 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 9 relationships for space 02MoDbUmz2fQYwzHjhQuhV: {'Contains': 6, 'DefinedBy': 3}
+2025-09-28 16:03:30,320 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 33/34: 04
+2025-09-28 16:03:30,321 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 6 relationships for space 1fmOvhTur4SAytWzlO9cvT: {'Contains': 3, 'DefinedBy': 3}
+2025-09-28 16:03:30,321 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3126] - Extracting relationships for space 34/34: 05
+2025-09-28 16:03:30,322 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3138] - Found 6 relationships for space 0xyvjA51vBzPon8HIwA$o0: {'Contains': 3, 'DefinedBy': 3}
+2025-09-28 16:03:45,233 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1819] - Resource cleanup verification: all clean
+2025-09-28 16:03:59,535 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759068239_001 - Data Validation Results
+2025-09-28 16:03:59,537 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:306] -   Category: unknown, Severity: low
+2025-09-28 16:03:59,556 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:307] -   Message: Total Spaces: 34
+Spaces with Surfaces: 34
+Spaces with Boundaries: 34
+Spaces with Descriptions: 0
+
+Data Completeness: 0.0%
+2025-09-28 16:03:59,556 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:313] -   Guidance: Total Spaces: 34
+Spaces with Surfaces: 34
+Spaces with Boundaries: 34
+Spaces with Descriptions: 0
+
+Data Completeness: 0.0%
+2025-09-28 16:03:59,558 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=12.02, memory_percent_used=62.0, disk_free_gb=147.73, disk_percent_used=68.9, cpu_count=12
+2025-09-28 16:04:15,226 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1819] - Resource cleanup verification: all clean
