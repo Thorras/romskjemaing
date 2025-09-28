@@ -159,7 +159,6 @@ Project structure is established with all modules created and dependencies insta
 
 - [x] 13. Create end-to-end integration tests
 
-
   - Test complete workflow from IFC import to JSON export
   - Validate data integrity throughout the entire process using pytest
   - Test with various IFC file formats and sizes

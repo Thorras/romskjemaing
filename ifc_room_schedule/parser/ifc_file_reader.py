@@ -60,33 +60,50 @@ class IfcFileReader:
                 if file_size == 0:
                     return False, "File is empty (0 bytes)"
                 
-                # Enhanced memory check using psutil
-                try:
-                    import psutil
-                    available_memory = psutil.virtual_memory().available
-                    available_mb = available_memory / (1024*1024)
-                    
-                    # IFC files typically require 3-5x their file size in memory during processing
-                    estimated_memory_needed = file_size * 4  # Conservative estimate
-                    
-                    if estimated_memory_needed > available_memory * 0.6:  # Use max 60% of available memory
-                        return False, (f"Insufficient memory to process file ({size_mb:.1f}MB). "
-                                     f"Estimated memory needed: {estimated_memory_needed/(1024*1024):.1f}MB, "
-                                     f"Available: {available_mb:.1f}MB. "
-                                     f"Try closing other applications or processing a smaller file.")
-                except ImportError:
-                    # Fallback to simple file size check if psutil not available
-                    logger.warning("psutil not available, using basic file size check")
+                # Smart memory validation based on file size
+                if file_size < 10 * 1024 * 1024:  # Files under 10MB - minimal validation
+                    logger.info(f"Small file detected ({size_mb:.1f}MB) - skipping strict memory validation")
+                    # For small files, just do basic checks
+                    if file_size > 500 * 1024 * 1024:  # Still check for extremely large files
+                        return False, (f"File is extremely large ({size_mb:.1f}MB). "
+                                       f"Files over 500MB are not supported due to memory limitations.")
+                else:
+                    # Enhanced memory check for larger files using psutil
+                    try:
+                        import psutil
+                        available_memory = psutil.virtual_memory().available
+                        available_mb = available_memory / (1024*1024)
+                        
+                        # More reasonable memory estimation for different file sizes
+                        if file_size < 50 * 1024 * 1024:  # 10-50MB files
+                            estimated_memory_needed = file_size * 2  # Less conservative for medium files
+                            memory_threshold = 0.4  # Use max 40% of available memory
+                        elif file_size < 100 * 1024 * 1024:  # 50-100MB files
+                            estimated_memory_needed = file_size * 3  # Moderate estimate
+                            memory_threshold = 0.5  # Use max 50% of available memory
+                        else:  # Files over 100MB
+                            estimated_memory_needed = file_size * 4  # Conservative estimate
+                            memory_threshold = 0.6  # Use max 60% of available memory
+                        
+                        if estimated_memory_needed > available_memory * memory_threshold:
+                            return False, (f"Insufficient memory to process file ({size_mb:.1f}MB). "
+                                         f"Estimated memory needed: {estimated_memory_needed/(1024*1024):.1f}MB, "
+                                         f"Available: {available_mb:.1f}MB. "
+                                         f"Try closing other applications or processing a smaller file.")
+                    except ImportError:
+                        # Fallback to simple file size check if psutil not available
+                        logger.warning("psutil not available, using basic file size check")
                 
+                # Adjusted file size limits - more reasonable for actual usage
                 if file_size > 500 * 1024 * 1024:  # 500MB
                     return False, (f"File is extremely large ({size_mb:.1f}MB). "
                                    f"Files over 500MB are not supported due to memory limitations.")
-                elif file_size > 150 * 1024 * 1024:  # 150MB - adjusted to catch test case
+                elif file_size > 200 * 1024 * 1024:  # 200MB (increased from 150MB)
                     return False, (f"File is very large ({size_mb:.1f}MB). "
-                                   f"Files over 150MB may cause memory issues. "
+                                   f"Files over 200MB may cause memory issues. "
                                    f"Try processing a smaller file or increase available memory.")
                 elif file_size > 100 * 1024 * 1024:  # 100MB
-                    logger.warning(f"Large file detected: {size_mb:.1f}MB")
+                    logger.warning(f"Large file detected: {size_mb:.1f}MB - processing may take time")
                     # Continue but warn - let the UI handle this decision
                     
             except OSError as e:
@@ -101,9 +118,10 @@ class IfcFileReader:
                 
             except MemoryError as e:
                 logger.error(f"Memory error loading IFC file: {e}")
-                return False, (f"Insufficient memory to load file ({size_mb:.1f}MB). "
+                return False, (f"Memory error loading IFC file ({size_mb:.1f}MB). "
+                              f"File size: {file_size:,} bytes. "
                               f"Try closing other applications, restarting the application, "
-                              f"or processing a smaller file.")
+                              f"or processing a smaller file. Error: {str(e)}")
             except Exception as e:
                 logger.error(f"Failed to parse IFC file: {e}")
                 error_msg = str(e).lower()
@@ -132,8 +150,9 @@ class IfcFileReader:
                 self.ifc_file = None
                 self.file_path = None
                 logger.error(f"Memory error during validation: {e}")
-                return False, (f"Insufficient memory to validate file. "
-                              f"The file may be too large for available memory.")
+                return False, (f"Memory error during file validation ({size_mb:.1f}MB). "
+                              f"File size: {file_size:,} bytes. "
+                              f"The file may be too large for available memory. Error: {str(e)}")
             except Exception as e:
                 self.ifc_file = None
                 self.file_path = None
@@ -168,8 +187,9 @@ class IfcFileReader:
                 self.ifc_file = None
                 self.file_path = None
                 logger.error(f"Memory error reading spaces: {e}")
-                return False, (f"Insufficient memory to read space data. "
-                              f"Try processing a smaller file or restart the application.")
+                return False, (f"Memory error reading space data from file ({size_mb:.1f}MB). "
+                              f"File size: {file_size:,} bytes. "
+                              f"Try processing a smaller file or restart the application. Error: {str(e)}")
             except Exception as e:
                 logger.error(f"Error reading IfcSpace entities: {e}")
                 return False, f"Error reading IfcSpace entities: {str(e)}"
@@ -189,8 +209,15 @@ class IfcFileReader:
             self.ifc_file = None
             self.file_path = None
             logger.error(f"Memory error: {e}")
-            return False, (f"Memory error loading IFC file: {str(e)}. "
-                          f"Try closing other applications or processing a smaller file.")
+            try:
+                file_size = os.path.getsize(file_path)
+                size_mb = file_size / (1024*1024)
+                return False, (f"Memory error loading IFC file ({size_mb:.1f}MB). "
+                              f"File size: {file_size:,} bytes. "
+                              f"Try closing other applications or processing a smaller file. Error: {str(e)}")
+            except:
+                return False, (f"Memory error loading IFC file: {str(e)}. "
+                              f"Try closing other applications or processing a smaller file.")
         except OSError as e:
             self.ifc_file = None
             self.file_path = None

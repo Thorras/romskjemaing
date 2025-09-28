@@ -16,6 +16,7 @@ import traceback
 import sys
 from datetime import datetime
 from typing import Optional, Dict, Any
+from enum import Enum
 
 from ..parser.ifc_file_reader import IfcFileReader
 from ..parser.ifc_space_extractor import IfcSpaceExtractor
@@ -26,6 +27,14 @@ from .space_list_widget import SpaceListWidget
 from .space_detail_widget import SpaceDetailWidget
 from .surface_editor_widget import SurfaceEditorWidget
 from .export_dialog_widget import ExportDialogWidget
+
+
+class FileSizeCategory(Enum):
+    """File size categories for smart loading strategy."""
+    SMALL = "small"      # < 10MB - Direct loading
+    MEDIUM = "medium"    # 10-50MB - Threaded with progress
+    LARGE = "large"      # 50-100MB - Threaded with warning
+    HUGE = "huge"        # > 100MB - Require confirmation
 
 
 class ErrorDetailsDialog(QDialog):
@@ -215,6 +224,46 @@ class MainWindow(QMainWindow):
         # Ensure initial state is correct
         self.update_file_info()
     
+    def categorize_file_size(self, file_path: str) -> tuple[FileSizeCategory, int, str]:
+        """
+        Categorize file size for smart loading strategy.
+        
+        Args:
+            file_path: Path to the IFC file
+            
+        Returns:
+            Tuple of (category, size_bytes, size_string)
+        """
+        try:
+            size_bytes = os.path.getsize(file_path)
+            size_mb = size_bytes / (1024 * 1024)
+            
+            # Create human-readable size string
+            if size_bytes < 1024:
+                size_string = f"{size_bytes} B"
+            elif size_bytes < 1024 * 1024:
+                size_string = f"{size_bytes / 1024:.1f} KB"
+            else:
+                size_string = f"{size_mb:.1f} MB"
+            
+            # Categorize based on size
+            if size_bytes < 10 * 1024 * 1024:  # < 10MB
+                category = FileSizeCategory.SMALL
+            elif size_bytes < 50 * 1024 * 1024:  # 10-50MB
+                category = FileSizeCategory.MEDIUM
+            elif size_bytes < 100 * 1024 * 1024:  # 50-100MB
+                category = FileSizeCategory.LARGE
+            else:  # > 100MB
+                category = FileSizeCategory.HUGE
+            
+            self.logger.info(f"File categorized as {category.value}: {size_string}")
+            return category, size_bytes, size_string
+            
+        except OSError as e:
+            self.logger.error(f"Error getting file size: {e}")
+            # Default to medium category if we can't determine size
+            return FileSizeCategory.MEDIUM, 0, "Unknown size"
+    
     def setup_error_handling(self):
         """Set up comprehensive error handling system."""
         # Configure logging
@@ -336,10 +385,10 @@ class MainWindow(QMainWindow):
     
     def show_operation_progress(self, title: str, operation_func, *args, **kwargs):
         """
-        Execute long-running operation in separate thread with progress dialog.
+        Execute long-running operation in separate thread with non-blocking progress indication.
         
         Args:
-            title: Progress dialog title
+            title: Progress operation title
             operation_func: Function to execute
             *args, **kwargs: Arguments for the operation function
         """
@@ -353,54 +402,145 @@ class MainWindow(QMainWindow):
                 self.on_operation_error("operation_error", f"Operation failed: {str(e)}")
                 return
         
-        # Create progress dialog
-        progress_dialog = QMessageBox(self)
-        progress_dialog.setWindowTitle(title)
-        progress_dialog.setText("Operation in progress...")
-        progress_dialog.setStandardButtons(QMessageBox.StandardButton.Cancel)
-        progress_dialog.setModal(True)
+        # Show non-blocking progress indication using status bar
+        self.show_non_blocking_progress(title, operation_func, *args, **kwargs)
+    
+    def show_non_blocking_progress(self, title: str, operation_func, *args, **kwargs):
+        """
+        Show non-blocking progress indication using QProgressBar in status bar.
+        
+        Args:
+            title: Progress operation title
+            operation_func: Function to execute
+            *args, **kwargs: Arguments for the operation function
+        """
+        # Update status bar with operation title
+        self.status_bar.showMessage(f"{title}...")
+        
+        # Show progress bar in main UI (not status bar to avoid conflicts)
+        self.progress_bar.setVisible(True)
+        self.progress_bar.setRange(0, 0)  # Indeterminate progress
         
         # Create worker thread
         self.operation_thread = QThread()
         self.operation_worker = LongRunningOperationWorker(operation_func, *args, **kwargs)
         self.operation_worker.moveToThread(self.operation_thread)
         
-        # Connect signals
-        self.operation_worker.progress_updated.connect(
-            lambda progress, status: progress_dialog.setText(f"{status}\n{progress}% complete")
-        )
+        # Connect signals for non-blocking progress updates
+        self.operation_worker.progress_updated.connect(self.update_progress_status)
         self.operation_worker.operation_completed.connect(self.on_operation_completed)
         self.operation_worker.error_occurred.connect(self.on_operation_error)
         
         self.operation_thread.started.connect(self.operation_worker.run_operation)
         self.operation_thread.finished.connect(self.operation_thread.deleteLater)
         
-        # Handle cancel button
-        progress_dialog.rejected.connect(self.cancel_operation)
+        # Set timeout timer for long operations
+        self.setup_operation_timeout(30)  # 30 second timeout
         
-        # Start operation
+        # Start operation (non-blocking)
         self.operation_thread.start()
+    
+    def update_progress_status(self, progress: int, status: str):
+        """
+        Update progress indication without blocking the main thread.
         
-        # Show progress dialog
-        progress_dialog.exec()
+        Args:
+            progress: Progress percentage (0-100)
+            status: Status message
+        """
+        # Update status bar message
+        self.status_bar.showMessage(f"{status}...")
+        
+        # Update progress bar if we have specific progress
+        if progress >= 0:
+            self.progress_bar.setRange(0, 100)
+            self.progress_bar.setValue(progress)
+        else:
+            # Keep indeterminate progress
+            self.progress_bar.setRange(0, 0)
+    
+    def setup_operation_timeout(self, timeout_seconds: int):
+        """
+        Set up timeout handling for long operations.
+        
+        Args:
+            timeout_seconds: Timeout in seconds
+        """
+        if hasattr(self, 'operation_timeout_timer'):
+            self.operation_timeout_timer.stop()
+        
+        self.operation_timeout_timer = QTimer()
+        self.operation_timeout_timer.setSingleShot(True)
+        self.operation_timeout_timer.timeout.connect(self.handle_operation_timeout)
+        self.operation_timeout_timer.start(timeout_seconds * 1000)  # Convert to milliseconds
+    
+    def handle_operation_timeout(self):
+        """Handle operation timeout with user recovery options."""
+        if self.operation_thread and self.operation_thread.isRunning():
+            recovery_options = {
+                'wait_longer': 'Wait 30 more seconds',
+                'cancel': 'Cancel operation',
+                'force_direct': 'Try direct loading (may freeze)'
+            }
+            
+            choice = self.show_enhanced_error_message(
+                "Operation Timeout",
+                "The operation is taking longer than expected. This may indicate a large file or system performance issues.",
+                f"Operation has been running for more than 30 seconds.\n\nOptions:\n"
+                f"- Wait longer: Continue waiting for the operation to complete\n"
+                f"- Cancel: Stop the operation and return to ready state\n"
+                f"- Force direct: Attempt direct loading (may cause freezing)",
+                "warning",
+                recovery_options
+            )
+            
+            if choice == 'wait_longer':
+                # Extend timeout by another 30 seconds
+                self.setup_operation_timeout(30)
+                self.status_bar.showMessage("Continuing operation - waiting longer...")
+            elif choice == 'cancel':
+                self.cancel_operation()
+            elif choice == 'force_direct':
+                self.cancel_operation()
+                if hasattr(self, 'current_file_path') and self.current_file_path:
+                    self.load_file_directly(self.current_file_path)
     
     def on_operation_completed(self, success: bool, message: str, result: Any):
         """Handle completion of long-running operation."""
+        # Clean up thread and worker
         if self.operation_thread:
             self.operation_thread.quit()
             self.operation_thread.wait()
             self.operation_thread = None
         self.operation_worker = None
         
+        # Clean up timeout timer
+        if hasattr(self, 'operation_timeout_timer'):
+            self.operation_timeout_timer.stop()
+        
+        # Hide progress bar
+        self.progress_bar.setVisible(False)
+        
         if success:
             self.status_bar.showMessage(f"✅ {message}")
             self.status_bar.setStyleSheet("QStatusBar { color: #28a745; }")
             QTimer.singleShot(5000, self.clear_temporary_error_status)
+            
+            # Finalize space extraction if this was a space extraction operation
+            if hasattr(self, 'spaces') and self.spaces:
+                self.finalize_space_extraction()
         else:
             self.show_enhanced_error_message("Operation Failed", message)
     
     def on_operation_error(self, error_type: str, error_message: str):
         """Handle error during long-running operation."""
+        # Clean up timeout timer
+        if hasattr(self, 'operation_timeout_timer'):
+            self.operation_timeout_timer.stop()
+        
+        # Hide progress bar
+        self.progress_bar.setVisible(False)
+        
         self.show_enhanced_error_message("Operation Error", error_message)
     
     def cancel_operation(self):
@@ -410,6 +550,14 @@ class MainWindow(QMainWindow):
             self.operation_thread.wait()
             self.operation_thread = None
         self.operation_worker = None
+        
+        # Clean up timeout timer
+        if hasattr(self, 'operation_timeout_timer'):
+            self.operation_timeout_timer.stop()
+        
+        # Hide progress bar
+        self.progress_bar.setVisible(False)
+        
         self.status_bar.showMessage("Operation cancelled")
     
     def handle_memory_error(self, operation: str, error: MemoryError) -> bool:
@@ -1156,10 +1304,20 @@ class MainWindow(QMainWindow):
         toolbar.addWidget(self.toolbar_status_label)
         
     def setup_status_bar(self):
-        """Set up the status bar."""
+        """Set up the status bar with enhanced styling."""
         self.status_bar = QStatusBar()
         self.setStatusBar(self.status_bar)
         self.status_bar.showMessage("Ready to load IFC file...")
+        
+        # Style the status bar
+        self.status_bar.setStyleSheet("""
+            QStatusBar {
+                background-color: #f8f9fa;
+                border-top: 1px solid #dee2e6;
+                padding: 4px 8px;
+                color: #495057;
+            }
+        """)
         
     def connect_signals(self):
         """Connect widget signals."""
@@ -1188,12 +1346,17 @@ class MainWindow(QMainWindow):
                 self.process_ifc_file(file_paths[0])
     
     def process_ifc_file(self, file_path: str):
-        """Process the selected IFC file with comprehensive error handling."""
-        self.status_bar.showMessage("Loading IFC file...")
+        """Process the selected IFC file with smart loading strategy based on file size."""
+        self.status_bar.showMessage("Analyzing file...")
         self.progress_bar.setVisible(True)
         self.progress_bar.setRange(0, 0)  # Indeterminate progress
         
         try:
+            # Categorize file size for smart loading strategy
+            file_category, file_size_bytes, file_size_string = self.categorize_file_size(file_path)
+            
+            self.logger.info(f"Processing {file_category.value} file: {file_size_string}")
+            
             # First validate the file
             is_valid, validation_message = self.ifc_reader.validate_file(file_path)
             
@@ -1222,24 +1385,78 @@ class MainWindow(QMainWindow):
                     self.status_bar.showMessage("File validation cancelled")
                     return
             
-            # Load the file
-            success, load_message = self.ifc_reader.load_file(file_path)
-            
-            if success:
-                self.current_file_path = file_path
-                self.update_file_info()
-                self.update_ui_state(True)  # Enable file-related actions
-                self.status_bar.showMessage("File loaded successfully. Extracting spaces...")
+            # Apply smart loading strategy based on file size
+            if file_category == FileSizeCategory.SMALL:
+                # Direct loading for small files (< 10MB) to avoid threading overhead
+                self.logger.info("Using direct loading strategy for small file")
+                self.status_bar.showMessage(f"Loading small file ({file_size_string}) directly...")
+                self.load_file_directly(file_path)
                 
-                # Extract spaces using threaded operation
-                self.extract_spaces_threaded()
+            elif file_category == FileSizeCategory.MEDIUM:
+                # Threaded loading for medium files (10-50MB)
+                self.logger.info("Using threaded loading strategy for medium file")
+                self.status_bar.showMessage(f"Loading medium file ({file_size_string}) with progress...")
+                self.load_file_threaded(file_path)
                 
-                self.ifc_file_loaded.emit(file_path)
-            else:
-                # Handle load failure with recovery options
-                if not self.handle_file_operation_error("load IFC file", file_path, Exception(load_message)):
-                    self.status_bar.showMessage("File loading cancelled")
-                    self.update_ui_state(False)
+            elif file_category == FileSizeCategory.LARGE:
+                # Threaded loading with warning for large files (50-100MB)
+                self.logger.info("Using threaded loading strategy for large file with warning")
+                
+                # Show warning for large files
+                recovery_options = {
+                    'continue': f'Continue loading large file ({file_size_string})',
+                    'select_different': 'Select a smaller file',
+                    'cancel': 'Cancel operation'
+                }
+                
+                choice = self.show_enhanced_error_message(
+                    "Large File Warning",
+                    f"This is a large IFC file ({file_size_string}). Loading may take time and use significant memory.",
+                    f"File: {file_path}\nSize: {file_size_string}\n\nLarge files may cause the application to become temporarily unresponsive during loading.",
+                    "warning",
+                    recovery_options
+                )
+                
+                if choice == 'continue':
+                    self.status_bar.showMessage(f"Loading large file ({file_size_string}) with progress...")
+                    self.load_file_threaded(file_path)
+                elif choice == 'select_different':
+                    self.load_ifc_file()
+                    return
+                else:
+                    self.progress_bar.setVisible(False)
+                    self.status_bar.showMessage("Large file loading cancelled")
+                    return
+                    
+            else:  # FileSizeCategory.HUGE
+                # Require explicit confirmation for huge files (> 100MB)
+                self.logger.warning("Huge file detected - requiring user confirmation")
+                
+                recovery_options = {
+                    'force_load': f'Force load huge file ({file_size_string}) - may cause issues',
+                    'select_different': 'Select a smaller file',
+                    'cancel': 'Cancel operation'
+                }
+                
+                choice = self.show_enhanced_error_message(
+                    "Huge File Warning",
+                    f"This is an extremely large IFC file ({file_size_string}). Loading is not recommended and may cause memory issues or application freezing.",
+                    f"File: {file_path}\nSize: {file_size_string}\n\nHuge files (>100MB) may:\n- Cause memory errors\n- Make the application unresponsive\n- Take very long to process\n\nConsider using a smaller file or processing the file in parts.",
+                    "error",
+                    recovery_options
+                )
+                
+                if choice == 'force_load':
+                    self.logger.warning(f"Force loading huge file: {file_path}")
+                    self.status_bar.showMessage(f"Force loading huge file ({file_size_string})...")
+                    self.load_file_threaded(file_path)
+                elif choice == 'select_different':
+                    self.load_ifc_file()
+                    return
+                else:
+                    self.progress_bar.setVisible(False)
+                    self.status_bar.showMessage("Huge file loading cancelled")
+                    return
                 
         except Exception as e:
             error_details = traceback.format_exc()
@@ -1263,6 +1480,131 @@ class MainWindow(QMainWindow):
                 self.load_ifc_file()
             
             self.status_bar.showMessage("Error loading file")
+        
+        finally:
+            self.progress_bar.setVisible(False)
+    
+    def load_file_directly(self, file_path: str):
+        """
+        Load small files directly without threading to avoid overhead.
+        
+        Args:
+            file_path: Path to the IFC file
+        """
+        try:
+            self.logger.info(f"Loading file directly: {file_path}")
+            
+            # Load the file synchronously
+            success, load_message = self.ifc_reader.load_file(file_path)
+            
+            if success:
+                self.current_file_path = file_path
+                self.update_file_info()
+                self.update_ui_state(True)  # Enable file-related actions
+                self.status_bar.showMessage("File loaded successfully. Extracting spaces...")
+                
+                # Extract spaces directly (synchronously) for small files
+                self.logger.info("Extracting spaces directly for small file")
+                result = self.extract_spaces_internal()
+                
+                if result is not None:
+                    self.finalize_space_extraction()
+                    self.ifc_file_loaded.emit(file_path)
+                    self.status_bar.showMessage(f"✅ Small file loaded successfully with {len(self.spaces)} spaces")
+                else:
+                    self.status_bar.showMessage("❌ Error extracting spaces from file")
+                    
+            else:
+                # Handle load failure with recovery options
+                if not self.handle_file_operation_error("load IFC file", file_path, Exception(load_message)):
+                    self.status_bar.showMessage("File loading cancelled")
+                    self.update_ui_state(False)
+                    
+        except Exception as e:
+            self.logger.error(f"Error in direct file loading: {e}")
+            error_details = traceback.format_exc()
+            
+            recovery_options = {
+                'retry_threaded': 'Retry with threaded loading',
+                'select_different': 'Select a different file',
+                'cancel': 'Cancel operation'
+            }
+            
+            choice = self.show_enhanced_error_message(
+                "Direct Loading Error", 
+                f"Error loading file directly: {str(e)}",
+                error_details,
+                "error",
+                recovery_options
+            )
+            
+            if choice == 'retry_threaded':
+                self.logger.info("Falling back to threaded loading")
+                self.load_file_threaded(file_path)
+            elif choice == 'select_different':
+                self.load_ifc_file()
+            else:
+                self.status_bar.showMessage("Direct loading cancelled")
+                self.update_ui_state(False)
+        
+        finally:
+            self.progress_bar.setVisible(False)
+    
+    def load_file_threaded(self, file_path: str):
+        """
+        Load medium/large files using threaded approach with progress indication.
+        
+        Args:
+            file_path: Path to the IFC file
+        """
+        try:
+            self.logger.info(f"Loading file with threading: {file_path}")
+            
+            # Load the file
+            success, load_message = self.ifc_reader.load_file(file_path)
+            
+            if success:
+                self.current_file_path = file_path
+                self.update_file_info()
+                self.update_ui_state(True)  # Enable file-related actions
+                self.status_bar.showMessage("File loaded successfully. Extracting spaces...")
+                
+                # Extract spaces using threaded operation for larger files
+                self.extract_spaces_threaded()
+                
+                self.ifc_file_loaded.emit(file_path)
+            else:
+                # Handle load failure with recovery options
+                if not self.handle_file_operation_error("load IFC file", file_path, Exception(load_message)):
+                    self.status_bar.showMessage("File loading cancelled")
+                    self.update_ui_state(False)
+                    
+        except Exception as e:
+            self.logger.error(f"Error in threaded file loading: {e}")
+            error_details = traceback.format_exc()
+            
+            recovery_options = {
+                'retry_direct': 'Retry with direct loading (may freeze)',
+                'select_different': 'Select a different file',
+                'cancel': 'Cancel operation'
+            }
+            
+            choice = self.show_enhanced_error_message(
+                "Threaded Loading Error", 
+                f"Error loading file with threading: {str(e)}",
+                error_details,
+                "error",
+                recovery_options
+            )
+            
+            if choice == 'retry_direct':
+                self.logger.info("Falling back to direct loading")
+                self.load_file_directly(file_path)
+            elif choice == 'select_different':
+                self.load_ifc_file()
+            else:
+                self.status_bar.showMessage("Threaded loading cancelled")
+                self.update_ui_state(False)
         
         finally:
             self.progress_bar.setVisible(False)

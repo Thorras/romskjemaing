@@ -3007,3 +3007,837 @@
 2025-09-27 19:07:54,103 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 381/381: 114
 2025-09-27 19:07:54,103 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2cOUw2Cof1bP_8bWi5K2I5
 2025-09-27 19:07:54,103 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2cOUw2Cof1bP_8bWi5K2I5: {'DefinedBy': 5}
+2025-09-28 08:14:11,804 - ifc_room_schedule.ui.main_window - INFO - File categorized as small: 1.0 KB
+2025-09-28 08:14:11,810 - ifc_room_schedule.ui.main_window - INFO - File categorized as small: 5.0 MB
+2025-09-28 08:14:11,820 - ifc_room_schedule.ui.main_window - INFO - File categorized as medium: 15.0 MB
+2025-09-28 08:14:11,936 - ifc_room_schedule.ui.main_window - INFO - File categorized as large: 75.0 MB
+2025-09-28 08:14:12,192 - ifc_room_schedule.ui.main_window - INFO - File categorized as huge: 150.0 MB
+2025-09-28 08:14:12,811 - ifc_room_schedule.ui.main_window - INFO - File categorized as small: 2.3 MB
+2025-09-28 08:14:12,812 - ifc_room_schedule.ui.main_window - INFO - File categorized as small: 1.4 MB
+2025-09-28 08:23:41,796 - ifc_room_schedule.ui.main_window - INFO - File categorized as small: 1.4 MB
+2025-09-28 08:23:41,797 - ifc_room_schedule.ui.main_window - INFO - Processing small file: 1.4 MB
+2025-09-28 08:23:41,872 - ifc_room_schedule.ui.main_window - INFO - Using direct loading strategy for small file
+2025-09-28 08:23:41,872 - ifc_room_schedule.ui.main_window - INFO - Loading file directly: tesfiler/DEICH_Test.ifc
+2025-09-28 08:23:41,873 - ifc_room_schedule.parser.ifc_file_reader - INFO - Small file detected (1.4MB) - skipping strict memory validation
+2025-09-28 08:23:41,873 - ifc_room_schedule.parser.ifc_file_reader - INFO - Loading IFC file: tesfiler/DEICH_Test.ifc (1.4MB)
+2025-09-28 08:23:41,936 - ifc_room_schedule.parser.ifc_file_reader - INFO - IFC file loaded successfully
+2025-09-28 08:23:41,937 - ifc_room_schedule.parser.ifc_file_reader - INFO - Validating IFC file structure...
+2025-09-28 08:23:41,938 - ifc_room_schedule.parser.ifc_file_reader - INFO - Found 125 building products
+2025-09-28 08:23:41,938 - ifc_room_schedule.parser.ifc_file_reader - INFO - Found 115 spaces
+2025-09-28 08:23:41,938 - ifc_room_schedule.parser.ifc_file_reader - INFO - Successfully loaded IFC file (IFC2X3) with 115 spaces found.
+2025-09-28 08:23:41,939 - ifc_room_schedule.ui.main_window - INFO - Extracting spaces directly for small file
+2025-09-28 08:23:41,960 - ifc_room_schedule.parser.ifc_space_extractor - INFO - Successfully extracted 115 spaces from 115 IfcSpace entities
+2025-09-28 08:23:41,961 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 1/115: B10.029
+2025-09-28 08:23:41,962 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 2 surfaces for space 0LteVhVED7Z9KbJ7LmY9y2
+2025-09-28 08:23:41,962 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 2 surfaces have zero or invalid area
+2025-09-28 08:23:41,963 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 2/115: A10.T2
+2025-09-28 08:23:41,963 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 0S5UMEo_9E_g4F9uzE0bnh
+2025-09-28 08:23:41,963 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 3/115: A10.T1
+2025-09-28 08:23:41,964 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 1I9CkJoQz24eYOZC0zB2E$
+2025-09-28 08:23:41,964 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 4/115: D10.05
+2025-09-28 08:23:41,964 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3ox26bIKn8iwIq$iMkNe3l
+2025-09-28 08:23:41,965 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 5/115: J10.04
+2025-09-28 08:23:41,965 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 1WbKXz5xfBAey1W8fT4Xh3
+2025-09-28 08:23:41,966 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 6/115: D10.03
+2025-09-28 08:23:41,966 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3pFjfFasjAeQP26hBgQQor
+2025-09-28 08:23:41,966 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 7/115: D10.03
+2025-09-28 08:23:41,967 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 2W4XYblej9$B$yTzuR9_5y
+2025-09-28 08:23:41,967 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 8/115: A10.T1
+2025-09-28 08:23:41,967 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 0Yx80aDvj28fqCC6GrWbXj
+2025-09-28 08:23:41,968 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 9/115: B10.T1
+2025-09-28 08:23:41,968 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 2iDMBmCab4Lxqme8HcSE2_
+2025-09-28 08:23:41,968 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 10/115: 103
+2025-09-28 08:23:41,969 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 1BL1gHfjvDDh7Mfm3ySJNb
+2025-09-28 08:23:41,969 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 11/115: B10.050
+2025-09-28 08:23:41,970 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 2eMwEXM9D53gtZPSzk1$mw
+2025-09-28 08:23:41,971 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 12/115: D10.05
+2025-09-28 08:23:41,971 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 0i5TgucZXE2OgKGE3ZDpES
+2025-09-28 08:23:41,972 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 13/115: D10.05
+2025-09-28 08:23:41,972 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 2khET2VDv2CPEGoKn0A5RW
+2025-09-28 08:23:41,972 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 14/115: B30.53
+2025-09-28 08:23:41,973 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 16e0aTSWX6COsXTEVc7aGX
+2025-09-28 08:23:41,973 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 15/115: A10.T2
+2025-09-28 08:23:41,974 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 2pw3LMo4HDX928zuYPE41L
+2025-09-28 08:23:41,974 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 16/115: E10.05
+2025-09-28 08:23:41,975 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 37vy4nnvnA3e2QmX4xjF6Z
+2025-09-28 08:23:41,975 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 17/115: G10.03
+2025-09-28 08:23:41,976 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 0ZmyKGboP2FQEWI96ddn12
+2025-09-28 08:23:41,976 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 18/115: E10.02
+2025-09-28 08:23:41,977 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 2 surfaces for space 1bVd89IKPDTAAVh69vwkvQ
+2025-09-28 08:23:41,977 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 2 surfaces have zero or invalid area
+2025-09-28 08:23:41,978 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 19/115: E10.01
+2025-09-28 08:23:41,979 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 2 surfaces for space 1HrSlQWEP9gR0DVMGX5d_e
+2025-09-28 08:23:41,979 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 2 surfaces have zero or invalid area
+2025-09-28 08:23:41,980 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 20/115: E10.06
+2025-09-28 08:23:41,980 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 2ZJGrP3$11iAGkRNBffkDw
+2025-09-28 08:23:41,980 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 21/115: E10.06
+2025-09-28 08:23:41,981 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3FLuvb299AluF2jmSx1zMW
+2025-09-28 08:23:41,981 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 22/115: E10.04
+2025-09-28 08:23:41,982 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 34jCAbmof84O8Ywu46VhB_
+2025-09-28 08:23:41,983 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 23/115: C10.09
+2025-09-28 08:23:41,983 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 0c7IyET3f1Yfla8ouZw2LA
+2025-09-28 08:23:41,984 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 24/115: C10.09
+2025-09-28 08:23:41,986 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 12VVYE4inDJPr3g0xv8Ie2
+2025-09-28 08:23:41,987 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 25/115: B10.08
+2025-09-28 08:23:41,988 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 0bJow1ZJPEMR2K6vKcbi3M
+2025-09-28 08:23:41,990 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 26/115: C10.09
+2025-09-28 08:23:41,991 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 1X0g560X18iRgqhH8NjzQc
+2025-09-28 08:23:41,993 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 27/115: J10.03
+2025-09-28 08:23:41,994 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 213iRKBBzFbBet0Nqb37NZ
+2025-09-28 08:23:41,995 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 28/115: J10.13
+2025-09-28 08:23:41,995 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3F_TrbvPT9ovGZnQJRzWl0
+2025-09-28 08:23:41,996 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 29/115: 105
+2025-09-28 08:23:41,997 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 02nIbwVTP0SvyiaHB4Lt9m
+2025-09-28 08:23:41,998 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 30/115: J10.02
+2025-09-28 08:23:41,999 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3N4CS3w5n54R_dNDM5HeEc
+2025-09-28 08:23:41,999 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 31/115: J10.06
+2025-09-28 08:23:41,999 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 0j55JTCejD$gZMKN_lRIPI
+2025-09-28 08:23:42,000 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 32/115: J10.06
+2025-09-28 08:23:42,000 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3PnoObhzfF69bdhOCSqoCQ
+2025-09-28 08:23:42,001 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 33/115: J10.06
+2025-09-28 08:23:42,001 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 17f3s5J5z9M98vQHspkx$7
+2025-09-28 08:23:42,001 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 34/115: J10.06
+2025-09-28 08:23:42,002 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3c1J081Az3tBaaeux8FWxv
+2025-09-28 08:23:42,002 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 35/115: J10.06
+2025-09-28 08:23:42,002 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 10xdRCbwv7dR9FhlAEWrUU
+2025-09-28 08:23:42,003 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 36/115: J10.06
+2025-09-28 08:23:42,003 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 1ZFONkOEj9oP6GP$JzjWrr
+2025-09-28 08:23:42,004 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 37/115: C10.09
+2025-09-28 08:23:42,005 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 0KKzYQ7258NglC64BIF_hO
+2025-09-28 08:23:42,006 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 38/115: J10.07
+2025-09-28 08:23:42,006 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 2dyomBYQzCvQbxQocdSAys
+2025-09-28 08:23:42,007 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 39/115: J10.06
+2025-09-28 08:23:42,007 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3JLj89a0vF3OW5SM0i4KcE
+2025-09-28 08:23:42,008 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 40/115: J10.10
+2025-09-28 08:23:42,009 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3sAtJ2mWf9lOIBVs6FStYM
+2025-09-28 08:23:42,010 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 41/115: J10.10
+2025-09-28 08:23:42,011 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3Pt0sWNJvCcOvWV_OWhPG0
+2025-09-28 08:23:42,011 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 42/115: J10.10
+2025-09-28 08:23:42,011 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3_xn3DhWD0r9SsqZ1ZQSY9
+2025-09-28 08:23:42,012 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 43/115: J10.10
+2025-09-28 08:23:42,013 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 2zUQQpxvTE48bh5LBiJFJF
+2025-09-28 08:23:42,013 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 44/115: J10.10
+2025-09-28 08:23:42,014 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 36Z2jTbhH5Bv6Z$VW4XByx
+2025-09-28 08:23:42,014 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 45/115: J10.10
+2025-09-28 08:23:42,015 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3wxun0A8X73Q7QDDdIfqgs
+2025-09-28 08:23:42,015 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 46/115: J10.10
+2025-09-28 08:23:42,015 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 2nCzRVWgDBpPdwdRPJI1I2
+2025-09-28 08:23:42,016 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 47/115: J10.10
+2025-09-28 08:23:42,016 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3uOBfrtTH9eOMWBRuDxqIc
+2025-09-28 08:23:42,017 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 48/115: J10.13
+2025-09-28 08:23:42,018 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 2Ydf8HjPrCK9EHjlWPqV8G
+2025-09-28 08:23:42,018 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 49/115: J10.13
+2025-09-28 08:23:42,018 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 099z0GYHbEuOh1jbnczn7I
+2025-09-28 08:23:42,019 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 50/115: J10.13
+2025-09-28 08:23:42,019 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 1vU2sDAtvFYBFo76XB67jA
+2025-09-28 08:23:42,020 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 51/115: J10.18
+2025-09-28 08:23:42,021 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3A3p684pz2k87F8I_WOq7E
+2025-09-28 08:23:42,021 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 52/115: J10.18
+2025-09-28 08:23:42,021 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 2_lopyZInDyx30DtBAW4Ga
+2025-09-28 08:23:42,022 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 53/115: J10.18
+2025-09-28 08:23:42,022 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 1$Dc_OD2P3MvGFU3txNUUl
+2025-09-28 08:23:42,022 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 54/115: J10.18
+2025-09-28 08:23:42,023 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 2FtPNdnRn2CRzmP6liz3ZK
+2025-09-28 08:23:42,023 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 55/115: J10.17
+2025-09-28 08:23:42,024 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 0Wnyqvz3v8ouuk7CUNSfMT
+2025-09-28 08:23:42,024 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 56/115: 101
+2025-09-28 08:23:42,025 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3PNm6BbKXC0BsrWMZcVNIn
+2025-09-28 08:23:42,025 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 57/115: J10.19
+2025-09-28 08:23:42,026 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 24AMi2g3XC4QPzur3LnYRP
+2025-09-28 08:23:42,026 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 58/115: J10.20
+2025-09-28 08:23:42,027 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3m8b5_ekvB2g7nMoclpSqj
+2025-09-28 08:23:42,027 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 59/115: J10.16
+2025-09-28 08:23:42,028 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 1KHkbbYfD0lBVLimYHjXYA
+2025-09-28 08:23:42,028 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 60/115: I10.05
+2025-09-28 08:23:42,029 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 14S6eEHlb9euXGUtXySSjn
+2025-09-28 08:23:42,030 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 61/115: J10.16
+2025-09-28 08:23:42,031 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 2oABIoRA5DbhyLO6r13e8g
+2025-09-28 08:23:42,031 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 62/115: J10.01
+2025-09-28 08:23:42,032 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3vGFFcmF5CeQ1QgjlRewmL
+2025-09-28 08:23:42,032 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 63/115: J10.12
+2025-09-28 08:23:42,032 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 2SLb1$Yu52mhLarSOgphCa
+2025-09-28 08:23:42,033 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 64/115: 103
+2025-09-28 08:23:42,033 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 0_v34JH3nEMewveIpje$8o
+2025-09-28 08:23:42,034 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 65/115: 103
+2025-09-28 08:23:42,034 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 24WVWgURn7ZOnWSWt1uFS0
+2025-09-28 08:23:42,035 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 66/115: J10.22
+2025-09-28 08:23:42,035 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 1ZoAIoLNjEXwV2AAmiC9vZ
+2025-09-28 08:23:42,035 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 67/115: J10.23
+2025-09-28 08:23:42,036 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 0eYnc0KNn7RRIWOaRUHUPB
+2025-09-28 08:23:42,036 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 68/115: J10.24
+2025-09-28 08:23:42,037 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 32wb3PS6X22eYUMAPdlov5
+2025-09-28 08:23:42,037 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 69/115: J10.24
+2025-09-28 08:23:42,038 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 2hZq0XJx9BU9CEQgBrJIjg
+2025-09-28 08:23:42,038 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 70/115: J10.25
+2025-09-28 08:23:42,039 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3BInJ4RrLBkwbmx_1UWzWw
+2025-09-28 08:23:42,039 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 71/115: J10.24
+2025-09-28 08:23:42,040 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 2UKhKw7tnD$Bcz5KlfZmzA
+2025-09-28 08:23:42,041 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 72/115: J10.25
+2025-09-28 08:23:42,041 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 0GL70Kgrv979zq5nJ3hVt7
+2025-09-28 08:23:42,042 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 73/115: I10.06
+2025-09-28 08:23:42,042 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3Q0LekePj9iuRi709BvAbM
+2025-09-28 08:23:42,043 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 74/115: I10.03
+2025-09-28 08:23:42,043 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3SADnCFyHFivxJtOrt_Ivj
+2025-09-28 08:23:42,044 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 75/115: I10.02
+2025-09-28 08:23:42,045 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 2ge4_byPX6hBCyVAi3frlN
+2025-09-28 08:23:42,045 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 76/115: I10.01
+2025-09-28 08:23:42,045 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 2mdgiDchz82QyemwkuNglb
+2025-09-28 08:23:42,046 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 77/115: I10.04
+2025-09-28 08:23:42,046 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 06Q6kRZtX5qPtFstnA7hsC
+2025-09-28 08:23:42,046 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 78/115: J10.25
+2025-09-28 08:23:42,047 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3iYpgOmKH8U8olaSlXoJXr
+2025-09-28 08:23:42,047 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 79/115: C10.01
+2025-09-28 08:23:42,048 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3FAYa$yb9BphsqjN3Pr1EF
+2025-09-28 08:23:42,049 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 80/115: C10.02
+2025-09-28 08:23:42,049 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 35NuEhzJX4nwjCvA8oOEtK
+2025-09-28 08:23:42,050 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 81/115: C10.05
+2025-09-28 08:23:42,051 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 31lUGsFX9E9BQsqhDuYiZf
+2025-09-28 08:23:42,051 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 82/115: C10.08
+2025-09-28 08:23:42,051 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 38xn2vxKXAaO0sSp$0h3jF
+2025-09-28 08:23:42,052 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 83/115: C10.02
+2025-09-28 08:23:42,052 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 0z5OJiZkL8se6HyKrFgurJ
+2025-09-28 08:23:42,052 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 84/115: C10.08
+2025-09-28 08:23:42,053 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 2aASVqmt18Q9Qx8OEjKofH
+2025-09-28 08:23:42,053 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 85/115: C10.08
+2025-09-28 08:23:42,053 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3h2m5gb1b5gPRVe1ICqxuT
+2025-09-28 08:23:42,053 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 86/115: C10.06
+2025-09-28 08:23:42,054 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3urWOebVPBZBlAg0_DPXLz
+2025-09-28 08:23:42,054 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 87/115: C10.07
+2025-09-28 08:23:42,055 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3GvWUHCyT2JAqWPfGNvSo2
+2025-09-28 08:23:42,055 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 88/115: A10.02
+2025-09-28 08:23:42,056 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 2FQNfTjln8vxen5$OjKqUJ
+2025-09-28 08:23:42,057 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 89/115: A10.01
+2025-09-28 08:23:42,057 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 1OBth6opP1SfntodtdoSQY
+2025-09-28 08:23:42,057 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 90/115: 104
+2025-09-28 08:23:42,058 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 2L6GnT65X1kh3E1X7kVITH
+2025-09-28 08:23:42,059 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 91/115: 103
+2025-09-28 08:23:42,059 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 2AtYNMWeL6yw8ZN7eTdDFb
+2025-09-28 08:23:42,059 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 92/115: D10.01
+2025-09-28 08:23:42,060 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 2 surfaces for space 0ZAWGkAun6chbqRqpj2fg4
+2025-09-28 08:23:42,061 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 2 surfaces have zero or invalid area
+2025-09-28 08:23:42,062 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 93/115: A10.03
+2025-09-28 08:23:42,062 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 2 surfaces for space 3IV7NwstnCegVo2czuDn3Y
+2025-09-28 08:23:42,063 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 2 surfaces have zero or invalid area
+2025-09-28 08:23:42,063 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 94/115: B10.04
+2025-09-28 08:23:42,064 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3z8ASr7bXB6vTd0bWuxJIv
+2025-09-28 08:23:42,064 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 95/115: B10.02
+2025-09-28 08:23:42,064 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 05_acMHIf1FQopY2SAeuGi
+2025-09-28 08:23:42,065 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 96/115: B10.01
+2025-09-28 08:23:42,066 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3oxYlzCi9CAO_OSU$m0inT
+2025-09-28 08:23:42,066 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 97/115: F10.03
+2025-09-28 08:23:42,067 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 1 surfaces for space 3swyfLky1CpAmSW0uwD$1V
+2025-09-28 08:23:42,067 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 08:23:42,067 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 98/115: F10.02
+2025-09-28 08:23:42,068 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 1l11DSOqH7yfWue3Kkowdv
+2025-09-28 08:23:42,068 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 99/115: F10.04
+2025-09-28 08:23:42,069 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 1 surfaces for space 39jqCcGNDA7hqQ2l1lf6NZ
+2025-09-28 08:23:42,069 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 08:23:42,069 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 100/115: F10.05
+2025-09-28 08:23:42,070 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 2j8EGjtJLBifxi7EVtn_vW
+2025-09-28 08:23:42,070 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 101/115: F10.06
+2025-09-28 08:23:42,071 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 1 surfaces for space 1KHWLA$iD3c9LAhVmtRUNV
+2025-09-28 08:23:42,071 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 08:23:42,071 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 102/115: F10.06
+2025-09-28 08:23:42,072 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3WusCSuNH8KwBvT6QO803d
+2025-09-28 08:23:42,072 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 103/115: F10.02
+2025-09-28 08:23:42,073 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 0giqvrVazBMe4E1viUd8Kp
+2025-09-28 08:23:42,073 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 104/115: G10.01
+2025-09-28 08:23:42,074 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 1iBb12VO54D8scSsEXwB7A
+2025-09-28 08:23:42,075 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 105/115: G10.02
+2025-09-28 08:23:42,076 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3Cca6hEnf1TOzoyj9k7GGe
+2025-09-28 08:23:42,076 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 106/115: 105
+2025-09-28 08:23:42,077 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 02G9B9vWbCluO2SBr8x7OW
+2025-09-28 08:23:42,077 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 107/115: F10.05
+2025-09-28 08:23:42,078 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 1 surfaces for space 1_fnW4Srf36giyi4SwG$AH
+2025-09-28 08:23:42,078 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 08:23:42,079 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 108/115: F10.02-3
+2025-09-28 08:23:42,080 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3ELzmGECj8mw2KJIs0Azgg
+2025-09-28 08:23:42,080 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 109/115: F10.06-1
+2025-09-28 08:23:42,081 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 1l8XT8Unj1Mvp50yccDdzk
+2025-09-28 08:23:42,082 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 110/115: F10.02-4
+2025-09-28 08:23:42,082 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 3AZcKMSTr36xgOvDRFvPiV
+2025-09-28 08:23:42,083 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 111/115: F10.02-1
+2025-09-28 08:23:42,084 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 0PLRApNYrFfQWWjSyEP2if
+2025-09-28 08:23:42,084 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 112/115: I10.H1
+2025-09-28 08:23:42,084 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 0BrjOeyQT8h9QY3einbKCq
+2025-09-28 08:23:42,085 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 113/115: F10.06-2
+2025-09-28 08:23:42,085 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 0102drA3nFRROe$0GEvl1z
+2025-09-28 08:23:42,085 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 114/115: F10.02-2
+2025-09-28 08:23:42,086 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 0g3jqD4h1Emh7d1ZotUorW
+2025-09-28 08:23:42,086 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 115/115: F10.01
+2025-09-28 08:23:42,086 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 0 surfaces for space 2rtN$jwdnDPuHZvwuoA7Ni
+2025-09-28 08:23:42,087 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 1/115: B10.029
+2025-09-28 08:23:42,107 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,108 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 2/115: A10.T2
+2025-09-28 08:23:42,118 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,119 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 3/115: A10.T1
+2025-09-28 08:23:42,130 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,131 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 4/115: D10.05
+2025-09-28 08:23:42,143 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,144 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 5/115: J10.04
+2025-09-28 08:23:42,162 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 12 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,163 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 6/115: D10.03
+2025-09-28 08:23:42,178 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 8 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,179 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 7/115: D10.03
+2025-09-28 08:23:42,191 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 7 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,192 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 8/115: A10.T1
+2025-09-28 08:23:42,219 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 13 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,219 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 9/115: B10.T1
+2025-09-28 08:23:42,232 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,233 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 10/115: 103
+2025-09-28 08:23:42,245 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 5 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,246 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 11/115: B10.050
+2025-09-28 08:23:42,271 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 13 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,272 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 12/115: D10.05
+2025-09-28 08:23:42,287 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 5 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,288 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 13/115: D10.05
+2025-09-28 08:23:42,299 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,299 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 14/115: B30.53
+2025-09-28 08:23:42,314 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 8 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,315 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 15/115: A10.T2
+2025-09-28 08:23:42,332 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,332 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 16/115: E10.05
+2025-09-28 08:23:42,354 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,355 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 17/115: G10.03
+2025-09-28 08:23:42,368 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 7 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,369 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 18/115: E10.02
+2025-09-28 08:23:42,396 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 15 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,396 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 19/115: E10.01
+2025-09-28 08:23:42,437 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 23 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,438 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 20/115: E10.06
+2025-09-28 08:23:42,448 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 5 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,449 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 21/115: E10.06
+2025-09-28 08:23:42,460 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 5 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,461 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 22/115: E10.04
+2025-09-28 08:23:42,472 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 5 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,473 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 23/115: C10.09
+2025-09-28 08:23:42,502 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 17 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,502 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 24/115: C10.09
+2025-09-28 08:23:42,517 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 8 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,518 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 25/115: B10.08
+2025-09-28 08:23:42,532 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,532 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 26/115: C10.09
+2025-09-28 08:23:42,546 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 7 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,547 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 27/115: J10.03
+2025-09-28 08:23:42,561 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 4 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,561 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 28/115: J10.13
+2025-09-28 08:23:42,569 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 1 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,570 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 29/115: 105
+2025-09-28 08:23:42,590 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 8 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,592 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 30/115: J10.02
+2025-09-28 08:23:42,606 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 5 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,613 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 31/115: J10.06
+2025-09-28 08:23:42,624 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 4 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,627 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 32/115: J10.06
+2025-09-28 08:23:42,636 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 1 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,638 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 33/115: J10.06
+2025-09-28 08:23:42,646 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 1 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,654 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 34/115: J10.06
+2025-09-28 08:23:42,668 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 1 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,669 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 35/115: J10.06
+2025-09-28 08:23:42,677 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 1 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,677 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 36/115: J10.06
+2025-09-28 08:23:42,686 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 1 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,687 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 37/115: C10.09
+2025-09-28 08:23:42,707 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 9 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,708 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 38/115: J10.07
+2025-09-28 08:23:42,714 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 1 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,714 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 39/115: J10.06
+2025-09-28 08:23:42,720 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 1 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,721 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 40/115: J10.10
+2025-09-28 08:23:42,727 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 1 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,727 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 41/115: J10.10
+2025-09-28 08:23:42,736 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 3 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,736 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 42/115: J10.10
+2025-09-28 08:23:42,743 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 1 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,743 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 43/115: J10.10
+2025-09-28 08:23:42,748 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 1 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,749 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 44/115: J10.10
+2025-09-28 08:23:42,756 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 1 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,756 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 45/115: J10.10
+2025-09-28 08:23:42,762 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 1 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,762 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 46/115: J10.10
+2025-09-28 08:23:42,771 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 3 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,771 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 47/115: J10.10
+2025-09-28 08:23:42,777 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 1 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,777 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 48/115: J10.13
+2025-09-28 08:23:42,782 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 0 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,782 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 49/115: J10.13
+2025-09-28 08:23:42,790 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 2 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,791 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 50/115: J10.13
+2025-09-28 08:23:42,795 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 0 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,795 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 51/115: J10.18
+2025-09-28 08:23:42,802 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 1 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,802 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 52/115: J10.18
+2025-09-28 08:23:42,808 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 1 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,808 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 53/115: J10.18
+2025-09-28 08:23:42,823 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 8 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,823 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 54/115: J10.18
+2025-09-28 08:23:42,830 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 1 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,830 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 55/115: J10.17
+2025-09-28 08:23:42,837 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 1 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,838 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 56/115: 101
+2025-09-28 08:23:42,847 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 4 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,848 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 57/115: J10.19
+2025-09-28 08:23:42,855 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 2 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,855 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 58/115: J10.20
+2025-09-28 08:23:42,863 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 3 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,864 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 59/115: J10.16
+2025-09-28 08:23:42,870 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 1 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,871 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 60/115: I10.05
+2025-09-28 08:23:42,909 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 29 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,910 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 61/115: J10.16
+2025-09-28 08:23:42,920 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 5 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,921 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 62/115: J10.01
+2025-09-28 08:23:42,939 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 12 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,940 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 63/115: J10.12
+2025-09-28 08:23:42,945 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 1 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,946 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 64/115: 103
+2025-09-28 08:23:42,957 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,958 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 65/115: 103
+2025-09-28 08:23:42,970 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,971 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 66/115: J10.22
+2025-09-28 08:23:42,982 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,983 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 67/115: J10.23
+2025-09-28 08:23:42,992 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 3 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,993 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 68/115: J10.24
+2025-09-28 08:23:42,997 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 0 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:42,997 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 69/115: J10.24
+2025-09-28 08:23:43,005 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 1 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,006 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 70/115: J10.25
+2025-09-28 08:23:43,016 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,018 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 71/115: J10.24
+2025-09-28 08:23:43,024 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 1 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,024 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 72/115: J10.25
+2025-09-28 08:23:43,035 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 5 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,035 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 73/115: I10.06
+2025-09-28 08:23:43,043 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 4 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,044 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 74/115: I10.03
+2025-09-28 08:23:43,054 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 5 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,055 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 75/115: I10.02
+2025-09-28 08:23:43,078 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 17 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,079 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 76/115: I10.01
+2025-09-28 08:23:43,106 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 19 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,107 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 77/115: I10.04
+2025-09-28 08:23:43,123 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 11 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,124 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 78/115: J10.25
+2025-09-28 08:23:43,131 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 3 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,132 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 79/115: C10.01
+2025-09-28 08:23:43,178 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 26 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,178 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 80/115: C10.02
+2025-09-28 08:23:43,194 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 7 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,195 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 81/115: C10.05
+2025-09-28 08:23:43,212 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 7 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,213 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 82/115: C10.08
+2025-09-28 08:23:43,228 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,228 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 83/115: C10.02
+2025-09-28 08:23:43,240 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 4 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,240 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 84/115: C10.08
+2025-09-28 08:23:43,247 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 2 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,248 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 85/115: C10.08
+2025-09-28 08:23:43,255 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 1 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,256 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 86/115: C10.06
+2025-09-28 08:23:43,272 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 9 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,273 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 87/115: C10.07
+2025-09-28 08:23:43,282 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 5 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,283 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 88/115: A10.02
+2025-09-28 08:23:43,296 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 7 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,296 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 89/115: A10.01
+2025-09-28 08:23:43,309 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,309 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 90/115: 104
+2025-09-28 08:23:43,318 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 4 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,318 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 91/115: 103
+2025-09-28 08:23:43,327 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 4 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,327 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 92/115: D10.01
+2025-09-28 08:23:43,344 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 12 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,345 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 93/115: A10.03
+2025-09-28 08:23:43,382 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 26 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,382 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 94/115: B10.04
+2025-09-28 08:23:43,397 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 9 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,397 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 95/115: B10.02
+2025-09-28 08:23:43,401 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 0 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,402 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 96/115: B10.01
+2025-09-28 08:23:43,418 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 10 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,419 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 97/115: F10.03
+2025-09-28 08:23:43,436 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 12 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,437 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 98/115: F10.02
+2025-09-28 08:23:43,474 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 30 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,475 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 99/115: F10.04
+2025-09-28 08:23:43,485 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 5 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,485 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 100/115: F10.05
+2025-09-28 08:23:43,495 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,496 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 101/115: F10.06
+2025-09-28 08:23:43,507 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 7 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,507 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 102/115: F10.06
+2025-09-28 08:23:43,518 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,518 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 103/115: F10.02
+2025-09-28 08:23:43,529 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,529 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 104/115: G10.01
+2025-09-28 08:23:43,560 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 28 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,560 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 105/115: G10.02
+2025-09-28 08:23:43,570 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,571 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 106/115: 105
+2025-09-28 08:23:43,580 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 4 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,580 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 107/115: F10.05
+2025-09-28 08:23:43,594 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 8 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,594 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 108/115: F10.02-3
+2025-09-28 08:23:43,608 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 10 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,608 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 109/115: F10.06-1
+2025-09-28 08:23:43,619 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,619 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 110/115: F10.02-4
+2025-09-28 08:23:43,632 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 8 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,632 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 111/115: F10.02-1
+2025-09-28 08:23:43,643 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,644 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 112/115: I10.H1
+2025-09-28 08:23:43,657 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 8 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,657 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 113/115: F10.06-2
+2025-09-28 08:23:43,668 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,668 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 114/115: F10.02-2
+2025-09-28 08:23:43,680 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 8 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,680 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 115/115: F10.01
+2025-09-28 08:23:43,728 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 37 space boundaries from 783 IfcRelSpaceBoundary entities
+2025-09-28 08:23:43,729 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 1/115: B10.029
+2025-09-28 08:23:43,730 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 0LteVhVED7Z9KbJ7LmY9y2
+2025-09-28 08:23:43,730 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 0LteVhVED7Z9KbJ7LmY9y2: {'DefinedBy': 5}
+2025-09-28 08:23:43,730 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 2/115: A10.T2
+2025-09-28 08:23:43,730 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 0S5UMEo_9E_g4F9uzE0bnh
+2025-09-28 08:23:43,731 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 0S5UMEo_9E_g4F9uzE0bnh: {'DefinedBy': 5}
+2025-09-28 08:23:43,731 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 3/115: A10.T1
+2025-09-28 08:23:43,731 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 1I9CkJoQz24eYOZC0zB2E$
+2025-09-28 08:23:43,731 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 1I9CkJoQz24eYOZC0zB2E$: {'DefinedBy': 5}
+2025-09-28 08:23:43,731 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 4/115: D10.05
+2025-09-28 08:23:43,732 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3ox26bIKn8iwIq$iMkNe3l
+2025-09-28 08:23:43,732 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3ox26bIKn8iwIq$iMkNe3l: {'DefinedBy': 5}
+2025-09-28 08:23:43,732 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 5/115: J10.04
+2025-09-28 08:23:43,733 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 1WbKXz5xfBAey1W8fT4Xh3
+2025-09-28 08:23:43,733 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 1WbKXz5xfBAey1W8fT4Xh3: {'DefinedBy': 5}
+2025-09-28 08:23:43,733 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 6/115: D10.03
+2025-09-28 08:23:43,733 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3pFjfFasjAeQP26hBgQQor
+2025-09-28 08:23:43,734 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3pFjfFasjAeQP26hBgQQor: {'DefinedBy': 5}
+2025-09-28 08:23:43,734 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 7/115: D10.03
+2025-09-28 08:23:43,734 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2W4XYblej9$B$yTzuR9_5y
+2025-09-28 08:23:43,734 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2W4XYblej9$B$yTzuR9_5y: {'DefinedBy': 5}
+2025-09-28 08:23:43,734 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 8/115: A10.T1
+2025-09-28 08:23:43,735 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 0Yx80aDvj28fqCC6GrWbXj
+2025-09-28 08:23:43,735 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 0Yx80aDvj28fqCC6GrWbXj: {'DefinedBy': 5}
+2025-09-28 08:23:43,735 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 9/115: B10.T1
+2025-09-28 08:23:43,735 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2iDMBmCab4Lxqme8HcSE2_
+2025-09-28 08:23:43,735 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2iDMBmCab4Lxqme8HcSE2_: {'DefinedBy': 5}
+2025-09-28 08:23:43,736 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 10/115: 103
+2025-09-28 08:23:43,736 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 1BL1gHfjvDDh7Mfm3ySJNb
+2025-09-28 08:23:43,736 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 1BL1gHfjvDDh7Mfm3ySJNb: {'DefinedBy': 5}
+2025-09-28 08:23:43,736 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 11/115: B10.050
+2025-09-28 08:23:43,737 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2eMwEXM9D53gtZPSzk1$mw
+2025-09-28 08:23:43,737 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2eMwEXM9D53gtZPSzk1$mw: {'DefinedBy': 5}
+2025-09-28 08:23:43,737 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 12/115: D10.05
+2025-09-28 08:23:43,737 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 0i5TgucZXE2OgKGE3ZDpES
+2025-09-28 08:23:43,738 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 0i5TgucZXE2OgKGE3ZDpES: {'DefinedBy': 5}
+2025-09-28 08:23:43,738 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 13/115: D10.05
+2025-09-28 08:23:43,738 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2khET2VDv2CPEGoKn0A5RW
+2025-09-28 08:23:43,739 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2khET2VDv2CPEGoKn0A5RW: {'DefinedBy': 5}
+2025-09-28 08:23:43,739 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 14/115: B30.53
+2025-09-28 08:23:43,739 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 16e0aTSWX6COsXTEVc7aGX
+2025-09-28 08:23:43,740 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 16e0aTSWX6COsXTEVc7aGX: {'DefinedBy': 5}
+2025-09-28 08:23:43,740 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 15/115: A10.T2
+2025-09-28 08:23:43,740 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2pw3LMo4HDX928zuYPE41L
+2025-09-28 08:23:43,740 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2pw3LMo4HDX928zuYPE41L: {'DefinedBy': 5}
+2025-09-28 08:23:43,741 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 16/115: E10.05
+2025-09-28 08:23:43,741 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 37vy4nnvnA3e2QmX4xjF6Z
+2025-09-28 08:23:43,741 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 37vy4nnvnA3e2QmX4xjF6Z: {'DefinedBy': 5}
+2025-09-28 08:23:43,741 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 17/115: G10.03
+2025-09-28 08:23:43,742 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 0ZmyKGboP2FQEWI96ddn12
+2025-09-28 08:23:43,742 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 0ZmyKGboP2FQEWI96ddn12: {'DefinedBy': 5}
+2025-09-28 08:23:43,742 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 18/115: E10.02
+2025-09-28 08:23:43,743 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 1bVd89IKPDTAAVh69vwkvQ
+2025-09-28 08:23:43,743 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 1bVd89IKPDTAAVh69vwkvQ: {'DefinedBy': 5}
+2025-09-28 08:23:43,743 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 19/115: E10.01
+2025-09-28 08:23:43,744 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 1HrSlQWEP9gR0DVMGX5d_e
+2025-09-28 08:23:43,744 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 1HrSlQWEP9gR0DVMGX5d_e: {'DefinedBy': 5}
+2025-09-28 08:23:43,744 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 20/115: E10.06
+2025-09-28 08:23:43,745 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2ZJGrP3$11iAGkRNBffkDw
+2025-09-28 08:23:43,745 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2ZJGrP3$11iAGkRNBffkDw: {'DefinedBy': 5}
+2025-09-28 08:23:43,745 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 21/115: E10.06
+2025-09-28 08:23:43,745 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3FLuvb299AluF2jmSx1zMW
+2025-09-28 08:23:43,746 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3FLuvb299AluF2jmSx1zMW: {'DefinedBy': 5}
+2025-09-28 08:23:43,746 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 22/115: E10.04
+2025-09-28 08:23:43,746 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 34jCAbmof84O8Ywu46VhB_
+2025-09-28 08:23:43,746 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 34jCAbmof84O8Ywu46VhB_: {'DefinedBy': 5}
+2025-09-28 08:23:43,747 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 23/115: C10.09
+2025-09-28 08:23:43,747 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 0c7IyET3f1Yfla8ouZw2LA
+2025-09-28 08:23:43,747 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 0c7IyET3f1Yfla8ouZw2LA: {'DefinedBy': 5}
+2025-09-28 08:23:43,748 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 24/115: C10.09
+2025-09-28 08:23:43,748 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 12VVYE4inDJPr3g0xv8Ie2
+2025-09-28 08:23:43,748 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 12VVYE4inDJPr3g0xv8Ie2: {'DefinedBy': 5}
+2025-09-28 08:23:43,749 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 25/115: B10.08
+2025-09-28 08:23:43,750 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 0bJow1ZJPEMR2K6vKcbi3M
+2025-09-28 08:23:43,750 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 0bJow1ZJPEMR2K6vKcbi3M: {'DefinedBy': 5}
+2025-09-28 08:23:43,750 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 26/115: C10.09
+2025-09-28 08:23:43,751 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 1X0g560X18iRgqhH8NjzQc
+2025-09-28 08:23:43,751 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 1X0g560X18iRgqhH8NjzQc: {'DefinedBy': 5}
+2025-09-28 08:23:43,751 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 27/115: J10.03
+2025-09-28 08:23:43,751 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 213iRKBBzFbBet0Nqb37NZ
+2025-09-28 08:23:43,752 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 213iRKBBzFbBet0Nqb37NZ: {'DefinedBy': 5}
+2025-09-28 08:23:43,752 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 28/115: J10.13
+2025-09-28 08:23:43,752 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3F_TrbvPT9ovGZnQJRzWl0
+2025-09-28 08:23:43,752 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3F_TrbvPT9ovGZnQJRzWl0: {'DefinedBy': 5}
+2025-09-28 08:23:43,753 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 29/115: 105
+2025-09-28 08:23:43,753 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 02nIbwVTP0SvyiaHB4Lt9m
+2025-09-28 08:23:43,753 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 02nIbwVTP0SvyiaHB4Lt9m: {'DefinedBy': 5}
+2025-09-28 08:23:43,753 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 30/115: J10.02
+2025-09-28 08:23:43,754 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3N4CS3w5n54R_dNDM5HeEc
+2025-09-28 08:23:43,754 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3N4CS3w5n54R_dNDM5HeEc: {'DefinedBy': 5}
+2025-09-28 08:23:43,754 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 31/115: J10.06
+2025-09-28 08:23:43,754 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 0j55JTCejD$gZMKN_lRIPI
+2025-09-28 08:23:43,754 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 0j55JTCejD$gZMKN_lRIPI: {'DefinedBy': 5}
+2025-09-28 08:23:43,755 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 32/115: J10.06
+2025-09-28 08:23:43,755 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3PnoObhzfF69bdhOCSqoCQ
+2025-09-28 08:23:43,755 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3PnoObhzfF69bdhOCSqoCQ: {'DefinedBy': 5}
+2025-09-28 08:23:43,755 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 33/115: J10.06
+2025-09-28 08:23:43,756 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 17f3s5J5z9M98vQHspkx$7
+2025-09-28 08:23:43,756 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 17f3s5J5z9M98vQHspkx$7: {'DefinedBy': 5}
+2025-09-28 08:23:43,756 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 34/115: J10.06
+2025-09-28 08:23:43,757 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3c1J081Az3tBaaeux8FWxv
+2025-09-28 08:23:43,757 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3c1J081Az3tBaaeux8FWxv: {'DefinedBy': 5}
+2025-09-28 08:23:43,757 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 35/115: J10.06
+2025-09-28 08:23:43,757 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 10xdRCbwv7dR9FhlAEWrUU
+2025-09-28 08:23:43,757 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 10xdRCbwv7dR9FhlAEWrUU: {'DefinedBy': 5}
+2025-09-28 08:23:43,757 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 36/115: J10.06
+2025-09-28 08:23:43,758 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 1ZFONkOEj9oP6GP$JzjWrr
+2025-09-28 08:23:43,758 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 1ZFONkOEj9oP6GP$JzjWrr: {'DefinedBy': 5}
+2025-09-28 08:23:43,758 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 37/115: C10.09
+2025-09-28 08:23:43,758 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 0KKzYQ7258NglC64BIF_hO
+2025-09-28 08:23:43,759 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 0KKzYQ7258NglC64BIF_hO: {'DefinedBy': 5}
+2025-09-28 08:23:43,759 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 38/115: J10.07
+2025-09-28 08:23:43,760 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2dyomBYQzCvQbxQocdSAys
+2025-09-28 08:23:43,760 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2dyomBYQzCvQbxQocdSAys: {'DefinedBy': 5}
+2025-09-28 08:23:43,760 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 39/115: J10.06
+2025-09-28 08:23:43,760 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3JLj89a0vF3OW5SM0i4KcE
+2025-09-28 08:23:43,761 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3JLj89a0vF3OW5SM0i4KcE: {'DefinedBy': 5}
+2025-09-28 08:23:43,761 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 40/115: J10.10
+2025-09-28 08:23:43,761 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3sAtJ2mWf9lOIBVs6FStYM
+2025-09-28 08:23:43,761 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3sAtJ2mWf9lOIBVs6FStYM: {'DefinedBy': 5}
+2025-09-28 08:23:43,761 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 41/115: J10.10
+2025-09-28 08:23:43,762 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3Pt0sWNJvCcOvWV_OWhPG0
+2025-09-28 08:23:43,762 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3Pt0sWNJvCcOvWV_OWhPG0: {'DefinedBy': 5}
+2025-09-28 08:23:43,762 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 42/115: J10.10
+2025-09-28 08:23:43,763 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3_xn3DhWD0r9SsqZ1ZQSY9
+2025-09-28 08:23:43,763 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3_xn3DhWD0r9SsqZ1ZQSY9: {'DefinedBy': 5}
+2025-09-28 08:23:43,763 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 43/115: J10.10
+2025-09-28 08:23:43,763 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2zUQQpxvTE48bh5LBiJFJF
+2025-09-28 08:23:43,763 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2zUQQpxvTE48bh5LBiJFJF: {'DefinedBy': 5}
+2025-09-28 08:23:43,763 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 44/115: J10.10
+2025-09-28 08:23:43,764 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 36Z2jTbhH5Bv6Z$VW4XByx
+2025-09-28 08:23:43,764 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 36Z2jTbhH5Bv6Z$VW4XByx: {'DefinedBy': 5}
+2025-09-28 08:23:43,764 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 45/115: J10.10
+2025-09-28 08:23:43,764 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3wxun0A8X73Q7QDDdIfqgs
+2025-09-28 08:23:43,765 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3wxun0A8X73Q7QDDdIfqgs: {'DefinedBy': 5}
+2025-09-28 08:23:43,765 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 46/115: J10.10
+2025-09-28 08:23:43,765 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2nCzRVWgDBpPdwdRPJI1I2
+2025-09-28 08:23:43,765 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2nCzRVWgDBpPdwdRPJI1I2: {'DefinedBy': 5}
+2025-09-28 08:23:43,765 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 47/115: J10.10
+2025-09-28 08:23:43,766 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3uOBfrtTH9eOMWBRuDxqIc
+2025-09-28 08:23:43,766 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3uOBfrtTH9eOMWBRuDxqIc: {'DefinedBy': 5}
+2025-09-28 08:23:43,766 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 48/115: J10.13
+2025-09-28 08:23:43,767 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2Ydf8HjPrCK9EHjlWPqV8G
+2025-09-28 08:23:43,767 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2Ydf8HjPrCK9EHjlWPqV8G: {'DefinedBy': 5}
+2025-09-28 08:23:43,767 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 49/115: J10.13
+2025-09-28 08:23:43,767 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 099z0GYHbEuOh1jbnczn7I
+2025-09-28 08:23:43,768 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 099z0GYHbEuOh1jbnczn7I: {'DefinedBy': 5}
+2025-09-28 08:23:43,768 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 50/115: J10.13
+2025-09-28 08:23:43,768 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 1vU2sDAtvFYBFo76XB67jA
+2025-09-28 08:23:43,768 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 1vU2sDAtvFYBFo76XB67jA: {'DefinedBy': 5}
+2025-09-28 08:23:43,768 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 51/115: J10.18
+2025-09-28 08:23:43,769 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3A3p684pz2k87F8I_WOq7E
+2025-09-28 08:23:43,769 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3A3p684pz2k87F8I_WOq7E: {'DefinedBy': 5}
+2025-09-28 08:23:43,769 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 52/115: J10.18
+2025-09-28 08:23:43,769 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2_lopyZInDyx30DtBAW4Ga
+2025-09-28 08:23:43,769 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2_lopyZInDyx30DtBAW4Ga: {'DefinedBy': 5}
+2025-09-28 08:23:43,769 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 53/115: J10.18
+2025-09-28 08:23:43,770 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 1$Dc_OD2P3MvGFU3txNUUl
+2025-09-28 08:23:43,770 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 1$Dc_OD2P3MvGFU3txNUUl: {'DefinedBy': 5}
+2025-09-28 08:23:43,771 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 54/115: J10.18
+2025-09-28 08:23:43,771 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2FtPNdnRn2CRzmP6liz3ZK
+2025-09-28 08:23:43,771 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2FtPNdnRn2CRzmP6liz3ZK: {'DefinedBy': 5}
+2025-09-28 08:23:43,771 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 55/115: J10.17
+2025-09-28 08:23:43,772 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 0Wnyqvz3v8ouuk7CUNSfMT
+2025-09-28 08:23:43,772 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 0Wnyqvz3v8ouuk7CUNSfMT: {'DefinedBy': 5}
+2025-09-28 08:23:43,772 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 56/115: 101
+2025-09-28 08:23:43,773 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3PNm6BbKXC0BsrWMZcVNIn
+2025-09-28 08:23:43,773 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3PNm6BbKXC0BsrWMZcVNIn: {'DefinedBy': 5}
+2025-09-28 08:23:43,773 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 57/115: J10.19
+2025-09-28 08:23:43,773 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 24AMi2g3XC4QPzur3LnYRP
+2025-09-28 08:23:43,773 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 24AMi2g3XC4QPzur3LnYRP: {'DefinedBy': 5}
+2025-09-28 08:23:43,773 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 58/115: J10.20
+2025-09-28 08:23:43,774 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3m8b5_ekvB2g7nMoclpSqj
+2025-09-28 08:23:43,775 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3m8b5_ekvB2g7nMoclpSqj: {'DefinedBy': 5}
+2025-09-28 08:23:43,775 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 59/115: J10.16
+2025-09-28 08:23:43,775 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 1KHkbbYfD0lBVLimYHjXYA
+2025-09-28 08:23:43,775 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 1KHkbbYfD0lBVLimYHjXYA: {'DefinedBy': 5}
+2025-09-28 08:23:43,775 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 60/115: I10.05
+2025-09-28 08:23:43,776 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 14S6eEHlb9euXGUtXySSjn
+2025-09-28 08:23:43,776 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 14S6eEHlb9euXGUtXySSjn: {'DefinedBy': 5}
+2025-09-28 08:23:43,776 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 61/115: J10.16
+2025-09-28 08:23:43,776 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2oABIoRA5DbhyLO6r13e8g
+2025-09-28 08:23:43,777 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2oABIoRA5DbhyLO6r13e8g: {'DefinedBy': 5}
+2025-09-28 08:23:43,777 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 62/115: J10.01
+2025-09-28 08:23:43,778 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3vGFFcmF5CeQ1QgjlRewmL
+2025-09-28 08:23:43,778 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3vGFFcmF5CeQ1QgjlRewmL: {'DefinedBy': 5}
+2025-09-28 08:23:43,779 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 63/115: J10.12
+2025-09-28 08:23:43,780 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2SLb1$Yu52mhLarSOgphCa
+2025-09-28 08:23:43,780 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2SLb1$Yu52mhLarSOgphCa: {'DefinedBy': 5}
+2025-09-28 08:23:43,783 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 64/115: 103
+2025-09-28 08:23:43,786 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 0_v34JH3nEMewveIpje$8o
+2025-09-28 08:23:43,786 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 0_v34JH3nEMewveIpje$8o: {'DefinedBy': 5}
+2025-09-28 08:23:43,788 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 65/115: 103
+2025-09-28 08:23:43,789 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 24WVWgURn7ZOnWSWt1uFS0
+2025-09-28 08:23:43,790 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 24WVWgURn7ZOnWSWt1uFS0: {'DefinedBy': 5}
+2025-09-28 08:23:43,790 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 66/115: J10.22
+2025-09-28 08:23:43,791 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 1ZoAIoLNjEXwV2AAmiC9vZ
+2025-09-28 08:23:43,791 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 1ZoAIoLNjEXwV2AAmiC9vZ: {'DefinedBy': 5}
+2025-09-28 08:23:43,792 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 67/115: J10.23
+2025-09-28 08:23:43,793 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 0eYnc0KNn7RRIWOaRUHUPB
+2025-09-28 08:23:43,795 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 0eYnc0KNn7RRIWOaRUHUPB: {'DefinedBy': 5}
+2025-09-28 08:23:43,796 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 68/115: J10.24
+2025-09-28 08:23:43,797 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 32wb3PS6X22eYUMAPdlov5
+2025-09-28 08:23:43,800 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 32wb3PS6X22eYUMAPdlov5: {'DefinedBy': 5}
+2025-09-28 08:23:43,801 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 69/115: J10.24
+2025-09-28 08:23:43,803 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2hZq0XJx9BU9CEQgBrJIjg
+2025-09-28 08:23:43,803 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2hZq0XJx9BU9CEQgBrJIjg: {'DefinedBy': 5}
+2025-09-28 08:23:43,804 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 70/115: J10.25
+2025-09-28 08:23:43,805 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3BInJ4RrLBkwbmx_1UWzWw
+2025-09-28 08:23:43,805 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3BInJ4RrLBkwbmx_1UWzWw: {'DefinedBy': 5}
+2025-09-28 08:23:43,808 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 71/115: J10.24
+2025-09-28 08:23:43,810 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2UKhKw7tnD$Bcz5KlfZmzA
+2025-09-28 08:23:43,810 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2UKhKw7tnD$Bcz5KlfZmzA: {'DefinedBy': 5}
+2025-09-28 08:23:43,810 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 72/115: J10.25
+2025-09-28 08:23:43,811 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 0GL70Kgrv979zq5nJ3hVt7
+2025-09-28 08:23:43,811 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 0GL70Kgrv979zq5nJ3hVt7: {'DefinedBy': 5}
+2025-09-28 08:23:43,811 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 73/115: I10.06
+2025-09-28 08:23:43,814 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3Q0LekePj9iuRi709BvAbM
+2025-09-28 08:23:43,815 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3Q0LekePj9iuRi709BvAbM: {'DefinedBy': 5}
+2025-09-28 08:23:43,815 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 74/115: I10.03
+2025-09-28 08:23:43,816 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3SADnCFyHFivxJtOrt_Ivj
+2025-09-28 08:23:43,818 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3SADnCFyHFivxJtOrt_Ivj: {'DefinedBy': 5}
+2025-09-28 08:23:43,819 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 75/115: I10.02
+2025-09-28 08:23:43,820 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2ge4_byPX6hBCyVAi3frlN
+2025-09-28 08:23:43,820 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2ge4_byPX6hBCyVAi3frlN: {'DefinedBy': 5}
+2025-09-28 08:23:43,821 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 76/115: I10.01
+2025-09-28 08:23:43,824 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2mdgiDchz82QyemwkuNglb
+2025-09-28 08:23:43,824 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2mdgiDchz82QyemwkuNglb: {'DefinedBy': 5}
+2025-09-28 08:23:43,824 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 77/115: I10.04
+2025-09-28 08:23:43,825 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 06Q6kRZtX5qPtFstnA7hsC
+2025-09-28 08:23:43,825 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 06Q6kRZtX5qPtFstnA7hsC: {'DefinedBy': 5}
+2025-09-28 08:23:43,828 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 78/115: J10.25
+2025-09-28 08:23:43,829 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3iYpgOmKH8U8olaSlXoJXr
+2025-09-28 08:23:43,829 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3iYpgOmKH8U8olaSlXoJXr: {'DefinedBy': 5}
+2025-09-28 08:23:43,829 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 79/115: C10.01
+2025-09-28 08:23:43,830 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3FAYa$yb9BphsqjN3Pr1EF
+2025-09-28 08:23:43,833 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3FAYa$yb9BphsqjN3Pr1EF: {'DefinedBy': 5}
+2025-09-28 08:23:43,833 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 80/115: C10.02
+2025-09-28 08:23:43,834 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 35NuEhzJX4nwjCvA8oOEtK
+2025-09-28 08:23:43,835 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 35NuEhzJX4nwjCvA8oOEtK: {'DefinedBy': 5}
+2025-09-28 08:23:43,835 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 81/115: C10.05
+2025-09-28 08:23:43,836 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 31lUGsFX9E9BQsqhDuYiZf
+2025-09-28 08:23:43,836 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 31lUGsFX9E9BQsqhDuYiZf: {'DefinedBy': 5}
+2025-09-28 08:23:43,837 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 82/115: C10.08
+2025-09-28 08:23:43,840 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 38xn2vxKXAaO0sSp$0h3jF
+2025-09-28 08:23:43,841 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 38xn2vxKXAaO0sSp$0h3jF: {'DefinedBy': 5}
+2025-09-28 08:23:43,843 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 83/115: C10.02
+2025-09-28 08:23:43,844 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 0z5OJiZkL8se6HyKrFgurJ
+2025-09-28 08:23:43,845 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 0z5OJiZkL8se6HyKrFgurJ: {'DefinedBy': 5}
+2025-09-28 08:23:43,845 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 84/115: C10.08
+2025-09-28 08:23:43,846 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2aASVqmt18Q9Qx8OEjKofH
+2025-09-28 08:23:43,846 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2aASVqmt18Q9Qx8OEjKofH: {'DefinedBy': 5}
+2025-09-28 08:23:43,847 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 85/115: C10.08
+2025-09-28 08:23:43,847 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3h2m5gb1b5gPRVe1ICqxuT
+2025-09-28 08:23:43,847 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3h2m5gb1b5gPRVe1ICqxuT: {'DefinedBy': 5}
+2025-09-28 08:23:43,848 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 86/115: C10.06
+2025-09-28 08:23:43,848 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3urWOebVPBZBlAg0_DPXLz
+2025-09-28 08:23:43,849 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3urWOebVPBZBlAg0_DPXLz: {'DefinedBy': 5}
+2025-09-28 08:23:43,849 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 87/115: C10.07
+2025-09-28 08:23:43,850 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3GvWUHCyT2JAqWPfGNvSo2
+2025-09-28 08:23:43,850 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3GvWUHCyT2JAqWPfGNvSo2: {'DefinedBy': 5}
+2025-09-28 08:23:43,850 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 88/115: A10.02
+2025-09-28 08:23:43,851 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2FQNfTjln8vxen5$OjKqUJ
+2025-09-28 08:23:43,851 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2FQNfTjln8vxen5$OjKqUJ: {'DefinedBy': 5}
+2025-09-28 08:23:43,851 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 89/115: A10.01
+2025-09-28 08:23:43,852 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 1OBth6opP1SfntodtdoSQY
+2025-09-28 08:23:43,853 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 1OBth6opP1SfntodtdoSQY: {'DefinedBy': 5}
+2025-09-28 08:23:43,853 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 90/115: 104
+2025-09-28 08:23:43,853 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2L6GnT65X1kh3E1X7kVITH
+2025-09-28 08:23:43,854 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2L6GnT65X1kh3E1X7kVITH: {'DefinedBy': 5}
+2025-09-28 08:23:43,854 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 91/115: 103
+2025-09-28 08:23:43,855 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2AtYNMWeL6yw8ZN7eTdDFb
+2025-09-28 08:23:43,855 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2AtYNMWeL6yw8ZN7eTdDFb: {'DefinedBy': 5}
+2025-09-28 08:23:43,855 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 92/115: D10.01
+2025-09-28 08:23:43,856 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 0ZAWGkAun6chbqRqpj2fg4
+2025-09-28 08:23:43,856 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 0ZAWGkAun6chbqRqpj2fg4: {'DefinedBy': 5}
+2025-09-28 08:23:43,856 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 93/115: A10.03
+2025-09-28 08:23:43,857 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3IV7NwstnCegVo2czuDn3Y
+2025-09-28 08:23:43,857 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3IV7NwstnCegVo2czuDn3Y: {'DefinedBy': 5}
+2025-09-28 08:23:43,858 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 94/115: B10.04
+2025-09-28 08:23:43,858 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3z8ASr7bXB6vTd0bWuxJIv
+2025-09-28 08:23:43,858 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3z8ASr7bXB6vTd0bWuxJIv: {'DefinedBy': 5}
+2025-09-28 08:23:43,859 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 95/115: B10.02
+2025-09-28 08:23:43,859 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 05_acMHIf1FQopY2SAeuGi
+2025-09-28 08:23:43,859 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 05_acMHIf1FQopY2SAeuGi: {'DefinedBy': 5}
+2025-09-28 08:23:43,860 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 96/115: B10.01
+2025-09-28 08:23:43,861 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3oxYlzCi9CAO_OSU$m0inT
+2025-09-28 08:23:43,861 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3oxYlzCi9CAO_OSU$m0inT: {'DefinedBy': 5}
+2025-09-28 08:23:43,861 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 97/115: F10.03
+2025-09-28 08:23:43,862 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3swyfLky1CpAmSW0uwD$1V
+2025-09-28 08:23:43,862 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3swyfLky1CpAmSW0uwD$1V: {'DefinedBy': 5}
+2025-09-28 08:23:43,863 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 98/115: F10.02
+2025-09-28 08:23:43,864 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 1l11DSOqH7yfWue3Kkowdv
+2025-09-28 08:23:43,865 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 1l11DSOqH7yfWue3Kkowdv: {'DefinedBy': 5}
+2025-09-28 08:23:43,865 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 99/115: F10.04
+2025-09-28 08:23:43,866 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 39jqCcGNDA7hqQ2l1lf6NZ
+2025-09-28 08:23:43,866 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 39jqCcGNDA7hqQ2l1lf6NZ: {'DefinedBy': 5}
+2025-09-28 08:23:43,866 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 100/115: F10.05
+2025-09-28 08:23:43,867 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2j8EGjtJLBifxi7EVtn_vW
+2025-09-28 08:23:43,868 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2j8EGjtJLBifxi7EVtn_vW: {'DefinedBy': 5}
+2025-09-28 08:23:43,868 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 101/115: F10.06
+2025-09-28 08:23:43,869 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 1KHWLA$iD3c9LAhVmtRUNV
+2025-09-28 08:23:43,869 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 1KHWLA$iD3c9LAhVmtRUNV: {'DefinedBy': 5}
+2025-09-28 08:23:43,870 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 102/115: F10.06
+2025-09-28 08:23:43,870 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3WusCSuNH8KwBvT6QO803d
+2025-09-28 08:23:43,871 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3WusCSuNH8KwBvT6QO803d: {'DefinedBy': 5}
+2025-09-28 08:23:43,871 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 103/115: F10.02
+2025-09-28 08:23:43,871 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 0giqvrVazBMe4E1viUd8Kp
+2025-09-28 08:23:43,872 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 0giqvrVazBMe4E1viUd8Kp: {'DefinedBy': 5}
+2025-09-28 08:23:43,872 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 104/115: G10.01
+2025-09-28 08:23:43,873 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 1iBb12VO54D8scSsEXwB7A
+2025-09-28 08:23:43,873 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 1iBb12VO54D8scSsEXwB7A: {'DefinedBy': 5}
+2025-09-28 08:23:43,873 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 105/115: G10.02
+2025-09-28 08:23:43,874 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3Cca6hEnf1TOzoyj9k7GGe
+2025-09-28 08:23:43,874 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3Cca6hEnf1TOzoyj9k7GGe: {'DefinedBy': 5}
+2025-09-28 08:23:43,875 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 106/115: 105
+2025-09-28 08:23:43,876 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 02G9B9vWbCluO2SBr8x7OW
+2025-09-28 08:23:43,876 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 02G9B9vWbCluO2SBr8x7OW: {'DefinedBy': 5}
+2025-09-28 08:23:43,877 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 107/115: F10.05
+2025-09-28 08:23:43,877 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 1_fnW4Srf36giyi4SwG$AH
+2025-09-28 08:23:43,878 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 1_fnW4Srf36giyi4SwG$AH: {'DefinedBy': 5}
+2025-09-28 08:23:43,878 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 108/115: F10.02-3
+2025-09-28 08:23:43,879 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3ELzmGECj8mw2KJIs0Azgg
+2025-09-28 08:23:43,880 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3ELzmGECj8mw2KJIs0Azgg: {'DefinedBy': 5}
+2025-09-28 08:23:43,881 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 109/115: F10.06-1
+2025-09-28 08:23:43,882 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 1l8XT8Unj1Mvp50yccDdzk
+2025-09-28 08:23:43,882 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 1l8XT8Unj1Mvp50yccDdzk: {'DefinedBy': 5}
+2025-09-28 08:23:43,883 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 110/115: F10.02-4
+2025-09-28 08:23:43,883 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3AZcKMSTr36xgOvDRFvPiV
+2025-09-28 08:23:43,884 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3AZcKMSTr36xgOvDRFvPiV: {'DefinedBy': 5}
+2025-09-28 08:23:43,885 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 111/115: F10.02-1
+2025-09-28 08:23:43,886 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 0PLRApNYrFfQWWjSyEP2if
+2025-09-28 08:23:43,886 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 0PLRApNYrFfQWWjSyEP2if: {'DefinedBy': 5}
+2025-09-28 08:23:43,887 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 112/115: I10.H1
+2025-09-28 08:23:43,887 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 0BrjOeyQT8h9QY3einbKCq
+2025-09-28 08:23:43,888 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 0BrjOeyQT8h9QY3einbKCq: {'DefinedBy': 5}
+2025-09-28 08:23:43,888 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 113/115: F10.06-2
+2025-09-28 08:23:43,890 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 0102drA3nFRROe$0GEvl1z
+2025-09-28 08:23:43,891 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 0102drA3nFRROe$0GEvl1z: {'DefinedBy': 5}
+2025-09-28 08:23:43,891 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 114/115: F10.02-2
+2025-09-28 08:23:43,892 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 0g3jqD4h1Emh7d1ZotUorW
+2025-09-28 08:23:43,893 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 0g3jqD4h1Emh7d1ZotUorW: {'DefinedBy': 5}
+2025-09-28 08:23:43,893 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 115/115: F10.01
+2025-09-28 08:23:43,894 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2rtN$jwdnDPuHZvwuoA7Ni
+2025-09-28 08:23:43,894 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2rtN$jwdnDPuHZvwuoA7Ni: {'DefinedBy': 5}

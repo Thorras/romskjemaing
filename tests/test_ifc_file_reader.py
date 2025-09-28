@@ -124,7 +124,7 @@ class TestIfcFileReader:
     @patch('os.path.getsize')
     def test_load_file_too_large(self, mock_getsize):
         """Test loading very large file."""
-        mock_getsize.return_value = 200 * 1024 * 1024  # 200MB
+        mock_getsize.return_value = 250 * 1024 * 1024  # 250MB - above the 200MB threshold
         
         with tempfile.NamedTemporaryFile(suffix=".ifc", delete=False) as tmp:
             tmp.write(b"ISO-10303-21;")
