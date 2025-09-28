@@ -14,8 +14,9 @@ import os
 import logging
 import traceback
 import sys
+import time
 from datetime import datetime
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, List
 from enum import Enum
 
 from ..parser.ifc_file_reader import IfcFileReader
@@ -23,6 +24,9 @@ from ..parser.ifc_space_extractor import IfcSpaceExtractor
 from ..parser.ifc_surface_extractor import IfcSurfaceExtractor
 from ..parser.ifc_space_boundary_parser import IfcSpaceBoundaryParser
 from ..parser.ifc_relationship_parser import IfcRelationshipParser
+from ..utils.enhanced_logging import (
+    enhanced_logger, ErrorCategory, ErrorSeverity, MemoryErrorAnalyzer
+)
 from .space_list_widget import SpaceListWidget
 from .space_detail_widget import SpaceDetailWidget
 from .surface_editor_widget import SurfaceEditorWidget
@@ -166,27 +170,108 @@ class ErrorRecoveryDialog(QDialog):
 
 
 class LongRunningOperationWorker(QObject):
-    """Worker for long-running operations with progress reporting."""
+    """Worker for long-running operations with progress reporting and cancellation support."""
     
     progress_updated = pyqtSignal(int, str)  # progress, status
     operation_completed = pyqtSignal(bool, str, object)  # success, message, result
     error_occurred = pyqtSignal(str, str)  # error_type, error_message
+    operation_cancelled = pyqtSignal(str)  # cancellation_message
     
     def __init__(self, operation_func, *args, **kwargs):
         super().__init__()
         self.operation_func = operation_func
         self.args = args
         self.kwargs = kwargs
+        self._is_cancelled = False
+        self._cancel_requested = False
+    
+    def request_cancellation(self):
+        """Request cancellation of the current operation."""
+        self._cancel_requested = True
+        self._is_cancelled = True
+    
+    def is_cancelled(self):
+        """Check if the operation has been cancelled."""
+        return self._is_cancelled
     
     def run_operation(self):
-        """Execute the long-running operation."""
+        """Execute the long-running operation with cancellation support and enhanced error reporting."""
+        import logging
+        logger = logging.getLogger(__name__)
+        
         try:
+            logger.debug(f"Worker thread starting operation: {self.operation_func.__name__}")
+            
+            # Check for cancellation before starting
+            if self._cancel_requested:
+                logger.info("Operation cancelled before starting")
+                self.operation_cancelled.emit("Operation cancelled before starting")
+                return
+            
+            # Execute the operation with threading context logging
+            logger.info(f"Executing operation in worker thread: {self.operation_func.__name__}")
             result = self.operation_func(*self.args, **self.kwargs)
+            
+            # Check for cancellation after completion
+            if self._cancel_requested:
+                logger.info("Operation cancelled after completion")
+                self.operation_cancelled.emit("Operation cancelled after completion")
+                return
+            
+            logger.info(f"Operation completed successfully in worker thread: {self.operation_func.__name__}")
             self.operation_completed.emit(True, "Operation completed successfully", result)
+            
         except Exception as e:
+            # Enhanced error classification and logging
+            error_type = self._classify_error(e)
+            logger.error(f"Operation failed in worker thread ({error_type}): {str(e)}")
+            
+            # Check if this is a cancellation-related exception
+            if self._cancel_requested:
+                logger.info(f"Operation cancelled due to error: {str(e)}")
+                self.operation_cancelled.emit(f"Operation cancelled due to error: {str(e)}")
+                return
+            
             error_details = traceback.format_exc()
-            self.error_occurred.emit("operation_error", f"Operation failed: {str(e)}")
+            logger.debug(f"Full error traceback: {error_details}")
+            
+            # Emit error with classification
+            self.error_occurred.emit(error_type, f"Operation failed: {str(e)}")
             self.operation_completed.emit(False, str(e), None)
+    
+    def _classify_error(self, error: Exception) -> str:
+        """
+        Classify the type of error for better handling.
+        
+        Args:
+            error: The exception that occurred
+            
+        Returns:
+            String classification of the error type
+        """
+        error_str = str(error).lower()
+        error_type_name = type(error).__name__.lower()
+        
+        # Threading-related errors
+        if any(keyword in error_str or keyword in error_type_name for keyword in 
+               ['thread', 'worker', 'signal', 'slot', 'qthread', 'concurrent']):
+            return "thread_error"
+        
+        # Memory-related errors
+        if isinstance(error, MemoryError) or 'memory' in error_str:
+            return "memory_error"
+        
+        # Timeout-related errors (check before I/O errors)
+        if 'timeout' in error_str or isinstance(error, TimeoutError):
+            return "timeout_error"
+        
+        # I/O related errors
+        if isinstance(error, (IOError, OSError)) or any(keyword in error_str for keyword in 
+                                                       ['file', 'io', 'read', 'write', 'access']):
+            return "io_error"
+        
+        # Default classification
+        return "operation_error"
 
 
 class MainWindow(QMainWindow):
@@ -197,7 +282,7 @@ class MainWindow(QMainWindow):
     
     def __init__(self):
         super().__init__()
-        self.logger = logging.getLogger(__name__)
+        self.logger = enhanced_logger.logger  # Use enhanced logger
         self.ifc_reader = IfcFileReader()
         self.space_extractor = IfcSpaceExtractor()
         self.surface_extractor = IfcSurfaceExtractor()
@@ -206,11 +291,22 @@ class MainWindow(QMainWindow):
         self.current_file_path = None
         self.spaces = []
         
-        # Error handling state
+        # Enhanced error handling state with detailed tracking
         self.error_count = 0
         self.last_error_time = None
         self.operation_thread = None
         self.operation_worker = None
+        self.current_operation_id = None  # Track current operation for timing
+        
+        # Fallback tracking for logging and diagnostics
+        self.fallback_stats = {
+            'threading_failures': 0,
+            'fallback_attempts': 0,
+            'fallback_successes': 0,
+            'fallback_failures': 0,
+            'last_fallback_time': None,
+            'fallback_reasons': []
+        }
         
         # Setup error handling
         self.setup_error_handling()
@@ -319,6 +415,7 @@ class MainWindow(QMainWindow):
                                   recovery_options: Optional[Dict[str, str]] = None) -> Optional[str]:
         """
         Show enhanced error message with details and optional recovery options.
+        Uses the enhanced logging system for structured error reporting.
         
         Args:
             title: Error dialog title
@@ -333,18 +430,28 @@ class MainWindow(QMainWindow):
         self.error_count += 1
         self.last_error_time = datetime.now()
         
-        # Log the error
+        # Map error types to enhanced logging categories and severities
         if error_type == "error":
-            self.logger.error(f"{title}: {message}")
+            category = ErrorCategory.UNKNOWN
+            severity = ErrorSeverity.HIGH
         elif error_type == "warning":
-            self.logger.warning(f"{title}: {message}")
+            category = ErrorCategory.UNKNOWN
+            severity = ErrorSeverity.MEDIUM
         else:
-            self.logger.info(f"{title}: {message}")
+            category = ErrorCategory.UNKNOWN
+            severity = ErrorSeverity.LOW
         
-        if details:
-            self.logger.debug(f"Error details: {details}")
+        # Create structured error report
+        error_report = enhanced_logger.create_error_report(
+            category=category,
+            severity=severity,
+            title=title,
+            message=message,
+            user_guidance=message,
+            recovery_suggestions=list(recovery_options.values()) if recovery_options else []
+        )
         
-        # Update status bar with error count
+        # Update status bar with error count and enhanced context
         self.update_error_status(f"Error #{self.error_count}: {message}")
         
         # In testing mode, don't show dialogs to avoid blocking tests
@@ -408,37 +515,74 @@ class MainWindow(QMainWindow):
     def show_non_blocking_progress(self, title: str, operation_func, *args, **kwargs):
         """
         Show non-blocking progress indication using QProgressBar in status bar.
+        Enhanced with detailed operation timing and logging.
         
         Args:
             title: Progress operation title
             operation_func: Function to execute
             *args, **kwargs: Arguments for the operation function
         """
-        # Update status bar with operation title
-        self.status_bar.showMessage(f"{title}...")
+        # Start enhanced operation timing
+        self.current_operation_id = enhanced_logger.start_operation_timing(
+            f"ui_operation_{title.lower().replace(' ', '_')}", 
+            self.current_file_path
+        )
+        
+        # Update status bar with operation title and enhanced context
+        file_context = ""
+        if self.current_file_path:
+            try:
+                file_size = os.path.getsize(self.current_file_path)
+                size_mb = file_size / (1024 * 1024)
+                file_context = f" ({size_mb:.1f}MB)"
+            except OSError:
+                pass
+        
+        self.status_bar.showMessage(f"{title}{file_context}...")
+        enhanced_logger.logger.info(f"Starting UI operation: {title}{file_context}")
         
         # Show progress bar in main UI (not status bar to avoid conflicts)
         self.progress_bar.setVisible(True)
         self.progress_bar.setRange(0, 0)  # Indeterminate progress
         
-        # Create worker thread
-        self.operation_thread = QThread()
-        self.operation_worker = LongRunningOperationWorker(operation_func, *args, **kwargs)
-        self.operation_worker.moveToThread(self.operation_thread)
+        # Show cancel button during operation
+        if hasattr(self, 'cancel_button'):
+            self.cancel_button.setVisible(True)
+            self.cancel_button.setEnabled(True)
         
-        # Connect signals for non-blocking progress updates
-        self.operation_worker.progress_updated.connect(self.update_progress_status)
-        self.operation_worker.operation_completed.connect(self.on_operation_completed)
-        self.operation_worker.error_occurred.connect(self.on_operation_error)
-        
-        self.operation_thread.started.connect(self.operation_worker.run_operation)
-        self.operation_thread.finished.connect(self.operation_thread.deleteLater)
-        
-        # Set timeout timer for long operations
-        self.setup_operation_timeout(30)  # 30 second timeout
-        
-        # Start operation (non-blocking)
-        self.operation_thread.start()
+        # Create worker thread with error handling
+        try:
+            self.operation_thread = QThread()
+            self.operation_worker = LongRunningOperationWorker(operation_func, *args, **kwargs)
+            self.operation_worker.moveToThread(self.operation_thread)
+            
+            # Connect signals for non-blocking progress updates
+            self.operation_worker.progress_updated.connect(self.update_progress_status)
+            self.operation_worker.operation_completed.connect(self.on_operation_completed)
+            self.operation_worker.error_occurred.connect(self.on_operation_error)
+            self.operation_worker.operation_cancelled.connect(self.on_operation_cancelled)
+            
+            self.operation_thread.started.connect(self.operation_worker.run_operation)
+            self.operation_thread.finished.connect(self.operation_thread.deleteLater)
+            
+            # Add error handling for thread creation and startup
+            self.operation_thread.finished.connect(self._on_thread_finished)
+            
+            # Set timeout timer for long operations with file-based timeout if available
+            timeout_file = getattr(self, 'current_file_path', None)
+            self.setup_operation_timeout(file_path=timeout_file)
+            
+            # Start operation (non-blocking) with error handling
+            try:
+                self.operation_thread.start()
+                self.logger.info(f"Threading operation '{title}' started successfully")
+            except Exception as thread_start_error:
+                self.logger.error(f"Failed to start thread for operation '{title}': {thread_start_error}")
+                self._handle_thread_startup_failure(title, operation_func, thread_start_error, *args, **kwargs)
+                
+        except Exception as thread_creation_error:
+            self.logger.error(f"Failed to create thread for operation '{title}': {thread_creation_error}")
+            self._handle_thread_creation_failure(title, operation_func, thread_creation_error, *args, **kwargs)
     
     def update_progress_status(self, progress: int, status: str):
         """
@@ -459,54 +603,132 @@ class MainWindow(QMainWindow):
             # Keep indeterminate progress
             self.progress_bar.setRange(0, 0)
     
-    def setup_operation_timeout(self, timeout_seconds: int):
+    def get_timeout_for_file_size(self, file_size_bytes: int) -> int:
         """
-        Set up timeout handling for long operations.
+        Get appropriate timeout value based on file size.
         
         Args:
-            timeout_seconds: Timeout in seconds
+            file_size_bytes: File size in bytes
+            
+        Returns:
+            Timeout in seconds
         """
-        if hasattr(self, 'operation_timeout_timer'):
+        size_mb = file_size_bytes / (1024 * 1024)
+        
+        if size_mb < 10:  # Small files
+            return 30  # 30 seconds
+        elif size_mb < 50:  # Medium files
+            return 60  # 1 minute
+        elif size_mb < 100:  # Large files
+            return 120  # 2 minutes
+        else:  # Huge files
+            return 300  # 5 minutes
+    
+    def setup_operation_timeout(self, timeout_seconds: int = None, file_path: str = None):
+        """
+        Set up timeout handling for long operations with configurable timeout based on file size.
+        
+        Args:
+            timeout_seconds: Explicit timeout in seconds (optional)
+            file_path: Path to file for size-based timeout calculation (optional)
+        """
+        if hasattr(self, 'operation_timeout_timer') and self.operation_timeout_timer:
             self.operation_timeout_timer.stop()
+        
+        # Determine timeout value
+        if timeout_seconds is None:
+            if file_path and os.path.exists(file_path):
+                try:
+                    file_size = os.path.getsize(file_path)
+                    timeout_seconds = self.get_timeout_for_file_size(file_size)
+                    self.logger.info(f"Using file size-based timeout: {timeout_seconds}s for {file_size/(1024*1024):.1f}MB file")
+                except OSError:
+                    timeout_seconds = 60  # Default fallback
+            else:
+                timeout_seconds = 60  # Default timeout
+        
+        self.current_timeout_seconds = timeout_seconds
+        self.operation_start_time = datetime.now()
         
         self.operation_timeout_timer = QTimer()
         self.operation_timeout_timer.setSingleShot(True)
         self.operation_timeout_timer.timeout.connect(self.handle_operation_timeout)
         self.operation_timeout_timer.start(timeout_seconds * 1000)  # Convert to milliseconds
+        
+        self.logger.info(f"Operation timeout set to {timeout_seconds} seconds")
     
     def handle_operation_timeout(self):
         """Handle operation timeout with user recovery options."""
         if self.operation_thread and self.operation_thread.isRunning():
+            # Calculate elapsed time
+            elapsed_time = (datetime.now() - self.operation_start_time).total_seconds()
+            elapsed_minutes = int(elapsed_time // 60)
+            elapsed_seconds = int(elapsed_time % 60)
+            
+            # Determine appropriate extension time based on current timeout
+            if self.current_timeout_seconds <= 60:
+                extension_time = 60  # 1 minute extension for short timeouts
+            elif self.current_timeout_seconds <= 120:
+                extension_time = 120  # 2 minute extension for medium timeouts
+            else:
+                extension_time = 180  # 3 minute extension for long timeouts
+            
             recovery_options = {
-                'wait_longer': 'Wait 30 more seconds',
+                'wait_longer': f'Wait {extension_time//60} more minute(s)',
                 'cancel': 'Cancel operation',
                 'force_direct': 'Try direct loading (may freeze)'
             }
             
+            # Add file size context if available
+            file_context = ""
+            if hasattr(self, 'current_file_path') and self.current_file_path:
+                try:
+                    file_size = os.path.getsize(self.current_file_path)
+                    size_mb = file_size / (1024 * 1024)
+                    file_context = f"\nFile size: {size_mb:.1f}MB"
+                except OSError:
+                    pass
+            
             choice = self.show_enhanced_error_message(
                 "Operation Timeout",
-                "The operation is taking longer than expected. This may indicate a large file or system performance issues.",
-                f"Operation has been running for more than 30 seconds.\n\nOptions:\n"
-                f"- Wait longer: Continue waiting for the operation to complete\n"
+                f"The operation has been running for {elapsed_minutes}m {elapsed_seconds}s and exceeded the timeout limit.",
+                f"Expected timeout: {self.current_timeout_seconds}s{file_context}\n\n"
+                f"This may indicate:\n"
+                f"- Large or complex file requiring more processing time\n"
+                f"- System performance issues or high memory usage\n"
+                f"- File corruption or parsing difficulties\n\n"
+                f"Recovery options:\n"
+                f"- Wait longer: Continue the operation with extended timeout\n"
                 f"- Cancel: Stop the operation and return to ready state\n"
-                f"- Force direct: Attempt direct loading (may cause freezing)",
+                f"- Force direct: Attempt synchronous loading (may cause UI freezing)",
                 "warning",
                 recovery_options
             )
             
             if choice == 'wait_longer':
-                # Extend timeout by another 30 seconds
-                self.setup_operation_timeout(30)
-                self.status_bar.showMessage("Continuing operation - waiting longer...")
+                # Extend timeout with appropriate duration
+                self.setup_operation_timeout(extension_time)
+                self.status_bar.showMessage(f"Extending timeout by {extension_time//60} minute(s)...")
+                self.logger.info(f"Operation timeout extended by {extension_time}s (total elapsed: {elapsed_time:.1f}s)")
             elif choice == 'cancel':
+                self.logger.info(f"Operation cancelled by user after {elapsed_time:.1f}s")
                 self.cancel_operation()
             elif choice == 'force_direct':
+                self.logger.warning(f"Forcing direct loading after timeout ({elapsed_time:.1f}s)")
                 self.cancel_operation()
                 if hasattr(self, 'current_file_path') and self.current_file_path:
                     self.load_file_directly(self.current_file_path)
     
     def on_operation_completed(self, success: bool, message: str, result: Any):
-        """Handle completion of long-running operation."""
+        """Handle completion of long-running operation with enhanced logging."""
+        # Complete operation timing if active
+        if self.current_operation_id:
+            operation_timing = enhanced_logger.finish_operation_timing(self.current_operation_id)
+            if operation_timing:
+                enhanced_logger.logger.info(f"UI operation completed: {operation_timing.operation_name} "
+                                          f"in {operation_timing.duration_seconds:.2f}s")
+            self.current_operation_id = None
+        
         # Clean up thread and worker
         if self.operation_thread:
             self.operation_thread.quit()
@@ -518,8 +740,10 @@ class MainWindow(QMainWindow):
         if hasattr(self, 'operation_timeout_timer'):
             self.operation_timeout_timer.stop()
         
-        # Hide progress bar
+        # Hide progress bar and cancel button
         self.progress_bar.setVisible(False)
+        if hasattr(self, 'cancel_button'):
+            self.cancel_button.setVisible(False)
         
         if success:
             self.status_bar.showMessage(f"✅ {message}")
@@ -533,32 +757,629 @@ class MainWindow(QMainWindow):
             self.show_enhanced_error_message("Operation Failed", message)
     
     def on_operation_error(self, error_type: str, error_message: str):
-        """Handle error during long-running operation."""
+        """Handle error during long-running operation with enhanced logging and fallback to direct loading."""
+        # Complete operation timing with error status
+        if self.current_operation_id:
+            operation_timing = enhanced_logger.finish_operation_timing(self.current_operation_id)
+            if operation_timing:
+                enhanced_logger.logger.error(f"UI operation failed: {operation_timing.operation_name} "
+                                           f"after {operation_timing.duration_seconds:.2f}s - {error_message}")
+            self.current_operation_id = None
+        
         # Clean up timeout timer
-        if hasattr(self, 'operation_timeout_timer'):
+        if hasattr(self, 'operation_timeout_timer') and self.operation_timeout_timer:
             self.operation_timeout_timer.stop()
         
-        # Hide progress bar
+        # Hide progress bar and cancel button
         self.progress_bar.setVisible(False)
+        if hasattr(self, 'cancel_button'):
+            self.cancel_button.setVisible(False)
         
-        self.show_enhanced_error_message("Operation Error", error_message)
+        # Create structured error report for operation failure
+        category = self._map_error_type_to_category(error_type)
+        severity = self._determine_error_severity(error_type, error_message)
+        
+        error_report = enhanced_logger.create_error_report(
+            category=category,
+            severity=severity,
+            title="Operation Error",
+            message=f"Operation failed: {error_message}",
+            user_guidance=self._get_error_guidance(error_type, error_message),
+            recovery_suggestions=self._get_recovery_suggestions(error_type, error_message)
+        )
+        
+        # Check if this is a threading-related error and offer fallback
+        if self._is_threading_error(error_type, error_message):
+            enhanced_logger.logger.warning(f"Threading error detected, attempting fallback: {error_message}")
+            self._handle_threading_error_with_fallback(error_message)
+        else:
+            # Enhanced error message with detailed guidance
+            recovery_options = self._get_recovery_options(error_type, error_message)
+            self.show_enhanced_error_message(
+                "Operation Error", 
+                error_message,
+                f"Error type: {error_type}\n\nGuidance: {self._get_error_guidance(error_type, error_message)}",
+                "error",
+                recovery_options
+            )
+    
+    def _map_error_type_to_category(self, error_type: str) -> ErrorCategory:
+        """Map error type string to ErrorCategory enum."""
+        error_type_lower = error_type.lower()
+        if 'memory' in error_type_lower:
+            return ErrorCategory.MEMORY
+        elif 'thread' in error_type_lower or 'worker' in error_type_lower:
+            return ErrorCategory.THREADING
+        elif 'timeout' in error_type_lower:
+            return ErrorCategory.TIMEOUT
+        elif 'io' in error_type_lower or 'file' in error_type_lower:
+            return ErrorCategory.IO
+        elif 'parsing' in error_type_lower or 'validation' in error_type_lower:
+            return ErrorCategory.PARSING
+        else:
+            return ErrorCategory.UNKNOWN
+    
+    def _determine_error_severity(self, error_type: str, error_message: str) -> ErrorSeverity:
+        """Determine error severity based on type and message."""
+        error_text = f"{error_type} {error_message}".lower()
+        
+        if any(keyword in error_text for keyword in ['critical', 'fatal', 'crash', 'corrupt']):
+            return ErrorSeverity.CRITICAL
+        elif any(keyword in error_text for keyword in ['memory', 'timeout', 'thread', 'fail']):
+            return ErrorSeverity.HIGH
+        elif any(keyword in error_text for keyword in ['warning', 'slow', 'performance']):
+            return ErrorSeverity.MEDIUM
+        else:
+            return ErrorSeverity.LOW
+    
+    def _get_error_guidance(self, error_type: str, error_message: str) -> str:
+        """Get user-friendly guidance based on error type and message."""
+        error_type_lower = error_type.lower()
+        error_message_lower = error_message.lower()
+        
+        if 'memory' in error_type_lower:
+            return "The operation ran out of memory. Try closing other applications or processing a smaller file."
+        elif 'thread' in error_type_lower:
+            return "A threading error occurred. The operation will be retried using direct processing."
+        elif 'timeout' in error_type_lower:
+            return "The operation took too long to complete. You can try waiting longer or cancel the operation."
+        elif 'io' in error_type_lower:
+            return "A file access error occurred. Check that the file is accessible and not locked by another application."
+        else:
+            return "An unexpected error occurred during the operation."
+    
+    def _get_recovery_suggestions(self, error_type: str, error_message: str) -> List[str]:
+        """Get recovery suggestions based on error type and message."""
+        error_type_lower = error_type.lower()
+        
+        if 'memory' in error_type_lower:
+            return [
+                "Close other applications to free up memory",
+                "Restart the application",
+                "Try processing a smaller file",
+                "Upgrade system memory if processing large files regularly"
+            ]
+        elif 'thread' in error_type_lower:
+            return [
+                "The operation will be retried automatically",
+                "If the issue persists, restart the application",
+                "Try processing the file again"
+            ]
+        elif 'timeout' in error_type_lower:
+            return [
+                "Wait longer for the operation to complete",
+                "Cancel and try with a smaller file",
+                "Check system performance and close other applications"
+            ]
+        else:
+            return [
+                "Try the operation again",
+                "Restart the application if the issue persists",
+                "Check the file and system status"
+            ]
+    
+    def _get_recovery_options(self, error_type: str, error_message: str) -> Optional[Dict[str, str]]:
+        """Get recovery options for user selection based on error type."""
+        error_type_lower = error_type.lower()
+        
+        if 'thread' in error_type_lower:
+            return {
+                'retry_direct': 'Retry with direct processing',
+                'cancel': 'Cancel operation'
+            }
+        elif 'timeout' in error_type_lower:
+            return {
+                'wait_longer': 'Wait longer',
+                'cancel': 'Cancel operation',
+                'retry': 'Retry operation'
+            }
+        else:
+            return {
+                'retry': 'Try again',
+                'cancel': 'Cancel'
+            }
+
+    def on_operation_cancelled(self, cancellation_message: str):
+        """Handle cancellation of long-running operation."""
+        self.logger.info(f"Operation cancelled: {cancellation_message}")
+        
+        # Clean up timeout timer
+        if hasattr(self, 'operation_timeout_timer') and self.operation_timeout_timer:
+            self.operation_timeout_timer.stop()
+        
+        # Hide progress bar and cancel button
+        self.progress_bar.setVisible(False)
+        if hasattr(self, 'cancel_button'):
+            self.cancel_button.setVisible(False)
+        
+        # Update UI state
+        self.update_ui_state(False)  # Disable file-related actions
+        
+        # Update status bar with cancellation message
+        self.status_bar.showMessage(f"✋ {cancellation_message}")
+        self.status_bar.setStyleSheet("QStatusBar { color: #fd7e14; }")  # Orange color for cancellation
+        
+        # Clear status after 5 seconds
+        QTimer.singleShot(5000, self.clear_temporary_error_status)
     
     def cancel_operation(self):
-        """Cancel the current long-running operation."""
+        """Cancel the current long-running operation with proper cleanup."""
+        self.logger.info("Cancelling current operation...")
+        
+        # Calculate elapsed time if available
+        elapsed_time = 0
+        if hasattr(self, 'operation_start_time') and self.operation_start_time:
+            if isinstance(self.operation_start_time, datetime):
+                elapsed_time = (datetime.now() - self.operation_start_time).total_seconds()
+            else:
+                # Handle case where operation_start_time might be a timestamp
+                elapsed_time = time.time() - float(self.operation_start_time)
+        
+        # Request cancellation from worker first (graceful cancellation)
+        if self.operation_worker:
+            self.logger.info("Requesting graceful cancellation from worker...")
+            self.operation_worker.request_cancellation()
+        
+        # Give worker a chance to cancel gracefully
         if self.operation_thread and self.operation_thread.isRunning():
-            self.operation_thread.terminate()
-            self.operation_thread.wait()
+            self.logger.info(f"Waiting for graceful thread termination after {elapsed_time:.1f}s")
+            
+            # Wait for graceful termination first (2 seconds)
+            if not self.operation_thread.wait(2000):
+                self.logger.warning("Graceful termination failed, forcing thread termination")
+                self.operation_thread.terminate()
+                
+                # Wait for forced termination (3 more seconds)
+                if not self.operation_thread.wait(3000):
+                    self.logger.error("Thread did not terminate even after forcing, may cause resource leaks")
+            else:
+                self.logger.info("Thread terminated gracefully")
+            
             self.operation_thread = None
-        self.operation_worker = None
+        
+        # Clean up worker
+        if self.operation_worker:
+            self.operation_worker = None
         
         # Clean up timeout timer
-        if hasattr(self, 'operation_timeout_timer'):
+        if hasattr(self, 'operation_timeout_timer') and self.operation_timeout_timer:
+            self.operation_timeout_timer.stop()
+            self.operation_timeout_timer = None
+        
+        # Reset operation state
+        if hasattr(self, 'operation_start_time'):
+            self.operation_start_time = None
+        if hasattr(self, 'current_timeout_seconds'):
+            self.current_timeout_seconds = None
+        
+        # Hide progress bar and cancel button, update UI
+        self.progress_bar.setVisible(False)
+        if hasattr(self, 'cancel_button'):
+            self.cancel_button.setVisible(False)
+        self.update_ui_state(False)  # Disable file-related actions
+        
+        # Update status
+        if elapsed_time > 0:
+            self.status_bar.showMessage(f"Operation cancelled after {elapsed_time:.1f}s")
+        else:
+            self.status_bar.showMessage("Operation cancelled")
+        
+        self.logger.info("Operation cancellation completed")
+    
+    def _is_threading_error(self, error_type: str, error_message: str) -> bool:
+        """
+        Determine if an error is related to threading operations.
+        
+        Args:
+            error_type: Type of error that occurred
+            error_message: Error message text
+            
+        Returns:
+            True if this appears to be a threading-related error
+        """
+        threading_indicators = [
+            'thread',
+            'worker',
+            'qthread',
+            'movetothread',
+            'signal',
+            'slot',
+            'connection',
+            'threading',
+            'concurrent',
+            'async',
+            'timeout',
+            'deadlock',
+            'race condition'
+        ]
+        
+        error_text = f"{error_type} {error_message}".lower()
+        
+        # Check for threading-related keywords
+        for indicator in threading_indicators:
+            if indicator in error_text:
+                self.logger.info(f"Threading error detected: '{indicator}' found in error message")
+                return True
+        
+        # Check for specific error types that commonly occur in threading
+        if error_type in ['operation_error', 'worker_error', 'thread_error']:
+            self.logger.info(f"Threading error detected: error type '{error_type}' indicates threading issue")
+            return True
+        
+        return False
+    
+    def _handle_threading_error_with_fallback(self, error_message: str):
+        """
+        Handle threading errors with fallback to direct loading.
+        
+        Args:
+            error_message: The original error message from the threading operation
+        """
+        # Update fallback statistics
+        self.fallback_stats['threading_failures'] += 1
+        self.fallback_stats['fallback_reasons'].append(f"Threading error: {error_message}")
+        
+        self.logger.warning(f"Threading operation failed (failure #{self.fallback_stats['threading_failures']}): {error_message}")
+        
+        # Check if we have a current file to fall back to
+        if not hasattr(self, 'current_file_path') or not self.current_file_path:
+            self.logger.error("No current file path available for fallback")
+            self.show_enhanced_error_message(
+                "Threading Error", 
+                f"Threading operation failed and no fallback available: {error_message}"
+            )
+            return
+        
+        # Log the fallback attempt
+        self.logger.info(f"Attempting fallback to direct loading for file: {self.current_file_path}")
+        
+        # Offer recovery options to the user
+        recovery_options = {
+            'fallback_direct': 'Try direct loading (may freeze UI temporarily)',
+            'retry_threading': 'Retry with threading',
+            'select_different': 'Select a different file',
+            'cancel': 'Cancel operation'
+        }
+        
+        choice = self.show_enhanced_error_message(
+            "Threading Operation Failed",
+            f"The threaded operation failed: {error_message}",
+            f"File: {os.path.basename(self.current_file_path)}\n\n"
+            f"Threading errors can occur due to:\n"
+            f"- System resource constraints\n"
+            f"- Qt threading limitations\n"
+            f"- Memory pressure\n"
+            f"- File complexity\n\n"
+            f"Fallback options:\n"
+            f"- Direct loading: Load the file synchronously (may cause temporary UI freezing)\n"
+            f"- Retry threading: Attempt the threaded operation again\n"
+            f"- Select different: Choose a different file to load\n"
+            f"- Cancel: Return to ready state",
+            "warning",
+            recovery_options
+        )
+        
+        if choice == 'fallback_direct':
+            self._attempt_direct_loading_fallback()
+        elif choice == 'retry_threading':
+            self._retry_threading_operation()
+        elif choice == 'select_different':
+            self.load_ifc_file()
+        else:  # cancel
+            self.status_bar.showMessage("Operation cancelled due to threading error")
+            self.update_ui_state(False)
+    
+    def _attempt_direct_loading_fallback(self):
+        """
+        Attempt to load the current file using direct loading as a fallback.
+        """
+        if not self.current_file_path:
+            self.logger.error("No file path available for direct loading fallback")
+            return
+        
+        # Update fallback statistics
+        self.fallback_stats['fallback_attempts'] += 1
+        self.fallback_stats['last_fallback_time'] = datetime.now()
+        
+        file_size_info = ""
+        try:
+            file_size = os.path.getsize(self.current_file_path)
+            file_size_info = f" ({file_size/(1024*1024):.1f}MB)"
+        except OSError:
+            pass
+        
+        self.logger.info(f"Starting direct loading fallback #{self.fallback_stats['fallback_attempts']} for: {self.current_file_path}{file_size_info}")
+        
+        try:
+            # Show warning about potential UI freezing
+            self.status_bar.showMessage("⚠️ Attempting direct loading - UI may freeze temporarily...")
+            self.status_bar.setStyleSheet("QStatusBar { color: #fd7e14; }")  # Orange warning color
+            
+            # Force a UI update before starting direct loading
+            self.repaint()
+            
+            # Attempt direct loading
+            self.load_file_directly(self.current_file_path)
+            
+            # Log successful fallback
+            self.fallback_stats['fallback_successes'] += 1
+            self.logger.info(f"Direct loading fallback completed successfully (success #{self.fallback_stats['fallback_successes']})")
+            self._log_fallback_statistics()
+            
+        except Exception as e:
+            # Update failure statistics
+            self.fallback_stats['fallback_failures'] += 1
+            self.logger.error(f"Direct loading fallback failed (failure #{self.fallback_stats['fallback_failures']}): {e}")
+            self._log_fallback_statistics()
+            error_details = traceback.format_exc()
+            
+            # Both threading and direct loading failed - this is a serious issue
+            self.show_enhanced_error_message(
+                "All Loading Methods Failed",
+                f"Both threaded and direct loading failed for this file: {str(e)}",
+                f"File: {os.path.basename(self.current_file_path)}\n"
+                f"Threading error occurred first, then direct loading also failed.\n\n"
+                f"This may indicate:\n"
+                f"- File corruption or invalid format\n"
+                f"- Insufficient system resources\n"
+                f"- Application configuration issues\n\n"
+                f"Error details:\n{error_details}",
+                "error"
+            )
+            
+            # Reset UI state
+            self.update_ui_state(False)
+            self.status_bar.showMessage("All loading methods failed")
+    
+    def _handle_thread_creation_failure(self, title: str, operation_func, error: Exception, *args, **kwargs):
+        """
+        Handle failure to create a thread for an operation.
+        
+        Args:
+            title: Operation title
+            operation_func: The function that was supposed to run in the thread
+            error: The exception that occurred during thread creation
+            *args, **kwargs: Arguments for the operation function
+        """
+        self.logger.error(f"Thread creation failed for '{title}': {error}")
+        
+        # Clean up any partially created resources
+        if hasattr(self, 'operation_thread'):
+            self.operation_thread = None
+        if hasattr(self, 'operation_worker'):
+            self.operation_worker = None
+        
+        # Hide progress indicators
+        self.progress_bar.setVisible(False)
+        if hasattr(self, 'cancel_button'):
+            self.cancel_button.setVisible(False)
+        
+        # Offer fallback to direct execution
+        recovery_options = {
+            'fallback_direct': 'Execute directly (may freeze UI)',
+            'retry_threading': 'Retry threading operation',
+            'cancel': 'Cancel operation'
+        }
+        
+        choice = self.show_enhanced_error_message(
+            "Thread Creation Failed",
+            f"Failed to create thread for '{title}': {str(error)}",
+            f"This may be due to:\n"
+            f"- System resource limitations\n"
+            f"- Qt threading constraints\n"
+            f"- Memory pressure\n\n"
+            f"Error details: {str(error)}",
+            "error",
+            recovery_options
+        )
+        
+        if choice == 'fallback_direct':
+            self.logger.info(f"Falling back to direct execution for '{title}'")
+            self._execute_operation_directly(title, operation_func, *args, **kwargs)
+        elif choice == 'retry_threading':
+            self.logger.info(f"Retrying threading operation for '{title}'")
+            self.show_non_blocking_progress(title, operation_func, *args, **kwargs)
+        else:
+            self.status_bar.showMessage(f"Operation '{title}' cancelled due to threading error")
+    
+    def _handle_thread_startup_failure(self, title: str, operation_func, error: Exception, *args, **kwargs):
+        """
+        Handle failure to start a thread for an operation.
+        
+        Args:
+            title: Operation title
+            operation_func: The function that was supposed to run in the thread
+            error: The exception that occurred during thread startup
+            *args, **kwargs: Arguments for the operation function
+        """
+        self.logger.error(f"Thread startup failed for '{title}': {error}")
+        
+        # Clean up the failed thread
+        if hasattr(self, 'operation_thread') and self.operation_thread:
+            self.operation_thread.quit()
+            self.operation_thread.wait(1000)  # Wait up to 1 second
+            self.operation_thread = None
+        if hasattr(self, 'operation_worker'):
+            self.operation_worker = None
+        
+        # Clean up timeout timer
+        if hasattr(self, 'operation_timeout_timer') and self.operation_timeout_timer:
             self.operation_timeout_timer.stop()
         
-        # Hide progress bar
+        # Hide progress indicators
         self.progress_bar.setVisible(False)
+        if hasattr(self, 'cancel_button'):
+            self.cancel_button.setVisible(False)
         
-        self.status_bar.showMessage("Operation cancelled")
+        # Offer fallback options
+        recovery_options = {
+            'fallback_direct': 'Execute directly (may freeze UI)',
+            'retry_threading': 'Retry threading operation',
+            'cancel': 'Cancel operation'
+        }
+        
+        choice = self.show_enhanced_error_message(
+            "Thread Startup Failed",
+            f"Failed to start thread for '{title}': {str(error)}",
+            f"The thread was created but failed to start properly.\n\n"
+            f"This may be due to:\n"
+            f"- Qt event loop issues\n"
+            f"- System threading limitations\n"
+            f"- Resource contention\n\n"
+            f"Error details: {str(error)}",
+            "error",
+            recovery_options
+        )
+        
+        if choice == 'fallback_direct':
+            self.logger.info(f"Falling back to direct execution for '{title}' after startup failure")
+            self._execute_operation_directly(title, operation_func, *args, **kwargs)
+        elif choice == 'retry_threading':
+            self.logger.info(f"Retrying threading operation for '{title}' after startup failure")
+            # Add a small delay before retry to let system recover
+            QTimer.singleShot(1000, lambda: self.show_non_blocking_progress(title, operation_func, *args, **kwargs))
+        else:
+            self.status_bar.showMessage(f"Operation '{title}' cancelled due to thread startup failure")
+    
+    def _execute_operation_directly(self, title: str, operation_func, *args, **kwargs):
+        """
+        Execute an operation directly (synchronously) as a fallback when threading fails.
+        
+        Args:
+            title: Operation title
+            operation_func: The function to execute
+            *args, **kwargs: Arguments for the operation function
+        """
+        # Update fallback statistics
+        self.fallback_stats['fallback_attempts'] += 1
+        self.fallback_stats['last_fallback_time'] = datetime.now()
+        self.fallback_stats['fallback_reasons'].append(f"Direct execution fallback for '{title}'")
+        
+        self.logger.info(f"Executing '{title}' directly as fallback (attempt #{self.fallback_stats['fallback_attempts']})")
+        
+        try:
+            # Show warning about potential UI freezing
+            self.status_bar.showMessage(f"⚠️ Executing '{title}' directly - UI may freeze temporarily...")
+            self.status_bar.setStyleSheet("QStatusBar { color: #fd7e14; }")  # Orange warning color
+            
+            # Force UI update before starting
+            self.repaint()
+            
+            # Execute the operation directly
+            result = operation_func(*args, **kwargs)
+            
+            # Handle successful completion
+            self.fallback_stats['fallback_successes'] += 1
+            self.on_operation_completed(True, f"'{title}' completed successfully (direct execution)", result)
+            
+            self.logger.info(f"Direct execution of '{title}' completed successfully (success #{self.fallback_stats['fallback_successes']})")
+            self._log_fallback_statistics()
+            
+        except Exception as e:
+            self.fallback_stats['fallback_failures'] += 1
+            self.logger.error(f"Direct execution of '{title}' failed (failure #{self.fallback_stats['fallback_failures']}): {e}")
+            self._log_fallback_statistics()
+            error_details = traceback.format_exc()
+            
+            # Both threading and direct execution failed
+            self.show_enhanced_error_message(
+                "All Execution Methods Failed",
+                f"Both threaded and direct execution failed for '{title}': {str(e)}",
+                f"Threading failed first, then direct execution also failed.\n\n"
+                f"This indicates a fundamental issue with the operation or system state.\n\n"
+                f"Error details:\n{error_details}",
+                "error"
+            )
+            
+            # Reset UI state
+            self.update_ui_state(False)
+            self.status_bar.showMessage(f"All execution methods failed for '{title}'")
+    
+    def _log_fallback_statistics(self):
+        """Log comprehensive fallback statistics for debugging and monitoring."""
+        stats = self.fallback_stats
+        
+        self.logger.info("=== Fallback Statistics ===")
+        self.logger.info(f"Threading failures: {stats['threading_failures']}")
+        self.logger.info(f"Fallback attempts: {stats['fallback_attempts']}")
+        self.logger.info(f"Fallback successes: {stats['fallback_successes']}")
+        self.logger.info(f"Fallback failures: {stats['fallback_failures']}")
+        
+        if stats['fallback_attempts'] > 0:
+            success_rate = (stats['fallback_successes'] / stats['fallback_attempts']) * 100
+            self.logger.info(f"Fallback success rate: {success_rate:.1f}%")
+        
+        if stats['last_fallback_time']:
+            self.logger.info(f"Last fallback attempt: {stats['last_fallback_time']}")
+        
+        # Log recent fallback reasons (last 5)
+        if stats['fallback_reasons']:
+            recent_reasons = stats['fallback_reasons'][-5:]
+            self.logger.info("Recent fallback reasons:")
+            for i, reason in enumerate(recent_reasons, 1):
+                self.logger.info(f"  {i}. {reason}")
+        
+        self.logger.info("=== End Fallback Statistics ===")
+    
+    def _on_thread_finished(self):
+        """Handle thread finished signal for cleanup and logging."""
+        self.logger.debug("Operation thread finished")
+        
+        # Additional cleanup if needed
+        if hasattr(self, 'operation_timeout_timer') and self.operation_timeout_timer:
+            self.operation_timeout_timer.stop()
+    
+    def _retry_threading_operation(self):
+        """
+        Retry the threading operation that previously failed.
+        """
+        if not self.current_file_path:
+            self.logger.error("No file path available for threading retry")
+            return
+        
+        self.logger.info(f"Retrying threading operation for: {self.current_file_path}")
+        
+        try:
+            # Determine file size category to use appropriate loading method
+            category, size_bytes, size_string = self.categorize_file_size(self.current_file_path)
+            
+            if category == FileSizeCategory.SMALL:
+                # For small files, direct loading is actually preferred
+                self.logger.info("File is small, using direct loading instead of threading")
+                self.load_file_directly(self.current_file_path)
+            else:
+                # Retry threaded loading for larger files
+                self.logger.info(f"Retrying threaded loading for {category.value} file ({size_string})")
+                self.load_file_threaded(self.current_file_path)
+                
+        except Exception as e:
+            self.logger.error(f"Threading retry failed: {e}")
+            self.show_enhanced_error_message(
+                "Retry Failed",
+                f"Failed to retry the operation: {str(e)}",
+                traceback.format_exc(),
+                "error"
+            )
     
     def handle_memory_error(self, operation: str, error: MemoryError) -> bool:
         """
@@ -923,6 +1744,29 @@ class MainWindow(QMainWindow):
             }
         """)
         main_layout.addWidget(self.progress_bar)
+        
+        # Cancel button for long operations
+        self.cancel_button = QPushButton("Cancel Operation")
+        self.cancel_button.clicked.connect(self.cancel_operation)
+        self.cancel_button.setVisible(False)
+        self.cancel_button.setStyleSheet("""
+            QPushButton {
+                padding: 8px 16px;
+                background-color: #dc3545;
+                color: white;
+                border: none;
+                border-radius: 4px;
+                font-weight: bold;
+                font-size: 12px;
+            }
+            QPushButton:hover {
+                background-color: #c82333;
+            }
+            QPushButton:pressed {
+                background-color: #bd2130;
+            }
+        """)
+        main_layout.addWidget(self.cancel_button)
         
         # Create splitter for main content
         self.main_splitter = QSplitter(Qt.Orientation.Horizontal)
@@ -1560,11 +2404,13 @@ class MainWindow(QMainWindow):
         try:
             self.logger.info(f"Loading file with threading: {file_path}")
             
+            # Store file path for timeout calculation
+            self.current_file_path = file_path
+            
             # Load the file
             success, load_message = self.ifc_reader.load_file(file_path)
             
             if success:
-                self.current_file_path = file_path
                 self.update_file_info()
                 self.update_ui_state(True)  # Enable file-related actions
                 self.status_bar.showMessage("File loaded successfully. Extracting spaces...")

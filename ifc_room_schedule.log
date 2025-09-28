@@ -3841,3 +3841,1195 @@
 2025-09-28 08:23:43,893 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 115/115: F10.01
 2025-09-28 08:23:43,894 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2rtN$jwdnDPuHZvwuoA7Ni
 2025-09-28 08:23:43,894 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2rtN$jwdnDPuHZvwuoA7Ni: {'DefinedBy': 5}
+2025-09-28 08:32:21,902 - ifc_room_schedule.ui.main_window - INFO - Using file size-based timeout: 30s for 5.1MB file
+2025-09-28 08:32:21,903 - ifc_room_schedule.ui.main_window - INFO - Operation timeout set to 30 seconds
+2025-09-28 08:32:21,903 - ifc_room_schedule.ui.main_window - INFO - Using file size-based timeout: 60s for 25.5MB file
+2025-09-28 08:32:21,903 - ifc_room_schedule.ui.main_window - INFO - Operation timeout set to 60 seconds
+2025-09-28 08:32:21,904 - ifc_room_schedule.ui.main_window - INFO - Operation timeout set to 90 seconds
+2025-09-28 08:32:22,620 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 08:33:13,144 - ifc_room_schedule.ui.main_window - INFO - Using file size-based timeout: 30s for 5.1MB file
+2025-09-28 08:33:13,145 - ifc_room_schedule.ui.main_window - INFO - Operation timeout set to 30 seconds
+2025-09-28 08:33:13,146 - ifc_room_schedule.ui.main_window - INFO - Using file size-based timeout: 60s for 25.5MB file
+2025-09-28 08:33:13,146 - ifc_room_schedule.ui.main_window - INFO - Operation timeout set to 60 seconds
+2025-09-28 08:33:13,147 - ifc_room_schedule.ui.main_window - INFO - Operation timeout set to 90 seconds
+2025-09-28 08:33:14,527 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 08:33:14,529 - ifc_room_schedule.ui.main_window - INFO - Terminating operation thread after 0.0s
+2025-09-28 08:33:14,531 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 08:33:34,289 - ifc_room_schedule.ui.main_window - INFO - Using file size-based timeout: 30s for 5.1MB file
+2025-09-28 08:33:34,290 - ifc_room_schedule.ui.main_window - INFO - Operation timeout set to 30 seconds
+2025-09-28 08:33:34,291 - ifc_room_schedule.ui.main_window - INFO - Using file size-based timeout: 60s for 25.5MB file
+2025-09-28 08:33:34,291 - ifc_room_schedule.ui.main_window - INFO - Operation timeout set to 60 seconds
+2025-09-28 08:33:34,292 - ifc_room_schedule.ui.main_window - INFO - Operation timeout set to 90 seconds
+2025-09-28 08:33:35,576 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 08:33:35,576 - ifc_room_schedule.ui.main_window - INFO - Terminating operation thread after 0.0s
+2025-09-28 08:33:35,578 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 08:34:08,632 - ifc_room_schedule.ui.main_window - INFO - File categorized as small: 2.3 MB
+2025-09-28 08:34:08,633 - ifc_room_schedule.ui.main_window - INFO - Using file size-based timeout: 30s for 2.3MB file
+2025-09-28 08:34:08,633 - ifc_room_schedule.ui.main_window - INFO - Operation timeout set to 30 seconds
+2025-09-28 08:34:08,634 - ifc_room_schedule.ui.main_window - INFO - File categorized as small: 1.4 MB
+2025-09-28 08:34:08,635 - ifc_room_schedule.ui.main_window - INFO - Using file size-based timeout: 30s for 1.4MB file
+2025-09-28 08:34:08,636 - ifc_room_schedule.ui.main_window - INFO - Operation timeout set to 30 seconds
+2025-09-28 08:34:08,637 - ifc_room_schedule.ui.main_window - INFO - File categorized as small: 2.3 MB
+2025-09-28 08:34:08,637 - ifc_room_schedule.ui.main_window - INFO - Processing small file: 2.3 MB
+2025-09-28 08:34:08,767 - ifc_room_schedule.ui.main_window - INFO - Using direct loading strategy for small file
+2025-09-28 08:34:47,749 - ifc_room_schedule.ui.main_window - INFO - Using file size-based timeout: 30s for 2.3MB file
+2025-09-28 08:34:47,749 - ifc_room_schedule.ui.main_window - INFO - Operation timeout set to 30 seconds
+2025-09-28 08:34:47,804 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 08:34:47,805 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 08:35:07,357 - ifc_room_schedule.ui.main_window - INFO - Using file size-based timeout: 30s for 2.3MB file
+2025-09-28 08:35:07,358 - ifc_room_schedule.ui.main_window - INFO - Operation timeout set to 30 seconds
+2025-09-28 08:35:07,469 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 08:35:07,469 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 08:35:07,471 - ifc_room_schedule.ui.main_window - INFO - Using file size-based timeout: 30s for 1.4MB file
+2025-09-28 08:35:07,472 - ifc_room_schedule.ui.main_window - INFO - Operation timeout set to 30 seconds
+2025-09-28 08:35:07,480 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 08:35:07,481 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 08:35:08,503 - ifc_room_schedule.ui.main_window - INFO - File categorized as small: 2.3 MB
+2025-09-28 08:35:08,505 - ifc_room_schedule.ui.main_window - INFO - File categorized as small: 1.4 MB
+2025-09-28 09:58:43,214 - ifc_room_schedule.ui.main_window - INFO - Using file size-based timeout: 30s for 5.1MB file
+2025-09-28 09:58:43,214 - ifc_room_schedule.ui.main_window - INFO - Operation timeout set to 30 seconds
+2025-09-28 09:58:43,215 - ifc_room_schedule.ui.main_window - INFO - Using file size-based timeout: 60s for 25.5MB file
+2025-09-28 09:58:43,215 - ifc_room_schedule.ui.main_window - INFO - Operation timeout set to 60 seconds
+2025-09-28 09:58:43,215 - ifc_room_schedule.ui.main_window - INFO - Operation timeout set to 90 seconds
+2025-09-28 09:58:43,959 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 09:58:43,960 - ifc_room_schedule.ui.main_window - INFO - Terminating operation thread after 0.0s
+2025-09-28 09:58:43,961 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 10:00:35,511 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 10:00:35,512 - ifc_room_schedule.ui.main_window - INFO - Requesting graceful cancellation from worker...
+2025-09-28 10:00:35,512 - ifc_room_schedule.ui.main_window - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 10:00:35,512 - ifc_room_schedule.ui.main_window - INFO - Thread terminated gracefully
+2025-09-28 10:00:35,513 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 10:00:35,908 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 10:00:35,909 - ifc_room_schedule.ui.main_window - INFO - Requesting graceful cancellation from worker...
+2025-09-28 10:00:35,909 - ifc_room_schedule.ui.main_window - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 10:00:35,910 - ifc_room_schedule.ui.main_window - INFO - Thread terminated gracefully
+2025-09-28 10:00:35,910 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 10:00:35,910 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 10:00:35,911 - ifc_room_schedule.ui.main_window - INFO - Requesting graceful cancellation from worker...
+2025-09-28 10:00:35,912 - ifc_room_schedule.ui.main_window - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 10:00:35,914 - ifc_room_schedule.ui.main_window - WARNING - Graceful termination failed, forcing thread termination
+2025-09-28 10:00:35,914 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 10:00:36,402 - ifc_room_schedule.ui.main_window - INFO - Operation cancelled by user after 0.0s
+2025-09-28 10:00:36,403 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 10:00:36,403 - ifc_room_schedule.ui.main_window - INFO - Requesting graceful cancellation from worker...
+2025-09-28 10:00:36,404 - ifc_room_schedule.ui.main_window - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 10:00:36,404 - ifc_room_schedule.ui.main_window - INFO - Thread terminated gracefully
+2025-09-28 10:00:36,404 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 10:00:36,910 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 10:00:36,910 - ifc_room_schedule.ui.main_window - INFO - Requesting graceful cancellation from worker...
+2025-09-28 10:00:36,911 - ifc_room_schedule.ui.main_window - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 10:00:36,911 - ifc_room_schedule.ui.main_window - INFO - Thread terminated gracefully
+2025-09-28 10:00:36,912 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 10:00:37,490 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 10:00:37,491 - ifc_room_schedule.ui.main_window - INFO - Requesting graceful cancellation from worker...
+2025-09-28 10:00:37,493 - ifc_room_schedule.ui.main_window - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 10:00:37,493 - ifc_room_schedule.ui.main_window - INFO - Thread terminated gracefully
+2025-09-28 10:00:37,495 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 10:01:13,354 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 10:01:13,354 - ifc_room_schedule.ui.main_window - INFO - Requesting graceful cancellation from worker...
+2025-09-28 10:01:13,354 - ifc_room_schedule.ui.main_window - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 10:01:13,355 - ifc_room_schedule.ui.main_window - INFO - Thread terminated gracefully
+2025-09-28 10:01:13,355 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 10:01:13,940 - ifc_room_schedule.ui.main_window - INFO - File categorized as small: 2.3 MB
+2025-09-28 10:01:13,940 - ifc_room_schedule.ui.main_window - INFO - Processing small file: 2.3 MB
+2025-09-28 10:01:14,070 - ifc_room_schedule.ui.main_window - INFO - Using direct loading strategy for small file
+2025-09-28 10:01:14,071 - ifc_room_schedule.ui.main_window - INFO - Loading file directly: tesfiler/AkkordSvingen 23_ARK.ifc
+2025-09-28 10:01:16,072 - ifc_room_schedule.parser.ifc_file_reader - INFO - Small file detected (2.3MB) - skipping strict memory validation
+2025-09-28 10:01:16,072 - ifc_room_schedule.parser.ifc_file_reader - INFO - Loading IFC file: tesfiler/AkkordSvingen 23_ARK.ifc (2.3MB)
+2025-09-28 10:01:16,187 - ifc_room_schedule.parser.ifc_file_reader - INFO - IFC file loaded successfully
+2025-09-28 10:01:16,187 - ifc_room_schedule.parser.ifc_file_reader - INFO - Validating IFC file structure...
+2025-09-28 10:01:16,188 - ifc_room_schedule.parser.ifc_file_reader - INFO - Found 341 building products
+2025-09-28 10:01:16,188 - ifc_room_schedule.parser.ifc_file_reader - INFO - Found 34 spaces
+2025-09-28 10:01:16,189 - ifc_room_schedule.parser.ifc_file_reader - INFO - Successfully loaded IFC file (IFC4) with 34 spaces found.
+2025-09-28 10:01:16,189 - ifc_room_schedule.ui.main_window - INFO - Extracting spaces directly for small file
+2025-09-28 10:01:16,195 - ifc_room_schedule.parser.ifc_space_extractor - INFO - Successfully extracted 34 spaces from 34 IfcSpace entities
+2025-09-28 10:01:16,195 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 1/34: 01
+2025-09-28 10:01:16,197 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 11 surfaces for space 2oghQ1cAf6c9BmWD1pMdIj
+2025-09-28 10:01:16,197 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:01:16,198 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 2oghQ1cAf6c9BmWD1pMdIj: ['Duplicate surface IDs found: 01LR8n0gb41fXDw7I3tUWy', '1 surfaces have zero or invalid area']
+2025-09-28 10:01:16,198 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 2/34: 01
+2025-09-28 10:01:16,199 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 9 surfaces for space 0lvmW1C_r0DwLHYilhW$yq
+2025-09-28 10:01:16,199 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:01:16,200 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 3/34: 01
+2025-09-28 10:01:16,201 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 13 surfaces for space 0etOdx4gn7QOeFM3DkCACZ
+2025-09-28 10:01:16,202 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:01:16,202 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 0etOdx4gn7QOeFM3DkCACZ: ['Duplicate surface IDs found: 0e3eGU1HrEb9ye2pDlv04O, 2BaCfuKIH2Ig_ALPcivZA2', '1 surfaces have zero or invalid area']
+2025-09-28 10:01:16,202 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 4/34: 01
+2025-09-28 10:01:16,206 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 32 surfaces for space 0RGRVCyE13zRvWx_wbQh5R
+2025-09-28 10:01:16,207 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:01:16,207 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 0RGRVCyE13zRvWx_wbQh5R: ['Duplicate surface IDs found: 3kO9NO6mvABAhIWNqlFUlo, 01LR8n0gb41fXDw7I3tUWy, 0lGbLiw0X4Vu4n$6tqyP_s', '1 surfaces have zero or invalid area']
+2025-09-28 10:01:16,207 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 5/34: 01
+2025-09-28 10:01:16,209 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 7 surfaces for space 0Lfq9rWmDEZAgA0xL$m$Bk
+2025-09-28 10:01:16,209 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:01:16,209 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 0Lfq9rWmDEZAgA0xL$m$Bk: ['Duplicate surface IDs found: 2HiaYxzmbFC9RWBDGOoUf4, 0lGbLiw0X4Vu4n$6tqyP_s', '1 surfaces have zero or invalid area']
+2025-09-28 10:01:16,209 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 6/34: 02
+2025-09-28 10:01:16,211 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 15 surfaces for space 3JXfZI11rEbPVPppj4Jxf1
+2025-09-28 10:01:16,211 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:01:16,212 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 3JXfZI11rEbPVPppj4Jxf1: ['Duplicate surface IDs found: 2LG9WHqjr7leWRzxd67kbB, 0wxr7RKCX9XBOiag7i_wCA, 374BUd6V1B480tJaEMN2iu', '1 surfaces have zero or invalid area']
+2025-09-28 10:01:16,212 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 7/34: 02
+2025-09-28 10:01:16,214 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 10 surfaces for space 0rF7q_xCj62PipnnzfNzKW
+2025-09-28 10:01:16,214 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:01:16,215 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 0rF7q_xCj62PipnnzfNzKW: ['Duplicate surface IDs found: 374BUd6V1B480tJaEMN2iu', '1 surfaces have zero or invalid area']
+2025-09-28 10:01:16,215 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 8/34: 02
+2025-09-28 10:01:16,216 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 10 surfaces for space 30Mh9i1JvBjAVAs5qwyGFC
+2025-09-28 10:01:16,217 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:01:16,217 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 9/34: 02
+2025-09-28 10:01:16,219 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 12 surfaces for space 1a0oo6Njb7gxF512nxSYuJ
+2025-09-28 10:01:16,219 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:01:16,219 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 10/34: 02
+2025-09-28 10:01:16,222 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 28 surfaces for space 1hcSgXD6nB8Qls7RqiVt36
+2025-09-28 10:01:16,223 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:01:16,223 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 1hcSgXD6nB8Qls7RqiVt36: ['Duplicate surface IDs found: 3zzm$YeIP3KwFw6TnLeBpn, 0wxr7RKCX9XBOiag7i_wCA, 374BUd6V1B480tJaEMN2iu', '1 surfaces have zero or invalid area']
+2025-09-28 10:01:16,224 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 11/34: 01
+2025-09-28 10:01:16,226 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 13 surfaces for space 2g7n5wXHHFjvfjzRMFL7Ag
+2025-09-28 10:01:16,226 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:01:16,226 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 2g7n5wXHHFjvfjzRMFL7Ag: ['Duplicate surface IDs found: 3kO9NO6mvABAhIWNqlFUlo', '1 surfaces have zero or invalid area']
+2025-09-28 10:01:16,226 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 12/34: 02
+2025-09-28 10:01:16,228 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 8 surfaces for space 3ueW3dBRL2R9WoR8xGTA9E
+2025-09-28 10:01:16,228 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:01:16,228 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 3ueW3dBRL2R9WoR8xGTA9E: ['Duplicate surface IDs found: 3c38nW$s52ROpD4RNXvJwF, 0wxr7RKCX9XBOiag7i_wCA', '1 surfaces have zero or invalid area']
+2025-09-28 10:01:16,229 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 13/34: 02
+2025-09-28 10:01:16,231 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 11 surfaces for space 0pwWNonAvEzRBvwhqxSoC6
+2025-09-28 10:01:16,231 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:01:16,231 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 0pwWNonAvEzRBvwhqxSoC6: ['Duplicate surface IDs found: 3zzm$YeIP3KwFw6TnLeBpn', '1 surfaces have zero or invalid area']
+2025-09-28 10:01:16,232 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 14/34: 01
+2025-09-28 10:01:16,244 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 126 surfaces for space 1lBJWr459BIP7TCLnlZ7Rr
+2025-09-28 10:01:16,245 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 6 surfaces have zero or invalid area
+2025-09-28 10:01:16,245 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 1lBJWr459BIP7TCLnlZ7Rr: ['Duplicate surface IDs found: 30QeuDIbb7WRfj6Cyg3v5b, 01LR8n0gb41fXDw7I3tUWy, 1SLZ6EUWz9ofFRTcVtfH5E, 0wxr7RKCX9XBOiag7i_wCA, 0FHZ$Ev4T0VgRvhCvO7_zY, 12pjW8B$LCUfUf6hpM6E8i, 374BUd6V1B480tJaEMN2iu, 119so98uP1xggSFjmpDBVH, 3kO9NO6mvABAhIWNqlFUlo, 0e3eGU1HrEb9ye2pDlv04O, 011xFod8vCxADo9BCQFXAF, 0lGbLiw0X4Vu4n$6tqyP_s, 3zzm$YeIP3KwFw6TnLeBpn, 2J7bZ4tXrAHR66jCNg8F0r, 1ZHs$C_91CyvindHAOIiIy, 1rQA2bC992bOMfd2Tb96_k, 2CrJaFXorFmwa7wEwTvbdy, 17ZetX$JjBVQavDZvMPiWb', '6 surfaces have zero or invalid area']
+2025-09-28 10:01:16,246 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 15/34: 01
+2025-09-28 10:01:16,247 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 9 surfaces for space 32WTxU1Oj9QRi0av4ikK8J
+2025-09-28 10:01:16,248 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:01:16,248 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 32WTxU1Oj9QRi0av4ikK8J: ['Duplicate surface IDs found: 01LR8n0gb41fXDw7I3tUWy, 0lGbLiw0X4Vu4n$6tqyP_s', '1 surfaces have zero or invalid area']
+2025-09-28 10:01:16,249 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 16/34: 03
+2025-09-28 10:01:16,251 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 16 surfaces for space 1BdfIYzF1BSQ8tBqjv4keq
+2025-09-28 10:01:16,251 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 1BdfIYzF1BSQ8tBqjv4keq: ['Duplicate surface IDs found: 3i_MxBIRb2dQSdCKkEB2bT, 3wF8HWUJD9kQrq1dwn0poO, 0rZd5xjqr1BgBbZPmzNPcG, 1_rzqOLQv2YQq20UtRA2Bj, 2t637aIc18dPbS$LhlLZ$8']
+2025-09-28 10:01:16,251 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 17/34: 03
+2025-09-28 10:01:16,253 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 11 surfaces for space 1Chpbbz1P2zRAU0ARRIKOs
+2025-09-28 10:01:16,253 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 1Chpbbz1P2zRAU0ARRIKOs: ['Duplicate surface IDs found: 0rZd5xjqr1BgBbZPmzNPcG, 3_zXnz1VnC2RAbUY6OsKyx']
+2025-09-28 10:01:16,254 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 18/34: 03
+2025-09-28 10:01:16,255 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 7 surfaces for space 1PXeoJQRHDY9mYm_2dV5Zw
+2025-09-28 10:01:16,255 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 19/34: 03
+2025-09-28 10:01:16,256 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 11 surfaces for space 1Abuh2hqP3MxoJVtTeNJZJ
+2025-09-28 10:01:16,257 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 1Abuh2hqP3MxoJVtTeNJZJ: ['Duplicate surface IDs found: 37h8Sgu7D0F9HKGc0lkAsK, 37rSpTisL4SPxRTvS$ay4_']
+2025-09-28 10:01:16,257 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 20/34: 03
+2025-09-28 10:01:16,259 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 15 surfaces for space 20e785kif8MhL29lIzXRhQ
+2025-09-28 10:01:16,259 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 20e785kif8MhL29lIzXRhQ: ['Duplicate surface IDs found: 1oJKHYXt9AgBACZ_H73n7j, 385DVPGnvDmgZ_vVwOypGc, 1NqhveuRTBRxUWsl4Apb86']
+2025-09-28 10:01:16,259 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 21/34: 03
+2025-09-28 10:01:16,261 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 7 surfaces for space 37au_BtkfEU8d59K6L2ldX
+2025-09-28 10:01:16,261 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 37au_BtkfEU8d59K6L2ldX: ['Duplicate surface IDs found: 1_rzqOLQv2YQq20UtRA2Bj, 1tiYEuCsLEVQF1bnhZGbvD']
+2025-09-28 10:01:16,261 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 22/34: 04
+2025-09-28 10:01:16,265 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 13 surfaces for space 02sq4HuYP3E9UVow$9C7Ud
+2025-09-28 10:01:16,266 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 02sq4HuYP3E9UVow$9C7Ud: ['Duplicate surface IDs found: 2W_WVwH_f5RhHsIOViFMf8, 2n7GZify51Th$Z2_nMpHTk, 0QNbGf$hX4WgdeoawMyOe$']
+2025-09-28 10:01:16,266 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 23/34: 04
+2025-09-28 10:01:16,267 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 11 surfaces for space 1kqaFJe_n95uburgU8d__1
+2025-09-28 10:01:16,268 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 1kqaFJe_n95uburgU8d__1: ['Duplicate surface IDs found: 2n7GZify51Th$Z2_nMpHTk, 3LN0A5aT9Btvo_bVwnmbDl']
+2025-09-28 10:01:16,268 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 24/34: 04
+2025-09-28 10:01:16,270 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 7 surfaces for space 3rYbhuSJj32fm1Vmztk9Qe
+2025-09-28 10:01:16,270 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 25/34: 04
+2025-09-28 10:01:16,272 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 9 surfaces for space 2oJi_gbc12FBtZgPM9SlEi
+2025-09-28 10:01:16,272 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 26/34: 04
+2025-09-28 10:01:16,273 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 6 surfaces for space 2J6Ny8LSj3LeIMUsY4hI2s
+2025-09-28 10:01:16,274 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 2J6Ny8LSj3LeIMUsY4hI2s: ['Duplicate surface IDs found: 2FINKUTsH1ngFpsHH72eqy, 0QNbGf$hX4WgdeoawMyOe$']
+2025-09-28 10:01:16,274 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 27/34: 04
+2025-09-28 10:01:16,276 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 14 surfaces for space 0hcW2B0zjFoesYviOiMrjT
+2025-09-28 10:01:16,276 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 0hcW2B0zjFoesYviOiMrjT: ['Duplicate surface IDs found: 0PVsWFqWbAf90LeX24rvR6, 2Zw3lvml971QLRubHbvXpI, 3Y$dkOJNz9V9Cs3zyoxDFr']
+2025-09-28 10:01:16,277 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 28/34: 02
+2025-09-28 10:01:16,305 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 294 surfaces for space 3qGJVsrovCCOERwRIM9M9F
+2025-09-28 10:01:16,306 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 4 surfaces have zero or invalid area
+2025-09-28 10:01:16,307 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 3qGJVsrovCCOERwRIM9M9F: ['Duplicate surface IDs found: 0PVsWFqWbAf90LeX24rvR6, 3GxUex2LXFDQk4naAj6zEj, 385DVPGnvDmgZ_vVwOypGc, 2tnWv1N6T2g81J8UBlFwKe, 2EnhrbM8b6kftnV9j08HkH, 2Zw3lvml971QLRubHbvXpI, 1NqhveuRTBRxUWsl4Apb86, 0gRoDum7937vfwhs1niPj5, 1oJKHYXt9AgBACZ_H73n7j, 1onrunXczCMO_SxJEcsYFR, 1yLTToSpn5luBGfDP61HGQ, 1_rzqOLQv2YQq20UtRA2Bj, 1k7aptnfzAr8XC2EW6UDg6, 3Y$dkOJNz9V9Cs3zyoxDFr, 2P0tgmtoD858UwkjVZsw64, 2W6yeJmY104eu62rCyQ3O0, 2n7GZify51Th$Z2_nMpHTk, 3wF8HWUJD9kQrq1dwn0poO, 2$3ty86p96owTvqm1LUvlD, 2_iHNUetH89haAeFM0v9sF, 2UOJsgQl5CeBsHx3tFxKdC, 3mztZ8eFv2swCqHmIxMvHn, 3U_Jx5uwfAnPL4KOAyS$1I, 3CWQv_Krf8Tv9kqhOuGXPx, 0rZd5xjqr1BgBbZPmzNPcG, 0OMdwkKMH34hDRjeVNngyz, 3_zXnz1VnC2RAbUY6OsKyx, 0QNbGf$hX4WgdeoawMyOe$', '4 surfaces have zero or invalid area']
+2025-09-28 10:01:16,307 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 29/34: 03
+2025-09-28 10:01:16,310 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 32 surfaces for space 3quWfdPA12heO5M9sToywJ
+2025-09-28 10:01:16,311 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 8 surfaces have zero or invalid area
+2025-09-28 10:01:16,311 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 3quWfdPA12heO5M9sToywJ: ['Duplicate surface IDs found: 1NqhveuRTBRxUWsl4Apb86, 1oJKHYXt9AgBACZ_H73n7j, 3wF8HWUJD9kQrq1dwn0poO, 385DVPGnvDmgZ_vVwOypGc, 0rZd5xjqr1BgBbZPmzNPcG, 1_rzqOLQv2YQq20UtRA2Bj, 3_zXnz1VnC2RAbUY6OsKyx', '8 surfaces have zero or invalid area']
+2025-09-28 10:01:16,311 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 30/34: 04
+2025-09-28 10:01:16,316 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 33 surfaces for space 2ygnsTAGr3ruU6hrha99xQ
+2025-09-28 10:01:16,317 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 8 surfaces have zero or invalid area
+2025-09-28 10:01:16,317 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 2ygnsTAGr3ruU6hrha99xQ: ['Duplicate surface IDs found: 0PVsWFqWbAf90LeX24rvR6, 2Zw3lvml971QLRubHbvXpI, 3Y$dkOJNz9V9Cs3zyoxDFr, 2n7GZify51Th$Z2_nMpHTk, 0$0jjesOT8lv70iEsbTHTJ, 1yObTqoOHDXB15tQZuXljW, 0QNbGf$hX4WgdeoawMyOe$', '8 surfaces have zero or invalid area']
+2025-09-28 10:01:16,317 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 31/34: 03
+2025-09-28 10:01:16,322 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 43 surfaces for space 0hmZNwjDX0ZwJbO6AmrrjO
+2025-09-28 10:01:16,322 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 3 surfaces have zero or invalid area
+2025-09-28 10:01:16,322 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 0hmZNwjDX0ZwJbO6AmrrjO: ['Duplicate surface IDs found: 2n7GZify51Th$Z2_nMpHTk, 36hnrR$zHBI9Z0XSe8Y_gm, 3wF8HWUJD9kQrq1dwn0poO, 2tnWv1N6T2g81J8UBlFwKe, 0rZd5xjqr1BgBbZPmzNPcG, 1k7aptnfzAr8XC2EW6UDg6, 3_zXnz1VnC2RAbUY6OsKyx', '3 surfaces have zero or invalid area']
+2025-09-28 10:01:16,323 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 32/34: 03
+2025-09-28 10:01:16,327 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 23 surfaces for space 02MoDbUmz2fQYwzHjhQuhV
+2025-09-28 10:01:16,328 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 4 surfaces have zero or invalid area
+2025-09-28 10:01:16,328 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 02MoDbUmz2fQYwzHjhQuhV: ['Duplicate surface IDs found: 1_rzqOLQv2YQq20UtRA2Bj, 12OorI3HbCkA_rAwe4GgMT, 3mztZ8eFv2swCqHmIxMvHn', '4 surfaces have zero or invalid area']
+2025-09-28 10:01:16,328 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 33/34: 04
+2025-09-28 10:01:16,333 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 48 surfaces for space 1fmOvhTur4SAytWzlO9cvT
+2025-09-28 10:01:16,334 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 5 surfaces have zero or invalid area
+2025-09-28 10:01:16,334 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 1fmOvhTur4SAytWzlO9cvT: ['Duplicate surface IDs found: 0PVsWFqWbAf90LeX24rvR6, 2Zw3lvml971QLRubHbvXpI, 2UOJsgQl5CeBsHx3tFxKdC, 2MlGu3SqnBqxCeAC$z39PI, 1NqhveuRTBRxUWsl4Apb86, 2P0tgmtoD858UwkjVZsw64, 0gRoDum7937vfwhs1niPj5, 3U_Jx5uwfAnPL4KOAyS$1I, 3Y$dkOJNz9V9Cs3zyoxDFr, 1oJKHYXt9AgBACZ_H73n7j, 1onrunXczCMO_SxJEcsYFR, 385DVPGnvDmgZ_vVwOypGc, 2EnhrbM8b6kftnV9j08HkH', '5 surfaces have zero or invalid area']
+2025-09-28 10:01:16,335 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 34/34: 05
+2025-09-28 10:01:16,336 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 3 surfaces for space 0xyvjA51vBzPon8HIwA$o0
+2025-09-28 10:01:16,336 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 1/34: 01
+2025-09-28 10:01:16,365 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 10 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,366 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 2/34: 01
+2025-09-28 10:01:16,378 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 7 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,379 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 3/34: 01
+2025-09-28 10:01:16,395 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 12 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,395 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 4/34: 01
+2025-09-28 10:01:16,421 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 24 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,422 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 5/34: 01
+2025-09-28 10:01:16,433 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 7 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,434 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 6/34: 02
+2025-09-28 10:01:16,453 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 16 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,454 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 7/34: 02
+2025-09-28 10:01:16,467 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 8 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,467 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 8/34: 02
+2025-09-28 10:01:16,482 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 10 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,483 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 9/34: 02
+2025-09-28 10:01:16,496 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 7 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,497 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 10/34: 02
+2025-09-28 10:01:16,521 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 22 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,521 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 11/34: 01
+2025-09-28 10:01:16,538 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 13 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,538 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 12/34: 02
+2025-09-28 10:01:16,551 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 8 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,552 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 13/34: 02
+2025-09-28 10:01:16,566 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 11 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,567 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 14/34: 01
+2025-09-28 10:01:16,669 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 118 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,670 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 15/34: 01
+2025-09-28 10:01:16,689 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 14 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,689 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 16/34: 03
+2025-09-28 10:01:16,713 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 20 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,713 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 17/34: 03
+2025-09-28 10:01:16,728 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 11 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,729 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 18/34: 03
+2025-09-28 10:01:16,735 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 1 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,735 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 19/34: 03
+2025-09-28 10:01:16,752 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 12 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,753 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 20/34: 03
+2025-09-28 10:01:16,773 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 15 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,774 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 21/34: 03
+2025-09-28 10:01:16,788 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 9 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,789 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 22/34: 04
+2025-09-28 10:01:16,808 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 16 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,808 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 23/34: 04
+2025-09-28 10:01:16,823 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 11 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,823 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 24/34: 04
+2025-09-28 10:01:16,837 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 9 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,838 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 25/34: 04
+2025-09-28 10:01:16,849 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,850 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 26/34: 04
+2025-09-28 10:01:16,862 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 8 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,863 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 27/34: 04
+2025-09-28 10:01:16,882 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 14 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:16,883 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 28/34: 02
+2025-09-28 10:01:17,095 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 274 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:17,098 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 29/34: 03
+2025-09-28 10:01:17,136 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 33 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:17,136 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 30/34: 04
+2025-09-28 10:01:17,177 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 34 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:17,178 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 31/34: 03
+2025-09-28 10:01:17,221 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 42 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:17,221 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 32/34: 03
+2025-09-28 10:01:17,253 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 25 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:17,253 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 33/34: 04
+2025-09-28 10:01:17,310 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 53 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:17,311 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 34/34: 05
+2025-09-28 10:01:17,323 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:01:17,323 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 1/34: 01
+2025-09-28 10:01:17,324 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2oghQ1cAf6c9BmWD1pMdIj
+2025-09-28 10:01:17,324 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2oghQ1cAf6c9BmWD1pMdIj: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 10:01:17,324 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 2/34: 01
+2025-09-28 10:01:17,325 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 9 relationships for space 0lvmW1C_r0DwLHYilhW$yq
+2025-09-28 10:01:17,325 - ifc_room_schedule.ui.main_window - INFO - Found 9 relationships for space 0lvmW1C_r0DwLHYilhW$yq: {'Contains': 6, 'DefinedBy': 3}
+2025-09-28 10:01:17,325 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 3/34: 01
+2025-09-28 10:01:17,326 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 7 relationships for space 0etOdx4gn7QOeFM3DkCACZ
+2025-09-28 10:01:17,326 - ifc_room_schedule.ui.main_window - INFO - Found 7 relationships for space 0etOdx4gn7QOeFM3DkCACZ: {'Contains': 4, 'DefinedBy': 3}
+2025-09-28 10:01:17,326 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 4/34: 01
+2025-09-28 10:01:17,327 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 15 relationships for space 0RGRVCyE13zRvWx_wbQh5R
+2025-09-28 10:01:17,327 - ifc_room_schedule.ui.main_window - INFO - Found 15 relationships for space 0RGRVCyE13zRvWx_wbQh5R: {'Contains': 12, 'DefinedBy': 3}
+2025-09-28 10:01:17,328 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 5/34: 01
+2025-09-28 10:01:17,328 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 3 relationships for space 0Lfq9rWmDEZAgA0xL$m$Bk
+2025-09-28 10:01:17,329 - ifc_room_schedule.ui.main_window - INFO - Found 3 relationships for space 0Lfq9rWmDEZAgA0xL$m$Bk: {'DefinedBy': 3}
+2025-09-28 10:01:17,329 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 6/34: 02
+2025-09-28 10:01:17,329 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3JXfZI11rEbPVPppj4Jxf1
+2025-09-28 10:01:17,330 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3JXfZI11rEbPVPppj4Jxf1: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 10:01:17,330 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 7/34: 02
+2025-09-28 10:01:17,330 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 0rF7q_xCj62PipnnzfNzKW
+2025-09-28 10:01:17,330 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 0rF7q_xCj62PipnnzfNzKW: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 10:01:17,331 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 8/34: 02
+2025-09-28 10:01:17,331 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 6 relationships for space 30Mh9i1JvBjAVAs5qwyGFC
+2025-09-28 10:01:17,331 - ifc_room_schedule.ui.main_window - INFO - Found 6 relationships for space 30Mh9i1JvBjAVAs5qwyGFC: {'Contains': 3, 'DefinedBy': 3}
+2025-09-28 10:01:17,331 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 9/34: 02
+2025-09-28 10:01:17,332 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 10 relationships for space 1a0oo6Njb7gxF512nxSYuJ
+2025-09-28 10:01:17,332 - ifc_room_schedule.ui.main_window - INFO - Found 10 relationships for space 1a0oo6Njb7gxF512nxSYuJ: {'Contains': 7, 'DefinedBy': 3}
+2025-09-28 10:01:17,332 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 10/34: 02
+2025-09-28 10:01:17,333 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 14 relationships for space 1hcSgXD6nB8Qls7RqiVt36
+2025-09-28 10:01:17,333 - ifc_room_schedule.ui.main_window - INFO - Found 14 relationships for space 1hcSgXD6nB8Qls7RqiVt36: {'Contains': 11, 'DefinedBy': 3}
+2025-09-28 10:01:17,334 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 11/34: 01
+2025-09-28 10:01:17,334 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 3 relationships for space 2g7n5wXHHFjvfjzRMFL7Ag
+2025-09-28 10:01:17,334 - ifc_room_schedule.ui.main_window - INFO - Found 3 relationships for space 2g7n5wXHHFjvfjzRMFL7Ag: {'DefinedBy': 3}
+2025-09-28 10:01:17,334 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 12/34: 02
+2025-09-28 10:01:17,335 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 3 relationships for space 3ueW3dBRL2R9WoR8xGTA9E
+2025-09-28 10:01:17,335 - ifc_room_schedule.ui.main_window - INFO - Found 3 relationships for space 3ueW3dBRL2R9WoR8xGTA9E: {'DefinedBy': 3}
+2025-09-28 10:01:17,335 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 13/34: 02
+2025-09-28 10:01:17,336 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 3 relationships for space 0pwWNonAvEzRBvwhqxSoC6
+2025-09-28 10:01:17,336 - ifc_room_schedule.ui.main_window - INFO - Found 3 relationships for space 0pwWNonAvEzRBvwhqxSoC6: {'DefinedBy': 3}
+2025-09-28 10:01:17,336 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 14/34: 01
+2025-09-28 10:01:17,338 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 24 relationships for space 1lBJWr459BIP7TCLnlZ7Rr
+2025-09-28 10:01:17,338 - ifc_room_schedule.ui.main_window - INFO - Found 24 relationships for space 1lBJWr459BIP7TCLnlZ7Rr: {'Contains': 21, 'DefinedBy': 3}
+2025-09-28 10:01:17,339 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 15/34: 01
+2025-09-28 10:01:17,339 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 3 relationships for space 32WTxU1Oj9QRi0av4ikK8J
+2025-09-28 10:01:17,339 - ifc_room_schedule.ui.main_window - INFO - Found 3 relationships for space 32WTxU1Oj9QRi0av4ikK8J: {'DefinedBy': 3}
+2025-09-28 10:01:17,339 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 16/34: 03
+2025-09-28 10:01:17,340 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 1BdfIYzF1BSQ8tBqjv4keq
+2025-09-28 10:01:17,340 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 1BdfIYzF1BSQ8tBqjv4keq: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 10:01:17,341 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 17/34: 03
+2025-09-28 10:01:17,341 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 1Chpbbz1P2zRAU0ARRIKOs
+2025-09-28 10:01:17,341 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 1Chpbbz1P2zRAU0ARRIKOs: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 10:01:17,342 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 18/34: 03
+2025-09-28 10:01:17,342 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 9 relationships for space 1PXeoJQRHDY9mYm_2dV5Zw
+2025-09-28 10:01:17,343 - ifc_room_schedule.ui.main_window - INFO - Found 9 relationships for space 1PXeoJQRHDY9mYm_2dV5Zw: {'Contains': 6, 'DefinedBy': 3}
+2025-09-28 10:01:17,343 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 19/34: 03
+2025-09-28 10:01:17,344 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 7 relationships for space 1Abuh2hqP3MxoJVtTeNJZJ
+2025-09-28 10:01:17,344 - ifc_room_schedule.ui.main_window - INFO - Found 7 relationships for space 1Abuh2hqP3MxoJVtTeNJZJ: {'Contains': 4, 'DefinedBy': 3}
+2025-09-28 10:01:17,344 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 20/34: 03
+2025-09-28 10:01:17,345 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 20e785kif8MhL29lIzXRhQ
+2025-09-28 10:01:17,346 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 20e785kif8MhL29lIzXRhQ: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 10:01:17,346 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 21/34: 03
+2025-09-28 10:01:17,347 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 3 relationships for space 37au_BtkfEU8d59K6L2ldX
+2025-09-28 10:01:17,347 - ifc_room_schedule.ui.main_window - INFO - Found 3 relationships for space 37au_BtkfEU8d59K6L2ldX: {'DefinedBy': 3}
+2025-09-28 10:01:17,347 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 22/34: 04
+2025-09-28 10:01:17,348 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 02sq4HuYP3E9UVow$9C7Ud
+2025-09-28 10:01:17,348 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 02sq4HuYP3E9UVow$9C7Ud: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 10:01:17,349 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 23/34: 04
+2025-09-28 10:01:17,349 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 1kqaFJe_n95uburgU8d__1
+2025-09-28 10:01:17,349 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 1kqaFJe_n95uburgU8d__1: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 10:01:17,350 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 24/34: 04
+2025-09-28 10:01:17,350 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 6 relationships for space 3rYbhuSJj32fm1Vmztk9Qe
+2025-09-28 10:01:17,351 - ifc_room_schedule.ui.main_window - INFO - Found 6 relationships for space 3rYbhuSJj32fm1Vmztk9Qe: {'Contains': 3, 'DefinedBy': 3}
+2025-09-28 10:01:17,351 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 25/34: 04
+2025-09-28 10:01:17,352 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 10 relationships for space 2oJi_gbc12FBtZgPM9SlEi
+2025-09-28 10:01:17,352 - ifc_room_schedule.ui.main_window - INFO - Found 10 relationships for space 2oJi_gbc12FBtZgPM9SlEi: {'Contains': 7, 'DefinedBy': 3}
+2025-09-28 10:01:17,352 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 26/34: 04
+2025-09-28 10:01:17,353 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 3 relationships for space 2J6Ny8LSj3LeIMUsY4hI2s
+2025-09-28 10:01:17,353 - ifc_room_schedule.ui.main_window - INFO - Found 3 relationships for space 2J6Ny8LSj3LeIMUsY4hI2s: {'DefinedBy': 3}
+2025-09-28 10:01:17,353 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 27/34: 04
+2025-09-28 10:01:17,354 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 0hcW2B0zjFoesYviOiMrjT
+2025-09-28 10:01:17,354 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 0hcW2B0zjFoesYviOiMrjT: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 10:01:17,354 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 28/34: 02
+2025-09-28 10:01:17,357 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 37 relationships for space 3qGJVsrovCCOERwRIM9M9F
+2025-09-28 10:01:17,357 - ifc_room_schedule.ui.main_window - INFO - Found 37 relationships for space 3qGJVsrovCCOERwRIM9M9F: {'Contains': 34, 'DefinedBy': 3}
+2025-09-28 10:01:17,358 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 29/34: 03
+2025-09-28 10:01:17,359 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 8 relationships for space 3quWfdPA12heO5M9sToywJ
+2025-09-28 10:01:17,360 - ifc_room_schedule.ui.main_window - INFO - Found 8 relationships for space 3quWfdPA12heO5M9sToywJ: {'Contains': 5, 'DefinedBy': 3}
+2025-09-28 10:01:17,360 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 30/34: 04
+2025-09-28 10:01:17,361 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 8 relationships for space 2ygnsTAGr3ruU6hrha99xQ
+2025-09-28 10:01:17,362 - ifc_room_schedule.ui.main_window - INFO - Found 8 relationships for space 2ygnsTAGr3ruU6hrha99xQ: {'Contains': 5, 'DefinedBy': 3}
+2025-09-28 10:01:17,362 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 31/34: 03
+2025-09-28 10:01:17,364 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 10 relationships for space 0hmZNwjDX0ZwJbO6AmrrjO
+2025-09-28 10:01:17,364 - ifc_room_schedule.ui.main_window - INFO - Found 10 relationships for space 0hmZNwjDX0ZwJbO6AmrrjO: {'Contains': 7, 'DefinedBy': 3}
+2025-09-28 10:01:17,364 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 32/34: 03
+2025-09-28 10:01:17,365 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 9 relationships for space 02MoDbUmz2fQYwzHjhQuhV
+2025-09-28 10:01:17,365 - ifc_room_schedule.ui.main_window - INFO - Found 9 relationships for space 02MoDbUmz2fQYwzHjhQuhV: {'Contains': 6, 'DefinedBy': 3}
+2025-09-28 10:01:17,365 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 33/34: 04
+2025-09-28 10:01:17,366 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 6 relationships for space 1fmOvhTur4SAytWzlO9cvT
+2025-09-28 10:01:17,366 - ifc_room_schedule.ui.main_window - INFO - Found 6 relationships for space 1fmOvhTur4SAytWzlO9cvT: {'Contains': 3, 'DefinedBy': 3}
+2025-09-28 10:01:17,367 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 34/34: 05
+2025-09-28 10:01:17,367 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 6 relationships for space 0xyvjA51vBzPon8HIwA$o0
+2025-09-28 10:01:17,367 - ifc_room_schedule.ui.main_window - INFO - Found 6 relationships for space 0xyvjA51vBzPon8HIwA$o0: {'Contains': 3, 'DefinedBy': 3}
+2025-09-28 10:02:09,421 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 10:02:09,421 - ifc_room_schedule.ui.main_window - INFO - Requesting graceful cancellation from worker...
+2025-09-28 10:02:09,421 - ifc_room_schedule.ui.main_window - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 10:02:09,422 - ifc_room_schedule.ui.main_window - INFO - Thread terminated gracefully
+2025-09-28 10:02:09,422 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 10:02:09,997 - ifc_room_schedule.ui.main_window - INFO - Processing medium file: 25.0 MB (forced)
+2025-09-28 10:02:10,126 - ifc_room_schedule.ui.main_window - INFO - Using threaded loading strategy for medium file
+2025-09-28 10:02:10,126 - ifc_room_schedule.ui.main_window - INFO - Loading file with threading: tesfiler/AkkordSvingen 23_ARK.ifc
+2025-09-28 10:02:10,126 - ifc_room_schedule.parser.ifc_file_reader - INFO - Small file detected (2.3MB) - skipping strict memory validation
+2025-09-28 10:02:10,127 - ifc_room_schedule.parser.ifc_file_reader - INFO - Loading IFC file: tesfiler/AkkordSvingen 23_ARK.ifc (2.3MB)
+2025-09-28 10:02:10,240 - ifc_room_schedule.parser.ifc_file_reader - INFO - IFC file loaded successfully
+2025-09-28 10:02:10,241 - ifc_room_schedule.parser.ifc_file_reader - INFO - Validating IFC file structure...
+2025-09-28 10:02:10,241 - ifc_room_schedule.parser.ifc_file_reader - INFO - Found 341 building products
+2025-09-28 10:02:10,241 - ifc_room_schedule.parser.ifc_file_reader - INFO - Found 34 spaces
+2025-09-28 10:02:10,242 - ifc_room_schedule.parser.ifc_file_reader - INFO - Successfully loaded IFC file (IFC4) with 34 spaces found.
+2025-09-28 10:02:13,252 - ifc_room_schedule.parser.ifc_space_extractor - INFO - Successfully extracted 34 spaces from 34 IfcSpace entities
+2025-09-28 10:02:13,252 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 1/34: 01
+2025-09-28 10:02:13,255 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 11 surfaces for space 2oghQ1cAf6c9BmWD1pMdIj
+2025-09-28 10:02:13,255 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:02:13,256 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 2oghQ1cAf6c9BmWD1pMdIj: ['Duplicate surface IDs found: 01LR8n0gb41fXDw7I3tUWy', '1 surfaces have zero or invalid area']
+2025-09-28 10:02:13,256 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 2/34: 01
+2025-09-28 10:02:13,257 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 9 surfaces for space 0lvmW1C_r0DwLHYilhW$yq
+2025-09-28 10:02:13,258 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:02:13,258 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 3/34: 01
+2025-09-28 10:02:13,260 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 13 surfaces for space 0etOdx4gn7QOeFM3DkCACZ
+2025-09-28 10:02:13,260 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:02:13,260 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 0etOdx4gn7QOeFM3DkCACZ: ['Duplicate surface IDs found: 0e3eGU1HrEb9ye2pDlv04O, 2BaCfuKIH2Ig_ALPcivZA2', '1 surfaces have zero or invalid area']
+2025-09-28 10:02:13,261 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 4/34: 01
+2025-09-28 10:02:13,265 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 32 surfaces for space 0RGRVCyE13zRvWx_wbQh5R
+2025-09-28 10:02:13,265 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:02:13,265 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 0RGRVCyE13zRvWx_wbQh5R: ['Duplicate surface IDs found: 01LR8n0gb41fXDw7I3tUWy, 0lGbLiw0X4Vu4n$6tqyP_s, 3kO9NO6mvABAhIWNqlFUlo', '1 surfaces have zero or invalid area']
+2025-09-28 10:02:13,266 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 5/34: 01
+2025-09-28 10:02:13,266 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 7 surfaces for space 0Lfq9rWmDEZAgA0xL$m$Bk
+2025-09-28 10:02:13,267 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:02:13,267 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 0Lfq9rWmDEZAgA0xL$m$Bk: ['Duplicate surface IDs found: 2HiaYxzmbFC9RWBDGOoUf4, 0lGbLiw0X4Vu4n$6tqyP_s', '1 surfaces have zero or invalid area']
+2025-09-28 10:02:13,267 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 6/34: 02
+2025-09-28 10:02:13,270 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 15 surfaces for space 3JXfZI11rEbPVPppj4Jxf1
+2025-09-28 10:02:13,270 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:02:13,270 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 3JXfZI11rEbPVPppj4Jxf1: ['Duplicate surface IDs found: 374BUd6V1B480tJaEMN2iu, 0wxr7RKCX9XBOiag7i_wCA, 2LG9WHqjr7leWRzxd67kbB', '1 surfaces have zero or invalid area']
+2025-09-28 10:02:13,270 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 7/34: 02
+2025-09-28 10:02:13,272 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 10 surfaces for space 0rF7q_xCj62PipnnzfNzKW
+2025-09-28 10:02:13,273 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:02:13,273 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 0rF7q_xCj62PipnnzfNzKW: ['Duplicate surface IDs found: 374BUd6V1B480tJaEMN2iu', '1 surfaces have zero or invalid area']
+2025-09-28 10:02:13,273 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 8/34: 02
+2025-09-28 10:02:13,275 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 10 surfaces for space 30Mh9i1JvBjAVAs5qwyGFC
+2025-09-28 10:02:13,275 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:02:13,275 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 9/34: 02
+2025-09-28 10:02:13,277 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 12 surfaces for space 1a0oo6Njb7gxF512nxSYuJ
+2025-09-28 10:02:13,277 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:02:13,278 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 10/34: 02
+2025-09-28 10:02:13,280 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 28 surfaces for space 1hcSgXD6nB8Qls7RqiVt36
+2025-09-28 10:02:13,281 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:02:13,281 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 1hcSgXD6nB8Qls7RqiVt36: ['Duplicate surface IDs found: 374BUd6V1B480tJaEMN2iu, 0wxr7RKCX9XBOiag7i_wCA, 3zzm$YeIP3KwFw6TnLeBpn', '1 surfaces have zero or invalid area']
+2025-09-28 10:02:13,281 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 11/34: 01
+2025-09-28 10:02:13,283 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 13 surfaces for space 2g7n5wXHHFjvfjzRMFL7Ag
+2025-09-28 10:02:13,284 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:02:13,284 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 2g7n5wXHHFjvfjzRMFL7Ag: ['Duplicate surface IDs found: 3kO9NO6mvABAhIWNqlFUlo', '1 surfaces have zero or invalid area']
+2025-09-28 10:02:13,284 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 12/34: 02
+2025-09-28 10:02:13,285 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 8 surfaces for space 3ueW3dBRL2R9WoR8xGTA9E
+2025-09-28 10:02:13,286 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:02:13,286 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 3ueW3dBRL2R9WoR8xGTA9E: ['Duplicate surface IDs found: 3c38nW$s52ROpD4RNXvJwF, 0wxr7RKCX9XBOiag7i_wCA', '1 surfaces have zero or invalid area']
+2025-09-28 10:02:13,286 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 13/34: 02
+2025-09-28 10:02:13,288 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 11 surfaces for space 0pwWNonAvEzRBvwhqxSoC6
+2025-09-28 10:02:13,288 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:02:13,289 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 0pwWNonAvEzRBvwhqxSoC6: ['Duplicate surface IDs found: 3zzm$YeIP3KwFw6TnLeBpn', '1 surfaces have zero or invalid area']
+2025-09-28 10:02:13,289 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 14/34: 01
+2025-09-28 10:02:13,301 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 126 surfaces for space 1lBJWr459BIP7TCLnlZ7Rr
+2025-09-28 10:02:13,303 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 6 surfaces have zero or invalid area
+2025-09-28 10:02:13,303 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 1lBJWr459BIP7TCLnlZ7Rr: ['Duplicate surface IDs found: 12pjW8B$LCUfUf6hpM6E8i, 1ZHs$C_91CyvindHAOIiIy, 2J7bZ4tXrAHR66jCNg8F0r, 0lGbLiw0X4Vu4n$6tqyP_s, 30QeuDIbb7WRfj6Cyg3v5b, 1rQA2bC992bOMfd2Tb96_k, 01LR8n0gb41fXDw7I3tUWy, 011xFod8vCxADo9BCQFXAF, 3kO9NO6mvABAhIWNqlFUlo, 0e3eGU1HrEb9ye2pDlv04O, 17ZetX$JjBVQavDZvMPiWb, 119so98uP1xggSFjmpDBVH, 1SLZ6EUWz9ofFRTcVtfH5E, 2CrJaFXorFmwa7wEwTvbdy, 374BUd6V1B480tJaEMN2iu, 0wxr7RKCX9XBOiag7i_wCA, 3zzm$YeIP3KwFw6TnLeBpn, 0FHZ$Ev4T0VgRvhCvO7_zY', '6 surfaces have zero or invalid area']
+2025-09-28 10:02:13,304 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 15/34: 01
+2025-09-28 10:02:13,305 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 9 surfaces for space 32WTxU1Oj9QRi0av4ikK8J
+2025-09-28 10:02:13,306 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 1 surfaces have zero or invalid area
+2025-09-28 10:02:13,306 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 32WTxU1Oj9QRi0av4ikK8J: ['Duplicate surface IDs found: 01LR8n0gb41fXDw7I3tUWy, 0lGbLiw0X4Vu4n$6tqyP_s', '1 surfaces have zero or invalid area']
+2025-09-28 10:02:13,307 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 16/34: 03
+2025-09-28 10:02:13,309 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 16 surfaces for space 1BdfIYzF1BSQ8tBqjv4keq
+2025-09-28 10:02:13,309 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 1BdfIYzF1BSQ8tBqjv4keq: ['Duplicate surface IDs found: 3wF8HWUJD9kQrq1dwn0poO, 2t637aIc18dPbS$LhlLZ$8, 0rZd5xjqr1BgBbZPmzNPcG, 1_rzqOLQv2YQq20UtRA2Bj, 3i_MxBIRb2dQSdCKkEB2bT']
+2025-09-28 10:02:13,309 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 17/34: 03
+2025-09-28 10:02:13,311 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 11 surfaces for space 1Chpbbz1P2zRAU0ARRIKOs
+2025-09-28 10:02:13,312 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 1Chpbbz1P2zRAU0ARRIKOs: ['Duplicate surface IDs found: 0rZd5xjqr1BgBbZPmzNPcG, 3_zXnz1VnC2RAbUY6OsKyx']
+2025-09-28 10:02:13,312 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 18/34: 03
+2025-09-28 10:02:13,313 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 7 surfaces for space 1PXeoJQRHDY9mYm_2dV5Zw
+2025-09-28 10:02:13,313 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 19/34: 03
+2025-09-28 10:02:13,315 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 11 surfaces for space 1Abuh2hqP3MxoJVtTeNJZJ
+2025-09-28 10:02:13,315 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 1Abuh2hqP3MxoJVtTeNJZJ: ['Duplicate surface IDs found: 37h8Sgu7D0F9HKGc0lkAsK, 37rSpTisL4SPxRTvS$ay4_']
+2025-09-28 10:02:13,316 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 20/34: 03
+2025-09-28 10:02:13,317 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 15 surfaces for space 20e785kif8MhL29lIzXRhQ
+2025-09-28 10:02:13,318 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 20e785kif8MhL29lIzXRhQ: ['Duplicate surface IDs found: 1NqhveuRTBRxUWsl4Apb86, 1oJKHYXt9AgBACZ_H73n7j, 385DVPGnvDmgZ_vVwOypGc']
+2025-09-28 10:02:13,318 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 21/34: 03
+2025-09-28 10:02:13,319 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 7 surfaces for space 37au_BtkfEU8d59K6L2ldX
+2025-09-28 10:02:13,320 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 37au_BtkfEU8d59K6L2ldX: ['Duplicate surface IDs found: 1_rzqOLQv2YQq20UtRA2Bj, 1tiYEuCsLEVQF1bnhZGbvD']
+2025-09-28 10:02:13,320 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 22/34: 04
+2025-09-28 10:02:13,322 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 13 surfaces for space 02sq4HuYP3E9UVow$9C7Ud
+2025-09-28 10:02:13,323 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 02sq4HuYP3E9UVow$9C7Ud: ['Duplicate surface IDs found: 0QNbGf$hX4WgdeoawMyOe$, 2W_WVwH_f5RhHsIOViFMf8, 2n7GZify51Th$Z2_nMpHTk']
+2025-09-28 10:02:13,323 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 23/34: 04
+2025-09-28 10:02:13,325 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 11 surfaces for space 1kqaFJe_n95uburgU8d__1
+2025-09-28 10:02:13,325 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 1kqaFJe_n95uburgU8d__1: ['Duplicate surface IDs found: 3LN0A5aT9Btvo_bVwnmbDl, 2n7GZify51Th$Z2_nMpHTk']
+2025-09-28 10:02:13,325 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 24/34: 04
+2025-09-28 10:02:13,326 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 7 surfaces for space 3rYbhuSJj32fm1Vmztk9Qe
+2025-09-28 10:02:13,327 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 25/34: 04
+2025-09-28 10:02:13,328 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 9 surfaces for space 2oJi_gbc12FBtZgPM9SlEi
+2025-09-28 10:02:13,328 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 26/34: 04
+2025-09-28 10:02:13,330 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 6 surfaces for space 2J6Ny8LSj3LeIMUsY4hI2s
+2025-09-28 10:02:13,330 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 2J6Ny8LSj3LeIMUsY4hI2s: ['Duplicate surface IDs found: 0QNbGf$hX4WgdeoawMyOe$, 2FINKUTsH1ngFpsHH72eqy']
+2025-09-28 10:02:13,330 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 27/34: 04
+2025-09-28 10:02:13,332 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 14 surfaces for space 0hcW2B0zjFoesYviOiMrjT
+2025-09-28 10:02:13,333 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 0hcW2B0zjFoesYviOiMrjT: ['Duplicate surface IDs found: 0PVsWFqWbAf90LeX24rvR6, 3Y$dkOJNz9V9Cs3zyoxDFr, 2Zw3lvml971QLRubHbvXpI']
+2025-09-28 10:02:13,333 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 28/34: 02
+2025-09-28 10:02:13,361 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 294 surfaces for space 3qGJVsrovCCOERwRIM9M9F
+2025-09-28 10:02:13,363 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 4 surfaces have zero or invalid area
+2025-09-28 10:02:13,363 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 3qGJVsrovCCOERwRIM9M9F: ['Duplicate surface IDs found: 3wF8HWUJD9kQrq1dwn0poO, 3GxUex2LXFDQk4naAj6zEj, 3U_Jx5uwfAnPL4KOAyS$1I, 1k7aptnfzAr8XC2EW6UDg6, 0QNbGf$hX4WgdeoawMyOe$, 385DVPGnvDmgZ_vVwOypGc, 0OMdwkKMH34hDRjeVNngyz, 2tnWv1N6T2g81J8UBlFwKe, 2Zw3lvml971QLRubHbvXpI, 0rZd5xjqr1BgBbZPmzNPcG, 3Y$dkOJNz9V9Cs3zyoxDFr, 1yLTToSpn5luBGfDP61HGQ, 2W6yeJmY104eu62rCyQ3O0, 1_rzqOLQv2YQq20UtRA2Bj, 2$3ty86p96owTvqm1LUvlD, 0PVsWFqWbAf90LeX24rvR6, 3CWQv_Krf8Tv9kqhOuGXPx, 1NqhveuRTBRxUWsl4Apb86, 3_zXnz1VnC2RAbUY6OsKyx, 2n7GZify51Th$Z2_nMpHTk, 2EnhrbM8b6kftnV9j08HkH, 1oJKHYXt9AgBACZ_H73n7j, 2_iHNUetH89haAeFM0v9sF, 3mztZ8eFv2swCqHmIxMvHn, 2UOJsgQl5CeBsHx3tFxKdC, 2P0tgmtoD858UwkjVZsw64, 0gRoDum7937vfwhs1niPj5, 1onrunXczCMO_SxJEcsYFR', '4 surfaces have zero or invalid area']
+2025-09-28 10:02:13,363 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 29/34: 03
+2025-09-28 10:02:13,366 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 32 surfaces for space 3quWfdPA12heO5M9sToywJ
+2025-09-28 10:02:13,367 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 8 surfaces have zero or invalid area
+2025-09-28 10:02:13,367 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 3quWfdPA12heO5M9sToywJ: ['Duplicate surface IDs found: 3wF8HWUJD9kQrq1dwn0poO, 1oJKHYXt9AgBACZ_H73n7j, 0rZd5xjqr1BgBbZPmzNPcG, 385DVPGnvDmgZ_vVwOypGc, 1NqhveuRTBRxUWsl4Apb86, 1_rzqOLQv2YQq20UtRA2Bj, 3_zXnz1VnC2RAbUY6OsKyx', '8 surfaces have zero or invalid area']
+2025-09-28 10:02:13,367 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 30/34: 04
+2025-09-28 10:02:13,370 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 33 surfaces for space 2ygnsTAGr3ruU6hrha99xQ
+2025-09-28 10:02:13,370 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 8 surfaces have zero or invalid area
+2025-09-28 10:02:13,371 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 2ygnsTAGr3ruU6hrha99xQ: ['Duplicate surface IDs found: 2Zw3lvml971QLRubHbvXpI, 3Y$dkOJNz9V9Cs3zyoxDFr, 0$0jjesOT8lv70iEsbTHTJ, 0QNbGf$hX4WgdeoawMyOe$, 0PVsWFqWbAf90LeX24rvR6, 1yObTqoOHDXB15tQZuXljW, 2n7GZify51Th$Z2_nMpHTk', '8 surfaces have zero or invalid area']
+2025-09-28 10:02:13,371 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 31/34: 03
+2025-09-28 10:02:13,375 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 43 surfaces for space 0hmZNwjDX0ZwJbO6AmrrjO
+2025-09-28 10:02:13,376 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 3 surfaces have zero or invalid area
+2025-09-28 10:02:13,376 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 0hmZNwjDX0ZwJbO6AmrrjO: ['Duplicate surface IDs found: 2tnWv1N6T2g81J8UBlFwKe, 3wF8HWUJD9kQrq1dwn0poO, 36hnrR$zHBI9Z0XSe8Y_gm, 0rZd5xjqr1BgBbZPmzNPcG, 1k7aptnfzAr8XC2EW6UDg6, 3_zXnz1VnC2RAbUY6OsKyx, 2n7GZify51Th$Z2_nMpHTk', '3 surfaces have zero or invalid area']
+2025-09-28 10:02:13,376 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 32/34: 03
+2025-09-28 10:02:13,379 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 23 surfaces for space 02MoDbUmz2fQYwzHjhQuhV
+2025-09-28 10:02:13,379 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 4 surfaces have zero or invalid area
+2025-09-28 10:02:13,379 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 02MoDbUmz2fQYwzHjhQuhV: ['Duplicate surface IDs found: 3mztZ8eFv2swCqHmIxMvHn, 1_rzqOLQv2YQq20UtRA2Bj, 12OorI3HbCkA_rAwe4GgMT', '4 surfaces have zero or invalid area']
+2025-09-28 10:02:13,380 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 33/34: 04
+2025-09-28 10:02:13,384 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 48 surfaces for space 1fmOvhTur4SAytWzlO9cvT
+2025-09-28 10:02:13,385 - ifc_room_schedule.parser.ifc_surface_extractor - WARNING - 5 surfaces have zero or invalid area
+2025-09-28 10:02:13,385 - ifc_room_schedule.ui.main_window - WARNING - Surface validation issues for space 1fmOvhTur4SAytWzlO9cvT: ['Duplicate surface IDs found: 2EnhrbM8b6kftnV9j08HkH, 1oJKHYXt9AgBACZ_H73n7j, 2Zw3lvml971QLRubHbvXpI, 2MlGu3SqnBqxCeAC$z39PI, 3U_Jx5uwfAnPL4KOAyS$1I, 3Y$dkOJNz9V9Cs3zyoxDFr, 2UOJsgQl5CeBsHx3tFxKdC, 2P0tgmtoD858UwkjVZsw64, 385DVPGnvDmgZ_vVwOypGc, 0PVsWFqWbAf90LeX24rvR6, 0gRoDum7937vfwhs1niPj5, 1NqhveuRTBRxUWsl4Apb86, 1onrunXczCMO_SxJEcsYFR', '5 surfaces have zero or invalid area']
+2025-09-28 10:02:13,385 - ifc_room_schedule.ui.main_window - INFO - Extracting surfaces for space 34/34: 05
+2025-09-28 10:02:13,386 - ifc_room_schedule.parser.ifc_surface_extractor - INFO - Extracted 3 surfaces for space 0xyvjA51vBzPon8HIwA$o0
+2025-09-28 10:02:13,386 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 1/34: 01
+2025-09-28 10:02:13,416 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 10 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,417 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 2/34: 01
+2025-09-28 10:02:13,429 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 7 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,430 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 3/34: 01
+2025-09-28 10:02:13,446 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 12 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,446 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 4/34: 01
+2025-09-28 10:02:13,472 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 24 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,472 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 5/34: 01
+2025-09-28 10:02:13,483 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 7 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,484 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 6/34: 02
+2025-09-28 10:02:13,504 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 16 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,505 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 7/34: 02
+2025-09-28 10:02:13,516 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 8 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,517 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 8/34: 02
+2025-09-28 10:02:13,532 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 10 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,533 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 9/34: 02
+2025-09-28 10:02:13,547 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 7 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,548 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 10/34: 02
+2025-09-28 10:02:13,572 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 22 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,573 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 11/34: 01
+2025-09-28 10:02:13,588 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 13 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,589 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 12/34: 02
+2025-09-28 10:02:13,600 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 8 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,600 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 13/34: 02
+2025-09-28 10:02:13,614 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 11 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,615 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 14/34: 01
+2025-09-28 10:02:13,713 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 118 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,715 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 15/34: 01
+2025-09-28 10:02:13,732 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 14 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,733 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 16/34: 03
+2025-09-28 10:02:13,756 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 20 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,757 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 17/34: 03
+2025-09-28 10:02:13,770 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 11 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,770 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 18/34: 03
+2025-09-28 10:02:13,777 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 1 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,778 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 19/34: 03
+2025-09-28 10:02:13,794 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 12 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,795 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 20/34: 03
+2025-09-28 10:02:13,813 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 15 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,813 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 21/34: 03
+2025-09-28 10:02:13,827 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 9 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,828 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 22/34: 04
+2025-09-28 10:02:13,847 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 16 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,847 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 23/34: 04
+2025-09-28 10:02:13,862 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 11 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,862 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 24/34: 04
+2025-09-28 10:02:13,876 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 9 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,877 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 25/34: 04
+2025-09-28 10:02:13,889 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,890 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 26/34: 04
+2025-09-28 10:02:13,902 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 8 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,902 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 27/34: 04
+2025-09-28 10:02:13,920 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 14 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:13,920 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 28/34: 02
+2025-09-28 10:02:14,128 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 274 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:14,131 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 29/34: 03
+2025-09-28 10:02:14,168 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 33 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:14,168 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 30/34: 04
+2025-09-28 10:02:14,205 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 34 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:14,205 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 31/34: 03
+2025-09-28 10:02:14,246 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 42 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:14,247 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 32/34: 03
+2025-09-28 10:02:14,276 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 25 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:14,276 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 33/34: 04
+2025-09-28 10:02:14,328 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 53 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:14,328 - ifc_room_schedule.ui.main_window - INFO - Extracting boundaries for space 34/34: 05
+2025-09-28 10:02:14,341 - ifc_room_schedule.parser.ifc_space_boundary_parser - INFO - Successfully extracted 6 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-28 10:02:14,341 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 1/34: 01
+2025-09-28 10:02:14,342 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 2oghQ1cAf6c9BmWD1pMdIj
+2025-09-28 10:02:14,342 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 2oghQ1cAf6c9BmWD1pMdIj: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 10:02:14,347 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 2/34: 01
+2025-09-28 10:02:14,348 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 9 relationships for space 0lvmW1C_r0DwLHYilhW$yq
+2025-09-28 10:02:14,348 - ifc_room_schedule.ui.main_window - INFO - Found 9 relationships for space 0lvmW1C_r0DwLHYilhW$yq: {'Contains': 6, 'DefinedBy': 3}
+2025-09-28 10:02:14,349 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 3/34: 01
+2025-09-28 10:02:14,351 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 7 relationships for space 0etOdx4gn7QOeFM3DkCACZ
+2025-09-28 10:02:14,351 - ifc_room_schedule.ui.main_window - INFO - Found 7 relationships for space 0etOdx4gn7QOeFM3DkCACZ: {'Contains': 4, 'DefinedBy': 3}
+2025-09-28 10:02:14,352 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 4/34: 01
+2025-09-28 10:02:14,353 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 15 relationships for space 0RGRVCyE13zRvWx_wbQh5R
+2025-09-28 10:02:14,354 - ifc_room_schedule.ui.main_window - INFO - Found 15 relationships for space 0RGRVCyE13zRvWx_wbQh5R: {'Contains': 12, 'DefinedBy': 3}
+2025-09-28 10:02:14,354 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 5/34: 01
+2025-09-28 10:02:14,355 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 3 relationships for space 0Lfq9rWmDEZAgA0xL$m$Bk
+2025-09-28 10:02:14,355 - ifc_room_schedule.ui.main_window - INFO - Found 3 relationships for space 0Lfq9rWmDEZAgA0xL$m$Bk: {'DefinedBy': 3}
+2025-09-28 10:02:14,356 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 6/34: 02
+2025-09-28 10:02:14,356 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 3JXfZI11rEbPVPppj4Jxf1
+2025-09-28 10:02:14,357 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 3JXfZI11rEbPVPppj4Jxf1: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 10:02:14,357 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 7/34: 02
+2025-09-28 10:02:14,358 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 0rF7q_xCj62PipnnzfNzKW
+2025-09-28 10:02:14,358 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 0rF7q_xCj62PipnnzfNzKW: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 10:02:14,358 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 8/34: 02
+2025-09-28 10:02:14,359 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 6 relationships for space 30Mh9i1JvBjAVAs5qwyGFC
+2025-09-28 10:02:14,360 - ifc_room_schedule.ui.main_window - INFO - Found 6 relationships for space 30Mh9i1JvBjAVAs5qwyGFC: {'Contains': 3, 'DefinedBy': 3}
+2025-09-28 10:02:14,360 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 9/34: 02
+2025-09-28 10:02:14,360 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 10 relationships for space 1a0oo6Njb7gxF512nxSYuJ
+2025-09-28 10:02:14,360 - ifc_room_schedule.ui.main_window - INFO - Found 10 relationships for space 1a0oo6Njb7gxF512nxSYuJ: {'Contains': 7, 'DefinedBy': 3}
+2025-09-28 10:02:14,361 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 10/34: 02
+2025-09-28 10:02:14,362 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 14 relationships for space 1hcSgXD6nB8Qls7RqiVt36
+2025-09-28 10:02:14,362 - ifc_room_schedule.ui.main_window - INFO - Found 14 relationships for space 1hcSgXD6nB8Qls7RqiVt36: {'Contains': 11, 'DefinedBy': 3}
+2025-09-28 10:02:14,362 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 11/34: 01
+2025-09-28 10:02:14,363 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 3 relationships for space 2g7n5wXHHFjvfjzRMFL7Ag
+2025-09-28 10:02:14,369 - ifc_room_schedule.ui.main_window - INFO - Found 3 relationships for space 2g7n5wXHHFjvfjzRMFL7Ag: {'DefinedBy': 3}
+2025-09-28 10:02:14,370 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 12/34: 02
+2025-09-28 10:02:14,371 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 3 relationships for space 3ueW3dBRL2R9WoR8xGTA9E
+2025-09-28 10:02:14,371 - ifc_room_schedule.ui.main_window - INFO - Found 3 relationships for space 3ueW3dBRL2R9WoR8xGTA9E: {'DefinedBy': 3}
+2025-09-28 10:02:14,371 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 13/34: 02
+2025-09-28 10:02:14,372 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 3 relationships for space 0pwWNonAvEzRBvwhqxSoC6
+2025-09-28 10:02:14,372 - ifc_room_schedule.ui.main_window - INFO - Found 3 relationships for space 0pwWNonAvEzRBvwhqxSoC6: {'DefinedBy': 3}
+2025-09-28 10:02:14,372 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 14/34: 01
+2025-09-28 10:02:14,375 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 24 relationships for space 1lBJWr459BIP7TCLnlZ7Rr
+2025-09-28 10:02:14,376 - ifc_room_schedule.ui.main_window - INFO - Found 24 relationships for space 1lBJWr459BIP7TCLnlZ7Rr: {'Contains': 21, 'DefinedBy': 3}
+2025-09-28 10:02:14,377 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 15/34: 01
+2025-09-28 10:02:14,378 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 3 relationships for space 32WTxU1Oj9QRi0av4ikK8J
+2025-09-28 10:02:14,378 - ifc_room_schedule.ui.main_window - INFO - Found 3 relationships for space 32WTxU1Oj9QRi0av4ikK8J: {'DefinedBy': 3}
+2025-09-28 10:02:14,378 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 16/34: 03
+2025-09-28 10:02:14,379 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 1BdfIYzF1BSQ8tBqjv4keq
+2025-09-28 10:02:14,380 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 1BdfIYzF1BSQ8tBqjv4keq: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 10:02:14,380 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 17/34: 03
+2025-09-28 10:02:14,381 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 1Chpbbz1P2zRAU0ARRIKOs
+2025-09-28 10:02:14,381 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 1Chpbbz1P2zRAU0ARRIKOs: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 10:02:14,381 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 18/34: 03
+2025-09-28 10:02:14,382 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 9 relationships for space 1PXeoJQRHDY9mYm_2dV5Zw
+2025-09-28 10:02:14,382 - ifc_room_schedule.ui.main_window - INFO - Found 9 relationships for space 1PXeoJQRHDY9mYm_2dV5Zw: {'Contains': 6, 'DefinedBy': 3}
+2025-09-28 10:02:14,383 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 19/34: 03
+2025-09-28 10:02:14,383 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 7 relationships for space 1Abuh2hqP3MxoJVtTeNJZJ
+2025-09-28 10:02:14,383 - ifc_room_schedule.ui.main_window - INFO - Found 7 relationships for space 1Abuh2hqP3MxoJVtTeNJZJ: {'Contains': 4, 'DefinedBy': 3}
+2025-09-28 10:02:14,384 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 20/34: 03
+2025-09-28 10:02:14,384 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 20e785kif8MhL29lIzXRhQ
+2025-09-28 10:02:14,385 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 20e785kif8MhL29lIzXRhQ: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 10:02:14,385 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 21/34: 03
+2025-09-28 10:02:14,386 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 3 relationships for space 37au_BtkfEU8d59K6L2ldX
+2025-09-28 10:02:14,386 - ifc_room_schedule.ui.main_window - INFO - Found 3 relationships for space 37au_BtkfEU8d59K6L2ldX: {'DefinedBy': 3}
+2025-09-28 10:02:14,386 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 22/34: 04
+2025-09-28 10:02:14,387 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 02sq4HuYP3E9UVow$9C7Ud
+2025-09-28 10:02:14,388 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 02sq4HuYP3E9UVow$9C7Ud: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 10:02:14,388 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 23/34: 04
+2025-09-28 10:02:14,389 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 1kqaFJe_n95uburgU8d__1
+2025-09-28 10:02:14,390 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 1kqaFJe_n95uburgU8d__1: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 10:02:14,390 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 24/34: 04
+2025-09-28 10:02:14,391 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 6 relationships for space 3rYbhuSJj32fm1Vmztk9Qe
+2025-09-28 10:02:14,391 - ifc_room_schedule.ui.main_window - INFO - Found 6 relationships for space 3rYbhuSJj32fm1Vmztk9Qe: {'Contains': 3, 'DefinedBy': 3}
+2025-09-28 10:02:14,392 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 25/34: 04
+2025-09-28 10:02:14,393 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 10 relationships for space 2oJi_gbc12FBtZgPM9SlEi
+2025-09-28 10:02:14,393 - ifc_room_schedule.ui.main_window - INFO - Found 10 relationships for space 2oJi_gbc12FBtZgPM9SlEi: {'Contains': 7, 'DefinedBy': 3}
+2025-09-28 10:02:14,393 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 26/34: 04
+2025-09-28 10:02:14,394 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 3 relationships for space 2J6Ny8LSj3LeIMUsY4hI2s
+2025-09-28 10:02:14,394 - ifc_room_schedule.ui.main_window - INFO - Found 3 relationships for space 2J6Ny8LSj3LeIMUsY4hI2s: {'DefinedBy': 3}
+2025-09-28 10:02:14,395 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 27/34: 04
+2025-09-28 10:02:14,395 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 5 relationships for space 0hcW2B0zjFoesYviOiMrjT
+2025-09-28 10:02:14,395 - ifc_room_schedule.ui.main_window - INFO - Found 5 relationships for space 0hcW2B0zjFoesYviOiMrjT: {'Contains': 2, 'DefinedBy': 3}
+2025-09-28 10:02:14,396 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 28/34: 02
+2025-09-28 10:02:14,398 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 37 relationships for space 3qGJVsrovCCOERwRIM9M9F
+2025-09-28 10:02:14,399 - ifc_room_schedule.ui.main_window - INFO - Found 37 relationships for space 3qGJVsrovCCOERwRIM9M9F: {'Contains': 34, 'DefinedBy': 3}
+2025-09-28 10:02:14,399 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 29/34: 03
+2025-09-28 10:02:14,399 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 8 relationships for space 3quWfdPA12heO5M9sToywJ
+2025-09-28 10:02:14,400 - ifc_room_schedule.ui.main_window - INFO - Found 8 relationships for space 3quWfdPA12heO5M9sToywJ: {'Contains': 5, 'DefinedBy': 3}
+2025-09-28 10:02:14,400 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 30/34: 04
+2025-09-28 10:02:14,401 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 8 relationships for space 2ygnsTAGr3ruU6hrha99xQ
+2025-09-28 10:02:14,401 - ifc_room_schedule.ui.main_window - INFO - Found 8 relationships for space 2ygnsTAGr3ruU6hrha99xQ: {'Contains': 5, 'DefinedBy': 3}
+2025-09-28 10:02:14,401 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 31/34: 03
+2025-09-28 10:02:14,402 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 10 relationships for space 0hmZNwjDX0ZwJbO6AmrrjO
+2025-09-28 10:02:14,402 - ifc_room_schedule.ui.main_window - INFO - Found 10 relationships for space 0hmZNwjDX0ZwJbO6AmrrjO: {'Contains': 7, 'DefinedBy': 3}
+2025-09-28 10:02:14,402 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 32/34: 03
+2025-09-28 10:02:14,403 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 9 relationships for space 02MoDbUmz2fQYwzHjhQuhV
+2025-09-28 10:02:14,403 - ifc_room_schedule.ui.main_window - INFO - Found 9 relationships for space 02MoDbUmz2fQYwzHjhQuhV: {'Contains': 6, 'DefinedBy': 3}
+2025-09-28 10:02:14,404 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 33/34: 04
+2025-09-28 10:02:14,405 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 6 relationships for space 1fmOvhTur4SAytWzlO9cvT
+2025-09-28 10:02:14,405 - ifc_room_schedule.ui.main_window - INFO - Found 6 relationships for space 1fmOvhTur4SAytWzlO9cvT: {'Contains': 3, 'DefinedBy': 3}
+2025-09-28 10:02:14,405 - ifc_room_schedule.ui.main_window - INFO - Extracting relationships for space 34/34: 05
+2025-09-28 10:02:14,406 - ifc_room_schedule.parser.ifc_relationship_parser - INFO - Found 6 relationships for space 0xyvjA51vBzPon8HIwA$o0
+2025-09-28 10:02:14,406 - ifc_room_schedule.ui.main_window - INFO - Found 6 relationships for space 0xyvjA51vBzPon8HIwA$o0: {'Contains': 3, 'DefinedBy': 3}
+2025-09-28 10:03:50,202 - ifc_room_schedule.ui.main_window - INFO - Operation timeout set to 60 seconds
+2025-09-28 10:03:50,852 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 10:03:50,853 - ifc_room_schedule.ui.main_window - INFO - Requesting graceful cancellation from worker...
+2025-09-28 10:03:50,854 - ifc_room_schedule.ui.main_window - INFO - Waiting for graceful thread termination after 0.7s
+2025-09-28 10:03:52,860 - ifc_room_schedule.ui.main_window - WARNING - Graceful termination failed, forcing thread termination
+2025-09-28 10:03:55,224 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 10:03:55,226 - ifc_room_schedule.ui.main_window - INFO - Operation cancelled: Operation cancelled after completion
+2025-09-28 10:03:55,228 - ifc_room_schedule.ui.main_window - CRITICAL - Uncaught exception: An unexpected error occurred: 'NoneType' object has no attribute 'stop'
+Traceback (most recent call last):
+  File "C:\Users\johtho\Git-Repos\romskjemaing\romskjemaing\ifc_room_schedule\ui\main_window.py", line 664, in on_operation_cancelled
+    self.operation_timeout_timer.stop()
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'stop'
+2025-09-28 11:18:50,710 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 11:18:50,710 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 11:18:50,711 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 11:18:50,711 - ifc_room_schedule.ui.main_window - INFO - Requesting graceful cancellation from worker...
+2025-09-28 11:18:50,712 - ifc_room_schedule.ui.main_window - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 11:18:50,712 - ifc_room_schedule.ui.main_window - INFO - Thread terminated gracefully
+2025-09-28 11:18:50,713 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 11:18:50,713 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 11:18:50,714 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 11:18:50,714 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 11:18:50,715 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 11:18:50,716 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 11:18:50,716 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 11:18:50,818 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 11:18:50,818 - ifc_room_schedule.ui.main_window - INFO - Requesting graceful cancellation from worker...
+2025-09-28 11:18:50,818 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 11:18:50,928 - ifc_room_schedule.ui.main_window - INFO - Operation cancelled by user after 0.0s
+2025-09-28 11:18:50,928 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 11:18:50,928 - ifc_room_schedule.ui.main_window - INFO - Requesting graceful cancellation from worker...
+2025-09-28 11:18:50,929 - ifc_room_schedule.ui.main_window - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 11:18:50,929 - ifc_room_schedule.ui.main_window - INFO - Thread terminated gracefully
+2025-09-28 11:18:50,930 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 11:19:11,439 - ifc_room_schedule.ui.main_window - INFO - Using file size-based timeout: 30s for 5.1MB file
+2025-09-28 11:19:11,439 - ifc_room_schedule.ui.main_window - INFO - Operation timeout set to 30 seconds
+2025-09-28 11:19:11,440 - ifc_room_schedule.ui.main_window - INFO - Using file size-based timeout: 60s for 25.5MB file
+2025-09-28 11:19:11,440 - ifc_room_schedule.ui.main_window - INFO - Operation timeout set to 60 seconds
+2025-09-28 11:19:11,441 - ifc_room_schedule.ui.main_window - INFO - Operation timeout set to 90 seconds
+2025-09-28 11:19:12,288 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 11:19:12,289 - ifc_room_schedule.ui.main_window - INFO - Requesting graceful cancellation from worker...
+2025-09-28 11:19:12,291 - ifc_room_schedule.ui.main_window - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 11:19:12,296 - ifc_room_schedule.ui.main_window - INFO - Thread terminated gracefully
+2025-09-28 11:19:12,300 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 11:19:26,200 - ifc_room_schedule.ui.main_window - INFO - Using file size-based timeout: 30s for 5.1MB file
+2025-09-28 11:19:26,200 - ifc_room_schedule.ui.main_window - INFO - Operation timeout set to 30 seconds
+2025-09-28 11:19:26,201 - ifc_room_schedule.ui.main_window - INFO - Using file size-based timeout: 60s for 25.5MB file
+2025-09-28 11:19:26,201 - ifc_room_schedule.ui.main_window - INFO - Operation timeout set to 60 seconds
+2025-09-28 11:19:26,202 - ifc_room_schedule.ui.main_window - INFO - Operation timeout set to 90 seconds
+2025-09-28 11:19:27,468 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 11:19:27,469 - ifc_room_schedule.ui.main_window - INFO - Requesting graceful cancellation from worker...
+2025-09-28 11:19:27,469 - ifc_room_schedule.ui.main_window - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 11:19:27,470 - ifc_room_schedule.ui.main_window - INFO - Thread terminated gracefully
+2025-09-28 11:19:27,471 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 11:19:40,440 - ifc_room_schedule.ui.main_window - INFO - Operation timeout set to 60 seconds
+2025-09-28 11:19:41,098 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 11:19:41,099 - ifc_room_schedule.ui.main_window - INFO - Requesting graceful cancellation from worker...
+2025-09-28 11:19:41,099 - ifc_room_schedule.ui.main_window - INFO - Waiting for graceful thread termination after 0.7s
+2025-09-28 11:19:43,102 - ifc_room_schedule.ui.main_window - WARNING - Graceful termination failed, forcing thread termination
+2025-09-28 11:19:45,463 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 11:19:45,465 - ifc_room_schedule.ui.main_window - INFO - Operation cancelled: Operation cancelled after completion
+2025-09-28 11:19:46,133 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 11:19:46,133 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 11:19:46,134 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 11:19:46,134 - ifc_room_schedule.ui.main_window - INFO - Requesting graceful cancellation from worker...
+2025-09-28 11:19:46,134 - ifc_room_schedule.ui.main_window - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 11:19:46,135 - ifc_room_schedule.ui.main_window - INFO - Thread terminated gracefully
+2025-09-28 11:19:46,135 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 11:19:46,135 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 11:19:46,135 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 11:19:46,135 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 11:19:46,136 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 11:19:46,136 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 11:19:46,136 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 11:19:46,528 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 11:19:46,529 - ifc_room_schedule.ui.main_window - INFO - Requesting graceful cancellation from worker...
+2025-09-28 11:19:46,529 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 11:19:46,910 - ifc_room_schedule.ui.main_window - INFO - Operation cancelled by user after 0.0s
+2025-09-28 11:19:46,911 - ifc_room_schedule.ui.main_window - INFO - Cancelling current operation...
+2025-09-28 11:19:46,911 - ifc_room_schedule.ui.main_window - INFO - Requesting graceful cancellation from worker...
+2025-09-28 11:19:46,911 - ifc_room_schedule.ui.main_window - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 11:19:46,912 - ifc_room_schedule.ui.main_window - INFO - Thread terminated gracefully
+2025-09-28 11:19:46,912 - ifc_room_schedule.ui.main_window - INFO - Operation cancellation completed
+2025-09-28 14:43:23,126 - ifc_room_schedule.utils.enhanced_logging - INFO - Using file size-based timeout: 30s for 5.1MB file
+2025-09-28 14:43:23,205 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation timeout set to 30 seconds
+2025-09-28 14:43:23,234 - ifc_room_schedule.utils.enhanced_logging - INFO - Cancelling current operation...
+2025-09-28 14:43:23,235 - ifc_room_schedule.utils.enhanced_logging - INFO - Requesting graceful cancellation from worker...
+2025-09-28 14:43:23,240 - ifc_room_schedule.utils.enhanced_logging - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 14:43:23,241 - ifc_room_schedule.utils.enhanced_logging - INFO - Thread terminated gracefully
+2025-09-28 14:43:23,242 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation cancellation completed
+2025-09-28 14:43:23,243 - ifc_room_schedule.utils.enhanced_logging - INFO - Cancelling current operation...
+2025-09-28 14:43:23,244 - ifc_room_schedule.utils.enhanced_logging - INFO - Requesting graceful cancellation from worker...
+2025-09-28 14:43:23,245 - ifc_room_schedule.utils.enhanced_logging - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 14:43:23,247 - ifc_room_schedule.utils.enhanced_logging - WARNING - Graceful termination failed, forcing thread termination
+2025-09-28 14:43:23,248 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation cancellation completed
+2025-09-28 14:43:23,333 - ifc_room_schedule.utils.enhanced_logging - INFO - Threading error detected: 'thread' found in error message
+2025-09-28 14:43:23,334 - ifc_room_schedule.utils.enhanced_logging - INFO - Threading error detected: 'thread' found in error message
+2025-09-28 14:43:23,334 - ifc_room_schedule.utils.enhanced_logging - INFO - Threading error detected: 'thread' found in error message
+2025-09-28 14:43:23,398 - ifc_room_schedule.utils.enhanced_logging - WARNING - Threading operation failed (failure #1): QThread failed to start
+2025-09-28 14:43:23,399 - ifc_room_schedule.utils.enhanced_logging - INFO - Attempting fallback to direct loading for file: C:\Users\johtho\AppData\Local\Temp\tmp1d1eeujo.ifc
+2025-09-28 14:43:23,399 - ifc_room_schedule.utils.enhanced_logging - INFO - Starting direct loading fallback #1 for: C:\Users\johtho\AppData\Local\Temp\tmp1d1eeujo.ifc (5.1MB)
+2025-09-28 14:43:23,400 - ifc_room_schedule.utils.enhanced_logging - INFO - Direct loading fallback completed successfully (success #1)
+2025-09-28 14:43:23,401 - ifc_room_schedule.utils.enhanced_logging - INFO - === Fallback Statistics ===
+2025-09-28 14:43:23,401 - ifc_room_schedule.utils.enhanced_logging - INFO - Threading failures: 1
+2025-09-28 14:43:23,402 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback attempts: 1
+2025-09-28 14:43:23,405 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback successes: 1
+2025-09-28 14:43:23,406 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback failures: 0
+2025-09-28 14:43:23,406 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback success rate: 100.0%
+2025-09-28 14:43:23,407 - ifc_room_schedule.utils.enhanced_logging - INFO - Last fallback attempt: 2025-09-28 14:43:23.399541
+2025-09-28 14:43:23,407 - ifc_room_schedule.utils.enhanced_logging - INFO - Recent fallback reasons:
+2025-09-28 14:43:23,408 - ifc_room_schedule.utils.enhanced_logging - INFO -   1. Threading error: QThread failed to start
+2025-09-28 14:43:23,408 - ifc_room_schedule.utils.enhanced_logging - INFO - === End Fallback Statistics ===
+2025-09-28 14:43:23,410 - ifc_room_schedule.utils.enhanced_logging - ERROR - Thread creation failed for 'Test Operation': Thread creation failed
+2025-09-28 14:43:23,411 - ifc_room_schedule.utils.enhanced_logging - INFO - Falling back to direct execution for 'Test Operation'
+2025-09-28 14:43:23,412 - ifc_room_schedule.utils.enhanced_logging - WARNING - Threading operation failed (failure #2): Test threading error
+2025-09-28 14:43:23,413 - ifc_room_schedule.utils.enhanced_logging - INFO - Attempting fallback to direct loading for file: C:\Users\johtho\AppData\Local\Temp\tmp1d1eeujo.ifc
+2025-09-28 14:43:23,418 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation timeout set to 1 seconds
+2025-09-28 14:44:18,927 - ifc_room_schedule.utils.enhanced_logging - INFO - Using file size-based timeout: 30s for 5.1MB file
+2025-09-28 14:44:18,927 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation timeout set to 30 seconds
+2025-09-28 14:44:18,928 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation cancelled by user after 0.0s
+2025-09-28 14:44:18,929 - ifc_room_schedule.utils.enhanced_logging - INFO - Cancelling current operation...
+2025-09-28 14:44:18,930 - ifc_room_schedule.utils.enhanced_logging - INFO - Requesting graceful cancellation from worker...
+2025-09-28 14:44:18,931 - ifc_room_schedule.utils.enhanced_logging - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 14:44:18,931 - ifc_room_schedule.utils.enhanced_logging - INFO - Thread terminated gracefully
+2025-09-28 14:44:18,932 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation cancellation completed
+2025-09-28 14:44:19,574 - ifc_room_schedule.utils.enhanced_logging - INFO - Using file size-based timeout: 120s for 77.2MB file
+2025-09-28 14:44:19,574 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation timeout set to 120 seconds
+2025-09-28 14:44:19,575 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation timeout set to 30 seconds
+2025-09-28 14:44:19,597 - ifc_room_schedule.utils.enhanced_logging - INFO - Cancelling current operation...
+2025-09-28 14:44:19,598 - ifc_room_schedule.utils.enhanced_logging - INFO - Requesting graceful cancellation from worker...
+2025-09-28 14:44:19,598 - ifc_room_schedule.utils.enhanced_logging - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 14:44:19,598 - ifc_room_schedule.utils.enhanced_logging - INFO - Thread terminated gracefully
+2025-09-28 14:44:19,599 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation cancellation completed
+2025-09-28 14:44:19,599 - ifc_room_schedule.utils.enhanced_logging - INFO - Cancelling current operation...
+2025-09-28 14:44:19,600 - ifc_room_schedule.utils.enhanced_logging - INFO - Requesting graceful cancellation from worker...
+2025-09-28 14:44:19,600 - ifc_room_schedule.utils.enhanced_logging - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 14:44:19,600 - ifc_room_schedule.utils.enhanced_logging - WARNING - Graceful termination failed, forcing thread termination
+2025-09-28 14:44:19,601 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation cancellation completed
+2025-09-28 14:44:19,636 - ifc_room_schedule.utils.enhanced_logging - INFO - File categorized as small: 5.1 MB
+2025-09-28 14:44:19,637 - ifc_room_schedule.utils.enhanced_logging - INFO - Processing small file: 5.1 MB
+2025-09-28 14:44:19,657 - ifc_room_schedule.utils.enhanced_logging - INFO - Threading error detected: 'thread' found in error message
+2025-09-28 14:44:19,658 - ifc_room_schedule.utils.enhanced_logging - INFO - Threading error detected: 'thread' found in error message
+2025-09-28 14:44:19,658 - ifc_room_schedule.utils.enhanced_logging - INFO - Threading error detected: 'thread' found in error message
+2025-09-28 14:44:19,692 - ifc_room_schedule.utils.enhanced_logging - WARNING - Threading operation failed (failure #1): QThread failed to start
+2025-09-28 14:44:19,692 - ifc_room_schedule.utils.enhanced_logging - INFO - Attempting fallback to direct loading for file: C:\Users\johtho\AppData\Local\Temp\tmpbl7g1lky.ifc
+2025-09-28 14:44:19,693 - ifc_room_schedule.utils.enhanced_logging - INFO - Starting direct loading fallback #1 for: C:\Users\johtho\AppData\Local\Temp\tmpbl7g1lky.ifc (5.1MB)
+2025-09-28 14:44:19,694 - ifc_room_schedule.utils.enhanced_logging - INFO - Direct loading fallback completed successfully (success #1)
+2025-09-28 14:44:19,695 - ifc_room_schedule.utils.enhanced_logging - INFO - === Fallback Statistics ===
+2025-09-28 14:44:19,695 - ifc_room_schedule.utils.enhanced_logging - INFO - Threading failures: 1
+2025-09-28 14:44:19,696 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback attempts: 1
+2025-09-28 14:44:19,696 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback successes: 1
+2025-09-28 14:44:19,697 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback failures: 0
+2025-09-28 14:44:19,697 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback success rate: 100.0%
+2025-09-28 14:44:19,698 - ifc_room_schedule.utils.enhanced_logging - INFO - Last fallback attempt: 2025-09-28 14:44:19.693625
+2025-09-28 14:44:19,698 - ifc_room_schedule.utils.enhanced_logging - INFO - Recent fallback reasons:
+2025-09-28 14:44:19,699 - ifc_room_schedule.utils.enhanced_logging - INFO -   1. Threading error: QThread failed to start
+2025-09-28 14:44:19,699 - ifc_room_schedule.utils.enhanced_logging - INFO - === End Fallback Statistics ===
+2025-09-28 14:44:19,701 - ifc_room_schedule.utils.enhanced_logging - ERROR - Thread creation failed for 'Test Operation': Thread creation failed
+2025-09-28 14:44:19,702 - ifc_room_schedule.utils.enhanced_logging - INFO - Falling back to direct execution for 'Test Operation'
+2025-09-28 14:44:19,703 - ifc_room_schedule.utils.enhanced_logging - WARNING - Threading operation failed (failure #2): Test threading error
+2025-09-28 14:44:19,703 - ifc_room_schedule.utils.enhanced_logging - INFO - Attempting fallback to direct loading for file: C:\Users\johtho\AppData\Local\Temp\tmpbl7g1lky.ifc
+2025-09-28 14:44:19,707 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation timeout set to 1 seconds
+2025-09-28 14:44:19,707 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation cancelled by user after 0.0s
+2025-09-28 14:44:19,708 - ifc_room_schedule.utils.enhanced_logging - INFO - Cancelling current operation...
+2025-09-28 14:44:19,708 - ifc_room_schedule.utils.enhanced_logging - INFO - Requesting graceful cancellation from worker...
+2025-09-28 14:44:19,708 - ifc_room_schedule.utils.enhanced_logging - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 14:44:19,709 - ifc_room_schedule.utils.enhanced_logging - INFO - Thread terminated gracefully
+2025-09-28 14:44:19,709 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation cancellation completed
+2025-09-28 14:44:19,711 - ifc_room_schedule.utils.enhanced_logging - INFO - Cancelling current operation...
+2025-09-28 14:44:19,711 - ifc_room_schedule.utils.enhanced_logging - INFO - Requesting graceful cancellation from worker...
+2025-09-28 14:44:19,712 - ifc_room_schedule.utils.enhanced_logging - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 14:44:19,712 - ifc_room_schedule.utils.enhanced_logging - INFO - Thread terminated gracefully
+2025-09-28 14:44:19,713 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation cancellation completed
+2025-09-28 14:44:19,746 - ifc_room_schedule.utils.enhanced_logging - WARNING - Threading operation failed (failure #3): Threading failed
+2025-09-28 14:44:19,747 - ifc_room_schedule.utils.enhanced_logging - INFO - Attempting fallback to direct loading for file: C:\Users\johtho\AppData\Local\Temp\tmpwsbgmq9g.ifc
+2025-09-28 14:44:19,748 - ifc_room_schedule.utils.enhanced_logging - INFO - Starting direct loading fallback #2 for: C:\Users\johtho\AppData\Local\Temp\tmpwsbgmq9g.ifc (5.1MB)
+2025-09-28 14:44:19,749 - ifc_room_schedule.utils.enhanced_logging - INFO - Direct loading fallback completed successfully (success #2)
+2025-09-28 14:44:19,749 - ifc_room_schedule.utils.enhanced_logging - INFO - === Fallback Statistics ===
+2025-09-28 14:44:19,750 - ifc_room_schedule.utils.enhanced_logging - INFO - Threading failures: 3
+2025-09-28 14:44:19,751 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback attempts: 2
+2025-09-28 14:44:19,751 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback successes: 2
+2025-09-28 14:44:19,751 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback failures: 0
+2025-09-28 14:44:19,752 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback success rate: 100.0%
+2025-09-28 14:44:19,753 - ifc_room_schedule.utils.enhanced_logging - INFO - Last fallback attempt: 2025-09-28 14:44:19.748119
+2025-09-28 14:44:19,753 - ifc_room_schedule.utils.enhanced_logging - INFO - Recent fallback reasons:
+2025-09-28 14:44:19,754 - ifc_room_schedule.utils.enhanced_logging - INFO -   1. Threading error: QThread failed to start
+2025-09-28 14:44:19,754 - ifc_room_schedule.utils.enhanced_logging - INFO -   2. Threading error: Test threading error
+2025-09-28 14:44:19,755 - ifc_room_schedule.utils.enhanced_logging - INFO -   3. Threading error: Threading failed
+2025-09-28 14:44:19,755 - ifc_room_schedule.utils.enhanced_logging - INFO - === End Fallback Statistics ===
+2025-09-28 14:45:20,071 - ifc_room_schedule.utils.enhanced_logging - INFO - Using file size-based timeout: 30s for 5.1MB file
+2025-09-28 14:45:20,072 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation timeout set to 30 seconds
+2025-09-28 14:45:20,073 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation cancelled by user after 0.0s
+2025-09-28 14:45:20,074 - ifc_room_schedule.utils.enhanced_logging - INFO - Cancelling current operation...
+2025-09-28 14:45:20,074 - ifc_room_schedule.utils.enhanced_logging - INFO - Requesting graceful cancellation from worker...
+2025-09-28 14:45:20,075 - ifc_room_schedule.utils.enhanced_logging - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 14:45:20,075 - ifc_room_schedule.utils.enhanced_logging - INFO - Thread terminated gracefully
+2025-09-28 14:45:20,076 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation cancellation completed
+2025-09-28 14:45:20,629 - ifc_room_schedule.utils.enhanced_logging - INFO - Using file size-based timeout: 120s for 77.2MB file
+2025-09-28 14:45:20,630 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation timeout set to 120 seconds
+2025-09-28 14:45:20,631 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation timeout set to 30 seconds
+2025-09-28 14:45:20,632 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation timeout set to 60 seconds
+2025-09-28 14:45:20,632 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation timeout extended by 60s (total elapsed: 0.0s)
+2025-09-28 14:45:20,645 - ifc_room_schedule.utils.enhanced_logging - INFO - Cancelling current operation...
+2025-09-28 14:45:20,646 - ifc_room_schedule.utils.enhanced_logging - INFO - Requesting graceful cancellation from worker...
+2025-09-28 14:45:20,646 - ifc_room_schedule.utils.enhanced_logging - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 14:45:20,647 - ifc_room_schedule.utils.enhanced_logging - INFO - Thread terminated gracefully
+2025-09-28 14:45:20,647 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation cancellation completed
+2025-09-28 14:45:20,648 - ifc_room_schedule.utils.enhanced_logging - INFO - Cancelling current operation...
+2025-09-28 14:45:20,648 - ifc_room_schedule.utils.enhanced_logging - INFO - Requesting graceful cancellation from worker...
+2025-09-28 14:45:20,649 - ifc_room_schedule.utils.enhanced_logging - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 14:45:20,649 - ifc_room_schedule.utils.enhanced_logging - WARNING - Graceful termination failed, forcing thread termination
+2025-09-28 14:45:20,650 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation cancellation completed
+2025-09-28 14:45:20,685 - ifc_room_schedule.utils.enhanced_logging - INFO - File categorized as small: 5.1 MB
+2025-09-28 14:45:20,686 - ifc_room_schedule.utils.enhanced_logging - INFO - Processing small file: 5.1 MB
+2025-09-28 14:45:20,706 - ifc_room_schedule.utils.enhanced_logging - ERROR - ERROR_REPORT: ERR_1759063520_001 - File Validation Error
+2025-09-28 14:45:20,707 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Category: unknown, Severity: high
+2025-09-28 14:45:20,707 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Message: No IfcSpace entities found
+2025-09-28 14:45:20,707 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Guidance: No IfcSpace entities found
+2025-09-28 14:45:20,708 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Recovery: Select a different IFC file, Try to load anyway (may cause errors), Cancel operation
+2025-09-28 14:45:20,708 - ifc_room_schedule.utils.enhanced_logging - DEBUG -   System: memory_total_gb=31.68, memory_available_gb=12.92, memory_percent_used=59.2, disk_free_gb=148.32, disk_percent_used=68.8, cpu_count=12
+2025-09-28 14:59:15,140 - ifc_room_schedule.utils.enhanced_logging - INFO - File categorized as small: 2.3 MB
+2025-09-28 14:59:15,140 - ifc_room_schedule.utils.enhanced_logging - INFO - Processing small file: 2.3 MB
+2025-09-28 14:59:15,267 - ifc_room_schedule.utils.enhanced_logging - INFO - Using direct loading strategy for small file
+2025-09-28 14:59:15,268 - ifc_room_schedule.utils.enhanced_logging - INFO - Loading file directly: C:/Users/johtho/Git-Repos/romskjemaing/romskjemaing/tesfiler/AkkordSvingen 23_ARK.ifc
+2025-09-28 14:59:15,269 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_START: ifc_file_load (file_size=2.3MB, memory_usage=215.6MB)
+2025-09-28 14:59:15,269 - ifc_room_schedule.utils.enhanced_logging - INFO - Starting IFC file validation: C:/Users/johtho/Git-Repos/romskjemaing/romskjemaing/tesfiler/AkkordSvingen 23_ARK.ifc
+2025-09-28 14:59:15,270 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Processing file path: C:/Users/johtho/Git-Repos/romskjemaing/romskjemaing/tesfiler/AkkordSvingen 23_ARK.ifc
+2025-09-28 14:59:15,270 - ifc_room_schedule.utils.enhanced_logging - INFO - File size analysis: 2.3MB (2,426,366 bytes)
+2025-09-28 14:59:15,271 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Memory recommendations: {'recommended_ram': '4GB or more', 'processing_time': 'Under 30 seconds', 'memory_usage': '~5MB'}
+2025-09-28 14:59:15,271 - ifc_room_schedule.utils.enhanced_logging - INFO - Small file detected (2.3MB) - using optimized loading
+2025-09-28 14:59:15,271 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_START: ifc_parsing (file_size=2.3MB, memory_usage=215.6MB)
+2025-09-28 14:59:15,272 - ifc_room_schedule.utils.enhanced_logging - INFO - Starting IFC parsing: C:/Users/johtho/Git-Repos/romskjemaing/romskjemaing/tesfiler/AkkordSvingen 23_ARK.ifc (2.3MB)
+2025-09-28 14:59:15,380 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_COMPLETE: ifc_parsing (duration=0.11s, file_size=2.3MB, rate=21.28MB/s, memory_usage=215.6MB)
+2025-09-28 14:59:15,381 - ifc_room_schedule.utils.enhanced_logging - INFO - IFC file parsed successfully in 0.11s
+2025-09-28 14:59:15,381 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_START: ifc_validation (file_size=2.3MB, memory_usage=225.9MB)
+2025-09-28 14:59:15,382 - ifc_room_schedule.utils.enhanced_logging - INFO - Starting IFC file structure validation...
+2025-09-28 14:59:15,382 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_COMPLETE: ifc_validation (duration=0.00s, file_size=2.3MB, rate=2488.13MB/s, memory_usage=225.9MB)
+2025-09-28 14:59:15,383 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 341 building products in 0.00s
+2025-09-28 14:59:15,383 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_START: space_validation (file_size=2.3MB, memory_usage=226.0MB)
+2025-09-28 14:59:15,383 - ifc_room_schedule.utils.enhanced_logging - INFO - Starting IfcSpace entity validation...
+2025-09-28 14:59:15,384 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 34 IfcSpace entities
+2025-09-28 14:59:15,384 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_COMPLETE: space_validation (duration=0.00s, file_size=2.3MB, rate=1717.86MB/s, memory_usage=226.0MB)
+2025-09-28 14:59:15,385 - ifc_room_schedule.utils.enhanced_logging - INFO - Space quality analysis completed in 0.00s:
+2025-09-28 14:59:15,385 - ifc_room_schedule.utils.enhanced_logging - INFO -   - Valid spaces: 10/10
+2025-09-28 14:59:15,385 - ifc_room_schedule.utils.enhanced_logging - INFO -   - Named spaces: 10/10
+2025-09-28 14:59:15,386 - ifc_room_schedule.utils.enhanced_logging - INFO -   - Spaces with geometry: 10/10
+2025-09-28 14:59:15,386 - ifc_room_schedule.utils.enhanced_logging - INFO - Good space data quality: 100% of sampled spaces have valid data
+2025-09-28 14:59:15,386 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_COMPLETE: ifc_file_load (duration=0.12s, file_size=2.3MB, rate=19.65MB/s, memory_usage=215.6MB)
+2025-09-28 14:59:15,387 - ifc_room_schedule.utils.enhanced_logging - INFO - Small file processing completed efficiently: 2.3MB in 0.12s
+2025-09-28 14:59:15,387 - ifc_room_schedule.utils.enhanced_logging - INFO - IFC file load operation completed successfully: Successfully loaded IFC file (IFC4) with 34 spaces found in 0.12s.
+2025-09-28 14:59:15,388 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting spaces directly for small file
+2025-09-28 14:59:15,388 - ifc_room_schedule.utils.enhanced_logging - ERROR - Error in direct file loading: Operation was cancelled
+2025-09-28 14:59:15,395 - ifc_room_schedule.utils.enhanced_logging - ERROR - ERROR_REPORT: ERR_1759064355_002 - Direct Loading Error
+2025-09-28 14:59:15,396 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Category: unknown, Severity: high
+2025-09-28 14:59:15,396 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Message: Error loading file directly: Operation was cancelled
+2025-09-28 14:59:15,397 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Guidance: Error loading file directly: Operation was cancelled
+2025-09-28 14:59:15,397 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Recovery: Retry with threaded loading, Select a different file, Cancel operation
+2025-09-28 14:59:15,397 - ifc_room_schedule.utils.enhanced_logging - DEBUG -   System: memory_total_gb=31.68, memory_available_gb=14.15, memory_percent_used=55.3, disk_free_gb=148.34, disk_percent_used=68.8, cpu_count=12
+2025-09-28 14:59:15,398 - ifc_room_schedule.utils.enhanced_logging - INFO - Falling back to threaded loading
+2025-09-28 14:59:15,398 - ifc_room_schedule.utils.enhanced_logging - INFO - Loading file with threading: C:/Users/johtho/Git-Repos/romskjemaing/romskjemaing/tesfiler/AkkordSvingen 23_ARK.ifc
+2025-09-28 14:59:15,399 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_START: ifc_file_load (file_size=2.3MB, memory_usage=226.9MB)
+2025-09-28 14:59:15,399 - ifc_room_schedule.utils.enhanced_logging - INFO - Starting IFC file validation: C:/Users/johtho/Git-Repos/romskjemaing/romskjemaing/tesfiler/AkkordSvingen 23_ARK.ifc
+2025-09-28 14:59:15,399 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Processing file path: C:/Users/johtho/Git-Repos/romskjemaing/romskjemaing/tesfiler/AkkordSvingen 23_ARK.ifc
+2025-09-28 14:59:15,400 - ifc_room_schedule.utils.enhanced_logging - INFO - File size analysis: 2.3MB (2,426,366 bytes)
+2025-09-28 14:59:15,401 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Memory recommendations: {'recommended_ram': '4GB or more', 'processing_time': 'Under 30 seconds', 'memory_usage': '~5MB'}
+2025-09-28 14:59:15,401 - ifc_room_schedule.utils.enhanced_logging - INFO - Small file detected (2.3MB) - using optimized loading
+2025-09-28 14:59:15,402 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_START: ifc_parsing (file_size=2.3MB, memory_usage=226.9MB)
+2025-09-28 14:59:15,402 - ifc_room_schedule.utils.enhanced_logging - INFO - Starting IFC parsing: C:/Users/johtho/Git-Repos/romskjemaing/romskjemaing/tesfiler/AkkordSvingen 23_ARK.ifc (2.3MB)
+2025-09-28 14:59:15,536 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_COMPLETE: ifc_parsing (duration=0.13s, file_size=2.3MB, rate=17.22MB/s, memory_usage=226.9MB)
+2025-09-28 14:59:15,537 - ifc_room_schedule.utils.enhanced_logging - INFO - IFC file parsed successfully in 0.13s
+2025-09-28 14:59:15,537 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_START: ifc_validation (file_size=2.3MB, memory_usage=238.5MB)
+2025-09-28 14:59:15,539 - ifc_room_schedule.utils.enhanced_logging - INFO - Starting IFC file structure validation...
+2025-09-28 14:59:15,540 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_COMPLETE: ifc_validation (duration=0.00s, file_size=2.3MB, rate=1068.31MB/s, memory_usage=238.5MB)
+2025-09-28 14:59:15,540 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 341 building products in 0.00s
+2025-09-28 14:59:15,541 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_START: space_validation (file_size=2.3MB, memory_usage=238.5MB)
+2025-09-28 14:59:15,541 - ifc_room_schedule.utils.enhanced_logging - INFO - Starting IfcSpace entity validation...
+2025-09-28 14:59:15,544 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 34 IfcSpace entities
+2025-09-28 14:59:15,545 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_COMPLETE: space_validation (duration=0.00s, file_size=2.3MB, rate=530.24MB/s, memory_usage=238.5MB)
+2025-09-28 14:59:15,545 - ifc_room_schedule.utils.enhanced_logging - INFO - Space quality analysis completed in 0.00s:
+2025-09-28 14:59:15,545 - ifc_room_schedule.utils.enhanced_logging - INFO -   - Valid spaces: 10/10
+2025-09-28 14:59:15,546 - ifc_room_schedule.utils.enhanced_logging - INFO -   - Named spaces: 10/10
+2025-09-28 14:59:15,546 - ifc_room_schedule.utils.enhanced_logging - INFO -   - Spaces with geometry: 10/10
+2025-09-28 14:59:15,546 - ifc_room_schedule.utils.enhanced_logging - INFO - Good space data quality: 100% of sampled spaces have valid data
+2025-09-28 14:59:15,547 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_COMPLETE: ifc_file_load (duration=0.15s, file_size=2.3MB, rate=15.63MB/s, memory_usage=226.9MB)
+2025-09-28 14:59:15,547 - ifc_room_schedule.utils.enhanced_logging - INFO - Small file processing completed efficiently: 2.3MB in 0.15s
+2025-09-28 14:59:15,547 - ifc_room_schedule.utils.enhanced_logging - INFO - IFC file load operation completed successfully: Successfully loaded IFC file (IFC4) with 34 spaces found in 0.15s.
+2025-09-28 14:59:15,553 - ifc_room_schedule.utils.enhanced_logging - ERROR - ERROR_REPORT: ERR_1759064355_003 - Space Extraction Error
+2025-09-28 14:59:15,554 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Category: unknown, Severity: high
+2025-09-28 14:59:15,555 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Message: Error extracting spaces from IFC file: Operation was cancelled
+2025-09-28 14:59:15,555 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Guidance: Error extracting spaces from IFC file: Operation was cancelled
+2025-09-28 14:59:15,555 - ifc_room_schedule.utils.enhanced_logging - DEBUG -   System: memory_total_gb=31.68, memory_available_gb=14.11, memory_percent_used=55.5, disk_free_gb=148.34, disk_percent_used=68.8, cpu_count=12
+2025-09-28 14:59:15,557 - ifc_room_schedule.utils.enhanced_logging - INFO - Using direct loading strategy for small file
+2025-09-28 14:59:15,558 - ifc_room_schedule.utils.enhanced_logging - INFO - Loading file directly: C:\Users\johtho\AppData\Local\Temp\tmp5z1q62pe.ifc
+2025-09-28 14:59:15,559 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_START: ifc_file_load (file_size=5.1MB, memory_usage=238.5MB)
+2025-09-28 14:59:15,559 - ifc_room_schedule.utils.enhanced_logging - INFO - Starting IFC file validation: C:\Users\johtho\AppData\Local\Temp\tmp5z1q62pe.ifc
+2025-09-28 14:59:15,559 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Processing file path: C:\Users\johtho\AppData\Local\Temp\tmp5z1q62pe.ifc
+2025-09-28 14:59:15,560 - ifc_room_schedule.utils.enhanced_logging - INFO - File size analysis: 5.1MB (5,394,696 bytes)
+2025-09-28 14:59:15,561 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Memory recommendations: {'recommended_ram': '4GB or more', 'processing_time': 'Under 30 seconds', 'memory_usage': '~10MB'}
+2025-09-28 14:59:15,561 - ifc_room_schedule.utils.enhanced_logging - INFO - Small file detected (5.1MB) - using optimized loading
+2025-09-28 14:59:15,562 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_START: ifc_parsing (file_size=5.1MB, memory_usage=238.5MB)
+2025-09-28 14:59:15,564 - ifc_room_schedule.utils.enhanced_logging - INFO - Starting IFC parsing: C:\Users\johtho\AppData\Local\Temp\tmp5z1q62pe.ifc (5.1MB)
+2025-09-28 14:59:15,592 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_COMPLETE: ifc_parsing (duration=0.03s, file_size=5.1MB, rate=168.23MB/s, memory_usage=238.5MB)
+2025-09-28 14:59:15,593 - ifc_room_schedule.utils.enhanced_logging - INFO - IFC file parsed successfully in 0.03s
+2025-09-28 14:59:15,594 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_START: ifc_validation (file_size=5.1MB, memory_usage=226.0MB)
+2025-09-28 14:59:15,594 - ifc_room_schedule.utils.enhanced_logging - INFO - Starting IFC file structure validation...
+2025-09-28 14:59:15,595 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_COMPLETE: ifc_validation (duration=0.00s, file_size=5.1MB, rate=4754.88MB/s, memory_usage=226.0MB)
+2025-09-28 14:59:15,601 - ifc_room_schedule.utils.enhanced_logging - ERROR - ERROR_REPORT: ERR_1759064355_004 - Empty IFC Structure
+2025-09-28 14:59:15,601 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Category: validation, Severity: high
+2025-09-28 14:59:15,602 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Message: IFC file contains no building elements
+2025-09-28 14:59:15,602 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Guidance: The IFC file appears to be empty or contains no building elements (IfcProduct entities).
+2025-09-28 14:59:15,602 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Recovery: Verify the IFC export included building geometry, Check export settings to include all building elements, Try exporting from a different view or model state, Ensure the model contains actual building components
+2025-09-28 14:59:15,603 - ifc_room_schedule.utils.enhanced_logging - DEBUG -   System: memory_total_gb=31.68, memory_available_gb=14.11, memory_percent_used=55.4, disk_free_gb=148.34, disk_percent_used=68.8, cpu_count=12
+2025-09-28 14:59:15,603 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_COMPLETE: ifc_file_load (duration=0.04s, file_size=5.1MB, rate=115.31MB/s, memory_usage=238.5MB)
+2025-09-28 14:59:15,609 - ifc_room_schedule.utils.enhanced_logging - ERROR - ERROR_REPORT: ERR_1759064355_005 - File Operation Error
+2025-09-28 14:59:15,610 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Category: unknown, Severity: high
+2025-09-28 14:59:15,610 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Message: Failed to load IFC file: IFC file appears to be empty or contains no building elements (IfcProduct entities).
+2025-09-28 14:59:15,610 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Guidance: Failed to load IFC file: IFC file appears to be empty or contains no building elements (IfcProduct entities).
+2025-09-28 14:59:15,611 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Recovery: Retry load IFC file, Select a different file, Cancel operation
+2025-09-28 14:59:15,611 - ifc_room_schedule.utils.enhanced_logging - DEBUG -   System: memory_total_gb=31.68, memory_available_gb=14.11, memory_percent_used=55.4, disk_free_gb=148.34, disk_percent_used=68.8, cpu_count=12
+2025-09-28 14:59:15,614 - ifc_room_schedule.utils.enhanced_logging - INFO - Threading error detected: 'thread' found in error message
+2025-09-28 14:59:15,614 - ifc_room_schedule.utils.enhanced_logging - INFO - Threading error detected: 'thread' found in error message
+2025-09-28 14:59:15,615 - ifc_room_schedule.utils.enhanced_logging - INFO - Threading error detected: 'thread' found in error message
+2025-09-28 14:59:15,648 - ifc_room_schedule.utils.enhanced_logging - WARNING - Threading operation failed (failure #1): QThread failed to start
+2025-09-28 14:59:15,648 - ifc_room_schedule.utils.enhanced_logging - INFO - Attempting fallback to direct loading for file: C:\Users\johtho\AppData\Local\Temp\tmpijn_em_t.ifc
+2025-09-28 14:59:15,649 - ifc_room_schedule.utils.enhanced_logging - INFO - Starting direct loading fallback #1 for: C:\Users\johtho\AppData\Local\Temp\tmpijn_em_t.ifc (5.1MB)
+2025-09-28 14:59:15,694 - ifc_room_schedule.utils.enhanced_logging - INFO - Direct loading fallback completed successfully (success #1)
+2025-09-28 14:59:15,695 - ifc_room_schedule.utils.enhanced_logging - INFO - === Fallback Statistics ===
+2025-09-28 14:59:15,695 - ifc_room_schedule.utils.enhanced_logging - INFO - Threading failures: 1
+2025-09-28 14:59:15,695 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback attempts: 1
+2025-09-28 14:59:15,696 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback successes: 1
+2025-09-28 14:59:15,696 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback failures: 0
+2025-09-28 14:59:15,697 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback success rate: 100.0%
+2025-09-28 14:59:15,697 - ifc_room_schedule.utils.enhanced_logging - INFO - Last fallback attempt: 2025-09-28 14:59:15.649362
+2025-09-28 14:59:15,697 - ifc_room_schedule.utils.enhanced_logging - INFO - Recent fallback reasons:
+2025-09-28 14:59:15,698 - ifc_room_schedule.utils.enhanced_logging - INFO -   1. Threading error: QThread failed to start
+2025-09-28 14:59:15,698 - ifc_room_schedule.utils.enhanced_logging - INFO - === End Fallback Statistics ===
+2025-09-28 14:59:15,700 - ifc_room_schedule.utils.enhanced_logging - ERROR - Thread creation failed for 'Test Operation': Thread creation failed
+2025-09-28 14:59:15,700 - ifc_room_schedule.utils.enhanced_logging - INFO - Falling back to direct execution for 'Test Operation'
+2025-09-28 14:59:15,701 - ifc_room_schedule.utils.enhanced_logging - WARNING - Threading operation failed (failure #2): Test threading error
+2025-09-28 14:59:15,701 - ifc_room_schedule.utils.enhanced_logging - INFO - Attempting fallback to direct loading for file: C:\Users\johtho\AppData\Local\Temp\tmpijn_em_t.ifc
+2025-09-28 14:59:15,737 - ifc_room_schedule.utils.enhanced_logging - WARNING - ERROR_REPORT: ERR_1759064355_006 - Threading Operation Failed
+2025-09-28 14:59:15,738 - ifc_room_schedule.utils.enhanced_logging - WARNING -   Category: unknown, Severity: medium
+2025-09-28 14:59:15,738 - ifc_room_schedule.utils.enhanced_logging - WARNING -   Message: The threaded operation failed: Test threading error
+2025-09-28 14:59:15,739 - ifc_room_schedule.utils.enhanced_logging - WARNING -   Guidance: The threaded operation failed: Test threading error
+2025-09-28 14:59:15,739 - ifc_room_schedule.utils.enhanced_logging - WARNING -   Recovery: Try direct loading (may freeze UI temporarily), Retry with threading, Select a different file, Cancel operation
+2025-09-28 14:59:15,739 - ifc_room_schedule.utils.enhanced_logging - DEBUG -   System: memory_total_gb=31.68, memory_available_gb=14.11, memory_percent_used=55.5, disk_free_gb=148.34, disk_percent_used=68.8, cpu_count=12
+2025-09-28 14:59:15,740 - ifc_room_schedule.utils.enhanced_logging - INFO - Starting direct loading fallback #2 for: C:\Users\johtho\AppData\Local\Temp\tmpijn_em_t.ifc
+2025-09-28 14:59:15,745 - ifc_room_schedule.utils.enhanced_logging - INFO - Loading file directly: C:\Users\johtho\AppData\Local\Temp\tmpijn_em_t.ifc
+2025-09-28 14:59:15,746 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_START: ifc_file_load (memory_usage=230.6MB)
+2025-09-28 14:59:15,746 - ifc_room_schedule.utils.enhanced_logging - INFO - Starting IFC file validation: C:\Users\johtho\AppData\Local\Temp\tmpijn_em_t.ifc
+2025-09-28 14:59:15,747 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Processing file path: C:\Users\johtho\AppData\Local\Temp\tmpijn_em_t.ifc
+2025-09-28 14:59:15,753 - ifc_room_schedule.utils.enhanced_logging - WARNING - ERROR_REPORT: ERR_1759064355_007 - File Not Found
+2025-09-28 14:59:15,753 - ifc_room_schedule.utils.enhanced_logging - WARNING -   Category: io, Severity: medium
+2025-09-28 14:59:15,754 - ifc_room_schedule.utils.enhanced_logging - WARNING -   Message: File does not exist: C:\Users\johtho\AppData\Local\Temp\tmpijn_em_t.ifc
+2025-09-28 14:59:15,754 - ifc_room_schedule.utils.enhanced_logging - WARNING -   Guidance: The selected file could not be found. It may have been moved, deleted, or renamed.
+2025-09-28 14:59:15,754 - ifc_room_schedule.utils.enhanced_logging - WARNING -   Recovery: Verify the file path is correct, Check if the file was moved or renamed, Select a different IFC file, Restore the file from backup if available
+2025-09-28 14:59:15,755 - ifc_room_schedule.utils.enhanced_logging - DEBUG -   System: memory_total_gb=31.68, memory_available_gb=14.11, memory_percent_used=55.5, disk_free_gb=148.34, disk_percent_used=68.8, cpu_count=12
+2025-09-28 14:59:15,755 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_COMPLETE: ifc_file_load (duration=0.01s, memory_usage=230.6MB)
+2025-09-28 14:59:15,761 - ifc_room_schedule.utils.enhanced_logging - ERROR - ERROR_REPORT: ERR_1759064355_008 - File Operation Error
+2025-09-28 14:59:15,762 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Category: unknown, Severity: high
+2025-09-28 14:59:15,762 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Message: Failed to load IFC file: File not found: C:\Users\johtho\AppData\Local\Temp\tmpijn_em_t.ifc
+2025-09-28 14:59:15,763 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Guidance: Failed to load IFC file: File not found: C:\Users\johtho\AppData\Local\Temp\tmpijn_em_t.ifc
+2025-09-28 14:59:15,763 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Recovery: Retry load IFC file, Select a different file, Cancel operation
+2025-09-28 14:59:15,763 - ifc_room_schedule.utils.enhanced_logging - DEBUG -   System: memory_total_gb=31.68, memory_available_gb=14.11, memory_percent_used=55.5, disk_free_gb=148.34, disk_percent_used=68.8, cpu_count=12
+2025-09-28 14:59:15,764 - ifc_room_schedule.utils.enhanced_logging - INFO - Direct loading fallback completed successfully (success #2)
+2025-09-28 14:59:15,764 - ifc_room_schedule.utils.enhanced_logging - INFO - === Fallback Statistics ===
+2025-09-28 14:59:15,764 - ifc_room_schedule.utils.enhanced_logging - INFO - Threading failures: 2
+2025-09-28 14:59:15,765 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback attempts: 2
+2025-09-28 14:59:15,765 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback successes: 2
+2025-09-28 14:59:15,765 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback failures: 0
+2025-09-28 14:59:15,766 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback success rate: 100.0%
+2025-09-28 14:59:15,766 - ifc_room_schedule.utils.enhanced_logging - INFO - Last fallback attempt: 2025-09-28 14:59:15.740435
+2025-09-28 14:59:15,766 - ifc_room_schedule.utils.enhanced_logging - INFO - Recent fallback reasons:
+2025-09-28 14:59:15,766 - ifc_room_schedule.utils.enhanced_logging - INFO -   1. Threading error: QThread failed to start
+2025-09-28 14:59:15,767 - ifc_room_schedule.utils.enhanced_logging - INFO -   2. Threading error: Test threading error
+2025-09-28 14:59:15,767 - ifc_room_schedule.utils.enhanced_logging - INFO - === End Fallback Statistics ===
+2025-09-28 14:59:15,768 - ifc_room_schedule.utils.enhanced_logging - INFO - Starting direct loading fallback #3 for: test_file.ifc
+2025-09-28 14:59:15,772 - ifc_room_schedule.utils.enhanced_logging - INFO - Direct loading fallback completed successfully (success #3)
+2025-09-28 14:59:15,773 - ifc_room_schedule.utils.enhanced_logging - INFO - === Fallback Statistics ===
+2025-09-28 14:59:15,773 - ifc_room_schedule.utils.enhanced_logging - INFO - Threading failures: 2
+2025-09-28 14:59:15,774 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback attempts: 3
+2025-09-28 14:59:15,774 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback successes: 3
+2025-09-28 14:59:15,774 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback failures: 0
+2025-09-28 14:59:15,775 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback success rate: 100.0%
+2025-09-28 14:59:15,775 - ifc_room_schedule.utils.enhanced_logging - INFO - Last fallback attempt: 2025-09-28 14:59:15.768190
+2025-09-28 14:59:15,776 - ifc_room_schedule.utils.enhanced_logging - INFO - Recent fallback reasons:
+2025-09-28 14:59:15,776 - ifc_room_schedule.utils.enhanced_logging - INFO -   1. Threading error: QThread failed to start
+2025-09-28 14:59:15,776 - ifc_room_schedule.utils.enhanced_logging - INFO -   2. Threading error: Test threading error
+2025-09-28 14:59:15,777 - ifc_room_schedule.utils.enhanced_logging - INFO - === End Fallback Statistics ===
+2025-09-28 14:59:15,778 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation timeout set to 1 seconds
+2025-09-28 14:59:15,779 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation cancelled by user after 0.0s
+2025-09-28 14:59:15,779 - ifc_room_schedule.utils.enhanced_logging - INFO - Cancelling current operation...
+2025-09-28 14:59:15,780 - ifc_room_schedule.utils.enhanced_logging - INFO - Requesting graceful cancellation from worker...
+2025-09-28 14:59:15,780 - ifc_room_schedule.utils.enhanced_logging - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 14:59:15,780 - ifc_room_schedule.utils.enhanced_logging - INFO - Thread terminated gracefully
+2025-09-28 14:59:15,781 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation cancellation completed
+2025-09-28 14:59:15,782 - ifc_room_schedule.utils.enhanced_logging - INFO - Cancelling current operation...
+2025-09-28 14:59:15,783 - ifc_room_schedule.utils.enhanced_logging - INFO - Requesting graceful cancellation from worker...
+2025-09-28 14:59:15,783 - ifc_room_schedule.utils.enhanced_logging - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 14:59:15,783 - ifc_room_schedule.utils.enhanced_logging - INFO - Thread terminated gracefully
+2025-09-28 14:59:15,784 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation cancellation completed
+2025-09-28 14:59:15,820 - ifc_room_schedule.utils.enhanced_logging - WARNING - Threading operation failed (failure #3): Threading failed
+2025-09-28 14:59:15,821 - ifc_room_schedule.utils.enhanced_logging - INFO - Attempting fallback to direct loading for file: C:\Users\johtho\AppData\Local\Temp\tmpeux_nlwd.ifc
+2025-09-28 14:59:15,821 - ifc_room_schedule.utils.enhanced_logging - INFO - Starting direct loading fallback #4 for: C:\Users\johtho\AppData\Local\Temp\tmpeux_nlwd.ifc (5.1MB)
+2025-09-28 14:59:15,826 - ifc_room_schedule.utils.enhanced_logging - INFO - Direct loading fallback completed successfully (success #4)
+2025-09-28 14:59:15,826 - ifc_room_schedule.utils.enhanced_logging - INFO - === Fallback Statistics ===
+2025-09-28 14:59:15,826 - ifc_room_schedule.utils.enhanced_logging - INFO - Threading failures: 3
+2025-09-28 14:59:15,827 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback attempts: 4
+2025-09-28 14:59:15,827 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback successes: 4
+2025-09-28 14:59:15,828 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback failures: 0
+2025-09-28 14:59:15,828 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback success rate: 100.0%
+2025-09-28 14:59:15,829 - ifc_room_schedule.utils.enhanced_logging - INFO - Last fallback attempt: 2025-09-28 14:59:15.821768
+2025-09-28 14:59:15,829 - ifc_room_schedule.utils.enhanced_logging - INFO - Recent fallback reasons:
+2025-09-28 14:59:15,830 - ifc_room_schedule.utils.enhanced_logging - INFO -   1. Threading error: QThread failed to start
+2025-09-28 14:59:15,830 - ifc_room_schedule.utils.enhanced_logging - INFO -   2. Threading error: Test threading error
+2025-09-28 14:59:15,831 - ifc_room_schedule.utils.enhanced_logging - INFO -   3. Threading error: Threading failed
+2025-09-28 14:59:15,831 - ifc_room_schedule.utils.enhanced_logging - INFO - === End Fallback Statistics ===
+2025-09-28 14:59:15,838 - ifc_room_schedule.utils.enhanced_logging - INFO - ERROR_REPORT: ERR_1759064355_009 - Operation Error
+2025-09-28 14:59:15,839 - ifc_room_schedule.utils.enhanced_logging - INFO -   Category: unknown, Severity: low
+2025-09-28 14:59:15,840 - ifc_room_schedule.utils.enhanced_logging - INFO -   Message: Operation failed: Test error message
+2025-09-28 14:59:15,841 - ifc_room_schedule.utils.enhanced_logging - INFO -   Guidance: An unexpected error occurred during the operation.
+2025-09-28 14:59:15,841 - ifc_room_schedule.utils.enhanced_logging - INFO -   Recovery: Try the operation again, Restart the application if the issue persists, Check the file and system status
+2025-09-28 14:59:15,841 - ifc_room_schedule.utils.enhanced_logging - DEBUG -   System: memory_total_gb=31.68, memory_available_gb=14.11, memory_percent_used=55.5, disk_free_gb=148.34, disk_percent_used=68.8, cpu_count=12
+2025-09-28 14:59:15,847 - ifc_room_schedule.utils.enhanced_logging - ERROR - ERROR_REPORT: ERR_1759064355_010 - Operation Error
+2025-09-28 14:59:15,848 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Category: unknown, Severity: high
+2025-09-28 14:59:15,848 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Message: Test error message
+2025-09-28 14:59:15,848 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Guidance: Test error message
+2025-09-28 14:59:15,848 - ifc_room_schedule.utils.enhanced_logging - ERROR -   Recovery: Try again, Cancel
+2025-09-28 14:59:15,849 - ifc_room_schedule.utils.enhanced_logging - DEBUG -   System: memory_total_gb=31.68, memory_available_gb=14.11, memory_percent_used=55.5, disk_free_gb=148.34, disk_percent_used=68.8, cpu_count=12
+2025-09-28 15:01:04,199 - ifc_room_schedule.utils.enhanced_logging - INFO - Using file size-based timeout: 30s for 5.1MB file
+2025-09-28 15:01:04,200 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation timeout set to 30 seconds
+2025-09-28 15:01:04,201 - ifc_room_schedule.utils.enhanced_logging - INFO - Using file size-based timeout: 120s for 77.2MB file
+2025-09-28 15:01:04,202 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation timeout set to 120 seconds
+2025-09-28 15:01:04,501 - ifc_room_schedule.utils.enhanced_logging - INFO - Threading error detected: 'thread' found in error message
+2025-09-28 15:01:04,503 - ifc_room_schedule.utils.enhanced_logging - INFO - Threading error detected: 'thread' found in error message
+2025-09-28 15:01:04,504 - ifc_room_schedule.utils.enhanced_logging - INFO - Threading error detected: 'thread' found in error message
+2025-09-28 15:01:04,558 - ifc_room_schedule.utils.enhanced_logging - WARNING - Threading operation failed (failure #1): QThread failed to start
+2025-09-28 15:01:04,559 - ifc_room_schedule.utils.enhanced_logging - INFO - Attempting fallback to direct loading for file: C:\Users\johtho\AppData\Local\Temp\tmpaynyz5tp.ifc
+2025-09-28 15:01:04,560 - ifc_room_schedule.utils.enhanced_logging - INFO - Starting direct loading fallback #1 for: C:\Users\johtho\AppData\Local\Temp\tmpaynyz5tp.ifc (5.1MB)
+2025-09-28 15:01:04,561 - ifc_room_schedule.utils.enhanced_logging - INFO - Direct loading fallback completed successfully (success #1)
+2025-09-28 15:01:04,562 - ifc_room_schedule.utils.enhanced_logging - INFO - === Fallback Statistics ===
+2025-09-28 15:01:04,563 - ifc_room_schedule.utils.enhanced_logging - INFO - Threading failures: 1
+2025-09-28 15:01:04,563 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback attempts: 1
+2025-09-28 15:01:04,564 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback successes: 1
+2025-09-28 15:01:04,564 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback failures: 0
+2025-09-28 15:01:04,565 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback success rate: 100.0%
+2025-09-28 15:01:04,565 - ifc_room_schedule.utils.enhanced_logging - INFO - Last fallback attempt: 2025-09-28 15:01:04.560478
+2025-09-28 15:01:04,566 - ifc_room_schedule.utils.enhanced_logging - INFO - Recent fallback reasons:
+2025-09-28 15:01:04,566 - ifc_room_schedule.utils.enhanced_logging - INFO -   1. Threading error: QThread failed to start
+2025-09-28 15:01:04,567 - ifc_room_schedule.utils.enhanced_logging - INFO - === End Fallback Statistics ===
+2025-09-28 15:01:04,568 - ifc_room_schedule.utils.enhanced_logging - ERROR - Thread creation failed for 'Test Operation': Thread creation failed
+2025-09-28 15:01:04,569 - ifc_room_schedule.utils.enhanced_logging - INFO - Falling back to direct execution for 'Test Operation'
+2025-09-28 15:01:04,570 - ifc_room_schedule.utils.enhanced_logging - INFO - Executing 'Test Operation' directly as fallback (attempt #2)
+2025-09-28 15:01:04,571 - ifc_room_schedule.utils.enhanced_logging - INFO - Direct execution of 'Test Operation' completed successfully (success #2)
+2025-09-28 15:01:04,571 - ifc_room_schedule.utils.enhanced_logging - INFO - === Fallback Statistics ===
+2025-09-28 15:01:04,572 - ifc_room_schedule.utils.enhanced_logging - INFO - Threading failures: 1
+2025-09-28 15:01:04,572 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback attempts: 2
+2025-09-28 15:01:04,573 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback successes: 2
+2025-09-28 15:01:04,573 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback failures: 0
+2025-09-28 15:01:04,574 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback success rate: 100.0%
+2025-09-28 15:01:04,575 - ifc_room_schedule.utils.enhanced_logging - INFO - Last fallback attempt: 2025-09-28 15:01:04.570370
+2025-09-28 15:01:04,576 - ifc_room_schedule.utils.enhanced_logging - INFO - Recent fallback reasons:
+2025-09-28 15:01:04,576 - ifc_room_schedule.utils.enhanced_logging - INFO -   1. Threading error: QThread failed to start
+2025-09-28 15:01:04,577 - ifc_room_schedule.utils.enhanced_logging - INFO -   2. Direct execution fallback for 'Test Operation'
+2025-09-28 15:01:04,578 - ifc_room_schedule.utils.enhanced_logging - INFO - === End Fallback Statistics ===
+2025-09-28 15:01:04,816 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation timeout set to 1 seconds
+2025-09-28 15:01:04,817 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation cancelled by user after 0.0s
+2025-09-28 15:01:04,818 - ifc_room_schedule.utils.enhanced_logging - INFO - Cancelling current operation...
+2025-09-28 15:01:04,819 - ifc_room_schedule.utils.enhanced_logging - INFO - Requesting graceful cancellation from worker...
+2025-09-28 15:01:04,820 - ifc_room_schedule.utils.enhanced_logging - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 15:01:04,820 - ifc_room_schedule.utils.enhanced_logging - INFO - Thread terminated gracefully
+2025-09-28 15:01:04,821 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation cancellation completed
+2025-09-28 15:01:04,824 - ifc_room_schedule.utils.enhanced_logging - INFO - Cancelling current operation...
+2025-09-28 15:01:04,825 - ifc_room_schedule.utils.enhanced_logging - INFO - Requesting graceful cancellation from worker...
+2025-09-28 15:01:04,827 - ifc_room_schedule.utils.enhanced_logging - INFO - Waiting for graceful thread termination after 0.0s
+2025-09-28 15:01:04,827 - ifc_room_schedule.utils.enhanced_logging - INFO - Thread terminated gracefully
+2025-09-28 15:01:04,828 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation cancellation completed
+2025-09-28 15:01:04,872 - ifc_room_schedule.utils.enhanced_logging - WARNING - Threading operation failed (failure #1): Threading failed
+2025-09-28 15:01:04,873 - ifc_room_schedule.utils.enhanced_logging - INFO - Attempting fallback to direct loading for file: C:\Users\johtho\AppData\Local\Temp\tmpssgmxwmi.ifc
+2025-09-28 15:01:04,874 - ifc_room_schedule.utils.enhanced_logging - INFO - Starting direct loading fallback #1 for: C:\Users\johtho\AppData\Local\Temp\tmpssgmxwmi.ifc (5.1MB)
+2025-09-28 15:01:04,875 - ifc_room_schedule.utils.enhanced_logging - INFO - Direct loading fallback completed successfully (success #1)
+2025-09-28 15:01:04,876 - ifc_room_schedule.utils.enhanced_logging - INFO - === Fallback Statistics ===
+2025-09-28 15:01:04,877 - ifc_room_schedule.utils.enhanced_logging - INFO - Threading failures: 1
+2025-09-28 15:01:04,877 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback attempts: 1
+2025-09-28 15:01:04,878 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback successes: 1
+2025-09-28 15:01:04,878 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback failures: 0
+2025-09-28 15:01:04,879 - ifc_room_schedule.utils.enhanced_logging - INFO - Fallback success rate: 100.0%
+2025-09-28 15:01:04,880 - ifc_room_schedule.utils.enhanced_logging - INFO - Last fallback attempt: 2025-09-28 15:01:04.873944
+2025-09-28 15:01:04,880 - ifc_room_schedule.utils.enhanced_logging - INFO - Recent fallback reasons:
+2025-09-28 15:01:04,880 - ifc_room_schedule.utils.enhanced_logging - INFO -   1. Threading error: Threading failed
+2025-09-28 15:01:04,881 - ifc_room_schedule.utils.enhanced_logging - INFO - === End Fallback Statistics ===
+2025-09-28 15:02:31,551 - ifc_room_schedule.utils.enhanced_logging - INFO - Using file size-based timeout: 30s for 0.0MB file
+2025-09-28 15:02:31,552 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation timeout set to 30 seconds
+2025-09-28 15:02:31,553 - ifc_room_schedule.utils.enhanced_logging - INFO - Using file size-based timeout: 30s for 0.0MB file
+2025-09-28 15:02:31,554 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation timeout set to 30 seconds
+2025-09-28 15:07:43,332 - ifc_room_schedule.utils.enhanced_logging - INFO - Using file size-based timeout: 30s for 5.1MB file
+2025-09-28 15:07:43,334 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation timeout set to 30 seconds
+2025-09-28 15:07:43,336 - ifc_room_schedule.utils.enhanced_logging - INFO - Using file size-based timeout: 120s for 76.6MB file
+2025-09-28 15:07:43,337 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation timeout set to 120 seconds
+2025-09-28 15:07:43,340 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation timeout set to 60 seconds
+2025-09-28 15:07:43,341 - ifc_room_schedule.utils.enhanced_logging - INFO - Operation timeout extended by 60s (total elapsed: 0.0s)
