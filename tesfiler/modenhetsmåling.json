@@ -1,0 +1,57 @@
+{
+	"Prosjektleder (PL)": {
+		"Fase A – Tilbud": {
+			"formål": "Grunnlag for konkurranse",
+			"akseptkriterier": [
+				"Alle LOIN-krav er beskrevet og inkludert i tilbudsgrunnlaget (modell, beskrivelser, IDS)."
+			]
+		},
+		"Fase B – Kost": {
+			"formål": "Kalkyle og budsjett",
+			"akseptkriterier": [
+				"Mengder og objekter kan hentes entydig fra modell, uten hull eller doble objekter."
+			]
+		},
+		"Fase C – Fremdrift": {
+			"formål": "Planlegging",
+			"akseptkriterier": [
+				"Milepæler og avhengigheter er modellert/validerbare i IFC.",
+				"Fremdriftsdata er koblet til objekter."
+			]
+		}
+	},
+	"Anleggsleder (AL)": {
+		"Fase D – Produksjonsunderlag": {
+			"formål": "Utførelsesgrunnlag",
+			"akseptkriterier": [
+				"Tegninger og modeller er konsistente og kan brukes på byggeplass (riktig detaljeringsnivå)."
+			]
+		},
+		"Fase E – Mengder": {
+			"formål": "Bestilling og oppfølging",
+			"akseptkriterier": [
+				"Mengder kan eksporteres direkte fra modell og stemmer med bestilt/avtalt omfang."
+			]
+		},
+		"Fase F – Logistikk": {
+			"formål": "Leveranse og rekkefølge",
+			"akseptkriterier": [
+				"Leveringsplan og plassering/rekkefølge er koblet til objektene.",
+				"Ingen avvik mot fremdrift."
+			]
+		},
+		"Fase G – Kvalitet": {
+			"formål": "Kontroll og dokumentasjon",
+			"akseptkriterier": [
+				"FDV-attributter og kvalitetssjekk (NS/IFC) er på plass og validerer uten feil."
+			]
+		},
+		"Fase H – As-built": {
+			"formål": "Ferdig FDV",
+			"akseptkriterier": [
+				"As-built-modellen dokumenterer faktisk bygget.",
+				"FDV-data er komplett og validert."
+			]
+		}
+	}
+}
