@@ -295,7 +295,7 @@ class TestJsonBuilder:
             temp_filename = temp_file.name
         
         try:
-            success = self.json_builder.write_json_file(temp_filename, test_data)
+            success, message = self.json_builder.write_json_file(temp_filename, test_data)
             assert success is True
             
             # Verify file contents
@@ -312,7 +312,7 @@ class TestJsonBuilder:
         test_data = {"test": "data"}
         invalid_path = "/invalid/path/file.json"
         
-        success = self.json_builder.write_json_file(invalid_path, test_data)
+        success, message = self.json_builder.write_json_file(invalid_path, test_data)
         assert success is False
     
     def test_export_to_json_success(self):

@@ -418,11 +418,11 @@ class TestEndToEndIntegration:
         # Test 3: Export failure handling
         json_builder = JsonBuilder()
         
-        # Test with invalid export path
-        success, messages = json_builder.export_to_json([], "/invalid/path/export.json")
+        # Test with empty spaces (should fail due to no data validation)
+        success, messages = json_builder.export_to_json([], "")
         assert success is False
         assert len(messages) > 0
-        assert any("export" in msg.lower() or "file" in msg.lower() for msg in messages)
+        assert any("filename" in msg.lower() or "empty" in msg.lower() for msg in messages)
     
     def test_various_ifc_file_sizes_and_formats(self, comprehensive_test_data):
         """Test handling of various IFC file sizes and data complexity."""

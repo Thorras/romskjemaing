@@ -4,12 +4,12 @@ IFC Space Extractor
 Extracts spatial information from IFC files using IfcOpenShell.
 """
 
-import logging
 from typing import List, Dict, Optional, Any, Tuple
 import ifcopenshell
 import ifcopenshell.util.element
 import ifcopenshell.util.unit
 from ..data.space_model import SpaceData
+from ..utils.enhanced_logging import enhanced_logger
 
 
 class IfcSpaceExtractor:
@@ -23,7 +23,7 @@ class IfcSpaceExtractor:
             ifc_file: IfcOpenShell file object (optional)
         """
         self.ifc_file = ifc_file
-        self.logger = logging.getLogger(__name__)
+        self.logger = enhanced_logger.logger
         self._spaces_cache = None
 
     def set_ifc_file(self, ifc_file) -> None:
@@ -102,6 +102,47 @@ class IfcSpaceExtractor:
             error_msg = f"Failed to extract spaces from IFC file: {e}"
             self.logger.error(error_msg)
             raise RuntimeError(error_msg)
+    
+    def _extract_spaces_batch(self, ifc_spaces_batch: List, batch_offset: int = 0) -> Tuple[List[SpaceData], List[Tuple[str, str]]]:
+        """
+        Extract a batch of spaces with optimized processing.
+        
+        Args:
+            ifc_spaces_batch: List of IFC space entities to process
+            batch_offset: Offset for space numbering in logs
+            
+        Returns:
+            Tuple of (successful_spaces, failed_extractions)
+        """
+        spaces = []
+        failed_extractions = []
+        
+        for i, ifc_space in enumerate(ifc_spaces_batch):
+            try:
+                # Pre-check for essential properties to avoid expensive extraction
+                if not hasattr(ifc_space, 'GlobalId') or not ifc_space.GlobalId:
+                    space_id = f'Space_{batch_offset + i}'
+                    failed_extractions.append((space_id, "Missing GlobalId"))
+                    continue
+                
+                space_data = self._extract_space_properties(ifc_space)
+                if space_data:
+                    spaces.append(space_data)
+                else:
+                    failed_extractions.append((ifc_space.GlobalId, "Failed to extract properties"))
+                    
+            except MemoryError as e:
+                # For memory errors, we should stop processing
+                space_id = getattr(ifc_space, 'GlobalId', f'Space_{batch_offset + i}')
+                self.logger.error(f"Memory error extracting space {space_id}: {e}")
+                raise MemoryError(f"Insufficient memory to extract spaces. Processed {len(spaces)} of {len(ifc_spaces_batch)} spaces in current batch.")
+            except Exception as e:
+                space_id = getattr(ifc_space, 'GlobalId', f'Space_{batch_offset + i}')
+                self.logger.error(f"Error extracting space {space_id}: {e}")
+                failed_extractions.append((space_id, str(e)))
+                continue
+        
+        return spaces, failed_extractions
 
     def get_space_by_guid(self, guid: str) -> Optional[SpaceData]:
         """

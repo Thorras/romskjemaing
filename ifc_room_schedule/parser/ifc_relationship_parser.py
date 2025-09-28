@@ -4,9 +4,9 @@ IFC Relationship Parser
 Parses relationships between IFC entities using IfcOpenShell.
 """
 
-import logging
 from typing import List, Dict, Optional, Any
 import ifcopenshell
+from ..utils.enhanced_logging import enhanced_logger
 from ..data.relationship_model import RelationshipData
 
 
@@ -21,7 +21,7 @@ class IfcRelationshipParser:
             ifc_file: IfcOpenShell file object (optional)
         """
         self.ifc_file = ifc_file
-        self.logger = logging.getLogger(__name__)
+        self.logger = enhanced_logger.logger
         self._relationships_cache = {}
 
     def set_ifc_file(self, ifc_file) -> None:

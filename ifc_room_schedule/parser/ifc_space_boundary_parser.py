@@ -4,12 +4,12 @@ IFC Space Boundary Parser
 Extracts and processes IfcSpaceBoundary entities from IFC files using IfcOpenShell.
 """
 
-import logging
 import math
 from typing import List, Dict, Optional, Any, Tuple
 import ifcopenshell
 import ifcopenshell.util.element
 import ifcopenshell.util.unit
+from ..utils.enhanced_logging import enhanced_logger
 import ifcopenshell.geom
 from ..data.space_boundary_model import SpaceBoundaryData
 
@@ -25,7 +25,7 @@ class IfcSpaceBoundaryParser:
             ifc_file: IfcOpenShell file object (optional)
         """
         self.ifc_file = ifc_file
-        self.logger = logging.getLogger(__name__)
+        self.logger = enhanced_logger.logger
         self._boundaries_cache = None
         self._geometry_settings = None
 

@@ -170,12 +170,14 @@ class ErrorRecoveryDialog(QDialog):
 
 
 class LongRunningOperationWorker(QObject):
-    """Worker for long-running operations with progress reporting and cancellation support."""
+    """Worker for long-running operations with enhanced progress reporting and cancellation support."""
     
     progress_updated = pyqtSignal(int, str)  # progress, status
+    detailed_progress_updated = pyqtSignal(int, int, str, str)  # current, total, operation, detail
     operation_completed = pyqtSignal(bool, str, object)  # success, message, result
     error_occurred = pyqtSignal(str, str)  # error_type, error_message
     operation_cancelled = pyqtSignal(str)  # cancellation_message
+    performance_stats_updated = pyqtSignal(dict)  # performance statistics
     
     def __init__(self, operation_func, *args, **kwargs):
         super().__init__()
@@ -2320,6 +2322,17 @@ class MainWindow(QMainWindow):
         
         file_menu.addSeparator()
         
+        # Export action
+        export_action = QAction('&Export Data...', self)
+        export_action.setShortcut('Ctrl+E')
+        export_action.setStatusTip('Export space data to various formats')
+        export_action.triggered.connect(self.export_json)
+        export_action.setEnabled(False)  # Initially disabled
+        file_menu.addAction(export_action)
+        self.export_action = export_action
+        
+        file_menu.addSeparator()
+        
         # Exit action
         exit_action = QAction('E&xit', self)
         exit_action.setShortcut('Ctrl+Q')
@@ -2327,10 +2340,71 @@ class MainWindow(QMainWindow):
         exit_action.triggered.connect(self.close)
         file_menu.addAction(exit_action)
         
-        # View menu with enhanced options
+        # View menu
         view_menu = menubar.addMenu('&View')
         
         # Refresh action
+        refresh_action = QAction('&Refresh', self)
+        refresh_action.setShortcut('F5')
+        refresh_action.setStatusTip('Refresh the current view')
+        refresh_action.triggered.connect(self.refresh_view)
+        refresh_action.setEnabled(False)  # Initially disabled
+        view_menu.addAction(refresh_action)
+        self.refresh_action = refresh_action
+        
+        view_menu.addSeparator()
+        
+        # Zoom actions for future implementation
+        zoom_in_action = QAction('Zoom &In', self)
+        zoom_in_action.setShortcut('Ctrl++')
+        zoom_in_action.setStatusTip('Increase font size')
+        zoom_in_action.triggered.connect(self.zoom_in)
+        view_menu.addAction(zoom_in_action)
+        
+        zoom_out_action = QAction('Zoom &Out', self)
+        zoom_out_action.setShortcut('Ctrl+-')
+        zoom_out_action.setStatusTip('Decrease font size')
+        zoom_out_action.triggered.connect(self.zoom_out)
+        view_menu.addAction(zoom_out_action)
+        
+        reset_zoom_action = QAction('&Reset Zoom', self)
+        reset_zoom_action.setShortcut('Ctrl+0')
+        reset_zoom_action.setStatusTip('Reset font size to default')
+        reset_zoom_action.triggered.connect(self.reset_zoom)
+        view_menu.addAction(reset_zoom_action)
+        
+        # Tools menu
+        tools_menu = menubar.addMenu('&Tools')
+        
+        # Memory cleanup action
+        cleanup_action = QAction('&Clean Memory', self)
+        cleanup_action.setShortcut('Ctrl+Shift+M')
+        cleanup_action.setStatusTip('Free memory resources')
+        cleanup_action.triggered.connect(self.free_memory_resources)
+        tools_menu.addAction(cleanup_action)
+        
+        # Performance stats action
+        stats_action = QAction('&Performance Statistics', self)
+        stats_action.setShortcut('Ctrl+Shift+P')
+        stats_action.setStatusTip('Show performance statistics')
+        stats_action.triggered.connect(self.show_performance_stats)
+        tools_menu.addAction(stats_action)
+        
+        # Help menu
+        help_menu = menubar.addMenu('&Help')
+        
+        # Keyboard shortcuts action
+        shortcuts_action = QAction('&Keyboard Shortcuts', self)
+        shortcuts_action.setShortcut('F1')
+        shortcuts_action.setStatusTip('Show keyboard shortcuts')
+        shortcuts_action.triggered.connect(self.show_keyboard_shortcuts)
+        help_menu.addAction(shortcuts_action)
+        
+        # About action
+        about_action = QAction('&About', self)
+        about_action.setStatusTip('About IFC Room Schedule')
+        about_action.triggered.connect(self.show_about_dialog)
+        help_menu.addAction(about_action)
         refresh_action = QAction('&Refresh', self)
         refresh_action.setShortcut('F5')
         refresh_action.setStatusTip('Refresh the current view and reload space data')
@@ -3606,3 +3680,179 @@ class MainWindow(QMainWindow):
                 self.toolbar_status_label.setText("File loaded, no spaces found")
         else:
             self.toolbar_status_label.setText("Ready")
+    
+    # New UI enhancement methods for Phase 3
+    def refresh_view(self):
+        """Refresh the current view and reload space data."""
+        if not self.current_file_path:
+            self.status_bar.showMessage("No file loaded to refresh", 3000)
+            return
+        
+        self.logger.info("Refreshing view - reloading space data")
+        self.status_bar.showMessage("Refreshing view...")
+        
+        # Clear current data
+        self.spaces.clear()
+        self.space_extractor._spaces_cache = None
+        
+        # Reload spaces
+        try:
+            self.show_operation_progress("Refreshing Spaces", self._reload_spaces)
+        except Exception as e:
+            self.show_enhanced_error_message(
+                "Refresh Error",
+                f"Failed to refresh view: {str(e)}",
+                traceback.format_exc(),
+                "error"
+            )
+    
+    def _reload_spaces(self):
+        """Internal method to reload spaces with performance optimization."""
+        spaces = self.space_extractor.extract_spaces(lazy_load=True, batch_size=25)
+        return spaces
+    
+    def zoom_in(self):
+        """Increase font size throughout the application."""
+        current_font = self.font()
+        current_size = current_font.pointSize()
+        if current_size < 20:  # Maximum font size
+            new_font = current_font
+            new_font.setPointSize(current_size + 1)
+            self.setFont(new_font)
+            self.status_bar.showMessage(f"Font size: {current_size + 1}pt", 2000)
+    
+    def zoom_out(self):
+        """Decrease font size throughout the application."""
+        current_font = self.font()
+        current_size = current_font.pointSize()
+        if current_size > 8:  # Minimum font size
+            new_font = current_font
+            new_font.setPointSize(current_size - 1)
+            self.setFont(new_font)
+            self.status_bar.showMessage(f"Font size: {current_size - 1}pt", 2000)
+    
+    def reset_zoom(self):
+        """Reset font size to default."""
+        default_font = self.font()
+        default_font.setPointSize(9)  # Default font size
+        self.setFont(default_font)
+        self.status_bar.showMessage("Font size reset to default", 2000)
+    
+    def show_performance_stats(self):
+        """Show performance statistics dialog."""
+        try:
+            import psutil
+            
+            # Get system info
+            memory = psutil.virtual_memory()
+            cpu_percent = psutil.cpu_percent(interval=1)
+            
+            # Get application stats
+            fallback_stats = self.fallback_stats
+            resource_stats = self.resource_monitor
+            
+            stats_text = f"""
+            <h3>Performance Statistics</h3>
+            
+            <h4>System Resources:</h4>
+            <ul>
+                <li>Memory Usage: {memory.percent:.1f}% ({memory.used / (1024**3):.1f}GB / {memory.total / (1024**3):.1f}GB)</li>
+                <li>CPU Usage: {cpu_percent:.1f}%</li>
+                <li>Available Memory: {memory.available / (1024**3):.1f}GB</li>
+            </ul>
+            
+            <h4>Application Performance:</h4>
+            <ul>
+                <li>Threading Failures: {fallback_stats['threading_failures']}</li>
+                <li>Fallback Attempts: {fallback_stats['fallback_attempts']}</li>
+                <li>Fallback Success Rate: {(fallback_stats['fallback_successes'] / max(1, fallback_stats['fallback_attempts'])) * 100:.1f}%</li>
+                <li>Active Threads: {len(resource_stats['active_threads'])}</li>
+                <li>Active Workers: {len(resource_stats['active_workers'])}</li>
+                <li>Resource Leaks Detected: {resource_stats['resource_leaks_detected']}</li>
+            </ul>
+            
+            <h4>Current File:</h4>
+            <ul>
+                <li>File: {os.path.basename(self.current_file_path) if self.current_file_path else 'None'}</li>
+                <li>Spaces Loaded: {len(self.spaces)}</li>
+            </ul>
+            """
+            
+            stats_dialog = QMessageBox()
+            stats_dialog.setWindowTitle("Performance Statistics")
+            stats_dialog.setText(stats_text)
+            stats_dialog.setStandardButtons(QMessageBox.StandardButton.Ok)
+            stats_dialog.exec()
+            
+        except ImportError:
+            self.show_enhanced_error_message(
+                "Performance Stats Unavailable",
+                "psutil package is required for performance statistics",
+                "Install psutil with: pip install psutil",
+                "warning"
+            )
+    
+    def show_keyboard_shortcuts(self):
+        """Show keyboard shortcuts dialog."""
+        shortcuts_text = """
+        <h3>Keyboard Shortcuts</h3>
+        
+        <h4>File Operations:</h4>
+        <ul>
+            <li><b>Ctrl+O</b> - Open IFC File</li>
+            <li><b>Ctrl+W</b> - Close File</li>
+            <li><b>Ctrl+E</b> - Export Data</li>
+            <li><b>Ctrl+Q</b> - Exit Application</li>
+        </ul>
+        
+        <h4>View:</h4>
+        <ul>
+            <li><b>F5</b> - Refresh View</li>
+            <li><b>Ctrl++</b> - Zoom In (Increase Font Size)</li>
+            <li><b>Ctrl+-</b> - Zoom Out (Decrease Font Size)</li>
+            <li><b>Ctrl+0</b> - Reset Zoom</li>
+        </ul>
+        
+        <h4>Tools:</h4>
+        <ul>
+            <li><b>Ctrl+Shift+M</b> - Clean Memory</li>
+            <li><b>Ctrl+Shift+P</b> - Performance Statistics</li>
+        </ul>
+        
+        <h4>Help:</h4>
+        <ul>
+            <li><b>F1</b> - Show This Help</li>
+        </ul>
+        """
+        
+        shortcuts_dialog = QMessageBox()
+        shortcuts_dialog.setWindowTitle("Keyboard Shortcuts")
+        shortcuts_dialog.setText(shortcuts_text)
+        shortcuts_dialog.setStandardButtons(QMessageBox.StandardButton.Ok)
+        shortcuts_dialog.exec()
+    
+    def show_about_dialog(self):
+        """Show about dialog."""
+        about_text = """
+        <h3>IFC Room Schedule</h3>
+        <p><b>Version:</b> 1.0.0</p>
+        <p><b>Description:</b> Professional IFC file processor for room schedule generation</p>
+        
+        <h4>Features:</h4>
+        <ul>
+            <li>Advanced IFC file parsing with IfcOpenShell</li>
+            <li>Comprehensive space data extraction</li>
+            <li>Multiple export formats (JSON, CSV, Excel, PDF)</li>
+            <li>Enhanced error handling and memory management</li>
+            <li>Performance optimization with lazy loading</li>
+        </ul>
+        
+        <p><b>Built with:</b> Python, PyQt6, IfcOpenShell</p>
+        <p><b>License:</b> MIT</p>
+        """
+        
+        about_dialog = QMessageBox()
+        about_dialog.setWindowTitle("About IFC Room Schedule")
+        about_dialog.setText(about_text)
+        about_dialog.setStandardButtons(QMessageBox.StandardButton.Ok)
+        about_dialog.exec()

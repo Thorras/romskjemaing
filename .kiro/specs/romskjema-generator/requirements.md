@@ -4,6 +4,25 @@
 
 Dette systemet skal eksportere utfylte romdata per IFC Space fra applikasjonen til et strukturert romskjema-format. Eksporten skal følge en omfattende JSON-mal som dekker alle aspekter ved romspesifikasjoner - fra grunnleggende identifikasjon til detaljerte tekniske krav som følger norske byggestandarder.
 
+## Implementation Phases
+
+Prosjektet implementeres i faser for å redusere kompleksitet og levere verdi tidlig:
+
+### Phase 1: Core JSON Export
+- Grunnleggende IFC Space-datautrekk
+- JSON-eksport med komplett romskjema-mal
+- Basisfeilhåndtering og validering
+
+### Phase 2: Advanced Features  
+- PDF og Excel-eksport
+- Omfattende standardvalidering (NS 3420, NS 8175, TEK17)
+- Avansert konfigurasjon og filtrering
+
+### Phase 3: Production Ready
+- Brukergrensesnitt for konfigurasjon
+- Ytelsesoptimalisering og caching
+- Omfattende testing og dokumentasjon
+
 ## Requirements
 
 ### Requirement 1
@@ -71,3 +90,14 @@ Dette systemet skal eksportere utfylte romdata per IFC Space fra applikasjonen t
 2. WHEN brukeren velger eksportinnstillinger THEN systemet SHALL kunne filtrere hvilke seksjoner som inkluderes
 3. WHEN eksporten kjøres THEN systemet SHALL respektere brukerens valg for format og innhold
 4. IF brukeren velger delvis eksport THEN systemet SHALL markere hvilke seksjoner som er inkludert/ekskludert
+
+### Requirement 7
+
+**User Story:** Som en bruker vil jeg ha fallback-strategier når IFC-data mangler, slik at eksporten kan gjennomføres selv med ufullstendige data.
+
+#### Acceptance Criteria
+
+1. WHEN kritiske IFC-data mangler THEN systemet SHALL bruke standardverdier basert på romtype
+2. WHEN geometridata er utilgjengelig THEN systemet SHALL estimere verdier basert på tilgjengelig informasjon
+3. WHEN eksporten kjøres med manglende data THEN systemet SHALL generere detaljert rapport over hva som mangler
+4. IF brukeren godkjenner manglende data THEN systemet SHALL fortsette eksport med tydelig markering av estimerte verdier
