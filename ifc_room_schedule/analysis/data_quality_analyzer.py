@@ -19,56 +19,29 @@ from ..mappers.ns3940_classifier import NS3940Classifier
 
 
 @dataclass
+class MissingDataReport:
+    """Report on missing data sections."""
+    
+    space_guid: str
+    space_name: str
+    ns8360_compliant: bool
+    ns3940_classified: bool
+    quantities_complete: bool
+    surfaces_present: bool
+    boundaries_present: bool
+    relationships_present: bool
+    missing_sections: List[str]
+    recommendations: List[str]
+
+
+@dataclass
 class CoverageReport:
     """Report on data coverage and quality."""
     
     total_spaces: int
-    spaces_with_names: int
-    spaces_with_ns8360_compliant_names: int
-    spaces_with_classification: int
-    spaces_with_quantities: int
-    spaces_with_surfaces: int
-    spaces_with_boundaries: int
-    spaces_with_relationships: int
-    
-    # NS Standards compliance
-    ns8360_compliance_rate: float
-    ns3940_classification_rate: float
-    
-    # Data completeness scores
-    name_completeness: float
-    quantity_completeness: float
-    surface_completeness: float
-    boundary_completeness: float
-    relationship_completeness: float
-    
-    # Overall quality score
-    overall_quality_score: float
-    
-    # Missing data analysis
-    missing_name_count: int
-    missing_quantities_count: int
-    missing_surfaces_count: int
-    missing_boundaries_count: int
-    missing_relationships_count: int
-
-
-@dataclass
-class MissingDataReport:
-    """Report on missing data sections."""
-    
-    spaces_missing_names: List[str]  # GUIDs
-    spaces_missing_quantities: List[str]
-    spaces_missing_surfaces: List[str]
-    spaces_missing_boundaries: List[str]
-    spaces_missing_relationships: List[str]
-    
-    # NS Standards issues
-    spaces_non_ns8360_compliant: List[str]
-    spaces_missing_ns3940_classification: List[str]
-    
-    # Recommendations
+    compliance_stats: Dict[str, int]
     recommendations: List[str]
+    quality_reports: List[MissingDataReport]
 
 
 class DataQualityAnalyzer:
@@ -78,6 +51,124 @@ class DataQualityAnalyzer:
         """Initialize the data quality analyzer."""
         self.name_parser = NS8360NameParser()
         self.classifier = NS3940Classifier()
+    
+    def analyze_spaces_quality(self, spaces: List[SpaceData]) -> Optional[CoverageReport]:
+        """
+        Analyze quality of provided spaces.
+        
+        Args:
+            spaces: List of spaces to analyze
+            
+        Returns:
+            CoverageReport with analysis results
+        """
+        if not spaces:
+            return None
+        
+        # Analyze each space
+        quality_reports = []
+        for space in spaces:
+            quality_report = self._analyze_single_space(space)
+            quality_reports.append(quality_report)
+        
+        # Calculate overall statistics
+        total_spaces = len(spaces)
+        compliance_stats = {
+            "ns8360_compliant": sum(1 for q in quality_reports if q.ns8360_compliant),
+            "ns3940_classified": sum(1 for q in quality_reports if q.ns3940_classified),
+            "quantities_complete": sum(1 for q in quality_reports if q.quantities_complete),
+            "surfaces_present": sum(1 for q in quality_reports if q.surfaces_present),
+            "boundaries_present": sum(1 for q in quality_reports if q.boundaries_present),
+            "relationships_present": sum(1 for q in quality_reports if q.relationships_present)
+        }
+        
+        # Generate recommendations
+        recommendations = self._generate_simple_recommendations(compliance_stats, total_spaces)
+        
+        return CoverageReport(
+            total_spaces=total_spaces,
+            compliance_stats=compliance_stats,
+            recommendations=recommendations,
+            quality_reports=quality_reports
+        )
+    
+    def _analyze_single_space(self, space: SpaceData) -> MissingDataReport:
+        """Analyze a single space for data quality."""
+        # Check NS 8360 compliance
+        ns8360_compliant = self._is_ns8360_compliant(space.name)
+        
+        # Check NS 3940 classification
+        ns3940_classified = self._has_ns3940_classification(space.name)
+        
+        # Check quantities
+        quantities_complete = bool(space.quantities and len(space.quantities) > 0)
+        
+        # Check surfaces
+        surfaces_present = bool(space.surfaces and len(space.surfaces) > 0)
+        
+        # Check boundaries
+        boundaries_present = bool(space.space_boundaries and len(space.space_boundaries) > 0)
+        
+        # Check relationships
+        relationships_present = bool(space.relationships and len(space.relationships) > 0)
+        
+        return MissingDataReport(
+            space_guid=space.guid,
+            space_name=space.name,
+            ns8360_compliant=ns8360_compliant,
+            ns3940_classified=ns3940_classified,
+            quantities_complete=quantities_complete,
+            surfaces_present=surfaces_present,
+            boundaries_present=boundaries_present,
+            relationships_present=relationships_present,
+            missing_sections=[],
+            recommendations=[]
+        )
+    
+    def _is_ns8360_compliant(self, name: str) -> bool:
+        """Check if name is NS 8360 compliant."""
+        if not name:
+            return False
+        
+        import re
+        pattern = r"^SPC-[A-Z0-9]{1,3}-[A-Z0-9]{1,6}-\d{3}-\d{3}$|^SPC-[A-Z0-9]{1,3}-\d{3}-\d{3}$"
+        return bool(re.match(pattern, name))
+    
+    def _has_ns3940_classification(self, name: str) -> bool:
+        """Check if name has NS 3940 classification."""
+        if not name:
+            return False
+        
+        import re
+        pattern = r"-\d{3}-"
+        return bool(re.search(pattern, name))
+    
+    def _generate_simple_recommendations(self, compliance_stats: Dict[str, int], total_spaces: int) -> List[str]:
+        """Generate simple recommendations based on compliance stats."""
+        recommendations = []
+        
+        if compliance_stats["ns8360_compliant"] < total_spaces * 0.8:
+            recommendations.append("Improve NS 8360 naming compliance")
+        
+        if compliance_stats["ns3940_classified"] < total_spaces * 0.8:
+            recommendations.append("Add NS 3940 classification codes")
+        
+        if compliance_stats["quantities_complete"] < total_spaces * 0.9:
+            recommendations.append("Complete quantity data for spaces")
+        
+        if compliance_stats["surfaces_present"] < total_spaces * 0.7:
+            recommendations.append("Add surface data for better material mapping")
+        
+        if compliance_stats["boundaries_present"] < total_spaces * 0.7:
+            recommendations.append("Add space boundary data")
+        
+        if compliance_stats["relationships_present"] < total_spaces * 0.5:
+            recommendations.append("Add relationship data for better context")
+        
+        if not recommendations:
+            recommendations.append("Data quality looks good!")
+        
+        return recommendations
     
     def analyze_ifc_coverage(self, ifc_file: str) -> CoverageReport:
         """
@@ -89,7 +180,7 @@ class DataQualityAnalyzer:
         Returns:
             CoverageReport with detailed analysis
         """
-        if not os.path.exists(ifc_file):
+        if not isinstance(ifc_file, str) or not os.path.exists(ifc_file):
             raise FileNotFoundError(f"IFC file not found: {ifc_file}")
         
         # Load IFC file and extract spaces

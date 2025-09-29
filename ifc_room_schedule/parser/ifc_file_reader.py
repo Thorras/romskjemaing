@@ -14,7 +14,7 @@ from ..utils.enhanced_logging import (
 )
 from .optimized_ifc_parser import OptimizedIFCParser, CacheConfig
 from .performance_monitor import PerformanceMonitor
-from .batch_processor import BatchProcessor, BatchConfig
+# from .batch_processor import BatchProcessor, BatchConfig  # Moved to avoid circular import
 
 
 class IfcFileReader:
@@ -37,13 +37,13 @@ class IfcFileReader:
                 )
             )
             self.performance_monitor = PerformanceMonitor()
-            self.batch_processor = BatchProcessor(
-                BatchConfig(
-                    batch_size=100,
-                    max_workers=4,
-                    memory_threshold_mb=1000.0
-                )
-            )
+            # Initialize batch processor (lazy import to avoid circular dependency)
+            self.batch_processor = None
+            self.batch_config = {
+                "batch_size": 100,
+                "max_workers": 4,
+                "memory_threshold_mb": 1000.0
+            }
         else:
             self.optimized_parser = None
             self.performance_monitor = None

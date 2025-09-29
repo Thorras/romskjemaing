@@ -2,16 +2,29 @@
 ifcopenshell>=0.7.0
 
 # GUI Framework
+PyQt5>=5.15.0
 PyQt6>=6.5.0
 
 # Data processing and export
 pandas>=2.0.0
 openpyxl>=3.1.0
 reportlab>=4.0.0
+numpy>=1.21.0
 
-# Performance and monitoring
+# Enhanced features
 psutil>=5.9.0
 memory-profiler>=0.61.0
+marshmallow>=3.13.0
+prometheus-client>=0.12.0
+requests>=2.25.0
+
+# Caching and performance
+redis>=4.0.0
+celery>=5.2.0
+
+# Web deployment
+gunicorn>=20.1.0
+flask>=2.0.0
 
 # Testing
 pytest>=7.0.0

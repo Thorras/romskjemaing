@@ -1,376 +1,459 @@
 """
-Batch Processor for IFC Parsing
+Batch Processor
 
-Processes large IFC files in batches to optimize memory usage and performance.
+Optimized batch processing for large room sets with memory management
+and streaming export capabilities.
 """
 
-import time
+import json
+import os
 import gc
-from typing import List, Dict, Any, Optional, Iterator, Callable, Tuple
-from dataclasses import dataclass
-from concurrent.futures import ThreadPoolExecutor, ProcessPoolExecutor, as_completed
-import multiprocessing as mp
-from queue import Queue, Empty
+from typing import List, Dict, Any, Optional, Iterator, Callable
+from pathlib import Path
+from datetime import datetime
 import threading
+import queue
+import time
 
-from ..utils.enhanced_logging import enhanced_logger
-from .performance_monitor import PerformanceMonitor
-
-
-@dataclass
-class BatchConfig:
-    """Configuration for batch processing."""
-    
-    batch_size: int = 100
-    max_workers: int = 4
-    memory_threshold_mb: float = 1000.0
-    use_multiprocessing: bool = False
-    enable_caching: bool = True
-    progress_callback: Optional[Callable] = None
-
-
-@dataclass
-class BatchResult:
-    """Result of batch processing."""
-    
-    batch_index: int
-    success: bool
-    items_processed: int
-    processing_time: float
-    memory_usage_mb: float
-    error_message: Optional[str] = None
-    results: List[Any] = None
+from ..data.space_model import SpaceData
+from ..export.enhanced_json_builder import EnhancedJsonBuilder
+from ..analysis.data_quality_analyzer import DataQualityAnalyzer
 
 
 class BatchProcessor:
-    """Processes IFC data in batches for optimal performance."""
+    """Optimized batch processor for large room sets."""
     
-    def __init__(self, config: Optional[BatchConfig] = None):
-        """Initialize batch processor."""
-        self.config = config or BatchConfig()
-        self.performance_monitor = PerformanceMonitor()
-        self.results_queue = Queue()
-        self.progress = 0
-        self.total_items = 0
-        self.lock = threading.Lock()
-    
-    def process_spaces_batch(self, spaces: List[Any], 
-                           processor_func: Callable[[Any], Any],
-                           config: Optional[BatchConfig] = None) -> List[Any]:
+    def __init__(self, max_memory_mb: int = 512, chunk_size: int = 100):
         """
-        Process spaces in batches.
+        Initialize batch processor.
         
         Args:
-            spaces: List of space entities to process
-            processor_func: Function to process each space
-            config: Optional batch configuration
+            max_memory_mb: Maximum memory usage in MB
+            chunk_size: Number of spaces to process in each chunk
+        """
+        self.max_memory_mb = max_memory_mb
+        self.chunk_size = chunk_size
+        self.builder = EnhancedJsonBuilder()
+        self.analyzer = DataQualityAnalyzer()
+        
+        # Performance monitoring
+        self.processing_stats = {
+            "total_spaces": 0,
+            "processed_spaces": 0,
+            "processing_time": 0.0,
+            "memory_peak_mb": 0.0,
+            "chunks_processed": 0
+        }
+    
+    def process_spaces_batch(self, 
+                           spaces: List[SpaceData], 
+                           output_path: str,
+                           export_profile: str = "production",
+                           progress_callback: Optional[Callable] = None) -> Dict[str, Any]:
+        """
+        Process spaces in batches with memory management.
+        
+        Args:
+            spaces: List of spaces to process
+            output_path: Output file path
+            export_profile: Export profile to use
+            progress_callback: Optional progress callback function
             
         Returns:
-            List of processed results
+            Processing statistics
         """
-        if config:
-            self.config = config
-        
-        self.total_items = len(spaces)
-        self.progress = 0
-        all_results = []
-        
-        # Start performance monitoring
-        self.performance_monitor.start_monitoring()
-        
-        try:
-            # Process in batches
-            for i in range(0, len(spaces), self.config.batch_size):
-                batch = spaces[i:i + self.config.batch_size]
-                batch_index = i // self.config.batch_size
-                
-                # Process batch
-                batch_result = self._process_single_batch(
-                    batch, batch_index, processor_func
-                )
-                
-                # Collect results
-                if batch_result.success and batch_result.results:
-                    all_results.extend(batch_result.results)
-                
-                # Update progress
-                self._update_progress(batch_result.items_processed)
-                
-                # Check memory usage
-                if self._check_memory_threshold():
-                    self._force_cleanup()
-            
-            return all_results
-            
-        finally:
-            # Stop performance monitoring
-            self.performance_monitor.stop_monitoring()
-    
-    def _process_single_batch(self, batch: List[Any], batch_index: int, 
-                            processor_func: Callable[[Any], Any]) -> BatchResult:
-        """Process a single batch of items."""
         start_time = time.time()
-        start_memory = self._get_memory_usage()
+        self.processing_stats["total_spaces"] = len(spaces)
+        self.processing_stats["processed_spaces"] = 0
+        self.processing_stats["chunks_processed"] = 0
         
         try:
-            results = []
+            # Process in chunks
+            chunks = self._create_chunks(spaces, self.chunk_size)
+            processed_data = []
             
-            if self.config.use_multiprocessing and len(batch) > 10:
-                # Use multiprocessing for large batches
-                results = self._process_batch_multiprocessing(batch, processor_func)
-            else:
-                # Use threading for smaller batches
-                results = self._process_batch_threading(batch, processor_func)
+            for i, chunk in enumerate(chunks):
+                # Process chunk
+                chunk_data = self._process_chunk(chunk, export_profile)
+                processed_data.extend(chunk_data)
+                
+                # Update statistics
+                self.processing_stats["processed_spaces"] += len(chunk)
+                self.processing_stats["chunks_processed"] += 1
+                
+                # Memory management
+                self._manage_memory()
+                
+                # Progress callback
+                if progress_callback:
+                    progress = (i + 1) / len(chunks) * 100
+                    progress_callback(int(progress), f"Processed chunk {i + 1}/{len(chunks)}")
+                
+                # Yield control to allow UI updates
+                time.sleep(0.001)
             
-            processing_time = time.time() - start_time
-            end_memory = self._get_memory_usage()
-            memory_usage = end_memory - start_memory
+            # Write output
+            self._write_output(processed_data, output_path)
             
-            return BatchResult(
-                batch_index=batch_index,
-                success=True,
-                items_processed=len(batch),
-                processing_time=processing_time,
-                memory_usage_mb=memory_usage,
-                results=results
-            )
+            # Final statistics
+            self.processing_stats["processing_time"] = time.time() - start_time
+            self.processing_stats["memory_peak_mb"] = self._get_memory_usage()
+            
+            return self.processing_stats
             
         except Exception as e:
-            processing_time = time.time() - start_time
-            enhanced_logger.logger.error(f"Error processing batch {batch_index}: {e}")
-            
-            return BatchResult(
-                batch_index=batch_index,
-                success=False,
-                items_processed=0,
-                processing_time=processing_time,
-                memory_usage_mb=0.0,
-                error_message=str(e),
-                results=[]
-            )
+            raise Exception(f"Batch processing failed: {str(e)}")
     
-    def _process_batch_threading(self, batch: List[Any], 
-                               processor_func: Callable[[Any], Any]) -> List[Any]:
-        """Process batch using threading."""
-        results = []
-        
-        with ThreadPoolExecutor(max_workers=self.config.max_workers) as executor:
-            # Submit all tasks
-            future_to_item = {
-                executor.submit(processor_func, item): item 
-                for item in batch
-            }
-            
-            # Collect results
-            for future in as_completed(future_to_item):
-                try:
-                    result = future.result()
-                    if result is not None:
-                        results.append(result)
-                except Exception as e:
-                    enhanced_logger.logger.warning(f"Error processing item: {e}")
-        
-        return results
-    
-    def _process_batch_multiprocessing(self, batch: List[Any], 
-                                     processor_func: Callable[[Any], Any]) -> List[Any]:
-        """Process batch using multiprocessing."""
-        results = []
-        
-        with ProcessPoolExecutor(max_workers=self.config.max_workers) as executor:
-            # Submit all tasks
-            future_to_item = {
-                executor.submit(processor_func, item): item 
-                for item in batch
-            }
-            
-            # Collect results
-            for future in as_completed(future_to_item):
-                try:
-                    result = future.result()
-                    if result is not None:
-                        results.append(result)
-                except Exception as e:
-                    enhanced_logger.logger.warning(f"Error processing item: {e}")
-        
-        return results
-    
-    def process_with_streaming(self, items: Iterator[Any], 
-                             processor_func: Callable[[Any], Any],
-                             config: Optional[BatchConfig] = None) -> Iterator[Any]:
+    def process_spaces_streaming(self, 
+                               spaces: List[SpaceData], 
+                               output_path: str,
+                               export_profile: str = "production",
+                               progress_callback: Optional[Callable] = None) -> Dict[str, Any]:
         """
-        Process items with streaming for memory efficiency.
+        Process spaces with streaming export to reduce memory usage.
         
         Args:
-            items: Iterator of items to process
-            processor_func: Function to process each item
-            config: Optional batch configuration
+            spaces: List of spaces to process
+            output_path: Output file path
+            export_profile: Export profile to use
+            progress_callback: Optional progress callback function
             
-        Yields:
-            Processed results as they become available
+        Returns:
+            Processing statistics
         """
-        if config:
-            self.config = config
+        start_time = time.time()
+        self.processing_stats["total_spaces"] = len(spaces)
+        self.processing_stats["processed_spaces"] = 0
+        self.processing_stats["chunks_processed"] = 0
         
-        batch = []
-        batch_index = 0
-        
-        for item in items:
-            batch.append(item)
+        try:
+            # Create chunks
+            chunks = self._create_chunks(spaces, self.chunk_size)
             
-            # Process batch when it reaches the configured size
-            if len(batch) >= self.config.batch_size:
-                batch_result = self._process_single_batch(
-                    batch, batch_index, processor_func
-                )
+            # Stream write to file
+            with open(output_path, 'w', encoding='utf-8') as f:
+                f.write('{\n')
+                f.write('  "metadata": {\n')
+                f.write(f'    "generated_at": "{datetime.now().isoformat()}",\n')
+                f.write(f'    "total_spaces": {len(spaces)},\n')
+                f.write(f'    "export_profile": "{export_profile}"\n')
+                f.write('  },\n')
+                f.write('  "spaces": [\n')
                 
-                # Yield results
-                if batch_result.success and batch_result.results:
-                    for result in batch_result.results:
-                        yield result
+                first_chunk = True
+                for i, chunk in enumerate(chunks):
+                    # Process chunk
+                    chunk_data = self._process_chunk(chunk, export_profile)
+                    
+                    # Write chunk data
+                    for j, space_data in enumerate(chunk_data):
+                        if not first_chunk or j > 0:
+                            f.write(',\n')
+                        
+                        json.dump(space_data, f, indent=4, ensure_ascii=False)
+                        first_chunk = False
+                    
+                    # Update statistics
+                    self.processing_stats["processed_spaces"] += len(chunk)
+                    self.processing_stats["chunks_processed"] += 1
+                    
+                    # Memory management
+                    self._manage_memory()
+                    
+                    # Progress callback
+                    if progress_callback:
+                        progress = (i + 1) / len(chunks) * 100
+                        progress_callback(int(progress), f"Streamed chunk {i + 1}/{len(chunks)}")
+                    
+                    # Yield control
+                    time.sleep(0.001)
                 
-                # Reset batch
-                batch = []
-                batch_index += 1
-                
-                # Check memory usage
-                if self._check_memory_threshold():
-                    self._force_cleanup()
-        
-        # Process remaining items
-        if batch:
-            batch_result = self._process_single_batch(
-                batch, batch_index, processor_func
-            )
+                f.write('\n  ]\n')
+                f.write('}\n')
             
-            if batch_result.success and batch_result.results:
-                for result in batch_result.results:
-                    yield result
+            # Final statistics
+            self.processing_stats["processing_time"] = time.time() - start_time
+            self.processing_stats["memory_peak_mb"] = self._get_memory_usage()
+            
+            return self.processing_stats
+            
+        except Exception as e:
+            raise Exception(f"Streaming processing failed: {str(e)}")
     
-    def _update_progress(self, items_processed: int):
-        """Update progress tracking."""
-        with self.lock:
-            self.progress += items_processed
+    def process_spaces_parallel(self, 
+                              spaces: List[SpaceData], 
+                              output_path: str,
+                              export_profile: str = "production",
+                              num_threads: int = 4,
+                              progress_callback: Optional[Callable] = None) -> Dict[str, Any]:
+        """
+        Process spaces in parallel using multiple threads.
+        
+        Args:
+            spaces: List of spaces to process
+            output_path: Output file path
+            export_profile: Export profile to use
+            num_threads: Number of threads to use
+            progress_callback: Optional progress callback function
             
-            if self.config.progress_callback:
-                progress_percent = (self.progress / self.total_items) * 100
-                self.config.progress_callback(progress_percent, self.progress, self.total_items)
+        Returns:
+            Processing statistics
+        """
+        start_time = time.time()
+        self.processing_stats["total_spaces"] = len(spaces)
+        self.processing_stats["processed_spaces"] = 0
+        self.processing_stats["chunks_processed"] = 0
+        
+        try:
+            # Create chunks
+            chunks = self._create_chunks(spaces, self.chunk_size)
+            
+            # Thread-safe queues
+            input_queue = queue.Queue()
+            output_queue = queue.Queue()
+            
+            # Add chunks to input queue
+            for chunk in chunks:
+                input_queue.put(chunk)
+            
+            # Add sentinel values to signal end
+            for _ in range(num_threads):
+                input_queue.put(None)
+            
+            # Worker threads
+            threads = []
+            for i in range(num_threads):
+                thread = threading.Thread(
+                    target=self._worker_thread,
+                    args=(input_queue, output_queue, export_profile, i)
+                )
+                thread.start()
+                threads.append(thread)
+            
+            # Collect results
+            processed_data = []
+            completed_chunks = 0
+            
+            while completed_chunks < len(chunks):
+                try:
+                    result = output_queue.get(timeout=1.0)
+                    if result is not None:
+                        processed_data.extend(result)
+                        completed_chunks += 1
+                        
+                        # Update statistics
+                        self.processing_stats["processed_spaces"] += len(result)
+                        self.processing_stats["chunks_processed"] += 1
+                        
+                        # Progress callback
+                        if progress_callback:
+                            progress = completed_chunks / len(chunks) * 100
+                            progress_callback(int(progress), f"Completed {completed_chunks}/{len(chunks)} chunks")
+                        
+                except queue.Empty:
+                    continue
+            
+            # Wait for threads to complete
+            for thread in threads:
+                thread.join()
+            
+            # Write output
+            self._write_output(processed_data, output_path)
+            
+            # Final statistics
+            self.processing_stats["processing_time"] = time.time() - start_time
+            self.processing_stats["memory_peak_mb"] = self._get_memory_usage()
+            
+            return self.processing_stats
+            
+        except Exception as e:
+            raise Exception(f"Parallel processing failed: {str(e)}")
+    
+    def _create_chunks(self, spaces: List[SpaceData], chunk_size: int) -> List[List[SpaceData]]:
+        """Create chunks from spaces list."""
+        chunks = []
+        for i in range(0, len(spaces), chunk_size):
+            chunk = spaces[i:i + chunk_size]
+            chunks.append(chunk)
+        return chunks
+    
+    def _process_chunk(self, chunk: List[SpaceData], export_profile: str) -> List[Dict[str, Any]]:
+        """Process a chunk of spaces."""
+        chunk_data = []
+        
+        for space in chunk:
+            try:
+                # Build enhanced space data
+                space_data = self.builder._build_enhanced_space_dict(space, export_profile)
+                chunk_data.append(space_data)
+                
+            except Exception as e:
+                # Log error but continue processing
+                print(f"Error processing space {space.name}: {str(e)}")
+                continue
+        
+        return chunk_data
+    
+    def _worker_thread(self, input_queue: queue.Queue, output_queue: queue.Queue, 
+                      export_profile: str, thread_id: int):
+        """Worker thread for parallel processing."""
+        while True:
+            try:
+                chunk = input_queue.get(timeout=1.0)
+                if chunk is None:
+                    break
+                
+                # Process chunk
+                chunk_data = self._process_chunk(chunk, export_profile)
+                output_queue.put(chunk_data)
+                
+            except queue.Empty:
+                continue
+            except Exception as e:
+                print(f"Worker thread {thread_id} error: {str(e)}")
+                output_queue.put([])
+    
+    def _manage_memory(self):
+        """Manage memory usage."""
+        current_memory = self._get_memory_usage()
+        
+        if current_memory > self.max_memory_mb:
+            # Force garbage collection
+            gc.collect()
+            
+            # If still over limit, increase chunk size
+            if self._get_memory_usage() > self.max_memory_mb:
+                self.chunk_size = max(10, self.chunk_size // 2)
     
     def _get_memory_usage(self) -> float:
         """Get current memory usage in MB."""
         try:
             import psutil
             process = psutil.Process()
-            return process.memory_info().rss / (1024 * 1024)
-        except Exception:
+            return process.memory_info().rss / 1024 / 1024
+        except ImportError:
+            # Fallback to basic memory estimation
             return 0.0
     
-    def _check_memory_threshold(self) -> bool:
-        """Check if memory usage exceeds threshold."""
-        current_memory = self._get_memory_usage()
-        return current_memory > self.config.memory_threshold_mb
-    
-    def _force_cleanup(self):
-        """Force cleanup to free memory."""
-        enhanced_logger.logger.info("Forcing cleanup due to memory threshold")
+    def _write_output(self, data: List[Dict[str, Any]], output_path: str):
+        """Write processed data to output file."""
+        output_data = {
+            "metadata": {
+                "generated_at": datetime.now().isoformat(),
+                "total_spaces": len(data),
+                "processing_stats": self.processing_stats
+            },
+            "spaces": data
+        }
         
-        # Force garbage collection
-        collected = gc.collect()
-        enhanced_logger.logger.info(f"Garbage collection freed {collected} objects")
-        
-        # Apply system optimizations
-        self.performance_monitor.optimize_system()
+        with open(output_path, 'w', encoding='utf-8') as f:
+            json.dump(output_data, f, indent=2, ensure_ascii=False)
     
     def get_processing_stats(self) -> Dict[str, Any]:
-        """Get processing statistics."""
-        with self.lock:
+        """Get current processing statistics."""
+        return self.processing_stats.copy()
+    
+    def reset_stats(self):
+        """Reset processing statistics."""
+        self.processing_stats = {
+            "total_spaces": 0,
+            "processed_spaces": 0,
+            "processing_time": 0.0,
+            "memory_peak_mb": 0.0,
+            "chunks_processed": 0
+        }
+
+
+class MemoryManager:
+    """Memory management utilities for batch processing."""
+    
+    @staticmethod
+    def get_memory_info() -> Dict[str, Any]:
+        """Get current memory information."""
+        try:
+            import psutil
+            memory = psutil.virtual_memory()
             return {
-                "total_items": self.total_items,
-                "processed_items": self.progress,
-                "progress_percent": (self.progress / self.total_items) * 100 if self.total_items > 0 else 0,
-                "remaining_items": self.total_items - self.progress
+                "total_mb": memory.total / 1024 / 1024,
+                "available_mb": memory.available / 1024 / 1024,
+                "used_mb": memory.used / 1024 / 1024,
+                "percent_used": memory.percent
+            }
+        except ImportError:
+            return {
+                "total_mb": 0,
+                "available_mb": 0,
+                "used_mb": 0,
+                "percent_used": 0
             }
     
-    def optimize_for_large_files(self):
-        """Optimize processor for large files."""
-        enhanced_logger.logger.info("Optimizing processor for large files")
+    @staticmethod
+    def optimize_memory():
+        """Optimize memory usage."""
+        # Force garbage collection
+        gc.collect()
         
-        # Reduce batch size for large files
-        self.config.batch_size = min(self.config.batch_size, 50)
-        
-        # Enable multiprocessing
-        self.config.use_multiprocessing = True
-        
-        # Reduce memory threshold
-        self.config.memory_threshold_mb = 500.0
-        
-        # Force initial cleanup
-        self._force_cleanup()
+        # Clear Python cache
+        import sys
+        if hasattr(sys, '_clear_type_cache'):
+            sys._clear_type_cache()
     
-    def optimize_for_small_files(self):
-        """Optimize processor for small files."""
-        enhanced_logger.logger.info("Optimizing processor for small files")
+    @staticmethod
+    def estimate_memory_usage(spaces: List[SpaceData], export_profile: str) -> float:
+        """Estimate memory usage for processing spaces."""
+        # Rough estimation based on space count and profile
+        base_memory_per_space = 0.1  # MB per space
         
-        # Increase batch size for small files
-        self.config.batch_size = max(self.config.batch_size, 200)
+        if export_profile == "production":
+            multiplier = 3.0
+        elif export_profile == "advanced":
+            multiplier = 2.0
+        else:
+            multiplier = 1.0
         
-        # Disable multiprocessing for small files
-        self.config.use_multiprocessing = False
-        
-        # Increase memory threshold
-        self.config.memory_threshold_mb = 2000.0
-    
-    def cleanup(self):
-        """Clean up processor resources."""
-        self.performance_monitor.cleanup()
-        self.results_queue = Queue()
-        self.progress = 0
-        self.total_items = 0
+        estimated_memory = len(spaces) * base_memory_per_space * multiplier
+        return estimated_memory
 
 
-# Example usage and testing
+# Example usage
 if __name__ == "__main__":
-    # Test batch processor
-    processor = BatchProcessor()
+    from ..data.space_model import SpaceData
     
-    # Test data
-    test_spaces = [f"Space_{i}" for i in range(1000)]
+    # Create sample spaces
+    sample_spaces = [
+        SpaceData(
+            guid=f"test_space_{i}",
+            name=f"SPC-02-A101-111-{i:03d}",
+            long_name=f"Test Space {i} | 02/A101 | NS3940:111",
+            description=f"Test space {i}",
+            object_type="IfcSpace",
+            zone_category="A101",
+            number=f"{i:03d}",
+            elevation=0.0,
+            quantities={"Height": 2.4, "NetArea": 25.0},
+            surfaces=[],
+            space_boundaries=[],
+            relationships=[]
+        )
+        for i in range(1000)  # Create 1000 test spaces
+    ]
     
-    def process_space(space):
-        """Test processing function."""
-        time.sleep(0.001)  # Simulate processing
-        return f"Processed_{space}"
+    # Test batch processing
+    processor = BatchProcessor(max_memory_mb=256, chunk_size=50)
     
-    def progress_callback(percent, processed, total):
-        """Test progress callback."""
-        print(f"Progress: {percent:.1f}% ({processed}/{total})")
+    def progress_callback(progress: int, status: str):
+        print(f"Progress: {progress}% - {status}")
     
-    # Configure processor
-    config = BatchConfig(
-        batch_size=50,
-        max_workers=4,
-        progress_callback=progress_callback
-    )
-    
-    print("Batch Processor Test:")
-    print("=" * 40)
-    
-    # Process spaces
-    results = processor.process_spaces_batch(test_spaces, process_space, config)
-    
-    print(f"Processed {len(results)} spaces")
-    
-    # Get stats
-    stats = processor.get_processing_stats()
-    print(f"Stats: {stats}")
-    
-    # Test streaming
-    print("\nStreaming Test:")
-    stream_results = list(processor.process_with_streaming(
-        iter(test_spaces[:100]), process_space, config
-    ))
-    print(f"Streamed {len(stream_results)} results")
-    
-    # Cleanup
-    processor.cleanup()
-    print("Processor cleaned up")
+    try:
+        stats = processor.process_spaces_batch(
+            sample_spaces, 
+            "test_batch_output.json",
+            "production",
+            progress_callback
+        )
+        
+        print("Batch processing completed!")
+        print(f"Statistics: {stats}")
+        
+    except Exception as e:
+        print(f"Batch processing failed: {str(e)}")
