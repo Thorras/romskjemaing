@@ -9,7 +9,24 @@ from .surface_model import SurfaceData, Surface
 from .space_boundary_model import SpaceBoundaryData
 from .relationship_model import RelationshipData
 from .space_repository import SpaceRepository
-from .room_schedule_model import RoomSchedule
+from .room_schedule_model import RoomSchedule, RoomScheduleMetadata
+from .enhanced_room_schedule_model import (
+    EnhancedRoomScheduleData,
+    MetaData,
+    IdentificationData,
+    ClassificationData,
+    StructureData,
+    GeometryEnhanced,
+    IFCMetadata,
+    PerformanceRequirements,
+    FinishesData,
+    OpeningsData,
+    FixturesData,
+    HSEData,
+    ValidationLevel,
+    FallbackStrategy,
+    Phase
+)
 
 __all__ = [
     'SpaceData', 'Space',
@@ -17,5 +34,21 @@ __all__ = [
     'SpaceBoundaryData',
     'RelationshipData',
     'SpaceRepository',
-    'RoomSchedule'
+    'RoomSchedule',
+    'RoomScheduleMetadata',
+    'EnhancedRoomScheduleData',
+    'MetaData',
+    'IdentificationData',
+    'ClassificationData',
+    'StructureData',
+    'GeometryEnhanced',
+    'IFCMetadata',
+    'PerformanceRequirements',
+    'FinishesData',
+    'OpeningsData',
+    'FixturesData',
+    'HSEData',
+    'ValidationLevel',
+    'FallbackStrategy',
+    'Phase'
 ]

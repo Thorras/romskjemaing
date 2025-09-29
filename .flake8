@@ -26,3 +26,5 @@ exclude =
 per-file-ignores = 
     **/ui/*.py: E501
     **/test_*.py: E501
+
+
