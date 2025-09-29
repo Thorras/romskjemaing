@@ -1,0 +1,629 @@
+2025-09-29 10:26:24,838 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:26,061 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:26,957 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:26,972 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:1459] - Starting comprehensive memory cleanup...
+2025-09-29 10:26:26,974 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1487] - Cleared _spaces_cache from IfcSpaceExtractor
+2025-09-29 10:26:26,975 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1487] - Cleared _boundaries_cache from IfcSpaceBoundaryParser
+2025-09-29 10:26:26,975 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1487] - Cleared _relationships_cache from IfcRelationshipParser
+2025-09-29 10:26:26,976 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1523] - Garbage collection pass 1: collected <MagicMock name='collect()' id='1507736102832'> objects
+2025-09-29 10:26:26,976 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1523] - Garbage collection pass 2: collected <MagicMock name='collect()' id='1507736102832'> objects
+2025-09-29 10:26:26,976 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1523] - Garbage collection pass 3: collected <MagicMock name='collect()' id='1507736102832'> objects
+2025-09-29 10:26:26,977 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:1529] - Memory cleanup completed. Freed: -0.1MB
+2025-09-29 10:26:27,864 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:27,895 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759134387_001 - Cannot export data
+2025-09-29 10:26:27,895 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:306] -   Category: unknown, Severity: high
+2025-09-29 10:26:27,896 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:307] -   Message: Operation cannot proceed due to 2 unmet prerequisites
+2025-09-29 10:26:27,896 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:313] -   Guidance: Operation cannot proceed due to 2 unmet prerequisites
+2025-09-29 10:26:27,897 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=11.14, memory_percent_used=64.8, disk_free_gb=144.7, disk_percent_used=69.5, cpu_count=12
+2025-09-29 10:26:28,758 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:28,770 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:1897] - Failed to cleanup temporary files: Permission denied
+2025-09-29 10:26:28,787 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759134388_002 - Resource Cleanup Warning
+2025-09-29 10:26:28,788 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:306] -   Category: unknown, Severity: medium
+2025-09-29 10:26:28,788 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:307] -   Message: Failed to properly cleanup temporary files. This may cause resource leaks.
+2025-09-29 10:26:28,788 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:313] -   Guidance: Failed to properly cleanup temporary files. This may cause resource leaks.
+2025-09-29 10:26:28,788 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=11.15, memory_percent_used=64.8, disk_free_gb=144.7, disk_percent_used=69.5, cpu_count=12
+2025-09-29 10:26:28,842 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_file_load (memory_usage=143.4MB)
+2025-09-29 10:26:28,843 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:66] - Starting IFC file validation: non_existent_file.ifc
+2025-09-29 10:26:28,843 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:80] - Processing file path: non_existent_file.ifc
+2025-09-29 10:26:28,856 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759134388_003 - File Not Found
+2025-09-29 10:26:28,856 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:306] -   Category: io, Severity: medium
+2025-09-29 10:26:28,856 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:307] -   Message: File does not exist: non_existent_file.ifc
+2025-09-29 10:26:28,856 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:313] -   Guidance: The selected file could not be found. It may have been moved, deleted, or renamed.
+2025-09-29 10:26:28,856 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:316] -   Recovery: Verify the file path is correct, Check if the file was moved or renamed, Select a different IFC file, Restore the file from backup if available
+2025-09-29 10:26:28,856 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=11.18, memory_percent_used=64.7, disk_free_gb=144.7, disk_percent_used=69.5, cpu_count=12
+2025-09-29 10:26:28,856 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_file_load (duration=0.01s, memory_usage=143.4MB)
+2025-09-29 10:26:28,857 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_file_load (memory_usage=144.1MB)
+2025-09-29 10:26:28,857 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:66] - Starting IFC file validation: test.txt
+2025-09-29 10:26:28,857 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:80] - Processing file path: test.txt
+2025-09-29 10:26:28,868 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759134388_004 - Invalid File Format
+2025-09-29 10:26:28,868 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:306] -   Category: user_input, Severity: low
+2025-09-29 10:26:28,868 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:307] -   Message: File does not have IFC extension: test.txt
+2025-09-29 10:26:28,869 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:313] -   Guidance: Only IFC and IFCXML files are supported for room schedule generation.
+2025-09-29 10:26:28,869 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:316] -   Recovery: Select a file with .ifc or .ifcxml extension, Convert your file to IFC format using CAD software, Verify the file is actually an IFC file despite the extension
+2025-09-29 10:26:28,869 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=11.18, memory_percent_used=64.7, disk_free_gb=144.7, disk_percent_used=69.5, cpu_count=12
+2025-09-29 10:26:28,869 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_file_load (duration=0.01s, memory_usage=144.1MB)
+2025-09-29 10:26:29,623 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:30,552 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:31,405 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:31,434 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759134391_005 - Test Error 1
+2025-09-29 10:26:31,434 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:306] -   Category: unknown, Severity: high
+2025-09-29 10:26:31,435 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:307] -   Message: Error message 1
+2025-09-29 10:26:31,435 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:313] -   Guidance: Error message 1
+2025-09-29 10:26:31,435 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=11.12, memory_percent_used=64.9, disk_free_gb=144.7, disk_percent_used=69.5, cpu_count=12
+2025-09-29 10:26:31,446 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759134391_006 - Test Error 2
+2025-09-29 10:26:31,446 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:306] -   Category: unknown, Severity: high
+2025-09-29 10:26:31,446 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:307] -   Message: Error message 2
+2025-09-29 10:26:31,447 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:313] -   Guidance: Error message 2
+2025-09-29 10:26:31,447 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=11.12, memory_percent_used=64.9, disk_free_gb=144.7, disk_percent_used=69.5, cpu_count=12
+2025-09-29 10:26:31,491 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759134391_007 - Test Error 3
+2025-09-29 10:26:31,492 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:306] -   Category: unknown, Severity: high
+2025-09-29 10:26:31,492 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:307] -   Message: Error message 3
+2025-09-29 10:26:31,492 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:313] -   Guidance: Error message 3
+2025-09-29 10:26:31,495 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=11.12, memory_percent_used=64.9, disk_free_gb=144.7, disk_percent_used=69.5, cpu_count=12
+2025-09-29 10:26:32,449 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:33,323 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:34,477 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:34,481 - ifc_room_schedule.utils.enhanced_logging - ERROR - [main_window.py:375] - Error getting file size: [WinError 3] The system cannot find the path specified: '/fake/invalid.txt'
+2025-09-29 10:26:34,482 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:2688] - Processing medium file: Unknown size
+2025-09-29 10:26:34,484 - ifc_room_schedule.utils.enhanced_logging - ERROR - [main_window.py:375] - Error getting file size: [WinError 3] The system cannot find the path specified: '/fake/corrupted.ifc'
+2025-09-29 10:26:34,484 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:2688] - Processing medium file: Unknown size
+2025-09-29 10:26:34,485 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:2727] - Using threaded loading strategy for medium file
+2025-09-29 10:26:34,485 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:2891] - Loading file with threading: /fake/corrupted.ifc
+2025-09-29 10:26:34,706 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:34,928 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:34,952 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759134394_008 - Test Error
+2025-09-29 10:26:34,952 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:306] -   Category: unknown, Severity: high
+2025-09-29 10:26:34,953 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:307] -   Message: This is a test error message
+2025-09-29 10:26:34,953 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:313] -   Guidance: This is a test error message
+2025-09-29 10:26:34,953 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=11.06, memory_percent_used=65.1, disk_free_gb=144.7, disk_percent_used=69.5, cpu_count=12
+2025-09-29 10:26:35,147 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:35,340 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:35,373 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759134395_009 - Memory Error
+2025-09-29 10:26:35,373 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:306] -   Category: unknown, Severity: high
+2025-09-29 10:26:35,374 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:307] -   Message: Insufficient memory for test operation. The operation requires more memory than available.
+2025-09-29 10:26:35,374 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:313] -   Guidance: Insufficient memory for test operation. The operation requires more memory than available.
+2025-09-29 10:26:35,374 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:316] -   Recovery: Reduce operation scope and retry, Free memory and retry, Abort operation
+2025-09-29 10:26:35,374 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=11.05, memory_percent_used=65.1, disk_free_gb=144.7, disk_percent_used=69.5, cpu_count=12
+2025-09-29 10:26:35,622 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:35,847 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:36,056 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:36,302 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:36,373 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759134396_010 - Cannot export data
+2025-09-29 10:26:36,374 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:306] -   Category: unknown, Severity: high
+2025-09-29 10:26:36,376 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:307] -   Message: Operation cannot proceed due to 1 unmet prerequisites
+2025-09-29 10:26:36,376 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:313] -   Guidance: Operation cannot proceed due to 1 unmet prerequisites
+2025-09-29 10:26:36,376 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=11.13, memory_percent_used=64.9, disk_free_gb=144.7, disk_percent_used=69.5, cpu_count=12
+2025-09-29 10:26:36,618 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:36,631 - ifc_room_schedule.utils.enhanced_logging - WARNING - [main_window.py:1897] - Failed to cleanup test resource: Permission denied
+2025-09-29 10:26:36,647 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759134396_011 - Resource Cleanup Warning
+2025-09-29 10:26:36,647 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:306] -   Category: unknown, Severity: medium
+2025-09-29 10:26:36,647 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:307] -   Message: Failed to properly cleanup test resource. This may cause resource leaks.
+2025-09-29 10:26:36,648 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:313] -   Guidance: Failed to properly cleanup test resource. This may cause resource leaks.
+2025-09-29 10:26:36,648 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=11.14, memory_percent_used=64.8, disk_free_gb=144.7, disk_percent_used=69.5, cpu_count=12
+2025-09-29 10:26:36,870 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:36,883 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:1459] - Starting comprehensive memory cleanup...
+2025-09-29 10:26:36,884 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1487] - Cleared _spaces_cache from IfcSpaceExtractor
+2025-09-29 10:26:36,884 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1487] - Cleared _surfaces_cache from IfcSurfaceExtractor
+2025-09-29 10:26:36,885 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1487] - Cleared _boundaries_cache from IfcSpaceBoundaryParser
+2025-09-29 10:26:36,885 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1487] - Cleared _relationships_cache from IfcRelationshipParser
+2025-09-29 10:26:36,955 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1523] - Garbage collection pass 1: collected 1328 objects
+2025-09-29 10:26:37,006 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1523] - Garbage collection pass 2: collected 0 objects
+2025-09-29 10:26:37,065 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1523] - Garbage collection pass 3: collected 0 objects
+2025-09-29 10:26:37,066 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:1529] - Memory cleanup completed. Freed: 0.0MB
+2025-09-29 10:26:37,251 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:37,450 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:37,463 - ifc_room_schedule.utils.enhanced_logging - CRITICAL - [main_window.py:408] - Uncaught exception: An unexpected error occurred: Test uncaught exception
+ValueError: Test uncaught exception
+2025-09-29 10:26:42,369 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_file_load (memory_usage=203.5MB)
+2025-09-29 10:26:42,369 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:66] - Starting IFC file validation: 
+2025-09-29 10:26:42,380 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759134402_012 - No File Path
+2025-09-29 10:26:42,381 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:306] -   Category: user_input, Severity: low
+2025-09-29 10:26:42,381 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:307] -   Message: No file path provided
+2025-09-29 10:26:42,381 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:313] -   Guidance: Please select an IFC file to load.
+2025-09-29 10:26:42,381 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:316] -   Recovery: Use the 'Load IFC File' button to select a file
+2025-09-29 10:26:42,381 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=11.16, memory_percent_used=64.8, disk_free_gb=144.7, disk_percent_used=69.5, cpu_count=12
+2025-09-29 10:26:42,381 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_file_load (duration=0.01s, memory_usage=203.5MB)
+2025-09-29 10:26:42,381 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_file_load (memory_usage=204.2MB)
+2025-09-29 10:26:42,381 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:66] - Starting IFC file validation:    
+2025-09-29 10:26:42,389 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759134402_013 - No File Path
+2025-09-29 10:26:42,390 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:306] -   Category: user_input, Severity: low
+2025-09-29 10:26:42,390 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:307] -   Message: No file path provided
+2025-09-29 10:26:42,390 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:313] -   Guidance: Please select an IFC file to load.
+2025-09-29 10:26:42,390 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:316] -   Recovery: Use the 'Load IFC File' button to select a file
+2025-09-29 10:26:42,390 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=11.16, memory_percent_used=64.8, disk_free_gb=144.7, disk_percent_used=69.5, cpu_count=12
+2025-09-29 10:26:42,390 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_file_load (duration=0.01s, memory_usage=204.2MB)
+2025-09-29 10:26:42,393 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_file_load (memory_usage=204.2MB)
+2025-09-29 10:26:42,393 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:66] - Starting IFC file validation: test.txt
+2025-09-29 10:26:42,393 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:80] - Processing file path: test.txt
+2025-09-29 10:26:42,399 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759134402_014 - Invalid File Format
+2025-09-29 10:26:42,400 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:306] -   Category: user_input, Severity: low
+2025-09-29 10:26:42,400 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:307] -   Message: File does not have IFC extension: test.txt
+2025-09-29 10:26:42,400 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:313] -   Guidance: Only IFC and IFCXML files are supported for room schedule generation.
+2025-09-29 10:26:42,400 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:316] -   Recovery: Select a file with .ifc or .ifcxml extension, Convert your file to IFC format using CAD software, Verify the file is actually an IFC file despite the extension
+2025-09-29 10:26:42,400 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=11.16, memory_percent_used=64.8, disk_free_gb=144.7, disk_percent_used=69.5, cpu_count=12
+2025-09-29 10:26:42,400 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_file_load (duration=0.01s, memory_usage=204.2MB)
+2025-09-29 10:26:42,401 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_file_load (memory_usage=204.2MB)
+2025-09-29 10:26:42,402 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:66] - Starting IFC file validation: nonexistent.ifc
+2025-09-29 10:26:42,402 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:80] - Processing file path: nonexistent.ifc
+2025-09-29 10:26:42,410 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759134402_015 - File Not Found
+2025-09-29 10:26:42,410 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:306] -   Category: io, Severity: medium
+2025-09-29 10:26:42,410 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:307] -   Message: File does not exist: nonexistent.ifc
+2025-09-29 10:26:42,410 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:313] -   Guidance: The selected file could not be found. It may have been moved, deleted, or renamed.
+2025-09-29 10:26:42,410 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:316] -   Recovery: Verify the file path is correct, Check if the file was moved or renamed, Select a different IFC file, Restore the file from backup if available
+2025-09-29 10:26:42,410 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=11.16, memory_percent_used=64.8, disk_free_gb=144.7, disk_percent_used=69.5, cpu_count=12
+2025-09-29 10:26:42,410 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_file_load (duration=0.01s, memory_usage=204.2MB)
+2025-09-29 10:26:42,480 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_file_load (memory_usage=205.6MB)
+2025-09-29 10:26:42,480 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:66] - Starting IFC file validation: C:\Users\johtho\AppData\Local\Temp\tmp4drusp29.ifc
+2025-09-29 10:26:42,480 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:80] - Processing file path: C:\Users\johtho\AppData\Local\Temp\tmp4drusp29.ifc
+2025-09-29 10:26:42,487 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759134402_016 - File Not Found
+2025-09-29 10:26:42,487 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:306] -   Category: io, Severity: medium
+2025-09-29 10:26:42,487 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:307] -   Message: File does not exist: C:\Users\johtho\AppData\Local\Temp\tmp4drusp29.ifc
+2025-09-29 10:26:42,487 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:313] -   Guidance: The selected file could not be found. It may have been moved, deleted, or renamed.
+2025-09-29 10:26:42,487 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:316] -   Recovery: Verify the file path is correct, Check if the file was moved or renamed, Select a different IFC file, Restore the file from backup if available
+2025-09-29 10:26:42,487 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=11.16, memory_percent_used=64.8, disk_free_gb=144.7, disk_percent_used=69.5, cpu_count=12
+2025-09-29 10:26:42,487 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_file_load (duration=0.01s, memory_usage=205.6MB)
+2025-09-29 10:26:42,492 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_file_load (memory_usage=205.6MB)
+2025-09-29 10:26:42,492 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:66] - Starting IFC file validation: C:\Users\johtho\AppData\Local\Temp\tmp_999tfx7.ifc
+2025-09-29 10:26:42,492 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:80] - Processing file path: C:\Users\johtho\AppData\Local\Temp\tmp_999tfx7.ifc
+2025-09-29 10:26:42,493 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:147] - File size analysis: 0.0MB (0 bytes)
+2025-09-29 10:26:42,499 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759134402_017 - Empty File
+2025-09-29 10:26:42,500 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:306] -   Category: validation, Severity: medium
+2025-09-29 10:26:42,500 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:307] -   Message: File is empty (0 bytes)
+2025-09-29 10:26:42,500 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:313] -   Guidance: The selected file contains no data and cannot be processed.
+2025-09-29 10:26:42,500 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:316] -   Recovery: Select a different IFC file, Check if the file was corrupted during transfer, Re-export the file from the original CAD software
+2025-09-29 10:26:42,500 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=11.16, memory_percent_used=64.8, disk_free_gb=144.7, disk_percent_used=69.5, cpu_count=12
+2025-09-29 10:26:42,500 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_file_load (duration=0.01s, memory_usage=205.6MB)
+2025-09-29 10:26:42,503 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_file_load (file_size=0.0MB, memory_usage=205.6MB)
+2025-09-29 10:26:42,503 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:66] - Starting IFC file validation: C:\Users\johtho\AppData\Local\Temp\tmpnp392txc.ifc
+2025-09-29 10:26:42,503 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:80] - Processing file path: C:\Users\johtho\AppData\Local\Temp\tmpnp392txc.ifc
+2025-09-29 10:26:42,503 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:147] - File size analysis: 0.0MB (13 bytes)
+2025-09-29 10:26:42,503 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:165] - Memory recommendations: {'recommended_ram': '4GB or more', 'processing_time': 'Under 30 seconds', 'memory_usage': '~0MB'}
+2025-09-29 10:26:42,503 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:169] - Small file detected (0.0MB) - using optimized loading
+2025-09-29 10:26:42,503 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_parsing (file_size=0.0MB, memory_usage=205.6MB)
+2025-09-29 10:26:42,503 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:293] - Starting IFC parsing: C:\Users\johtho\AppData\Local\Temp\tmpnp392txc.ifc (0.0MB)
+2025-09-29 10:26:42,504 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: optimized_ifc_load (file_size=0.0MB, memory_usage=205.6MB)
+2025-09-29 10:26:42,504 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: optimized_ifc_load (duration=0.00s, file_size=0.0MB, rate=0.05MB/s, memory_usage=205.6MB)
+2025-09-29 10:26:42,504 - ifc_room_schedule.utils.enhanced_logging - WARNING - [ifc_file_reader.py:304] - Optimized loading failed, falling back to standard: Error loading small file: Insufficient memory
+2025-09-29 10:26:42,504 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_parsing (duration=0.00s, file_size=0.0MB, rate=0.02MB/s, memory_usage=205.6MB)
+2025-09-29 10:26:42,524 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759134402_018 - Memory Error During IFC Parsing
+2025-09-29 10:26:42,524 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:306] -   Category: memory, Severity: high
+2025-09-29 10:26:42,524 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:307] -   Message: Out of memory while parsing IFC file (0.0MB)
+2025-09-29 10:26:42,524 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:310] -   Technical: Exception: MemoryError: Insufficient memory
+2025-09-29 10:26:42,524 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:313] -   Guidance: Unexpected memory error with small file (0.0MB). This may indicate system issues or file corruption.
+2025-09-29 10:26:42,525 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:316] -   Recovery: Restart the application, Check system memory usage in Task Manager, Verify the IFC file is not corrupted, Try processing a different IFC file to isolate the issue
+2025-09-29 10:26:42,525 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=11.16, memory_percent_used=64.8, disk_free_gb=144.7, disk_percent_used=69.5, cpu_count=12
+2025-09-29 10:26:42,525 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:339] -   Stack trace:
+Traceback (most recent call last):
+  File "C:\Users\johtho\Git-Repos\romskjemaing\romskjema_cursor\romskjemaing\tests\..\ifc_room_schedule\parser\ifc_file_reader.py", line 305, in load_file
+    self.ifc_file = ifcopenshell.open(file_path)
+                    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\johtho\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1169, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\johtho\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1173, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\johtho\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1228, in _execute_mock_call
+    raise effect
+  File "C:\Users\johtho\Git-Repos\romskjemaing\romskjema_cursor\romskjemaing\tests\..\ifc_room_schedule\parser\optimized_ifc_parser.py", line 119, in _load_small_file
+    self.ifc_file = ifcopenshell.open(file_path)
+                    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\johtho\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1169, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\johtho\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1173, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\johtho\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1228, in _execute_mock_call
+    raise effect
+MemoryError: Insufficient memory
+
+2025-09-29 10:26:42,525 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_file_load (duration=0.02s, file_size=0.0MB, rate=0.00MB/s, memory_usage=205.6MB)
+2025-09-29 10:26:42,528 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_file_load (file_size=0.0MB, memory_usage=205.8MB)
+2025-09-29 10:26:42,528 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:66] - Starting IFC file validation: C:\Users\johtho\AppData\Local\Temp\tmp3eb3bc0_.ifc
+2025-09-29 10:26:42,528 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:80] - Processing file path: C:\Users\johtho\AppData\Local\Temp\tmp3eb3bc0_.ifc
+2025-09-29 10:26:42,529 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:147] - File size analysis: 0.0MB (13 bytes)
+2025-09-29 10:26:42,529 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:165] - Memory recommendations: {'recommended_ram': '4GB or more', 'processing_time': 'Under 30 seconds', 'memory_usage': '~0MB'}
+2025-09-29 10:26:42,529 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:169] - Small file detected (0.0MB) - using optimized loading
+2025-09-29 10:26:42,529 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_parsing (file_size=0.0MB, memory_usage=205.8MB)
+2025-09-29 10:26:42,529 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:293] - Starting IFC parsing: C:\Users\johtho\AppData\Local\Temp\tmp3eb3bc0_.ifc (0.0MB)
+2025-09-29 10:26:42,529 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: optimized_ifc_load (file_size=0.0MB, memory_usage=205.8MB)
+2025-09-29 10:26:42,529 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: optimized_ifc_load (duration=0.00s, file_size=0.0MB, rate=0.06MB/s, memory_usage=205.8MB)
+2025-09-29 10:26:42,529 - ifc_room_schedule.utils.enhanced_logging - WARNING - [ifc_file_reader.py:304] - Optimized loading failed, falling back to standard: Error loading small file: Not a valid IFC file
+2025-09-29 10:26:42,529 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_parsing (duration=0.00s, file_size=0.0MB, rate=0.02MB/s, memory_usage=205.8MB)
+2025-09-29 10:26:42,529 - ifc_room_schedule.utils.enhanced_logging - ERROR - [ifc_file_reader.py:351] - IFC parsing failed: Not a valid IFC file
+2025-09-29 10:26:42,538 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759134402_019 - Invalid IFC File
+2025-09-29 10:26:42,538 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:306] -   Category: parsing, Severity: high
+2025-09-29 10:26:42,538 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:307] -   Message: File is not a valid IFC format: tmp3eb3bc0_.ifc
+2025-09-29 10:26:42,538 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:310] -   Technical: Exception: Exception: Not a valid IFC file
+2025-09-29 10:26:42,538 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:313] -   Guidance: The file appears to be corrupted or not in valid IFC format.
+2025-09-29 10:26:42,539 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:316] -   Recovery: Verify the file was exported correctly from CAD software, Try opening the file in another IFC viewer to confirm validity, Re-export the file from the original CAD application, Check if the file was corrupted during transfer
+2025-09-29 10:26:42,539 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=11.16, memory_percent_used=64.8, disk_free_gb=144.7, disk_percent_used=69.5, cpu_count=12
+2025-09-29 10:26:42,539 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:339] -   Stack trace:
+Traceback (most recent call last):
+  File "C:\Users\johtho\Git-Repos\romskjemaing\romskjema_cursor\romskjemaing\tests\..\ifc_room_schedule\parser\ifc_file_reader.py", line 305, in load_file
+    self.ifc_file = ifcopenshell.open(file_path)
+                    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\johtho\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1169, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\johtho\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1173, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\johtho\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1228, in _execute_mock_call
+    raise effect
+  File "C:\Users\johtho\Git-Repos\romskjemaing\romskjema_cursor\romskjemaing\tests\..\ifc_room_schedule\parser\optimized_ifc_parser.py", line 119, in _load_small_file
+    self.ifc_file = ifcopenshell.open(file_path)
+                    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\johtho\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1169, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\johtho\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1173, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\johtho\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1228, in _execute_mock_call
+    raise effect
+Exception: Not a valid IFC file
+
+2025-09-29 10:26:42,539 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_file_load (duration=0.01s, file_size=0.0MB, rate=0.00MB/s, memory_usage=205.8MB)
+2025-09-29 10:26:42,654 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:49,514 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:49,708 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:49,961 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:50,033 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_file_load (memory_usage=212.5MB)
+2025-09-29 10:26:50,034 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:66] - Starting IFC file validation: nonexistent.ifc
+2025-09-29 10:26:50,034 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:80] - Processing file path: nonexistent.ifc
+2025-09-29 10:26:50,045 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759134410_020 - File Not Found
+2025-09-29 10:26:50,045 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:306] -   Category: io, Severity: medium
+2025-09-29 10:26:50,045 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:307] -   Message: File does not exist: nonexistent.ifc
+2025-09-29 10:26:50,045 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:313] -   Guidance: The selected file could not be found. It may have been moved, deleted, or renamed.
+2025-09-29 10:26:50,046 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:316] -   Recovery: Verify the file path is correct, Check if the file was moved or renamed, Select a different IFC file, Restore the file from backup if available
+2025-09-29 10:26:50,046 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=11.17, memory_percent_used=64.7, disk_free_gb=144.71, disk_percent_used=69.5, cpu_count=12
+2025-09-29 10:26:50,046 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_file_load (duration=0.01s, memory_usage=212.5MB)
+2025-09-29 10:26:50,050 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_file_load (file_size=0.0MB, memory_usage=213.2MB)
+2025-09-29 10:26:50,051 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:66] - Starting IFC file validation: C:\Users\johtho\AppData\Local\Temp\tmp6v_mle0j.txt
+2025-09-29 10:26:50,052 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:80] - Processing file path: C:\Users\johtho\AppData\Local\Temp\tmp6v_mle0j.txt
+2025-09-29 10:26:50,064 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759134410_021 - Invalid File Format
+2025-09-29 10:26:50,065 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:306] -   Category: user_input, Severity: low
+2025-09-29 10:26:50,065 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:307] -   Message: File does not have IFC extension: tmp6v_mle0j.txt
+2025-09-29 10:26:50,066 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:313] -   Guidance: Only IFC and IFCXML files are supported for room schedule generation.
+2025-09-29 10:26:50,066 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:316] -   Recovery: Select a file with .ifc or .ifcxml extension, Convert your file to IFC format using CAD software, Verify the file is actually an IFC file despite the extension
+2025-09-29 10:26:50,067 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=11.17, memory_percent_used=64.7, disk_free_gb=144.71, disk_percent_used=69.5, cpu_count=12
+2025-09-29 10:26:50,067 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_file_load (duration=0.02s, file_size=0.0MB, rate=0.00MB/s, memory_usage=213.2MB)
+2025-09-29 10:26:50,075 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_file_load (file_size=250.0MB, memory_usage=213.2MB)
+2025-09-29 10:26:50,075 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:66] - Starting IFC file validation: C:\Users\johtho\AppData\Local\Temp\tmpdthh8hag.ifc
+2025-09-29 10:26:50,075 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:80] - Processing file path: C:\Users\johtho\AppData\Local\Temp\tmpdthh8hag.ifc
+2025-09-29 10:26:50,076 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:147] - File size analysis: 250.0MB (262,144,000 bytes)
+2025-09-29 10:26:50,077 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:165] - Memory recommendations: {'recommended_ram': '32GB or more', 'processing_time': '5+ minutes', 'memory_usage': '~1250MB'}
+2025-09-29 10:26:50,087 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:192] - System memory check: 11433.1MB available
+2025-09-29 10:26:50,088 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:209] - Memory estimation for very_large file: ~1000.0MB needed
+2025-09-29 10:26:50,100 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759134410_022 - File Very Large
+2025-09-29 10:26:50,100 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:306] -   Category: memory, Severity: medium
+2025-09-29 10:26:50,101 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:307] -   Message: File size (250.0MB) may cause performance issues
+2025-09-29 10:26:50,101 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:313] -   Guidance: Large files may cause memory issues or slow processing. Expected processing time: 5+ minutes. Recommended system RAM: 32GB or more
+2025-09-29 10:26:50,101 - ifc_room_schedule.utils.enhanced_logging - WARNING - [enhanced_logging.py:316] -   Recovery: Ensure sufficient free memory before processing, Close other applications to free up RAM, Consider processing during off-peak hours, Split the file into smaller sections if possible
+2025-09-29 10:26:50,101 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=11.16, memory_percent_used=64.8, disk_free_gb=144.71, disk_percent_used=69.5, cpu_count=12
+2025-09-29 10:26:50,101 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_file_load (duration=0.03s, file_size=250.0MB, rate=9554.38MB/s, memory_usage=213.2MB)
+2025-09-29 10:26:50,109 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_file_load (file_size=0.0MB, memory_usage=213.2MB)
+2025-09-29 10:26:50,109 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:66] - Starting IFC file validation: C:\Users\johtho\AppData\Local\Temp\tmpif_0a112.ifc
+2025-09-29 10:26:50,109 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:80] - Processing file path: C:\Users\johtho\AppData\Local\Temp\tmpif_0a112.ifc
+2025-09-29 10:26:50,110 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:147] - File size analysis: 0.0MB (13 bytes)
+2025-09-29 10:26:50,110 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:165] - Memory recommendations: {'recommended_ram': '4GB or more', 'processing_time': 'Under 30 seconds', 'memory_usage': '~0MB'}
+2025-09-29 10:26:50,110 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:169] - Small file detected (0.0MB) - using optimized loading
+2025-09-29 10:26:50,110 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_parsing (file_size=0.0MB, memory_usage=213.2MB)
+2025-09-29 10:26:50,110 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:293] - Starting IFC parsing: C:\Users\johtho\AppData\Local\Temp\tmpif_0a112.ifc (0.0MB)
+2025-09-29 10:26:50,111 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: optimized_ifc_load (file_size=0.0MB, memory_usage=213.2MB)
+2025-09-29 10:26:50,111 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: optimized_ifc_load (duration=0.00s, file_size=0.0MB, rate=0.02MB/s, memory_usage=213.2MB)
+2025-09-29 10:26:50,112 - ifc_room_schedule.utils.enhanced_logging - WARNING - [ifc_file_reader.py:304] - Optimized loading failed, falling back to standard: Error loading small file: object of type 'Mock' has no len()
+2025-09-29 10:26:50,112 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_parsing (duration=0.00s, file_size=0.0MB, rate=0.01MB/s, memory_usage=213.2MB)
+2025-09-29 10:26:50,112 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:313] - IFC file parsed successfully in 0.00s
+2025-09-29 10:26:50,112 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_validation (file_size=0.0MB, memory_usage=213.2MB)
+2025-09-29 10:26:50,112 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:426] - Starting IFC file structure validation...
+2025-09-29 10:26:50,113 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_validation (duration=0.00s, file_size=0.0MB, rate=0.03MB/s, memory_usage=213.2MB)
+2025-09-29 10:26:50,113 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:450] - Found 2 building products in 0.00s
+2025-09-29 10:26:50,113 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: space_validation (file_size=0.0MB, memory_usage=213.2MB)
+2025-09-29 10:26:50,113 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:508] - Starting IfcSpace entity validation...
+2025-09-29 10:26:50,121 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:533] - Found 3 IfcSpace entities
+2025-09-29 10:26:50,123 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: space_validation (duration=0.01s, file_size=0.0MB, rate=0.00MB/s, memory_usage=213.2MB)
+2025-09-29 10:26:50,123 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:550] - Space quality analysis completed in 0.01s:
+2025-09-29 10:26:50,123 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:551] -   - Valid spaces: 3/3
+2025-09-29 10:26:50,123 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:552] -   - Named spaces: 3/3
+2025-09-29 10:26:50,123 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:553] -   - Spaces with geometry: 3/3
+2025-09-29 10:26:50,124 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:568] - Good space data quality: 100% of sampled spaces have valid data
+2025-09-29 10:26:50,124 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_file_load (duration=0.02s, file_size=0.0MB, rate=0.00MB/s, memory_usage=213.2MB)
+2025-09-29 10:26:50,124 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:646] - Small file processing completed efficiently: 0.0MB in 0.02s
+2025-09-29 10:26:50,125 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:648] - IFC file load operation completed successfully: Successfully loaded IFC file (<Mock name='open().schema' id='1507752009680'>) with 3 spaces found in 0.02s.
+2025-09-29 10:26:50,133 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_file_load (file_size=0.0MB, memory_usage=209.8MB)
+2025-09-29 10:26:50,134 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:66] - Starting IFC file validation: C:\Users\johtho\AppData\Local\Temp\tmp2a6q8znl.ifc
+2025-09-29 10:26:50,134 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:80] - Processing file path: C:\Users\johtho\AppData\Local\Temp\tmp2a6q8znl.ifc
+2025-09-29 10:26:50,135 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:147] - File size analysis: 0.0MB (13 bytes)
+2025-09-29 10:26:50,136 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:165] - Memory recommendations: {'recommended_ram': '4GB or more', 'processing_time': 'Under 30 seconds', 'memory_usage': '~0MB'}
+2025-09-29 10:26:50,136 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:169] - Small file detected (0.0MB) - using optimized loading
+2025-09-29 10:26:50,138 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_parsing (file_size=0.0MB, memory_usage=209.8MB)
+2025-09-29 10:26:50,138 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:293] - Starting IFC parsing: C:\Users\johtho\AppData\Local\Temp\tmp2a6q8znl.ifc (0.0MB)
+2025-09-29 10:26:50,139 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: optimized_ifc_load (file_size=0.0MB, memory_usage=209.8MB)
+2025-09-29 10:26:50,140 - ifc_room_schedule.utils.enhanced_logging - WARNING - [ifc_file_reader.py:304] - Optimized loading failed, falling back to standard: No IfcSpace entities found
+2025-09-29 10:26:50,140 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_parsing (duration=0.00s, file_size=0.0MB, rate=0.00MB/s, memory_usage=209.8MB)
+2025-09-29 10:26:50,140 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:313] - IFC file parsed successfully in 0.00s
+2025-09-29 10:26:50,141 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_validation (file_size=0.0MB, memory_usage=209.8MB)
+2025-09-29 10:26:50,141 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:426] - Starting IFC file structure validation...
+2025-09-29 10:26:50,141 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_validation (duration=0.00s, file_size=0.0MB, rate=0.04MB/s, memory_usage=209.8MB)
+2025-09-29 10:26:50,151 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759134410_023 - Empty IFC Structure
+2025-09-29 10:26:50,154 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:306] -   Category: validation, Severity: high
+2025-09-29 10:26:50,155 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:307] -   Message: IFC file contains no building elements
+2025-09-29 10:26:50,155 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:313] -   Guidance: The IFC file appears to be empty or contains no building elements (IfcProduct entities).
+2025-09-29 10:26:50,156 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:316] -   Recovery: Verify the IFC export included building geometry, Check export settings to include all building elements, Try exporting from a different view or model state, Ensure the model contains actual building components
+2025-09-29 10:26:50,156 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=11.16, memory_percent_used=64.8, disk_free_gb=144.71, disk_percent_used=69.5, cpu_count=12
+2025-09-29 10:26:50,156 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_file_load (duration=0.02s, file_size=0.0MB, rate=0.00MB/s, memory_usage=209.8MB)
+2025-09-29 10:26:50,164 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_file_load (file_size=0.0MB, memory_usage=210.6MB)
+2025-09-29 10:26:50,165 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:66] - Starting IFC file validation: C:\Users\johtho\AppData\Local\Temp\tmpykgo3o6c.ifc
+2025-09-29 10:26:50,165 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:80] - Processing file path: C:\Users\johtho\AppData\Local\Temp\tmpykgo3o6c.ifc
+2025-09-29 10:26:50,166 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:147] - File size analysis: 0.0MB (13 bytes)
+2025-09-29 10:26:50,166 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:165] - Memory recommendations: {'recommended_ram': '4GB or more', 'processing_time': 'Under 30 seconds', 'memory_usage': '~0MB'}
+2025-09-29 10:26:50,166 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:169] - Small file detected (0.0MB) - using optimized loading
+2025-09-29 10:26:50,167 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_parsing (file_size=0.0MB, memory_usage=210.6MB)
+2025-09-29 10:26:50,167 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:293] - Starting IFC parsing: C:\Users\johtho\AppData\Local\Temp\tmpykgo3o6c.ifc (0.0MB)
+2025-09-29 10:26:50,168 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: optimized_ifc_load (file_size=0.0MB, memory_usage=210.6MB)
+2025-09-29 10:26:50,170 - ifc_room_schedule.utils.enhanced_logging - WARNING - [ifc_file_reader.py:304] - Optimized loading failed, falling back to standard: No IfcSpace entities found
+2025-09-29 10:26:50,170 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_parsing (duration=0.00s, file_size=0.0MB, rate=0.00MB/s, memory_usage=210.6MB)
+2025-09-29 10:26:50,170 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:313] - IFC file parsed successfully in 0.00s
+2025-09-29 10:26:50,171 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_validation (file_size=0.0MB, memory_usage=210.6MB)
+2025-09-29 10:26:50,172 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:426] - Starting IFC file structure validation...
+2025-09-29 10:26:50,172 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_validation (duration=0.00s, file_size=0.0MB, rate=0.02MB/s, memory_usage=210.6MB)
+2025-09-29 10:26:50,172 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:450] - Found 2 building products in 0.00s
+2025-09-29 10:26:50,173 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: space_validation (file_size=0.0MB, memory_usage=210.6MB)
+2025-09-29 10:26:50,175 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:508] - Starting IfcSpace entity validation...
+2025-09-29 10:26:50,177 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: space_validation (duration=0.00s, file_size=0.0MB, rate=0.00MB/s, memory_usage=210.6MB)
+2025-09-29 10:26:50,197 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759134410_024 - No Spaces Found
+2025-09-29 10:26:50,198 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:306] -   Category: validation, Severity: high
+2025-09-29 10:26:50,198 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:307] -   Message: IFC file contains no IfcSpace entities
+2025-09-29 10:26:50,198 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:313] -   Guidance: This application requires IFC files with room/space data for generating room schedules.
+2025-09-29 10:26:50,199 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:316] -   Recovery: Ensure spaces/rooms are included in the IFC export, Check IFC export settings to include space boundaries, Verify the model contains room/space objects, Try exporting with 'Include Spaces' option enabled, Use an IFC file that contains architectural space data
+2025-09-29 10:26:50,199 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=11.16, memory_percent_used=64.8, disk_free_gb=144.71, disk_percent_used=69.5, cpu_count=12
+2025-09-29 10:26:50,200 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_file_load (duration=0.04s, file_size=0.0MB, rate=0.00MB/s, memory_usage=210.6MB)
+2025-09-29 10:26:50,210 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_file_load (file_size=0.0MB, memory_usage=210.6MB)
+2025-09-29 10:26:50,210 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:66] - Starting IFC file validation: C:\Users\johtho\AppData\Local\Temp\tmpr4acagsu.ifc
+2025-09-29 10:26:50,210 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:80] - Processing file path: C:\Users\johtho\AppData\Local\Temp\tmpr4acagsu.ifc
+2025-09-29 10:26:50,211 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:147] - File size analysis: 0.0MB (13 bytes)
+2025-09-29 10:26:50,211 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:165] - Memory recommendations: {'recommended_ram': '4GB or more', 'processing_time': 'Under 30 seconds', 'memory_usage': '~0MB'}
+2025-09-29 10:26:50,211 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:169] - Small file detected (0.0MB) - using optimized loading
+2025-09-29 10:26:50,211 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_parsing (file_size=0.0MB, memory_usage=210.6MB)
+2025-09-29 10:26:50,212 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:293] - Starting IFC parsing: C:\Users\johtho\AppData\Local\Temp\tmpr4acagsu.ifc (0.0MB)
+2025-09-29 10:26:50,212 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: optimized_ifc_load (file_size=0.0MB, memory_usage=210.6MB)
+2025-09-29 10:26:50,214 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: optimized_ifc_load (duration=0.00s, file_size=0.0MB, rate=0.01MB/s, memory_usage=210.6MB)
+2025-09-29 10:26:50,214 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:301] - IFC file loaded with optimizations: Small file loaded: 2 spaces in 0.00s
+2025-09-29 10:26:50,215 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_parsing (duration=0.00s, file_size=0.0MB, rate=0.00MB/s, memory_usage=210.6MB)
+2025-09-29 10:26:50,215 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:313] - IFC file parsed successfully in 0.00s
+2025-09-29 10:26:50,215 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_validation (file_size=0.0MB, memory_usage=210.6MB)
+2025-09-29 10:26:50,216 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:426] - Starting IFC file structure validation...
+2025-09-29 10:26:50,217 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_validation (duration=0.00s, file_size=0.0MB, rate=0.01MB/s, memory_usage=210.6MB)
+2025-09-29 10:26:50,218 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:450] - Found 10 building products in 0.00s
+2025-09-29 10:26:50,219 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: space_validation (file_size=0.0MB, memory_usage=210.6MB)
+2025-09-29 10:26:50,219 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:508] - Starting IfcSpace entity validation...
+2025-09-29 10:26:50,223 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:533] - Found 2 IfcSpace entities
+2025-09-29 10:26:50,224 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: space_validation (duration=0.01s, file_size=0.0MB, rate=0.00MB/s, memory_usage=210.6MB)
+2025-09-29 10:26:50,224 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:550] - Space quality analysis completed in 0.01s:
+2025-09-29 10:26:50,224 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:551] -   - Valid spaces: 2/2
+2025-09-29 10:26:50,224 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:552] -   - Named spaces: 2/2
+2025-09-29 10:26:50,224 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:553] -   - Spaces with geometry: 2/2
+2025-09-29 10:26:50,224 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:568] - Good space data quality: 100% of sampled spaces have valid data
+2025-09-29 10:26:50,226 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:628] - IFC file statistics: 1000 total entities, 50 building elements
+2025-09-29 10:26:50,226 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_file_load (duration=0.02s, file_size=0.0MB, rate=0.00MB/s, memory_usage=210.6MB)
+2025-09-29 10:26:50,226 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:646] - Small file processing completed efficiently: 0.0MB in 0.02s
+2025-09-29 10:26:50,227 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:648] - IFC file load operation completed successfully: Successfully loaded IFC file (IFC4) with 2 spaces found in 0.02s.
+2025-09-29 10:26:50,325 - ifc_room_schedule.utils.enhanced_logging - INFO - [performance_monitor.py:383] - Performance monitor cleaned up
+2025-09-29 10:26:50,325 - ifc_room_schedule.utils.enhanced_logging - INFO - [performance_monitor.py:383] - Performance monitor cleaned up
+2025-09-29 10:26:50,329 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_file_load (file_size=0.0MB, memory_usage=211.5MB)
+2025-09-29 10:26:50,330 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:66] - Starting IFC file validation: C:\Users\johtho\AppData\Local\Temp\tmppcx5on9m.ifc
+2025-09-29 10:26:50,330 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:80] - Processing file path: C:\Users\johtho\AppData\Local\Temp\tmppcx5on9m.ifc
+2025-09-29 10:26:50,330 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:147] - File size analysis: 0.0MB (13 bytes)
+2025-09-29 10:26:50,330 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:165] - Memory recommendations: {'recommended_ram': '4GB or more', 'processing_time': 'Under 30 seconds', 'memory_usage': '~0MB'}
+2025-09-29 10:26:50,330 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:169] - Small file detected (0.0MB) - using optimized loading
+2025-09-29 10:26:50,331 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_parsing (file_size=0.0MB, memory_usage=211.5MB)
+2025-09-29 10:26:50,331 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:293] - Starting IFC parsing: C:\Users\johtho\AppData\Local\Temp\tmppcx5on9m.ifc (0.0MB)
+2025-09-29 10:26:50,331 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: optimized_ifc_load (file_size=0.0MB, memory_usage=211.5MB)
+2025-09-29 10:26:50,331 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: optimized_ifc_load (duration=0.00s, file_size=0.0MB, rate=0.03MB/s, memory_usage=211.5MB)
+2025-09-29 10:26:50,332 - ifc_room_schedule.utils.enhanced_logging - WARNING - [ifc_file_reader.py:304] - Optimized loading failed, falling back to standard: Error loading small file: Test exception
+2025-09-29 10:26:50,332 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_parsing (duration=0.00s, file_size=0.0MB, rate=0.01MB/s, memory_usage=211.5MB)
+2025-09-29 10:26:50,332 - ifc_room_schedule.utils.enhanced_logging - ERROR - [ifc_file_reader.py:351] - IFC parsing failed: Test exception
+2025-09-29 10:26:50,344 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:305] - ERROR_REPORT: ERR_1759134410_025 - IFC Parsing Error
+2025-09-29 10:26:50,345 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:306] -   Category: parsing, Severity: high
+2025-09-29 10:26:50,345 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:307] -   Message: Unexpected error parsing IFC file: tmppcx5on9m.ifc
+2025-09-29 10:26:50,345 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:310] -   Technical: Exception: Exception: Test exception
+2025-09-29 10:26:50,345 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:313] -   Guidance: An unexpected error occurred while parsing the IFC file.
+2025-09-29 10:26:50,345 - ifc_room_schedule.utils.enhanced_logging - ERROR - [enhanced_logging.py:316] -   Recovery: Verify the file is not corrupted, Try processing a different IFC file to isolate the issue, Re-export the file from the original CAD software, Contact support with the error details
+2025-09-29 10:26:50,346 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:325] -   System: memory_total_gb=31.68, memory_available_gb=11.16, memory_percent_used=64.8, disk_free_gb=144.71, disk_percent_used=69.5, cpu_count=12
+2025-09-29 10:26:50,346 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [enhanced_logging.py:339] -   Stack trace:
+Traceback (most recent call last):
+  File "C:\Users\johtho\Git-Repos\romskjemaing\romskjema_cursor\romskjemaing\tests\..\ifc_room_schedule\parser\ifc_file_reader.py", line 305, in load_file
+    self.ifc_file = ifcopenshell.open(file_path)
+                    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\johtho\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1169, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\johtho\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1173, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\johtho\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1228, in _execute_mock_call
+    raise effect
+  File "C:\Users\johtho\Git-Repos\romskjemaing\romskjema_cursor\romskjemaing\tests\..\ifc_room_schedule\parser\optimized_ifc_parser.py", line 119, in _load_small_file
+    self.ifc_file = ifcopenshell.open(file_path)
+                    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+  File "C:\Users\johtho\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1169, in __call__
+    return self._mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\johtho\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1173, in _mock_call
+    return self._execute_mock_call(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\johtho\AppData\Local\Programs\Python\Python313\Lib\unittest\mock.py", line 1228, in _execute_mock_call
+    raise effect
+Exception: Test exception
+
+2025-09-29 10:26:50,346 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_file_load (duration=0.02s, file_size=0.0MB, rate=0.00MB/s, memory_usage=211.5MB)
+2025-09-29 10:26:50,360 - ifc_room_schedule.utils.enhanced_logging - WARNING - [ifc_relationship_parser.py:62] - Space with GUID NONEXISTENT not found
+2025-09-29 10:26:50,362 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_relationship_parser.py:83] - Found 0 relationships for space SPACE123456789ABC
+2025-09-29 10:26:50,393 - ifc_room_schedule.utils.enhanced_logging - ERROR - [ifc_relationship_parser.py:91] - Failed to extract relationships for space TEST_GUID: Processing error
+2025-09-29 10:26:50,399 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_relationship_parser.py:83] - Found 1 relationships for space TEST_GUID
+2025-09-29 10:26:50,409 - ifc_room_schedule.utils.enhanced_logging - WARNING - [ifc_relationship_parser.py:511] - Error extracting properties from property set: 'Mock' object is not iterable
+2025-09-29 10:26:50,430 - ifc_room_schedule.utils.enhanced_logging - WARNING - [ifc_space_boundary_parser.py:65] - No IfcRelSpaceBoundary entities found in the file
+2025-09-29 10:26:50,432 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_space_boundary_parser.py:324] - Error getting area from related element: 'Mock' object is not iterable
+2025-09-29 10:26:50,433 - ifc_room_schedule.utils.enhanced_logging - WARNING - [ifc_space_boundary_parser.py:595] - Error extracting material properties: 'Mock' object is not iterable
+2025-09-29 10:26:50,433 - ifc_room_schedule.utils.enhanced_logging - WARNING - [ifc_space_boundary_parser.py:665] - Error extracting thermal properties: 'Mock' object is not iterable
+2025-09-29 10:26:50,433 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_space_boundary_parser.py:191] - Extracted space boundary: BOUNDARY123456789 - Wall Boundary
+2025-09-29 10:26:50,433 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_space_boundary_parser.py:87] - Successfully extracted 1 space boundaries from 1 IfcRelSpaceBoundary entities
+2025-09-29 10:26:50,436 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_space_boundary_parser.py:191] - Extracted space boundary: BOUNDARY1 - Boundary 1
+2025-09-29 10:26:50,436 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_space_boundary_parser.py:87] - Successfully extracted 1 space boundaries from 2 IfcRelSpaceBoundary entities
+2025-09-29 10:26:50,456 - ifc_room_schedule.utils.enhanced_logging - WARNING - [ifc_space_extractor.py:64] - No IfcSpace entities found in the file
+2025-09-29 10:26:50,459 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_space_extractor.py:213] - Extracted space: 1234567890ABCDEF - Office 101
+2025-09-29 10:26:50,459 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_space_extractor.py:94] - Successfully extracted 1 spaces from 1 IfcSpace entities
+2025-09-29 10:26:50,462 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_space_extractor.py:213] - Extracted space: GOOD123456789ABC - Good Room
+2025-09-29 10:26:50,462 - ifc_room_schedule.utils.enhanced_logging - WARNING - [ifc_space_extractor.py:185] - Space missing GlobalId, skipping
+2025-09-29 10:26:50,462 - ifc_room_schedule.utils.enhanced_logging - WARNING - [ifc_space_extractor.py:90] - Failed to extract 1 spaces out of 2
+2025-09-29 10:26:50,462 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_space_extractor.py:92] -   - None: Failed to extract properties
+2025-09-29 10:26:50,462 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_space_extractor.py:94] - Successfully extracted 1 spaces from 2 IfcSpace entities
+2025-09-29 10:26:50,464 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_space_extractor.py:213] - Extracted space: TEST123456789ABC - Test Room
+2025-09-29 10:26:50,465 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_space_extractor.py:94] - Successfully extracted 1 spaces from 1 IfcSpace entities
+2025-09-29 10:26:50,484 - ifc_room_schedule.utils.enhanced_logging - ERROR - [ifc_space_extractor.py:103] - Failed to extract spaces from IFC file: Failed to access IfcSpace entities: IFC file error
+2025-09-29 10:26:50,498 - ifc_room_schedule.utils.enhanced_logging - WARNING - [ifc_surface_extractor.py:58] - Space with GUID non-existent-guid not found
+2025-09-29 10:26:50,501 - ifc_room_schedule.utils.enhanced_logging - WARNING - [ifc_surface_extractor.py:121] - Error extracting surfaces from related elements: 'Mock' object is not iterable
+2025-09-29 10:26:50,501 - ifc_room_schedule.utils.enhanced_logging - WARNING - [ifc_surface_extractor.py:140] - Error extracting surfaces from containment: 'Mock' object is not iterable
+2025-09-29 10:26:50,502 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_surface_extractor.py:72] - Extracted 1 surfaces for space space-guid
+2025-09-29 10:26:50,518 - ifc_room_schedule.utils.enhanced_logging - WARNING - [ifc_surface_extractor.py:435] - 1 surfaces have zero or invalid area
+2025-09-29 10:26:50,523 - ifc_room_schedule.utils.enhanced_logging - WARNING - [ifc_surface_extractor.py:435] - 1 surfaces have no material information
+2025-09-29 10:26:50,525 - ifc_room_schedule.utils.enhanced_logging - WARNING - [ifc_surface_extractor.py:435] - No surfaces found
+2025-09-29 10:26:50,933 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:51,159 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:51,350 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:51,563 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:51,779 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:51,983 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:52,012 - ifc_room_schedule.utils.enhanced_logging - ERROR - [main_window.py:375] - Error getting file size: [WinError 2] The system cannot find the file specified: 'test.ifc'
+2025-09-29 10:26:52,012 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:2688] - Processing medium file: Unknown size
+2025-09-29 10:26:52,013 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:2727] - Using threaded loading strategy for medium file
+2025-09-29 10:26:52,013 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:2891] - Loading file with threading: test.ifc
+2025-09-29 10:26:52,210 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:52,410 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:52,630 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:52,930 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:53,144 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:53,386 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:53,397 - ifc_room_schedule.utils.enhanced_logging - INFO - [surface_editor_widget.py:251] - Started editing surface: surface_001
+2025-09-29 10:26:53,644 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:53,658 - ifc_room_schedule.utils.enhanced_logging - INFO - [surface_editor_widget.py:251] - Started editing surface: surface_001
+2025-09-29 10:26:53,659 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3395] - Updated surface description for surface_001
+2025-09-29 10:26:53,847 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:54,060 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:54,076 - ifc_room_schedule.utils.enhanced_logging - INFO - [surface_editor_widget.py:251] - Started editing surface: surface_001
+2025-09-29 10:26:54,294 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:54,487 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:54,723 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:54,735 - ifc_room_schedule.utils.enhanced_logging - INFO - [surface_editor_widget.py:251] - Started editing surface: surface_001
+2025-09-29 10:26:54,924 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:54,940 - ifc_room_schedule.utils.enhanced_logging - INFO - [surface_editor_widget.py:251] - Started editing surface: surface_001
+2025-09-29 10:26:54,942 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3395] - Updated surface description for surface_001
+2025-09-29 10:26:54,943 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [surface_editor_widget.py:383] - Auto-saved surface description for surface_001
+2025-09-29 10:26:54,944 - ifc_room_schedule.utils.enhanced_logging - INFO - [surface_editor_widget.py:251] - Started editing surface: surface_002
+2025-09-29 10:26:54,946 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:3395] - Updated surface description for surface_002
+2025-09-29 10:26:54,947 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [surface_editor_widget.py:383] - Auto-saved surface description for surface_002
+2025-09-29 10:26:54,948 - ifc_room_schedule.utils.enhanced_logging - INFO - [surface_editor_widget.py:251] - Started editing surface: surface_001
+2025-09-29 10:26:54,995 - ifc_room_schedule.utils.enhanced_logging - INFO - [surface_editor_widget.py:251] - Started editing surface: test_surface_001
+2025-09-29 10:26:55,006 - ifc_room_schedule.utils.enhanced_logging - INFO - [surface_editor_widget.py:292] - Started editing boundary: test_boundary_001
+2025-09-29 10:26:55,015 - ifc_room_schedule.utils.enhanced_logging - INFO - [surface_editor_widget.py:251] - Started editing surface: test_surface_001
+2025-09-29 10:26:55,045 - ifc_room_schedule.utils.enhanced_logging - INFO - [surface_editor_widget.py:251] - Started editing surface: test_surface_001
+2025-09-29 10:26:55,047 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [surface_editor_widget.py:383] - Auto-saved surface description for test_surface_001
+2025-09-29 10:26:55,060 - ifc_room_schedule.utils.enhanced_logging - INFO - [surface_editor_widget.py:251] - Started editing surface: test_surface_001
+2025-09-29 10:26:55,064 - ifc_room_schedule.utils.enhanced_logging - INFO - [surface_editor_widget.py:417] - Cleared all descriptions
+2025-09-29 10:26:55,074 - ifc_room_schedule.utils.enhanced_logging - INFO - [surface_editor_widget.py:251] - Started editing surface: test_surface_001
+2025-09-29 10:26:55,076 - ifc_room_schedule.utils.enhanced_logging - INFO - [surface_editor_widget.py:292] - Started editing boundary: test_boundary_001
+2025-09-29 10:26:55,086 - ifc_room_schedule.utils.enhanced_logging - INFO - [surface_editor_widget.py:251] - Started editing surface: test_surface_001
+2025-09-29 10:26:55,088 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [surface_editor_widget.py:383] - Auto-saved surface description for test_surface_001
+2025-09-29 10:26:55,258 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:55,679 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:55,684 - ifc_room_schedule.utils.enhanced_logging - ERROR - [main_window.py:375] - Error getting file size: [WinError 3] The system cannot find the path specified: '/fake/path/test.ifc'
+2025-09-29 10:26:55,685 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:2688] - Processing medium file: Unknown size
+2025-09-29 10:26:55,685 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:2727] - Using threaded loading strategy for medium file
+2025-09-29 10:26:55,686 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:2891] - Loading file with threading: /fake/path/test.ifc
+2025-09-29 10:26:55,914 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:56,509 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:56,739 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:57,037 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:57,141 - ifc_room_schedule.utils.enhanced_logging - ERROR - [main_window.py:375] - Error getting file size: [WinError 3] The system cannot find the path specified: '/fake/test.ifc'
+2025-09-29 10:26:57,142 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:2688] - Processing medium file: Unknown size
+2025-09-29 10:26:57,142 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:2727] - Using threaded loading strategy for medium file
+2025-09-29 10:26:57,143 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:2891] - Loading file with threading: /fake/test.ifc
+2025-09-29 10:26:57,518 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:57,520 - ifc_room_schedule.utils.enhanced_logging - ERROR - [main_window.py:375] - Error getting file size: [WinError 3] The system cannot find the path specified: '/fake/invalid.ifc'
+2025-09-29 10:26:57,521 - ifc_room_schedule.utils.enhanced_logging - INFO - [main_window.py:2688] - Processing medium file: Unknown size
+2025-09-29 10:26:57,742 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:57,955 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:58,153 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:58,384 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:58,622 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:58,893 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:59,121 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:59,345 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:59,597 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:26:59,792 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [main_window.py:1733] - Resource monitoring setup completed
+2025-09-29 10:35:04,979 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_file_load (file_size=0.0MB, memory_usage=74.4MB)
+2025-09-29 10:35:04,980 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:66] - Starting IFC file validation: test_sample.ifc
+2025-09-29 10:35:04,980 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:80] - Processing file path: test_sample.ifc
+2025-09-29 10:35:04,980 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:147] - File size analysis: 0.0MB (2,382 bytes)
+2025-09-29 10:35:04,980 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:165] - Memory recommendations: {'recommended_ram': '4GB or more', 'processing_time': 'Under 30 seconds', 'memory_usage': '~0MB'}
+2025-09-29 10:35:04,980 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:169] - Small file detected (0.0MB) - using optimized loading
+2025-09-29 10:35:04,981 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_parsing (file_size=0.0MB, memory_usage=74.4MB)
+2025-09-29 10:35:04,981 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:293] - Starting IFC parsing: test_sample.ifc (0.0MB)
+2025-09-29 10:35:04,981 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: optimized_ifc_load (file_size=0.0MB, memory_usage=74.4MB)
+2025-09-29 10:35:04,993 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: optimized_ifc_load (duration=0.01s, file_size=0.0MB, rate=0.19MB/s, memory_usage=74.4MB)
+2025-09-29 10:35:04,993 - ifc_room_schedule.utils.enhanced_logging - WARNING - [ifc_file_reader.py:304] - Optimized loading failed, falling back to standard: Error loading small file: object of type 'file' has no len()
+2025-09-29 10:35:04,994 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_parsing (duration=0.01s, file_size=0.0MB, rate=0.17MB/s, memory_usage=74.4MB)
+2025-09-29 10:35:04,994 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:313] - IFC file parsed successfully in 0.01s
+2025-09-29 10:35:04,995 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_validation (file_size=0.0MB, memory_usage=74.9MB)
+2025-09-29 10:35:04,996 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:426] - Starting IFC file structure validation...
+2025-09-29 10:35:04,996 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_validation (duration=0.00s, file_size=0.0MB, rate=7.75MB/s, memory_usage=74.9MB)
+2025-09-29 10:35:04,996 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:450] - Found 5 building products in 0.00s
+2025-09-29 10:35:04,996 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: space_validation (file_size=0.0MB, memory_usage=74.9MB)
+2025-09-29 10:35:04,996 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:508] - Starting IfcSpace entity validation...
+2025-09-29 10:35:04,996 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:533] - Found 3 IfcSpace entities
+2025-09-29 10:35:04,997 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: space_validation (duration=0.00s, file_size=0.0MB, rate=2.25MB/s, memory_usage=74.9MB)
+2025-09-29 10:35:04,997 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:550] - Space quality analysis completed in 0.00s:
+2025-09-29 10:35:04,997 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:551] -   - Valid spaces: 3/3
+2025-09-29 10:35:04,997 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:552] -   - Named spaces: 2/3
+2025-09-29 10:35:04,997 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:553] -   - Spaces with geometry: 3/3
+2025-09-29 10:35:04,997 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:568] - Good space data quality: 100% of sampled spaces have valid data
+2025-09-29 10:35:04,998 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_file_load (duration=0.02s, file_size=0.0MB, rate=0.12MB/s, memory_usage=74.4MB)
+2025-09-29 10:35:04,998 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:646] - Small file processing completed efficiently: 0.0MB in 0.02s
+2025-09-29 10:35:04,998 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:648] - IFC file load operation completed successfully: Successfully loaded IFC file (IFC4) with 3 spaces found in 0.02s.
+2025-09-29 10:35:04,998 - ifc_room_schedule.utils.enhanced_logging - ERROR - [ifc_space_extractor.py:103] - Failed to extract spaces from IFC file: Failed to access IfcSpace entities: 'tuple' object has no attribute 'by_type'
+2025-09-29 10:35:32,390 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_file_load (file_size=0.0MB, memory_usage=74.5MB)
+2025-09-29 10:35:32,390 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:66] - Starting IFC file validation: test_sample.ifc
+2025-09-29 10:35:32,391 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:80] - Processing file path: test_sample.ifc
+2025-09-29 10:35:32,391 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:147] - File size analysis: 0.0MB (2,382 bytes)
+2025-09-29 10:35:32,391 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_file_reader.py:165] - Memory recommendations: {'recommended_ram': '4GB or more', 'processing_time': 'Under 30 seconds', 'memory_usage': '~0MB'}
+2025-09-29 10:35:32,391 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:169] - Small file detected (0.0MB) - using optimized loading
+2025-09-29 10:35:32,392 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_parsing (file_size=0.0MB, memory_usage=74.5MB)
+2025-09-29 10:35:32,392 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:293] - Starting IFC parsing: test_sample.ifc (0.0MB)
+2025-09-29 10:35:32,393 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: optimized_ifc_load (file_size=0.0MB, memory_usage=74.5MB)
+2025-09-29 10:35:32,394 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: optimized_ifc_load (duration=0.00s, file_size=0.0MB, rate=1.61MB/s, memory_usage=74.5MB)
+2025-09-29 10:35:32,394 - ifc_room_schedule.utils.enhanced_logging - WARNING - [ifc_file_reader.py:304] - Optimized loading failed, falling back to standard: Error loading small file: object of type 'file' has no len()
+2025-09-29 10:35:32,395 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_parsing (duration=0.00s, file_size=0.0MB, rate=0.71MB/s, memory_usage=74.5MB)
+2025-09-29 10:35:32,395 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:313] - IFC file parsed successfully in 0.00s
+2025-09-29 10:35:32,396 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: ifc_validation (file_size=0.0MB, memory_usage=74.9MB)
+2025-09-29 10:35:32,396 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:426] - Starting IFC file structure validation...
+2025-09-29 10:35:32,396 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_validation (duration=0.00s, file_size=0.0MB, rate=11.59MB/s, memory_usage=74.9MB)
+2025-09-29 10:35:32,396 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:450] - Found 5 building products in 0.00s
+2025-09-29 10:35:32,396 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:175] - OPERATION_START: space_validation (file_size=0.0MB, memory_usage=74.9MB)
+2025-09-29 10:35:32,396 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:508] - Starting IfcSpace entity validation...
+2025-09-29 10:35:32,396 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:533] - Found 3 IfcSpace entities
+2025-09-29 10:35:32,396 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: space_validation (duration=0.00s, file_size=0.0MB, rate=6.35MB/s, memory_usage=74.9MB)
+2025-09-29 10:35:32,396 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:550] - Space quality analysis completed in 0.00s:
+2025-09-29 10:35:32,397 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:551] -   - Valid spaces: 3/3
+2025-09-29 10:35:32,397 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:552] -   - Named spaces: 2/3
+2025-09-29 10:35:32,397 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:553] -   - Spaces with geometry: 3/3
+2025-09-29 10:35:32,397 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:568] - Good space data quality: 100% of sampled spaces have valid data
+2025-09-29 10:35:32,397 - ifc_room_schedule.utils.enhanced_logging - INFO - [enhanced_logging.py:210] - OPERATION_COMPLETE: ifc_file_load (duration=0.01s, file_size=0.0MB, rate=0.32MB/s, memory_usage=74.5MB)
+2025-09-29 10:35:32,397 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:646] - Small file processing completed efficiently: 0.0MB in 0.01s
+2025-09-29 10:35:32,397 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_file_reader.py:648] - IFC file load operation completed successfully: Successfully loaded IFC file (IFC4) with 3 spaces found in 0.01s.
+2025-09-29 10:35:32,399 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_space_extractor.py:213] - Extracted space: 4P6X7vj8H1hgu$nW0qL7qN - SPC-01-A101-111-001
+2025-09-29 10:35:32,399 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_space_extractor.py:213] - Extracted space: 5P6X7vj8H1hgu$nW0qL7qO - Bad 2. etasje
+2025-09-29 10:35:32,399 - ifc_room_schedule.utils.enhanced_logging - DEBUG - [ifc_space_extractor.py:213] - Extracted space: 6P6X7vj8H1hgu$nW0qL7qP - 
+2025-09-29 10:35:32,399 - ifc_room_schedule.utils.enhanced_logging - INFO - [ifc_space_extractor.py:94] - Successfully extracted 3 spaces from 3 IfcSpace entities

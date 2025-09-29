@@ -310,7 +310,7 @@ class TestJsonBuilder:
     def test_write_json_file_invalid_path(self):
         """Test writing JSON to invalid file path."""
         test_data = {"test": "data"}
-        invalid_path = "/invalid/path/file.json"
+        invalid_path = "Z:\\invalid\\path\\file.json"
         
         success, message = self.json_builder.write_json_file(invalid_path, test_data)
         assert success is False

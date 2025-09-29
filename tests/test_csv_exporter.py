@@ -235,13 +235,13 @@ class TestCsvExporter:
         """Test CSV export error handling."""
         exporter = CsvExporter()
         
-        # Try to export to invalid path
-        invalid_path = "/invalid/path/that/does/not/exist/test.csv"
+        # Try to export to invalid path (Windows drive that doesn't exist)
+        invalid_path = "Z:\\invalid\\path\\that\\does\\not\\exist\\test.csv"
         
         success, message = exporter.export_to_csv(sample_spaces, invalid_path)
         
         assert success is False
-        assert "CSV export failed" in message
+        assert "File system error" in message
     
     def test_export_csv_summary_statistics(self, sample_spaces):
         """Test CSV export summary statistics section."""

@@ -104,7 +104,34 @@ class PdfExporter:
                 return False, "Filename cannot be empty"
             
             if not spaces:
-                return False, "No spaces data to export"
+                # Create empty PDF file with headers only
+                if not filename.lower().endswith('.pdf'):
+                    filename += '.pdf'
+                
+                file_path = Path(filename)
+                file_path.parent.mkdir(parents=True, exist_ok=True)
+                
+                doc = SimpleDocTemplate(str(file_path), pagesize=letter)
+                story = []
+                
+                # Add title
+                title = Paragraph("Room Schedule Report", self.title_style)
+                story.append(title)
+                story.append(Spacer(1, 20))
+                
+                # Add summary
+                summary_text = f"Total spaces: 0"
+                summary = Paragraph(summary_text, self.normal_style)
+                story.append(summary)
+                story.append(Spacer(1, 20))
+                
+                # Add note about empty data
+                note_text = "No space data available for export."
+                note = Paragraph(note_text, self.normal_style)
+                story.append(note)
+                
+                doc.build(story)
+                return True, "Successfully exported 0 spaces"
             
             # Ensure .pdf extension
             if not filename.lower().endswith('.pdf'):

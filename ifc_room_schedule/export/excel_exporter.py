@@ -48,6 +48,18 @@ class ExcelExporter:
         """Set the source IFC file path."""
         self.source_file_path = file_path
     
+    def _get_excel_headers(self, include_surfaces: bool = True, 
+                          include_boundaries: bool = True,
+                          include_relationships: bool = True) -> List[str]:
+        """Get Excel headers based on included sections."""
+        headers = [
+            'GUID', 'Name', 'Long Name', 'Description', 'Object Type',
+            'Zone Category', 'Number', 'Elevation', 'Processed',
+            'Height', 'Finish Floor Height', 'Finish Ceiling Height',
+            'Total Surface Area', 'Total Boundary Area', 'User Description'
+        ]
+        return headers
+    
     def export_to_excel(self, spaces: List[SpaceData], filename: str,
                        include_surfaces: bool = True,
                        include_boundaries: bool = True,
@@ -71,7 +83,30 @@ class ExcelExporter:
                 return False, "Filename cannot be empty"
             
             if not spaces:
-                return False, "No spaces data to export"
+                # Create empty Excel file with headers only
+                if not filename.lower().endswith('.xlsx'):
+                    filename += '.xlsx'
+                
+                file_path = Path(filename)
+                file_path.parent.mkdir(parents=True, exist_ok=True)
+                
+                workbook = Workbook()
+                worksheet = workbook.active
+                worksheet.title = "Spaces"
+                
+                # Write headers
+                headers = self._get_excel_headers(include_surfaces, include_boundaries, include_relationships)
+                for col, header in enumerate(headers, 1):
+                    cell = worksheet.cell(row=1, column=col, value=header)
+                    cell.font = self.header_font
+                    cell.fill = self.header_fill
+                    cell.alignment = self.center_alignment
+                
+                # Add summary sheet
+                self._create_summary_sheet(workbook, [])
+                
+                workbook.save(file_path)
+                return True, "Successfully exported 0 spaces"
             
             # Ensure .xlsx extension
             if not filename.lower().endswith(('.xlsx', '.xls')):

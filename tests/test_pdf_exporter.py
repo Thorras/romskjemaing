@@ -212,13 +212,13 @@ class TestPdfExporter:
         """Test PDF export error handling."""
         exporter = PdfExporter()
         
-        # Try to export to invalid path
-        invalid_path = "/invalid/path/that/does/not/exist/test.pdf"
+        # Try to export to invalid path (Windows drive that doesn't exist)
+        invalid_path = "Z:\\invalid\\path\\that\\does\\not\\exist\\test.pdf"
         
         success, message = exporter.export_to_pdf(sample_spaces, invalid_path)
         
         assert success is False
-        assert "PDF export failed" in message
+        assert "File system error" in message
     
     def test_export_pdf_multiple_spaces(self):
         """Test PDF export with multiple spaces."""

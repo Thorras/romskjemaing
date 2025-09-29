@@ -25,6 +25,18 @@ class CsvExporter:
         """Set the source IFC file path."""
         self.source_file_path = file_path
     
+    def _get_csv_headers(self, include_surfaces: bool = True, 
+                        include_boundaries: bool = True,
+                        include_relationships: bool = True) -> List[str]:
+        """Get CSV headers based on included sections."""
+        headers = [
+            'GUID', 'Name', 'Long Name', 'Description', 'Object Type',
+            'Zone Category', 'Number', 'Elevation', 'Processed',
+            'Height', 'Finish Floor Height', 'Finish Ceiling Height',
+            'Total Surface Area', 'Total Boundary Area', 'User Description'
+        ]
+        return headers
+    
     def export_to_csv(self, spaces: List[SpaceData], filename: str, 
                      include_surfaces: bool = True, 
                      include_boundaries: bool = True,
@@ -48,7 +60,17 @@ class CsvExporter:
                 return False, "Filename cannot be empty"
             
             if not spaces:
-                return False, "No spaces data to export"
+                # Create empty CSV file with headers only
+                file_path = Path(filename)
+                file_path.parent.mkdir(parents=True, exist_ok=True)
+                
+                with open(file_path, 'w', newline='', encoding='utf-8') as csvfile:
+                    writer = csv.writer(csvfile)
+                    # Write headers
+                    headers = self._get_csv_headers(include_surfaces, include_boundaries, include_relationships)
+                    writer.writerow(headers)
+                
+                return True, "Successfully exported 0 spaces"
             
             # Ensure .csv extension
             if not filename.lower().endswith('.csv'):

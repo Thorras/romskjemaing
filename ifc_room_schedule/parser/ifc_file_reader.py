@@ -2,7 +2,7 @@
 IFC File Reader
 
 Handles reading and basic validation of IFC files using IfcOpenShell.
-Enhanced with detailed logging and structured error reporting.
+Enhanced with detailed logging, structured error reporting, and performance optimizations.
 """
 
 import os
@@ -12,14 +12,42 @@ import ifcopenshell.util.element
 from ..utils.enhanced_logging import (
     enhanced_logger, ErrorCategory, ErrorSeverity, MemoryErrorAnalyzer
 )
+from .optimized_ifc_parser import OptimizedIFCParser, CacheConfig
+from .performance_monitor import PerformanceMonitor
+from .batch_processor import BatchProcessor, BatchConfig
 
 
 class IfcFileReader:
-    """Handles IFC file loading and validation using IfcOpenShell."""
+    """Handles IFC file loading and validation using IfcOpenShell with performance optimizations."""
 
-    def __init__(self):
+    def __init__(self, enable_optimizations: bool = True):
         self.ifc_file = None
         self.file_path = None
+        self.enable_optimizations = enable_optimizations
+        
+        # Initialize performance components if optimizations are enabled
+        if self.enable_optimizations:
+            self.optimized_parser = OptimizedIFCParser(
+                CacheConfig(
+                    max_size=128,
+                    ttl_seconds=3600,
+                    enable_geometry_cache=True,
+                    enable_property_cache=True,
+                    enable_relationship_cache=True
+                )
+            )
+            self.performance_monitor = PerformanceMonitor()
+            self.batch_processor = BatchProcessor(
+                BatchConfig(
+                    batch_size=100,
+                    max_workers=4,
+                    memory_threshold_mb=1000.0
+                )
+            )
+        else:
+            self.optimized_parser = None
+            self.performance_monitor = None
+            self.batch_processor = None
 
     def load_file(self, file_path: str) -> Tuple[bool, str]:
         """
@@ -263,8 +291,24 @@ class IfcFileReader:
             parsing_start = enhanced_logger.start_operation_timing("ifc_parsing", file_path)
             try:
                 enhanced_logger.logger.info(f"Starting IFC parsing: {file_path} ({size_mb:.1f}MB)")
-                self.ifc_file = ifcopenshell.open(file_path)
-                self.file_path = file_path
+                
+                # Use optimized parser if available
+                if self.enable_optimizations and self.optimized_parser:
+                    success, message = self.optimized_parser.load_file_optimized(file_path)
+                    if success:
+                        self.ifc_file = self.optimized_parser.ifc_file
+                        self.file_path = file_path
+                        enhanced_logger.logger.info(f"IFC file loaded with optimizations: {message}")
+                    else:
+                        # Fallback to standard loading
+                        enhanced_logger.logger.warning(f"Optimized loading failed, falling back to standard: {message}")
+                        self.ifc_file = ifcopenshell.open(file_path)
+                        self.file_path = file_path
+                else:
+                    # Standard loading
+                    self.ifc_file = ifcopenshell.open(file_path)
+                    self.file_path = file_path
+                
                 parsing_timing = enhanced_logger.finish_operation_timing(parsing_start)
                 enhanced_logger.logger.info(f"IFC file parsed successfully in {parsing_timing.duration_seconds:.2f}s")
                 
@@ -789,3 +833,180 @@ class IfcFileReader:
         """Close the currently loaded IFC file."""
         self.ifc_file = None
         self.file_path = None
+        
+        # Clean up performance components
+        if self.enable_optimizations:
+            if self.optimized_parser:
+                self.optimized_parser.close()
+            if self.performance_monitor:
+                self.performance_monitor.cleanup()
+            if self.batch_processor:
+                self.batch_processor.cleanup()
+    
+    def get_spaces_optimized(self):
+        """Get spaces with performance optimizations."""
+        if not self.ifc_file:
+            return []
+        
+        if self.enable_optimizations and self.optimized_parser:
+            return self.optimized_parser.get_spaces_cached()
+        else:
+            return self.ifc_file.by_type("IfcSpace")
+    
+    def get_space_properties_optimized(self, space_guid: str):
+        """Get space properties with caching."""
+        if not self.ifc_file:
+            return None
+        
+        if self.enable_optimizations and self.optimized_parser:
+            return self.optimized_parser.get_space_properties_cached(space_guid)
+        else:
+            # Fallback to standard method
+            spaces = self.ifc_file.by_type("IfcSpace")
+            for space in spaces:
+                if hasattr(space, 'GlobalId') and space.GlobalId == space_guid:
+                    return ifcopenshell.util.element.get_properties(space)
+            return None
+    
+    def get_space_boundaries_optimized(self, space_guid: str):
+        """Get space boundaries with caching."""
+        if not self.ifc_file:
+            return []
+        
+        if self.enable_optimizations and self.optimized_parser:
+            return self.optimized_parser.get_space_boundaries_cached(space_guid)
+        else:
+            # Fallback to standard method
+            return []
+    
+    def process_spaces_batch(self, processor_func, batch_size: int = None):
+        """Process spaces in batches for optimal performance."""
+        if not self.ifc_file:
+            return []
+        
+        spaces = self.get_spaces_optimized()
+        
+        if self.enable_optimizations and self.batch_processor:
+            if batch_size:
+                self.batch_processor.config.batch_size = batch_size
+            return self.batch_processor.process_spaces_batch(spaces, processor_func)
+        else:
+            # Fallback to standard processing
+            return [processor_func(space) for space in spaces]
+    
+    def get_performance_metrics(self):
+        """Get comprehensive performance metrics."""
+        if not self.enable_optimizations:
+            return {"optimizations_disabled": True}
+        
+        metrics = {}
+        
+        if self.optimized_parser:
+            parser_metrics = self.optimized_parser.get_metrics()
+            cache_stats = self.optimized_parser.get_cache_stats()
+            metrics.update({
+                "parser_metrics": parser_metrics,
+                "cache_stats": cache_stats
+            })
+        
+        if self.performance_monitor:
+            performance_stats = self.performance_monitor.get_performance_stats()
+            metrics["performance_stats"] = performance_stats
+        
+        if self.batch_processor:
+            processing_stats = self.batch_processor.get_processing_stats()
+            metrics["processing_stats"] = processing_stats
+        
+        return metrics
+    
+    def optimize_performance(self):
+        """Apply performance optimizations based on current metrics."""
+        if not self.enable_optimizations:
+            return
+        
+        enhanced_logger.logger.info("Applying performance optimizations")
+        
+        # Get current metrics
+        metrics = self.get_performance_metrics()
+        
+        # Apply optimizations based on file size
+        if self.ifc_file:
+            try:
+                file_size = os.path.getsize(self.file_path)
+                file_size_mb = file_size / (1024 * 1024)
+                
+                if file_size_mb < 10:
+                    # Small files - disable caching
+                    if self.optimized_parser:
+                        self.optimized_parser.cache_config.enable_geometry_cache = False
+                        self.optimized_parser.cache_config.enable_property_cache = False
+                    if self.batch_processor:
+                        self.batch_processor.config.batch_size = 50
+                        self.batch_processor.config.use_multiprocessing = False
+                
+                elif file_size_mb < 100:
+                    # Medium files - enable selective caching
+                    if self.optimized_parser:
+                        self.optimized_parser.cache_config.enable_geometry_cache = True
+                        self.optimized_parser.cache_config.enable_property_cache = True
+                        self.optimized_parser.cache_config.enable_relationship_cache = False
+                    if self.batch_processor:
+                        self.batch_processor.config.batch_size = 100
+                        self.batch_processor.config.use_multiprocessing = False
+                
+                else:
+                    # Large files - enable all optimizations
+                    if self.optimized_parser:
+                        self.optimized_parser.cache_config.enable_geometry_cache = True
+                        self.optimized_parser.cache_config.enable_property_cache = True
+                        self.optimized_parser.cache_config.enable_relationship_cache = True
+                    if self.batch_processor:
+                        self.batch_processor.config.batch_size = 50
+                        self.batch_processor.config.use_multiprocessing = True
+                        self.batch_processor.config.memory_threshold_mb = 500.0
+                
+                enhanced_logger.logger.info(f"Performance optimizations applied for {file_size_mb:.1f}MB file")
+                
+            except Exception as e:
+                enhanced_logger.logger.warning(f"Error applying performance optimizations: {e}")
+    
+    def get_optimization_recommendations(self):
+        """Get optimization recommendations based on current performance."""
+        if not self.enable_optimizations:
+            return ["Enable optimizations to get recommendations"]
+        
+        recommendations = []
+        
+        try:
+            metrics = self.get_performance_metrics()
+            
+            # Cache recommendations
+            if "cache_stats" in metrics:
+                cache_stats = metrics["cache_stats"]
+                hit_ratio = cache_stats.get("hit_ratio", 0)
+                if hit_ratio < 0.5:
+                    recommendations.append("Low cache hit ratio - consider increasing cache size or TTL")
+            
+            # Memory recommendations
+            if "cache_stats" in metrics:
+                memory_usage = metrics["cache_stats"].get("memory_usage_mb", 0)
+                if memory_usage > 500:
+                    recommendations.append("High cache memory usage - consider reducing cache size")
+            
+            # Processing recommendations
+            if "parser_metrics" in metrics:
+                processing_rate = metrics["parser_metrics"].get("processing_rate_mb_per_second", 0)
+                if processing_rate < 1.0:
+                    recommendations.append("Slow processing rate - consider enabling multiprocessing or reducing batch size")
+            
+            # File size recommendations
+            if self.ifc_file and self.file_path:
+                file_size = os.path.getsize(self.file_path)
+                file_size_mb = file_size / (1024 * 1024)
+                if file_size_mb > 100:
+                    recommendations.append("Large file detected - consider using streaming processing")
+            
+        except Exception as e:
+            recommendations.append(f"Error getting recommendations: {e}")
+        
+        return recommendations

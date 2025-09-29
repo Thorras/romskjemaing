@@ -251,13 +251,13 @@ class TestExcelExporter:
         """Test Excel export error handling."""
         exporter = ExcelExporter()
         
-        # Try to export to invalid path
-        invalid_path = "/invalid/path/that/does/not/exist/test.xlsx"
+        # Try to export to invalid path (Windows drive that doesn't exist)
+        invalid_path = "Z:\\invalid\\path\\that\\does\\not\\exist\\test.xlsx"
         
         success, message = exporter.export_to_excel(sample_spaces, invalid_path)
         
         assert success is False
-        assert "Excel export failed" in message
+        assert "File system error" in message
     
     def test_export_excel_summary_sheet(self, sample_spaces):
         """Test Excel export summary sheet content."""
