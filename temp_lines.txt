@@ -1,3 +1,0 @@
-        self.operation_thread = None
-        self.operation_worker = None
-        
