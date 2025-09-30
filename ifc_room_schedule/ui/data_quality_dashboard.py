@@ -8,13 +8,13 @@ import json
 from typing import Dict, List, Any, Optional
 from datetime import datetime
 
-from PyQt5.QtWidgets import (
+from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QGridLayout, QLabel, QProgressBar,
     QTextEdit, QTableWidget, QTableWidgetItem, QGroupBox, QFrame, QScrollArea,
     QPushButton, QComboBox, QSpinBox, QCheckBox, QSplitter, QTabWidget
 )
-from PyQt5.QtCore import Qt, QTimer, pyqtSignal
-from PyQt5.QtGui import QFont, QColor, QPalette, QPixmap, QPainter, QPen
+from PyQt6.QtCore import Qt, QTimer, pyqtSignal
+from PyQt6.QtGui import QFont, QColor, QPalette, QPixmap, QPainter, QPen
 
 from ..data.space_model import SpaceData
 from ..analysis.data_quality_analyzer import DataQualityAnalyzer
@@ -531,14 +531,14 @@ class DataQualityDashboard(QWidget):
         """Export quality report."""
         # This would typically open a file dialog and save the report
         # For now, just show a message
-        from PyQt5.QtWidgets import QMessageBox
+        from PyQt6.QtWidgets import QMessageBox
         QMessageBox.information(self, "Export Report", "Quality report export functionality would be implemented here.")
 
 
 # Example usage
 if __name__ == "__main__":
     import sys
-    from PyQt5.QtWidgets import QApplication
+    from PyQt6.QtWidgets import QApplication
     
     app = QApplication(sys.argv)
     
@@ -580,4 +580,4 @@ if __name__ == "__main__":
     dashboard.set_spaces(sample_spaces)
     dashboard.show()
     
-    sys.exit(app.exec_())
+    sys.exit(app.exec())

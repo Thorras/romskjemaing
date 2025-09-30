@@ -11,14 +11,14 @@ from typing import Dict, List, Any, Optional, Callable
 from pathlib import Path
 from datetime import datetime
 
-from PyQt5.QtWidgets import (
+from PyQt6.QtWidgets import (
     QDialog, QVBoxLayout, QHBoxLayout, QGridLayout, QTreeWidget, QTreeWidgetItem,
     QPushButton, QLabel, QLineEdit, QComboBox, QCheckBox, QTextEdit, QProgressBar,
     QGroupBox, QSplitter, QTabWidget, QScrollArea, QFrame, QSpinBox, QDoubleSpinBox,
     QFileDialog, QMessageBox, QWidget, QFormLayout, QListWidget, QListWidgetItem
 )
-from PyQt5.QtCore import Qt, QThread, pyqtSignal, QTimer
-from PyQt5.QtGui import QFont, QPixmap, QIcon, QPalette, QColor
+from PyQt6.QtCore import Qt, QThread, pyqtSignal, QTimer
+from PyQt6.QtGui import QFont, QPixmap, QIcon, QPalette, QColor
 
 from ..data.space_model import SpaceData
 from ..export.enhanced_json_builder import EnhancedJsonBuilder
@@ -611,7 +611,7 @@ class EnhancedExportDialog(QDialog):
 # Example usage
 if __name__ == "__main__":
     import sys
-    from PyQt5.QtWidgets import QApplication
+    from PyQt6.QtWidgets import QApplication
     
     app = QApplication(sys.argv)
     
@@ -652,4 +652,4 @@ if __name__ == "__main__":
     dialog = EnhancedExportDialog(sample_spaces)
     dialog.show()
     
-    sys.exit(app.exec_())
+    sys.exit(app.exec())

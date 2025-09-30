@@ -197,18 +197,18 @@ class RomskjemaGenerator:
     def run_gui(self):
         """Run the GUI application."""
         try:
-            from PyQt5.QtWidgets import QApplication
+            from PyQt6.QtWidgets import QApplication
             from ifc_room_schedule.ui.main_window import MainWindow
             
             app = QApplication(sys.argv)
             window = MainWindow()
             window.show()
             
-            return app.exec_()
+            return app.exec()
             
         except ImportError:
-            print("PyQt5 not available. GUI mode not supported.")
-            print("Please install PyQt5 to use the GUI: pip install PyQt5")
+            print("PyQt6 not available. GUI mode not supported.")
+            print("Please install PyQt6 to use the GUI: pip install PyQt6")
             return 1
         except Exception as e:
             print(f"Error starting GUI: {str(e)}")

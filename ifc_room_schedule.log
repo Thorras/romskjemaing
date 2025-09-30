@@ -1,0 +1,1247 @@
+2025-09-30 11:35:32,889 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Resource monitoring setup completed
+2025-09-30 11:36:02,883 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Resource cleanup verification: all clean
+2025-09-30 11:36:32,904 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Resource cleanup verification: all clean
+2025-09-30 11:37:02,896 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Resource cleanup verification: all clean
+2025-09-30 11:37:32,897 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Resource cleanup verification: all clean
+2025-09-30 11:38:01,024 - ifc_room_schedule.utils.enhanced_logging - INFO - File categorized as small: 2.3 MB
+2025-09-30 11:38:01,025 - ifc_room_schedule.utils.enhanced_logging - INFO - Processing small file: 2.3 MB
+2025-09-30 11:38:01,184 - ifc_room_schedule.utils.enhanced_logging - INFO - Using direct loading strategy for small file
+2025-09-30 11:38:01,184 - ifc_room_schedule.utils.enhanced_logging - INFO - Loading file directly: C:/Users/johtho/OneDrive - Backe/General - Utvikling - Backe/Prosjekt 00 - Prosjektoppfølging/Ifc/AkkordSvingen 23_ARK.ifc
+2025-09-30 11:38:01,185 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_START: ifc_file_load (file_size=2.3MB, memory_usage=223.2MB)
+2025-09-30 11:38:01,185 - ifc_room_schedule.utils.enhanced_logging - INFO - Starting IFC file validation: C:/Users/johtho/OneDrive - Backe/General - Utvikling - Backe/Prosjekt 00 - Prosjektoppfølging/Ifc/AkkordSvingen 23_ARK.ifc
+2025-09-30 11:38:01,185 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Processing file path: C:/Users/johtho/OneDrive - Backe/General - Utvikling - Backe/Prosjekt 00 - Prosjektoppfølging/Ifc/AkkordSvingen 23_ARK.ifc
+2025-09-30 11:38:01,186 - ifc_room_schedule.utils.enhanced_logging - INFO - File size analysis: 2.3MB (2,426,366 bytes)
+2025-09-30 11:38:01,186 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Memory recommendations: {'recommended_ram': '4GB or more', 'processing_time': 'Under 30 seconds', 'memory_usage': '~5MB'}
+2025-09-30 11:38:01,187 - ifc_room_schedule.utils.enhanced_logging - INFO - Small file detected (2.3MB) - using optimized loading
+2025-09-30 11:38:01,187 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_START: ifc_parsing (file_size=2.3MB, memory_usage=223.2MB)
+2025-09-30 11:38:01,187 - ifc_room_schedule.utils.enhanced_logging - INFO - Starting IFC parsing: C:/Users/johtho/OneDrive - Backe/General - Utvikling - Backe/Prosjekt 00 - Prosjektoppfølging/Ifc/AkkordSvingen 23_ARK.ifc (2.3MB)
+2025-09-30 11:38:01,187 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_START: optimized_ifc_load (file_size=2.3MB, memory_usage=223.2MB)
+2025-09-30 11:38:01,311 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_COMPLETE: optimized_ifc_load (duration=0.12s, file_size=2.3MB, rate=18.65MB/s, memory_usage=223.2MB)
+2025-09-30 11:38:01,312 - ifc_room_schedule.utils.enhanced_logging - WARNING - Optimized loading failed, falling back to standard: Error loading small file: object of type 'file' has no len()
+2025-09-30 11:38:01,420 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_COMPLETE: ifc_parsing (duration=0.23s, file_size=2.3MB, rate=9.93MB/s, memory_usage=223.2MB)
+2025-09-30 11:38:01,421 - ifc_room_schedule.utils.enhanced_logging - INFO - IFC file parsed successfully in 0.23s
+2025-09-30 11:38:01,421 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_START: ifc_validation (file_size=2.3MB, memory_usage=281.2MB)
+2025-09-30 11:38:01,421 - ifc_room_schedule.utils.enhanced_logging - INFO - Starting IFC file structure validation...
+2025-09-30 11:38:01,422 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_COMPLETE: ifc_validation (duration=0.00s, file_size=2.3MB, rate=2313.96MB/s, memory_usage=281.2MB)
+2025-09-30 11:38:01,423 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 341 building products in 0.00s
+2025-09-30 11:38:01,423 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_START: space_validation (file_size=2.3MB, memory_usage=281.2MB)
+2025-09-30 11:38:01,423 - ifc_room_schedule.utils.enhanced_logging - INFO - Starting IfcSpace entity validation...
+2025-09-30 11:38:01,424 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 34 IfcSpace entities
+2025-09-30 11:38:01,434 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_COMPLETE: space_validation (duration=0.01s, file_size=2.3MB, rate=200.73MB/s, memory_usage=281.2MB)
+2025-09-30 11:38:01,435 - ifc_room_schedule.utils.enhanced_logging - INFO - Space quality analysis completed in 0.01s:
+2025-09-30 11:38:01,435 - ifc_room_schedule.utils.enhanced_logging - INFO -   - Valid spaces: 10/10
+2025-09-30 11:38:01,435 - ifc_room_schedule.utils.enhanced_logging - INFO -   - Named spaces: 10/10
+2025-09-30 11:38:01,435 - ifc_room_schedule.utils.enhanced_logging - INFO -   - Spaces with geometry: 10/10
+2025-09-30 11:38:01,436 - ifc_room_schedule.utils.enhanced_logging - INFO - Good space data quality: 100% of sampled spaces have valid data
+2025-09-30 11:38:01,436 - ifc_room_schedule.utils.enhanced_logging - INFO - OPERATION_COMPLETE: ifc_file_load (duration=0.25s, file_size=2.3MB, rate=9.20MB/s, memory_usage=223.2MB)
+2025-09-30 11:38:01,436 - ifc_room_schedule.utils.enhanced_logging - INFO - Small file processing completed efficiently: 2.3MB in 0.25s
+2025-09-30 11:38:01,436 - ifc_room_schedule.utils.enhanced_logging - INFO - IFC file load operation completed successfully: Successfully loaded IFC file (IFC4) with 34 spaces found in 0.25s.
+2025-09-30 11:38:01,437 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting spaces directly for small file
+2025-09-30 11:38:01,438 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 2oghQ1cAf6c9BmWD1pMdIj - 01
+2025-09-30 11:38:01,438 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 0lvmW1C_r0DwLHYilhW$yq - 01
+2025-09-30 11:38:01,439 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 0etOdx4gn7QOeFM3DkCACZ - 01
+2025-09-30 11:38:01,440 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 0RGRVCyE13zRvWx_wbQh5R -  01
+2025-09-30 11:38:01,440 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 0Lfq9rWmDEZAgA0xL$m$Bk - 01
+2025-09-30 11:38:01,440 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 3JXfZI11rEbPVPppj4Jxf1 - 02
+2025-09-30 11:38:01,440 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 0rF7q_xCj62PipnnzfNzKW - 02
+2025-09-30 11:38:01,442 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 30Mh9i1JvBjAVAs5qwyGFC - 02
+2025-09-30 11:38:01,443 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 1a0oo6Njb7gxF512nxSYuJ - 02
+2025-09-30 11:38:01,443 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 1hcSgXD6nB8Qls7RqiVt36 - 02
+2025-09-30 11:38:01,443 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 2g7n5wXHHFjvfjzRMFL7Ag - 01
+2025-09-30 11:38:01,444 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 3ueW3dBRL2R9WoR8xGTA9E - 02
+2025-09-30 11:38:01,444 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 0pwWNonAvEzRBvwhqxSoC6 - 02
+2025-09-30 11:38:01,444 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 1lBJWr459BIP7TCLnlZ7Rr - 01
+2025-09-30 11:38:01,445 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 32WTxU1Oj9QRi0av4ikK8J - 01
+2025-09-30 11:38:01,445 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 1BdfIYzF1BSQ8tBqjv4keq - 03
+2025-09-30 11:38:01,446 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 1Chpbbz1P2zRAU0ARRIKOs - 03
+2025-09-30 11:38:01,446 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 1PXeoJQRHDY9mYm_2dV5Zw - 03
+2025-09-30 11:38:01,447 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 1Abuh2hqP3MxoJVtTeNJZJ - 03
+2025-09-30 11:38:01,447 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 20e785kif8MhL29lIzXRhQ - 03
+2025-09-30 11:38:01,448 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 37au_BtkfEU8d59K6L2ldX - 03
+2025-09-30 11:38:01,448 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 02sq4HuYP3E9UVow$9C7Ud - 04
+2025-09-30 11:38:01,448 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 1kqaFJe_n95uburgU8d__1 - 04
+2025-09-30 11:38:01,449 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 3rYbhuSJj32fm1Vmztk9Qe - 04
+2025-09-30 11:38:01,449 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 2oJi_gbc12FBtZgPM9SlEi - 04
+2025-09-30 11:38:01,450 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 2J6Ny8LSj3LeIMUsY4hI2s - 04
+2025-09-30 11:38:01,450 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 0hcW2B0zjFoesYviOiMrjT - 04
+2025-09-30 11:38:01,450 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 3qGJVsrovCCOERwRIM9M9F - 02
+2025-09-30 11:38:01,452 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 3quWfdPA12heO5M9sToywJ -  03
+2025-09-30 11:38:01,452 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 2ygnsTAGr3ruU6hrha99xQ - 04
+2025-09-30 11:38:01,452 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 0hmZNwjDX0ZwJbO6AmrrjO - 03
+2025-09-30 11:38:01,453 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 02MoDbUmz2fQYwzHjhQuhV - 03
+2025-09-30 11:38:01,453 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 1fmOvhTur4SAytWzlO9cvT - 04
+2025-09-30 11:38:01,454 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space: 0xyvjA51vBzPon8HIwA$o0 - 05
+2025-09-30 11:38:01,454 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 34 spaces from 34 IfcSpace entities
+2025-09-30 11:38:01,454 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 1/34: 01
+2025-09-30 11:38:01,457 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 11 surfaces for space 2oghQ1cAf6c9BmWD1pMdIj
+2025-09-30 11:38:01,458 - ifc_room_schedule.utils.enhanced_logging - WARNING - 1 surfaces have zero or invalid area
+2025-09-30 11:38:01,458 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 2oghQ1cAf6c9BmWD1pMdIj: ['Duplicate surface IDs found: 01LR8n0gb41fXDw7I3tUWy', '1 surfaces have zero or invalid area']
+2025-09-30 11:38:01,458 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 2/34: 01
+2025-09-30 11:38:01,460 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 9 surfaces for space 0lvmW1C_r0DwLHYilhW$yq
+2025-09-30 11:38:01,460 - ifc_room_schedule.utils.enhanced_logging - WARNING - 1 surfaces have zero or invalid area
+2025-09-30 11:38:01,462 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 3/34: 01
+2025-09-30 11:38:01,464 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 13 surfaces for space 0etOdx4gn7QOeFM3DkCACZ
+2025-09-30 11:38:01,465 - ifc_room_schedule.utils.enhanced_logging - WARNING - 1 surfaces have zero or invalid area
+2025-09-30 11:38:01,465 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 0etOdx4gn7QOeFM3DkCACZ: ['Duplicate surface IDs found: 2BaCfuKIH2Ig_ALPcivZA2, 0e3eGU1HrEb9ye2pDlv04O', '1 surfaces have zero or invalid area']
+2025-09-30 11:38:01,465 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 4/34: 01
+2025-09-30 11:38:01,473 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 32 surfaces for space 0RGRVCyE13zRvWx_wbQh5R
+2025-09-30 11:38:01,473 - ifc_room_schedule.utils.enhanced_logging - WARNING - 1 surfaces have zero or invalid area
+2025-09-30 11:38:01,473 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 0RGRVCyE13zRvWx_wbQh5R: ['Duplicate surface IDs found: 01LR8n0gb41fXDw7I3tUWy, 0lGbLiw0X4Vu4n$6tqyP_s, 3kO9NO6mvABAhIWNqlFUlo', '1 surfaces have zero or invalid area']
+2025-09-30 11:38:01,474 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 5/34: 01
+2025-09-30 11:38:01,475 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 7 surfaces for space 0Lfq9rWmDEZAgA0xL$m$Bk
+2025-09-30 11:38:01,476 - ifc_room_schedule.utils.enhanced_logging - WARNING - 1 surfaces have zero or invalid area
+2025-09-30 11:38:01,476 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 0Lfq9rWmDEZAgA0xL$m$Bk: ['Duplicate surface IDs found: 0lGbLiw0X4Vu4n$6tqyP_s, 2HiaYxzmbFC9RWBDGOoUf4', '1 surfaces have zero or invalid area']
+2025-09-30 11:38:01,476 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 6/34: 02
+2025-09-30 11:38:01,480 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 15 surfaces for space 3JXfZI11rEbPVPppj4Jxf1
+2025-09-30 11:38:01,480 - ifc_room_schedule.utils.enhanced_logging - WARNING - 1 surfaces have zero or invalid area
+2025-09-30 11:38:01,480 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 3JXfZI11rEbPVPppj4Jxf1: ['Duplicate surface IDs found: 0wxr7RKCX9XBOiag7i_wCA, 374BUd6V1B480tJaEMN2iu, 2LG9WHqjr7leWRzxd67kbB', '1 surfaces have zero or invalid area']
+2025-09-30 11:38:01,480 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 7/34: 02
+2025-09-30 11:38:01,483 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 10 surfaces for space 0rF7q_xCj62PipnnzfNzKW
+2025-09-30 11:38:01,483 - ifc_room_schedule.utils.enhanced_logging - WARNING - 1 surfaces have zero or invalid area
+2025-09-30 11:38:01,483 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 0rF7q_xCj62PipnnzfNzKW: ['Duplicate surface IDs found: 374BUd6V1B480tJaEMN2iu', '1 surfaces have zero or invalid area']
+2025-09-30 11:38:01,483 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 8/34: 02
+2025-09-30 11:38:01,486 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 10 surfaces for space 30Mh9i1JvBjAVAs5qwyGFC
+2025-09-30 11:38:01,486 - ifc_room_schedule.utils.enhanced_logging - WARNING - 1 surfaces have zero or invalid area
+2025-09-30 11:38:01,486 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 9/34: 02
+2025-09-30 11:38:01,489 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 12 surfaces for space 1a0oo6Njb7gxF512nxSYuJ
+2025-09-30 11:38:01,489 - ifc_room_schedule.utils.enhanced_logging - WARNING - 1 surfaces have zero or invalid area
+2025-09-30 11:38:01,490 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 10/34: 02
+2025-09-30 11:38:01,496 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 28 surfaces for space 1hcSgXD6nB8Qls7RqiVt36
+2025-09-30 11:38:01,497 - ifc_room_schedule.utils.enhanced_logging - WARNING - 1 surfaces have zero or invalid area
+2025-09-30 11:38:01,497 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 1hcSgXD6nB8Qls7RqiVt36: ['Duplicate surface IDs found: 0wxr7RKCX9XBOiag7i_wCA, 374BUd6V1B480tJaEMN2iu, 3zzm$YeIP3KwFw6TnLeBpn', '1 surfaces have zero or invalid area']
+2025-09-30 11:38:01,498 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 11/34: 01
+2025-09-30 11:38:01,500 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 13 surfaces for space 2g7n5wXHHFjvfjzRMFL7Ag
+2025-09-30 11:38:01,501 - ifc_room_schedule.utils.enhanced_logging - WARNING - 1 surfaces have zero or invalid area
+2025-09-30 11:38:01,501 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 2g7n5wXHHFjvfjzRMFL7Ag: ['Duplicate surface IDs found: 3kO9NO6mvABAhIWNqlFUlo', '1 surfaces have zero or invalid area']
+2025-09-30 11:38:01,501 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 12/34: 02
+2025-09-30 11:38:01,504 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 8 surfaces for space 3ueW3dBRL2R9WoR8xGTA9E
+2025-09-30 11:38:01,504 - ifc_room_schedule.utils.enhanced_logging - WARNING - 1 surfaces have zero or invalid area
+2025-09-30 11:38:01,504 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 3ueW3dBRL2R9WoR8xGTA9E: ['Duplicate surface IDs found: 0wxr7RKCX9XBOiag7i_wCA, 3c38nW$s52ROpD4RNXvJwF', '1 surfaces have zero or invalid area']
+2025-09-30 11:38:01,504 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 13/34: 02
+2025-09-30 11:38:01,508 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 11 surfaces for space 0pwWNonAvEzRBvwhqxSoC6
+2025-09-30 11:38:01,508 - ifc_room_schedule.utils.enhanced_logging - WARNING - 1 surfaces have zero or invalid area
+2025-09-30 11:38:01,508 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 0pwWNonAvEzRBvwhqxSoC6: ['Duplicate surface IDs found: 3zzm$YeIP3KwFw6TnLeBpn', '1 surfaces have zero or invalid area']
+2025-09-30 11:38:01,509 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 14/34: 01
+2025-09-30 11:38:01,532 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 126 surfaces for space 1lBJWr459BIP7TCLnlZ7Rr
+2025-09-30 11:38:01,533 - ifc_room_schedule.utils.enhanced_logging - WARNING - 6 surfaces have zero or invalid area
+2025-09-30 11:38:01,534 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 1lBJWr459BIP7TCLnlZ7Rr: ['Duplicate surface IDs found: 011xFod8vCxADo9BCQFXAF, 374BUd6V1B480tJaEMN2iu, 0lGbLiw0X4Vu4n$6tqyP_s, 1SLZ6EUWz9ofFRTcVtfH5E, 2J7bZ4tXrAHR66jCNg8F0r, 0wxr7RKCX9XBOiag7i_wCA, 01LR8n0gb41fXDw7I3tUWy, 2CrJaFXorFmwa7wEwTvbdy, 3zzm$YeIP3KwFw6TnLeBpn, 17ZetX$JjBVQavDZvMPiWb, 1rQA2bC992bOMfd2Tb96_k, 30QeuDIbb7WRfj6Cyg3v5b, 119so98uP1xggSFjmpDBVH, 12pjW8B$LCUfUf6hpM6E8i, 0e3eGU1HrEb9ye2pDlv04O, 3kO9NO6mvABAhIWNqlFUlo, 1ZHs$C_91CyvindHAOIiIy, 0FHZ$Ev4T0VgRvhCvO7_zY', '6 surfaces have zero or invalid area']
+2025-09-30 11:38:01,534 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 15/34: 01
+2025-09-30 11:38:01,537 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 9 surfaces for space 32WTxU1Oj9QRi0av4ikK8J
+2025-09-30 11:38:01,537 - ifc_room_schedule.utils.enhanced_logging - WARNING - 1 surfaces have zero or invalid area
+2025-09-30 11:38:01,537 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 32WTxU1Oj9QRi0av4ikK8J: ['Duplicate surface IDs found: 01LR8n0gb41fXDw7I3tUWy, 0lGbLiw0X4Vu4n$6tqyP_s', '1 surfaces have zero or invalid area']
+2025-09-30 11:38:01,537 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 16/34: 03
+2025-09-30 11:38:01,543 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 16 surfaces for space 1BdfIYzF1BSQ8tBqjv4keq
+2025-09-30 11:38:01,543 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 1BdfIYzF1BSQ8tBqjv4keq: ['Duplicate surface IDs found: 1_rzqOLQv2YQq20UtRA2Bj, 0rZd5xjqr1BgBbZPmzNPcG, 3i_MxBIRb2dQSdCKkEB2bT, 2t637aIc18dPbS$LhlLZ$8, 3wF8HWUJD9kQrq1dwn0poO']
+2025-09-30 11:38:01,543 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 17/34: 03
+2025-09-30 11:38:01,547 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 11 surfaces for space 1Chpbbz1P2zRAU0ARRIKOs
+2025-09-30 11:38:01,547 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 1Chpbbz1P2zRAU0ARRIKOs: ['Duplicate surface IDs found: 0rZd5xjqr1BgBbZPmzNPcG, 3_zXnz1VnC2RAbUY6OsKyx']
+2025-09-30 11:38:01,548 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 18/34: 03
+2025-09-30 11:38:01,550 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 7 surfaces for space 1PXeoJQRHDY9mYm_2dV5Zw
+2025-09-30 11:38:01,550 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 19/34: 03
+2025-09-30 11:38:01,553 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 11 surfaces for space 1Abuh2hqP3MxoJVtTeNJZJ
+2025-09-30 11:38:01,554 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 1Abuh2hqP3MxoJVtTeNJZJ: ['Duplicate surface IDs found: 37h8Sgu7D0F9HKGc0lkAsK, 37rSpTisL4SPxRTvS$ay4_']
+2025-09-30 11:38:01,554 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 20/34: 03
+2025-09-30 11:38:01,559 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 15 surfaces for space 20e785kif8MhL29lIzXRhQ
+2025-09-30 11:38:01,559 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 20e785kif8MhL29lIzXRhQ: ['Duplicate surface IDs found: 1NqhveuRTBRxUWsl4Apb86, 1oJKHYXt9AgBACZ_H73n7j, 385DVPGnvDmgZ_vVwOypGc']
+2025-09-30 11:38:01,560 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 21/34: 03
+2025-09-30 11:38:01,562 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 7 surfaces for space 37au_BtkfEU8d59K6L2ldX
+2025-09-30 11:38:01,563 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 37au_BtkfEU8d59K6L2ldX: ['Duplicate surface IDs found: 1tiYEuCsLEVQF1bnhZGbvD, 1_rzqOLQv2YQq20UtRA2Bj']
+2025-09-30 11:38:01,563 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 22/34: 04
+2025-09-30 11:38:01,566 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 13 surfaces for space 02sq4HuYP3E9UVow$9C7Ud
+2025-09-30 11:38:01,567 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 02sq4HuYP3E9UVow$9C7Ud: ['Duplicate surface IDs found: 2n7GZify51Th$Z2_nMpHTk, 0QNbGf$hX4WgdeoawMyOe$, 2W_WVwH_f5RhHsIOViFMf8']
+2025-09-30 11:38:01,567 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 23/34: 04
+2025-09-30 11:38:01,569 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 11 surfaces for space 1kqaFJe_n95uburgU8d__1
+2025-09-30 11:38:01,570 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 1kqaFJe_n95uburgU8d__1: ['Duplicate surface IDs found: 2n7GZify51Th$Z2_nMpHTk, 3LN0A5aT9Btvo_bVwnmbDl']
+2025-09-30 11:38:01,570 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 24/34: 04
+2025-09-30 11:38:01,572 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 7 surfaces for space 3rYbhuSJj32fm1Vmztk9Qe
+2025-09-30 11:38:01,572 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 25/34: 04
+2025-09-30 11:38:01,576 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 9 surfaces for space 2oJi_gbc12FBtZgPM9SlEi
+2025-09-30 11:38:01,576 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 26/34: 04
+2025-09-30 11:38:01,578 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 6 surfaces for space 2J6Ny8LSj3LeIMUsY4hI2s
+2025-09-30 11:38:01,578 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 2J6Ny8LSj3LeIMUsY4hI2s: ['Duplicate surface IDs found: 0QNbGf$hX4WgdeoawMyOe$, 2FINKUTsH1ngFpsHH72eqy']
+2025-09-30 11:38:01,579 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 27/34: 04
+2025-09-30 11:38:01,584 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 14 surfaces for space 0hcW2B0zjFoesYviOiMrjT
+2025-09-30 11:38:01,584 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 0hcW2B0zjFoesYviOiMrjT: ['Duplicate surface IDs found: 2Zw3lvml971QLRubHbvXpI, 3Y$dkOJNz9V9Cs3zyoxDFr, 0PVsWFqWbAf90LeX24rvR6']
+2025-09-30 11:38:01,584 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 28/34: 02
+2025-09-30 11:38:01,649 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 294 surfaces for space 3qGJVsrovCCOERwRIM9M9F
+2025-09-30 11:38:01,653 - ifc_room_schedule.utils.enhanced_logging - WARNING - 4 surfaces have zero or invalid area
+2025-09-30 11:38:01,653 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 3qGJVsrovCCOERwRIM9M9F: ['Duplicate surface IDs found: 2_iHNUetH89haAeFM0v9sF, 2tnWv1N6T2g81J8UBlFwKe, 3CWQv_Krf8Tv9kqhOuGXPx, 2n7GZify51Th$Z2_nMpHTk, 2P0tgmtoD858UwkjVZsw64, 385DVPGnvDmgZ_vVwOypGc, 2UOJsgQl5CeBsHx3tFxKdC, 0PVsWFqWbAf90LeX24rvR6, 3_zXnz1VnC2RAbUY6OsKyx, 2W6yeJmY104eu62rCyQ3O0, 2$3ty86p96owTvqm1LUvlD, 1onrunXczCMO_SxJEcsYFR, 3Y$dkOJNz9V9Cs3zyoxDFr, 0QNbGf$hX4WgdeoawMyOe$, 0OMdwkKMH34hDRjeVNngyz, 2Zw3lvml971QLRubHbvXpI, 1yLTToSpn5luBGfDP61HGQ, 0gRoDum7937vfwhs1niPj5, 1k7aptnfzAr8XC2EW6UDg6, 1_rzqOLQv2YQq20UtRA2Bj, 2EnhrbM8b6kftnV9j08HkH, 1oJKHYXt9AgBACZ_H73n7j, 3U_Jx5uwfAnPL4KOAyS$1I, 3mztZ8eFv2swCqHmIxMvHn, 1NqhveuRTBRxUWsl4Apb86, 0rZd5xjqr1BgBbZPmzNPcG, 3GxUex2LXFDQk4naAj6zEj, 3wF8HWUJD9kQrq1dwn0poO', '4 surfaces have zero or invalid area']
+2025-09-30 11:38:01,653 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 29/34: 03
+2025-09-30 11:38:01,659 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 32 surfaces for space 3quWfdPA12heO5M9sToywJ
+2025-09-30 11:38:01,660 - ifc_room_schedule.utils.enhanced_logging - WARNING - 8 surfaces have zero or invalid area
+2025-09-30 11:38:01,660 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 3quWfdPA12heO5M9sToywJ: ['Duplicate surface IDs found: 1_rzqOLQv2YQq20UtRA2Bj, 1oJKHYXt9AgBACZ_H73n7j, 1NqhveuRTBRxUWsl4Apb86, 0rZd5xjqr1BgBbZPmzNPcG, 385DVPGnvDmgZ_vVwOypGc, 3_zXnz1VnC2RAbUY6OsKyx, 3wF8HWUJD9kQrq1dwn0poO', '8 surfaces have zero or invalid area']
+2025-09-30 11:38:01,660 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 30/34: 04
+2025-09-30 11:38:01,666 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 33 surfaces for space 2ygnsTAGr3ruU6hrha99xQ
+2025-09-30 11:38:01,666 - ifc_room_schedule.utils.enhanced_logging - WARNING - 8 surfaces have zero or invalid area
+2025-09-30 11:38:01,667 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 2ygnsTAGr3ruU6hrha99xQ: ['Duplicate surface IDs found: 0PVsWFqWbAf90LeX24rvR6, 2n7GZify51Th$Z2_nMpHTk, 3Y$dkOJNz9V9Cs3zyoxDFr, 0QNbGf$hX4WgdeoawMyOe$, 2Zw3lvml971QLRubHbvXpI, 1yObTqoOHDXB15tQZuXljW, 0$0jjesOT8lv70iEsbTHTJ', '8 surfaces have zero or invalid area']
+2025-09-30 11:38:01,667 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 31/34: 03
+2025-09-30 11:38:01,676 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 43 surfaces for space 0hmZNwjDX0ZwJbO6AmrrjO
+2025-09-30 11:38:01,676 - ifc_room_schedule.utils.enhanced_logging - WARNING - 3 surfaces have zero or invalid area
+2025-09-30 11:38:01,676 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 0hmZNwjDX0ZwJbO6AmrrjO: ['Duplicate surface IDs found: 1k7aptnfzAr8XC2EW6UDg6, 2tnWv1N6T2g81J8UBlFwKe, 2n7GZify51Th$Z2_nMpHTk, 36hnrR$zHBI9Z0XSe8Y_gm, 0rZd5xjqr1BgBbZPmzNPcG, 3_zXnz1VnC2RAbUY6OsKyx, 3wF8HWUJD9kQrq1dwn0poO', '3 surfaces have zero or invalid area']
+2025-09-30 11:38:01,676 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 32/34: 03
+2025-09-30 11:38:01,680 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 23 surfaces for space 02MoDbUmz2fQYwzHjhQuhV
+2025-09-30 11:38:01,682 - ifc_room_schedule.utils.enhanced_logging - WARNING - 4 surfaces have zero or invalid area
+2025-09-30 11:38:01,682 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 02MoDbUmz2fQYwzHjhQuhV: ['Duplicate surface IDs found: 3mztZ8eFv2swCqHmIxMvHn, 12OorI3HbCkA_rAwe4GgMT, 1_rzqOLQv2YQq20UtRA2Bj', '4 surfaces have zero or invalid area']
+2025-09-30 11:38:01,682 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 33/34: 04
+2025-09-30 11:38:01,692 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 48 surfaces for space 1fmOvhTur4SAytWzlO9cvT
+2025-09-30 11:38:01,693 - ifc_room_schedule.utils.enhanced_logging - WARNING - 5 surfaces have zero or invalid area
+2025-09-30 11:38:01,693 - ifc_room_schedule.utils.enhanced_logging - WARNING - Surface validation issues for space 1fmOvhTur4SAytWzlO9cvT: ['Duplicate surface IDs found: 0gRoDum7937vfwhs1niPj5, 0PVsWFqWbAf90LeX24rvR6, 1onrunXczCMO_SxJEcsYFR, 1oJKHYXt9AgBACZ_H73n7j, 2MlGu3SqnBqxCeAC$z39PI, 3Y$dkOJNz9V9Cs3zyoxDFr, 3U_Jx5uwfAnPL4KOAyS$1I, 1NqhveuRTBRxUWsl4Apb86, 2EnhrbM8b6kftnV9j08HkH, 2P0tgmtoD858UwkjVZsw64, 385DVPGnvDmgZ_vVwOypGc, 2UOJsgQl5CeBsHx3tFxKdC, 2Zw3lvml971QLRubHbvXpI', '5 surfaces have zero or invalid area']
+2025-09-30 11:38:01,693 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting surfaces for space 34/34: 05
+2025-09-30 11:38:01,694 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracted 3 surfaces for space 0xyvjA51vBzPon8HIwA$o0
+2025-09-30 11:38:01,694 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 1/34: 01
+2025-09-30 11:38:01,734 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1ZeqRHVqcNSfPxlaKXMlAs - 2ndLevel
+2025-09-30 11:38:01,749 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 09eGiBayyiZQTshNQsh9j7 - 2ndLevel
+2025-09-30 11:38:01,751 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0SCRbvJ58Ka_KTQDrkWFBR - 2ndLevel
+2025-09-30 11:38:01,752 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 031AWNnQhayUJQ6qaUpUFi - 2ndLevel
+2025-09-30 11:38:01,754 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1S_6g6r4BIk_WRzsT38pS$ - 2ndLevel
+2025-09-30 11:38:01,757 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3qBIOp_vx7sUd0y_KeJfDK - 2ndLevel
+2025-09-30 11:38:01,760 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1$wXnDvURXNu8THXidZA1W - 2ndLevel
+2025-09-30 11:38:01,762 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 28950Nimu3V_wjeTRbqffF - 2ndLevel
+2025-09-30 11:38:01,764 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2bEybIl1DGMGazsuhFGbEQ - 2ndLevel
+2025-09-30 11:38:01,765 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2HEVbzIhg5GADN7BfFTNwC - 2ndLevel
+2025-09-30 11:38:01,775 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 10 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:01,776 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 2/34: 01
+2025-09-30 11:38:01,780 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0qaSTpss$$Tj2CUPTHhjKq - 2ndLevel
+2025-09-30 11:38:01,781 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1PnqPxRDgzIVUJ3s0KWzSK - 2ndLevel
+2025-09-30 11:38:01,784 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2UvmTgbUwYAYICA2aMmLBp - 2ndLevel
+2025-09-30 11:38:01,786 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0jnMtYPV78JHIf8sopAOcc - 2ndLevel
+2025-09-30 11:38:01,788 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0B$78rtOACIdADwUfOCiiL - 2ndLevel
+2025-09-30 11:38:01,790 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2bFpz8afIZSQb_8pNuOfnr - 2ndLevel
+2025-09-30 11:38:01,793 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0rQqFDt5nl4e4jn1HnJ1CR - 2ndLevel
+2025-09-30 11:38:01,805 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 7 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:01,806 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 3/34: 01
+2025-09-30 11:38:01,810 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 073JCgrxwlQOtOanQTljKV - 2ndLevel
+2025-09-30 11:38:01,812 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1y1Bu$H2B22kz7vbfR1dFa - 2ndLevel
+2025-09-30 11:38:01,814 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3gVtHp1JK6Oo2IMGWB1U58 - 2ndLevel
+2025-09-30 11:38:01,816 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3zMcxaFmUwDGXrfz0tZNOl - 2ndLevel
+2025-09-30 11:38:01,818 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2GuV2pKaCX5uiahEgIRvDw - 2ndLevel
+2025-09-30 11:38:01,821 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3P5BQoAZlbTTpD48Ilj527 - 2ndLevel
+2025-09-30 11:38:01,824 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0xyq4_d1ve73S0aZ6VFN_x - 2ndLevel
+2025-09-30 11:38:01,827 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1nck9sWJ14K0xkc5rrFmpS - 2ndLevel
+2025-09-30 11:38:01,829 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 13JzzbA_Dva39vCTU8lblT - 2ndLevel
+2025-09-30 11:38:01,831 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2ZoL$tws$I1FoIrkkAO5h9 - 2ndLevel
+2025-09-30 11:38:01,834 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0YR_gbzRyk7eTxK1pGWT5w - 2ndLevel
+2025-09-30 11:38:01,836 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3dSQDCaSqsSQOOBeixYoLG - 2ndLevel
+2025-09-30 11:38:01,847 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 12 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:01,848 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 4/34: 01
+2025-09-30 11:38:01,878 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0XTlrSdb2DKj9iHhIHWm8E - 2ndLevel
+2025-09-30 11:38:01,880 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 29btZ2U0Tjo_VHhpAuCIZB - 2ndLevel
+2025-09-30 11:38:01,883 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3oG4tD7UjDyS2f6LRRnb_S - 2ndLevel
+2025-09-30 11:38:01,884 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0mi7uDx72TPP6YjVYnewnW - 2ndLevel
+2025-09-30 11:38:01,887 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1JgKvsyawAl8fC86qzL0PW - 2ndLevel
+2025-09-30 11:38:01,889 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 23QIrwgp$gXenhRCJuXPs9 - 2ndLevel
+2025-09-30 11:38:01,891 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3kMfHaT7QRGUF6Xt8sSlgn - 2ndLevel
+2025-09-30 11:38:01,893 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1wz0iCI4afxNMWYi0DQjVt - 2ndLevel
+2025-09-30 11:38:01,896 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2DRi03e$wPwElCq85QpbKg - 2ndLevel
+2025-09-30 11:38:01,898 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 27Jm9v3YsxUDpb0uQYpliv - 2ndLevel
+2025-09-30 11:38:01,900 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1ItP52antskqtz66QSZZQv - 2ndLevel
+2025-09-30 11:38:01,902 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1mkWXnSg60gdDG8tnEEaTW - 2ndLevel
+2025-09-30 11:38:01,904 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0down8H5GDQ76Dk3aALZEU - 2ndLevel
+2025-09-30 11:38:01,906 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 26pugLJHINgATuSwqAgb2A - 2ndLevel
+2025-09-30 11:38:01,909 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2TQmSmWiTRCmiDqLVflXOU - 2ndLevel
+2025-09-30 11:38:01,913 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3Os$49cd0d8E7FgZ0Hng3k - 2ndLevel
+2025-09-30 11:38:01,916 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1Whzu_YHfTe99WXQcbjiY3 - 2ndLevel
+2025-09-30 11:38:01,918 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3LV$P$jxxz2FN9t_FBs$kq - 2ndLevel
+2025-09-30 11:38:01,920 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 14Q1eLO8QgyWd618VsvCu1 - 2ndLevel
+2025-09-30 11:38:01,922 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3yW54MI08gP4ZpT_kFYXdj - 2ndLevel
+2025-09-30 11:38:01,924 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3wRHSjj24KsZ9I59uPUqsc - 2ndLevel
+2025-09-30 11:38:01,927 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0X5wy0qls65HIAedmsB_mU - 2ndLevel
+2025-09-30 11:38:01,929 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3Rw_YHIeJpWnxYkGGeXl43 - 2ndLevel
+2025-09-30 11:38:01,932 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1RCnRFqKHg$xQ44H033Axn - 2ndLevel
+2025-09-30 11:38:01,944 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 24 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:01,946 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 5/34: 01
+2025-09-30 11:38:01,950 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2pFKRUfDhUFO$5$Be8uCyq - 2ndLevel
+2025-09-30 11:38:01,952 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0iHX5uZPDijuGLNUKz1DtK - 2ndLevel
+2025-09-30 11:38:01,954 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0y4ovq3D2OgwZ5JEjKhr0q - 2ndLevel
+2025-09-30 11:38:01,957 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3tJ9sQa$3efvFO9xm7aMGZ - 2ndLevel
+2025-09-30 11:38:01,959 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3aGQ32NM8QIOKbUVN45YKq - 2ndLevel
+2025-09-30 11:38:01,962 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2Lyo9nED3pSs1i3_GsnVDw - 2ndLevel
+2025-09-30 11:38:01,964 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0ATT8UFRtmTeWv3Y3e53KS - 2ndLevel
+2025-09-30 11:38:01,977 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 7 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:01,979 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 6/34: 02
+2025-09-30 11:38:01,990 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 03WmZR_xCaDFP3QSLW$45N - 2ndLevel
+2025-09-30 11:38:01,993 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0fMxKYlMZ0hrRNKZ3eGdSy - 2ndLevel
+2025-09-30 11:38:01,995 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0cNsA8dhJGuLDHje5zDpWz - 2ndLevel
+2025-09-30 11:38:01,998 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 33Cr07z2JfQK65hkjTkaKi - 2ndLevel
+2025-09-30 11:38:01,999 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 22OKHJZOJbV54cXCiWw0ep - 2ndLevel
+2025-09-30 11:38:02,002 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0kmpm39ymGv6V48sN07p3E - 2ndLevel
+2025-09-30 11:38:02,004 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 155EiUpotxX5TbgWeGhIjH - 2ndLevel
+2025-09-30 11:38:02,007 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2c8yxuwLtCpWzDrpo$UGp4 - 2ndLevel
+2025-09-30 11:38:02,010 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1r_lFwy2Rz4X_xnF1O4tdz - 2ndLevel
+2025-09-30 11:38:02,013 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2sB71KYizlWfI3JOy9wyB5 - 2ndLevel
+2025-09-30 11:38:02,018 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0YCgRv4lYt1y6ihLjxkiA0 - 2ndLevel
+2025-09-30 11:38:02,023 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3aDlhvCoKrFPT$8APOhelE - 2ndLevel
+2025-09-30 11:38:02,026 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2nRcejBquPZwmqnqaAIjxg - 2ndLevel
+2025-09-30 11:38:02,030 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3b5nwFz6L2Hsj5GXnVjEf_ - 2ndLevel
+2025-09-30 11:38:02,033 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 32dqeqgUoZNifS2rmPqcOF - 2ndLevel
+2025-09-30 11:38:02,035 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 16SunDGM4Ax4cvGKSqdqNL - 2ndLevel
+2025-09-30 11:38:02,046 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 16 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:02,048 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 7/34: 02
+2025-09-30 11:38:02,054 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2lieVcfI5psn8y56y$a_Yu - 2ndLevel
+2025-09-30 11:38:02,057 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0Dc6SmTwUn7IKk7HIoU1Yj - 2ndLevel
+2025-09-30 11:38:02,060 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1NQG1ayPuvN8OE99fycgsX - 2ndLevel
+2025-09-30 11:38:02,062 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1xG1nTM$8wfO1d86CYlV5Y - 2ndLevel
+2025-09-30 11:38:02,065 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0qJ1GNeSEf0ZhIvo5ZVTAX - 2ndLevel
+2025-09-30 11:38:02,068 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2JJ0FBKmLJYMzpKnimiUWN - 2ndLevel
+2025-09-30 11:38:02,070 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2ABU_PtrWIVQe_SF_N$er$ - 2ndLevel
+2025-09-30 11:38:02,073 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1TlZM4TrLmcHCFgK40Jp9G - 2ndLevel
+2025-09-30 11:38:02,086 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 8 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:02,088 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 8/34: 02
+2025-09-30 11:38:02,095 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3dghkbqW$TdkFaz4wJstPx - 2ndLevel
+2025-09-30 11:38:02,097 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0RM2iFJG_zuBtZlEexBQc1 - 2ndLevel
+2025-09-30 11:38:02,100 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2gmLJfD7SsWs8qnRDxWgkF - 2ndLevel
+2025-09-30 11:38:02,101 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 14ejXPshV9R1gAuIQzzwn3 - 2ndLevel
+2025-09-30 11:38:02,104 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0ICqi5BQ5J42R6RH2n31en - 2ndLevel
+2025-09-30 11:38:02,105 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2TXV3RXsVE5KFqEP8B$Xj7 - 2ndLevel
+2025-09-30 11:38:02,108 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1aIn51_8nB5zrHdeBmrXb6 - 2ndLevel
+2025-09-30 11:38:02,111 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0dqhUifqEQO4AiCjU1uLje - 2ndLevel
+2025-09-30 11:38:02,112 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3I1TLC1fJbpVwvY18eW4Vi - 2ndLevel
+2025-09-30 11:38:02,114 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3heU1pm4e2yLv7CiMpV2xf - 2ndLevel
+2025-09-30 11:38:02,123 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 10 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:02,125 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 9/34: 02
+2025-09-30 11:38:02,130 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1s$EVYbhneX0AQS7m6uHq1 - 2ndLevel
+2025-09-30 11:38:02,133 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3cNIyok1R93EWjVem9PsSm - 2ndLevel
+2025-09-30 11:38:02,135 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0V8miUR7nHCifwr735sa6i - 2ndLevel
+2025-09-30 11:38:02,137 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0UX1gknfC7d3bqsY2s4B83 - 2ndLevel
+2025-09-30 11:38:02,139 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3yaDV33AhUtjBT4zoBDCyj - 2ndLevel
+2025-09-30 11:38:02,142 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3DHLgb5UXtJSyQXX$9Zoa0 - 2ndLevel
+2025-09-30 11:38:02,144 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0uCRxaHlYEu$w8UgUms7Xv - 2ndLevel
+2025-09-30 11:38:02,153 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 7 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:02,154 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 10/34: 02
+2025-09-30 11:38:02,159 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0F1mLL6XQ$OhUg1pxAoAVQ - 2ndLevel
+2025-09-30 11:38:02,162 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0GY05CQoHarXtUdrwAprtj - 2ndLevel
+2025-09-30 11:38:02,164 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3RLpbLiyW6grYGLyGwo12e - 2ndLevel
+2025-09-30 11:38:02,165 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 38muDBNoJ5b_rMNq6bgx1u - 2ndLevel
+2025-09-30 11:38:02,167 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0Fy33yyRDgesQCxnS9VKH1 - 2ndLevel
+2025-09-30 11:38:02,169 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3YX4JdZd1JbgR0jBxtVAY7 - 2ndLevel
+2025-09-30 11:38:02,171 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3tjZyGARC9gLOqVY_wiamA - 2ndLevel
+2025-09-30 11:38:02,173 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 38Sv$3ukBiWULroZGk8pxQ - 2ndLevel
+2025-09-30 11:38:02,175 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1pN1$fnQRZlU1TaaAo8JpI - 2ndLevel
+2025-09-30 11:38:02,178 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2mqi8oNJ8sJA6gt1LXbrWO - 2ndLevel
+2025-09-30 11:38:02,181 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3L0ZGJ_cZyESFYvTi3uohr - 2ndLevel
+2025-09-30 11:38:02,184 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2U8qiXtDx3LLiex8ws7Bqx - 2ndLevel
+2025-09-30 11:38:02,188 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0zhrMpxBsJ8szTFbUncwl8 - 2ndLevel
+2025-09-30 11:38:02,190 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2VgezhS4sTYa_Yq3Yvg3dn - 2ndLevel
+2025-09-30 11:38:02,193 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0JMc9o8FHDu7hXhULOqsjR - 2ndLevel
+2025-09-30 11:38:02,196 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2NTdGZeEseUKKfNXHB_i3T - 2ndLevel
+2025-09-30 11:38:02,198 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2cXCkDrPkmEU5$b0VioDF2 - 2ndLevel
+2025-09-30 11:38:02,199 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1pQqxPZe_GpPSbkQqQsGm8 - 2ndLevel
+2025-09-30 11:38:02,201 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 09NM45d$G_DkgqyreePKT6 - 2ndLevel
+2025-09-30 11:38:02,203 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 297AK9si9LHtO3cnYVJGJQ - 2ndLevel
+2025-09-30 11:38:02,204 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 28bi8TVj9EwIO0Us_QVcTI - 2ndLevel
+2025-09-30 11:38:02,205 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3wGIcl9R$ecNxjASbci4Za - 2ndLevel
+2025-09-30 11:38:02,214 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 22 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:02,215 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 11/34: 01
+2025-09-30 11:38:02,217 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0O0q6Da$isXu8q0p9RDZFZ - 2ndLevel
+2025-09-30 11:38:02,219 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0YiAxSdkgOYFweC1KUJPsg - 2ndLevel
+2025-09-30 11:38:02,220 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2XF0jlmEuAnPgfGMGKKMq_ - 2ndLevel
+2025-09-30 11:38:02,224 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3BQFYQI2R5eKFlDHfU294A - 2ndLevel
+2025-09-30 11:38:02,226 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 03G37BN2b8kP5ADSrFSe1A - 2ndLevel
+2025-09-30 11:38:02,228 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0OtredRWvKbgbUtgQ0TFRh - 2ndLevel
+2025-09-30 11:38:02,231 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1JAu45WwRmQXl4Q6Y35Mal - 2ndLevel
+2025-09-30 11:38:02,233 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0UKYQQkTaJC__thqjvtvnp - 2ndLevel
+2025-09-30 11:38:02,234 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0uUqe5wmHr6jXOxA5u07ar - 2ndLevel
+2025-09-30 11:38:02,236 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2iSiTm73oSBxhBmXYASN2i - 2ndLevel
+2025-09-30 11:38:02,238 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3R6DSPi4Mhh1F98neSrSiL - 2ndLevel
+2025-09-30 11:38:02,240 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3xoI4nwmWQPfITPcbq4uiO - 2ndLevel
+2025-09-30 11:38:02,241 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1KN22SdjPDpwW9aJVOgLb2 - 2ndLevel
+2025-09-30 11:38:02,249 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 13 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:02,250 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 12/34: 02
+2025-09-30 11:38:02,254 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2i7BYeqXLXrVvHnCxyhD6n - 2ndLevel
+2025-09-30 11:38:02,256 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1J1JUyZTVq4iHkzcHcpZHZ - 2ndLevel
+2025-09-30 11:38:02,258 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2Wc2$XbjCo6z2XdcfEnsdN - 2ndLevel
+2025-09-30 11:38:02,260 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3Y6sduEv5z_nRuiC5PHPtT - 2ndLevel
+2025-09-30 11:38:02,262 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 19_eY9fRv1NimvzuMUYqOK - 2ndLevel
+2025-09-30 11:38:02,264 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0dhvXjDVrx_0RB132cp5k9 - 2ndLevel
+2025-09-30 11:38:02,266 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1_dU9k2$aU4_pU59mtv4_9 - 2ndLevel
+2025-09-30 11:38:02,267 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2Iv9FGFJT35VgRf2HZwkh8 - 2ndLevel
+2025-09-30 11:38:02,274 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 8 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:02,275 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 13/34: 02
+2025-09-30 11:38:02,280 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2Lf44uJU0UoJMgZgRPTkMT - 2ndLevel
+2025-09-30 11:38:02,281 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1H71pryrTFn8o2H5RDqmyB - 2ndLevel
+2025-09-30 11:38:02,283 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 35ws8OVJJghX0R9JgId3Gk - 2ndLevel
+2025-09-30 11:38:02,285 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0YJpZZPNiItgIgTL9CXbxY - 2ndLevel
+2025-09-30 11:38:02,286 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3_Z1wLPdBcWHMooxhxQrFm - 2ndLevel
+2025-09-30 11:38:02,289 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3IbCKtFtSUvUKJ5If8nLYh - 2ndLevel
+2025-09-30 11:38:02,290 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3jrOSJ5MB1HLmjz94na_Fa - 2ndLevel
+2025-09-30 11:38:02,292 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3vlHcAYDPl3i7Q778lJHM9 - 2ndLevel
+2025-09-30 11:38:02,294 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3am4R$z_zEy5_2b$ItyBb4 - 2ndLevel
+2025-09-30 11:38:02,295 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2yNX$JAYmJwaH3E7vd8_3$ - 2ndLevel
+2025-09-30 11:38:02,296 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1HJAIm$LcL7NjKBIrA6u3A - 2ndLevel
+2025-09-30 11:38:02,305 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 11 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:02,306 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 14/34: 01
+2025-09-30 11:38:02,311 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2BwbKxWx4$ByboZZ9eUDBX - 2ndLevel
+2025-09-30 11:38:02,313 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 16Xk_t_lpR8jR8b1aGDqIz - 2ndLevel
+2025-09-30 11:38:02,314 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3fDpMexx2PnhUQovRZR4Jl - 2ndLevel
+2025-09-30 11:38:02,316 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3TxAj1y8tDa8JI_Y498wTN - 2ndLevel
+2025-09-30 11:38:02,317 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3CdaCIMyx5N5CMNe9dF8KS - 2ndLevel
+2025-09-30 11:38:02,319 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1cLbw_m4kpvYY0b$PFAAPa - 2ndLevel
+2025-09-30 11:38:02,320 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1BH4p$Mbksirr9S7X8YhOR - 2ndLevel
+2025-09-30 11:38:02,322 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3xWTQex4y2nZXre_yjQYoX - 2ndLevel
+2025-09-30 11:38:02,324 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2iNhW$Awvzkm14dvHSnn8B - 2ndLevel
+2025-09-30 11:38:02,325 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3CC5_Lh0_4rhglnsBt0xpd - 2ndLevel
+2025-09-30 11:38:02,327 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0cfcWGBhHL5hH7kBKy6hJC - 2ndLevel
+2025-09-30 11:38:02,332 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3obvnsmyBYWCCCubkBB_38 - 2ndLevel
+2025-09-30 11:38:02,335 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2h8wtk$okILf1MMsQApbnK - 2ndLevel
+2025-09-30 11:38:02,337 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0MDn2kozQM6K8VfiktTNA9 - 2ndLevel
+2025-09-30 11:38:02,338 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2m2KHBurVtmfBJ7dGgwAdf - 2ndLevel
+2025-09-30 11:38:02,341 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0sg4YJ5_qj$4NajJWxUZGC - 2ndLevel
+2025-09-30 11:38:02,343 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2XokAXqeDCXt3HIdNGc_Lv - 2ndLevel
+2025-09-30 11:38:02,345 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1MH0BpClk0YI_6mFvMBuIP - 2ndLevel
+2025-09-30 11:38:02,347 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2wLTw3U9eWW7j3exW52_5q - 2ndLevel
+2025-09-30 11:38:02,349 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0tMcksRdyiipyN_t4tZFjq - 2ndLevel
+2025-09-30 11:38:02,350 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1xocR7$gmvzeofSKR7xCBV - 2ndLevel
+2025-09-30 11:38:02,353 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1MYuOO6BLPtiBkZRvKnkH0 - 2ndLevel
+2025-09-30 11:38:02,354 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 34gKa7cb5GQ$bwQcEVDXOJ - 2ndLevel
+2025-09-30 11:38:02,356 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2Ayc9pEdRBCqbeLH3y$wqo - 2ndLevel
+2025-09-30 11:38:02,358 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3ey2V3rpX8QWde9hNCdk$v - 2ndLevel
+2025-09-30 11:38:02,359 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1FOsY4OOMbEGMLM8nrVVfq - 2ndLevel
+2025-09-30 11:38:02,362 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 30O7T8eV5gFZF9kTW8wPAC - 2ndLevel
+2025-09-30 11:38:02,363 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 15PUYwhDReWmSTDfl04yw6 - 2ndLevel
+2025-09-30 11:38:02,364 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1RKLdylnnEix7ruayzcgZV - 2ndLevel
+2025-09-30 11:38:02,366 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1ey8WHLW8WQu9TDChj1ikA - 2ndLevel
+2025-09-30 11:38:02,367 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3smT9xr2oC75Gg8x698x_q - 2ndLevel
+2025-09-30 11:38:02,369 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3WCAj8mNHHdF7rwXJBxb$u - 2ndLevel
+2025-09-30 11:38:02,370 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0zAAftE4ZWl4QS_UgbS5Bp - 2ndLevel
+2025-09-30 11:38:02,372 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3G3SNOAnn4pEu7oXPLH945 - 2ndLevel
+2025-09-30 11:38:02,374 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0UCG7ic8_oWqaSq2mQTBl6 - 2ndLevel
+2025-09-30 11:38:02,376 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0ll3QX25LAEkwS$23WXhp5 - 2ndLevel
+2025-09-30 11:38:02,378 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1UzNaB2Hxjge9YmhN$XHU4 - 2ndLevel
+2025-09-30 11:38:02,379 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0ST3lc4h$yBJTS88b4lLFv - 2ndLevel
+2025-09-30 11:38:02,381 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1I64kVeS0_GOe4zRfR3yj$ - 2ndLevel
+2025-09-30 11:38:02,382 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3wwbBarHVQv_HpvZ5fjITR - 2ndLevel
+2025-09-30 11:38:02,384 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1bLk$AXGy85O_aLlZmTwxc - 2ndLevel
+2025-09-30 11:38:02,386 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1WNPl548YHjTW$pnrqMP7T - 2ndLevel
+2025-09-30 11:38:02,388 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3x8kIAfcSKfd47ZoKuPk7v - 2ndLevel
+2025-09-30 11:38:02,391 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3Mu5Ak2k2SBLhdFfkfKXR7 - 2ndLevel
+2025-09-30 11:38:02,394 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1Zqt6_T_XSZa3xEYPxxa19 - 2ndLevel
+2025-09-30 11:38:02,397 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2FrvEWCor0l8ISq6Lw1vbq - 2ndLevel
+2025-09-30 11:38:02,399 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0zpciPPP7KfXaAi3aeOGsI - 2ndLevel
+2025-09-30 11:38:02,402 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3$EYjfcDFeLvoDxkwTISQP - 2ndLevel
+2025-09-30 11:38:02,403 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0RRzSKKTpEuMnmwb9630xU - 2ndLevel
+2025-09-30 11:38:02,406 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2IIKs$5D5dnCvGK9pjmYWr - 2ndLevel
+2025-09-30 11:38:02,408 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2eu6Qa2XsYoDXZZqS286gY - 2ndLevel
+2025-09-30 11:38:02,410 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2kHPpy1iBjxxSu02U$YTxP - 2ndLevel
+2025-09-30 11:38:02,413 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3RJocA9QfBig7Rql37mdQY - 2ndLevel
+2025-09-30 11:38:02,414 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0irsO$I5dmqBGmICgGiSgk - 2ndLevel
+2025-09-30 11:38:02,416 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 27_RIfDm8hpjRBVP5ta1QM - 2ndLevel
+2025-09-30 11:38:02,418 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2lGan2Ky1EG8Lioti_BCpD - 2ndLevel
+2025-09-30 11:38:02,419 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1XFOdlDSP9oak6ev5Fv3J7 - 2ndLevel
+2025-09-30 11:38:02,420 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2SE5GjFPDSevz6kaNcgiXh - 2ndLevel
+2025-09-30 11:38:02,423 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0R4xtH8Msi2Q2EX3SBOtl4 - 2ndLevel
+2025-09-30 11:38:02,425 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3dzXDYqtRFErYh4mDxSj5J - 2ndLevel
+2025-09-30 11:38:02,427 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3iG7y0z_7vZryAfB8HPcEk - 2ndLevel
+2025-09-30 11:38:02,428 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1a4w3eksu8_nrjq5_e4x6l - 2ndLevel
+2025-09-30 11:38:02,430 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3OuEn5iDqVFHBtJm5vKjoo - 2ndLevel
+2025-09-30 11:38:02,432 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1X8X5UIq0_60MnwWUru2xY - 2ndLevel
+2025-09-30 11:38:02,434 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3bY3V3VY7JzaH6H3rd7d5k - 2ndLevel
+2025-09-30 11:38:02,435 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0OXaBhcXQkOLJ9Q9iXeCtc - 2ndLevel
+2025-09-30 11:38:02,437 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1vc2cerupfD7kPDzouGRUX - 2ndLevel
+2025-09-30 11:38:02,439 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 29bDFW6IuAGGxZKB5SHXoZ - 2ndLevel
+2025-09-30 11:38:02,440 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1uavdzZGSsCdyOI9SBCQlK - 2ndLevel
+2025-09-30 11:38:02,443 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0B1qcDLAldP3U_USkWP4W_ - 2ndLevel
+2025-09-30 11:38:02,444 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3K7Lvg1hUApQIaj9c9U248 - 2ndLevel
+2025-09-30 11:38:02,446 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1PF2cFVanEhDIgV$0nINgd - 2ndLevel
+2025-09-30 11:38:02,447 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 17vhL1RP7x9gn$pybFARfn - 2ndLevel
+2025-09-30 11:38:02,449 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0mjlm8F8RihyIXG0jTEKFg - 2ndLevel
+2025-09-30 11:38:02,450 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3B3fWsZuozKMPPUrx92z8W - 2ndLevel
+2025-09-30 11:38:02,452 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3zZuMlqL7vzZf_ACph$vbZ - 2ndLevel
+2025-09-30 11:38:02,457 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2prtwKDrcdWoG3ZNXXirn3 - 2ndLevel
+2025-09-30 11:38:02,458 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1aMYMlAHYZ$cCPc_Bo0bga - 2ndLevel
+2025-09-30 11:38:02,460 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1e0Cjd3N58Cj0gI0P0uKSC - 2ndLevel
+2025-09-30 11:38:02,462 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3XTzoCB$ewbt9MNOl9mRIa - 2ndLevel
+2025-09-30 11:38:02,463 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2jQXSXNM1t$HkJr6dL3tWK - 2ndLevel
+2025-09-30 11:38:02,464 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2sYC8wYFoCbFBv$0nEbfKU - 2ndLevel
+2025-09-30 11:38:02,466 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 05dPOkA9MAohubQWwY9_7m - 2ndLevel
+2025-09-30 11:38:02,468 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1PAmhB8HH9KjOc$pOa43cG - 2ndLevel
+2025-09-30 11:38:02,469 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1Fq$BgLzmkAwDi_IgmUccH - 2ndLevel
+2025-09-30 11:38:02,470 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 13_y2vz5RVyHfsTQlVPtY1 - 2ndLevel
+2025-09-30 11:38:02,473 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0v506gLicHlAV2nvz375v9 - 2ndLevel
+2025-09-30 11:38:02,474 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0pThxSIh6x9BmXAW1y05R6 - 2ndLevel
+2025-09-30 11:38:02,475 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2DWBHsGc_LaaQenLC3nxPt - 2ndLevel
+2025-09-30 11:38:02,476 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2PoLbLRUe6fCgGdgyW0iWM - 2ndLevel
+2025-09-30 11:38:02,478 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1pkZOxSpBKnJO93L0d7$kF - 2ndLevel
+2025-09-30 11:38:02,479 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0eOokYJIuB6H3yT5pTIpV7 - 2ndLevel
+2025-09-30 11:38:02,480 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0Cmc_X_jOUh2IEZvv2ah2m - 2ndLevel
+2025-09-30 11:38:02,482 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3TZ6R7BPMhfBMmAITgFxgn - 2ndLevel
+2025-09-30 11:38:02,483 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0BC4HW3ubmLGJj7aPijwZd - 2ndLevel
+2025-09-30 11:38:02,485 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1wCJLgJ5tFVTrMBWgoQLdP - 2ndLevel
+2025-09-30 11:38:02,486 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3Ls2hH9UyTB6B4cfacbD6d - 2ndLevel
+2025-09-30 11:38:02,488 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 39fEHfqX6jM_iErae3Ustw - 2ndLevel
+2025-09-30 11:38:02,489 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 21C$bMmQiI4BRhBjlesmhc - 2ndLevel
+2025-09-30 11:38:02,490 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 14Qb2Uh3SqTxrzLDbciL0u - 2ndLevel
+2025-09-30 11:38:02,492 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0wYO40mThTBaXZJxBzmw6u - 2ndLevel
+2025-09-30 11:38:02,493 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1AM6EtWLFNhhm5uqsUZCkD - 2ndLevel
+2025-09-30 11:38:02,495 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1NJ0mZHeXYOFdRPACJmvia - 2ndLevel
+2025-09-30 11:38:02,496 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0crCaSOwVJ2eejZrs$8tH1 - 2ndLevel
+2025-09-30 11:38:02,497 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 28SUg6_vjaMLE_gNu2J7EC - 2ndLevel
+2025-09-30 11:38:02,499 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0WEBs9zjohKFzzH9usBUL$ - 2ndLevel
+2025-09-30 11:38:02,500 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2St1E63HWK2B0wLmxOnL3Q - 2ndLevel
+2025-09-30 11:38:02,502 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 107OXBnxDpL2oY3Ub2iliT - 2ndLevel
+2025-09-30 11:38:02,504 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1GXtC9aCzklqNrRlA4WE7T - 2ndLevel
+2025-09-30 11:38:02,506 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3PqWtPLvG57VmWYuAAxtCG - 2ndLevel
+2025-09-30 11:38:02,508 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1k84_ucpCIRj6XuEMjaYw8 - 2ndLevel
+2025-09-30 11:38:02,509 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1Ye44gnoqSD9yqm2CSh7t8 - 2ndLevel
+2025-09-30 11:38:02,510 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2l2EaUHqzoQQCUqZKxObsj - 2ndLevel
+2025-09-30 11:38:02,512 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3wtE8m3dOgSR1dZC1VLVjV - 2ndLevel
+2025-09-30 11:38:02,514 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2kp5Hdf6odNxcW1v4raKdx - 2ndLevel
+2025-09-30 11:38:02,517 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2LsToUjbRFW2$zgvZ5yoB1 - 2ndLevel
+2025-09-30 11:38:02,518 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 08xvRQVWZoaPYXu4gdxzOu - 2ndLevel
+2025-09-30 11:38:02,519 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2qQRnYtoksBNoal9VPFG7E - 2ndLevel
+2025-09-30 11:38:02,526 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 118 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:02,530 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 15/34: 01
+2025-09-30 11:38:02,533 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0Qr_5WfxUNDVC6UCXILpUz - 2ndLevel
+2025-09-30 11:38:02,535 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2TVYtfVUl_EYVmplY6qaNF - 2ndLevel
+2025-09-30 11:38:02,539 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1ZFZN9Yv$KTKsIFxlnGrpv - 2ndLevel
+2025-09-30 11:38:02,540 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3xS6mO2mXaDtosU2Y4FD7T - 2ndLevel
+2025-09-30 11:38:02,543 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1Ouhq1oG6WnggnEYHnctNX - 2ndLevel
+2025-09-30 11:38:02,544 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3GKnRwGpFvc7CBm2IEwu5w - 2ndLevel
+2025-09-30 11:38:02,545 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 17C4qYmUivVib9DYMY9vAc - 2ndLevel
+2025-09-30 11:38:02,548 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2dgypiKmggfxiT4MkOLqbb - 2ndLevel
+2025-09-30 11:38:02,550 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2TW$c0DEM_7RHiLMbyALUh - 2ndLevel
+2025-09-30 11:38:02,552 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3UiVsWWmO6noCPuKnj7krs - 2ndLevel
+2025-09-30 11:38:02,554 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 117q1TYjnswcz2B0EljUwN - 2ndLevel
+2025-09-30 11:38:02,556 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0zN0c4Yvl7rBTQmMtHBqmr - 2ndLevel
+2025-09-30 11:38:02,558 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1$tGeon5bOfvbqRG2bqO75 - 2ndLevel
+2025-09-30 11:38:02,560 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 19npAgLSzZQYlwtZ5Y1eDK - 2ndLevel
+2025-09-30 11:38:02,567 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 14 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:02,568 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 16/34: 03
+2025-09-30 11:38:02,574 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2XipvciLEUldPV868TSGO6 - 2ndLevel
+2025-09-30 11:38:02,576 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 14BUXvxDjutb99iccZOhn0 - 2ndLevel
+2025-09-30 11:38:02,578 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3_zix6yyE1GthN6QyuojV$ - 2ndLevel
+2025-09-30 11:38:02,579 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1NDEDjX9BQyQXzxXYBanSx - 2ndLevel
+2025-09-30 11:38:02,580 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0HgFq8D_Kjh30XKh$H3sDy - 2ndLevel
+2025-09-30 11:38:02,583 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1g53e7jZk0hb0SWyuYnd3n - 2ndLevel
+2025-09-30 11:38:02,585 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2XCjVQKMm3oxpjy5Pj1Xj3 - 2ndLevel
+2025-09-30 11:38:02,586 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2Jb52xpJxhqS3UMdmkInxy - 2ndLevel
+2025-09-30 11:38:02,588 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2rmTqTm8aJlIk7r4LIdWvw - 2ndLevel
+2025-09-30 11:38:02,589 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1q$N6m4gQ9V8pamq1UbuT7 - 2ndLevel
+2025-09-30 11:38:02,591 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2NdMlqz0y7MJLAx6VLmDCT - 2ndLevel
+2025-09-30 11:38:02,593 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0tfZmf5odYIC$U2gpn5IxZ - 2ndLevel
+2025-09-30 11:38:02,594 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2rjOBUbLg0aizGMC4DWaDB - 2ndLevel
+2025-09-30 11:38:02,596 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0H2aWnzIxoryfR$rKV6i_k - 2ndLevel
+2025-09-30 11:38:02,598 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1MN5yNk0LVLcWCp7s8taKz - 2ndLevel
+2025-09-30 11:38:02,601 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0xZq0J3m4KZhGkBNVOZE0z - 2ndLevel
+2025-09-30 11:38:02,603 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1BBqrXibLiLEds0MslORSg - 2ndLevel
+2025-09-30 11:38:02,605 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2FUMtcu1RMiOCzM_T665HQ - 2ndLevel
+2025-09-30 11:38:02,608 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2Wr1doUSNxURCFXny2897_ - 2ndLevel
+2025-09-30 11:38:02,610 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0Y2mhP7A_cEYMfaJx26_7z - 2ndLevel
+2025-09-30 11:38:02,616 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 20 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:02,617 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 17/34: 03
+2025-09-30 11:38:02,626 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0WVIP56DwZ7JtrYArM022z - 2ndLevel
+2025-09-30 11:38:02,628 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3BFpa$t2fZA_okllEG8LV_ - 2ndLevel
+2025-09-30 11:38:02,629 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0TnFwWhSvsnmi5HR1YD1KT - 2ndLevel
+2025-09-30 11:38:02,631 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0AAKC42zbdzsJRaJ2hOW7n - 2ndLevel
+2025-09-30 11:38:02,632 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2ScWJyXzkxHd8l0trym6A6 - 2ndLevel
+2025-09-30 11:38:02,634 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3ijJavlb9sFN1XpXazuDjA - 2ndLevel
+2025-09-30 11:38:02,636 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2OBDdKSgnSufUJVQbbyHLF - 2ndLevel
+2025-09-30 11:38:02,638 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2zcsNMts2MbzV$UKqT38e$ - 2ndLevel
+2025-09-30 11:38:02,640 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1rDEbM$RmPkwbCdJNi8Q1V - 2ndLevel
+2025-09-30 11:38:02,641 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3pcungYdXmoLZOuwLcjkgr - 2ndLevel
+2025-09-30 11:38:02,643 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0odEVa9oTSsMRbY3Wv7HpX - 2ndLevel
+2025-09-30 11:38:02,648 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 11 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:02,649 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 18/34: 03
+2025-09-30 11:38:02,656 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3jwQEwhjd7Cu$ryU0LvEsI - 2ndLevel
+2025-09-30 11:38:02,660 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 1 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:02,662 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 19/34: 03
+2025-09-30 11:38:02,670 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1UGZwIaDh7PrjUfg3MSfbf - 2ndLevel
+2025-09-30 11:38:02,671 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1$zkk4PNXxr9ycGicZNF2A - 2ndLevel
+2025-09-30 11:38:02,673 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2LqVAswIoTqb8Ir7CIJqmP - 2ndLevel
+2025-09-30 11:38:02,675 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0FMSea2l3QD7ngidR_sZJ9 - 2ndLevel
+2025-09-30 11:38:02,677 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0_IC_YgkFgWlXodEDpj_FV - 2ndLevel
+2025-09-30 11:38:02,679 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 27AvhU4ft00mc2LnX$FLD6 - 2ndLevel
+2025-09-30 11:38:02,681 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2f74q_gXWcdzojAksm$0q_ - 2ndLevel
+2025-09-30 11:38:02,683 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2CUjHRazVaj9AJhbGORszj - 2ndLevel
+2025-09-30 11:38:02,685 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3UuRRl92Gynza0CPqSRkB1 - 2ndLevel
+2025-09-30 11:38:02,687 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0rZq9ZaJI9eZ6OptgbG2Li - 2ndLevel
+2025-09-30 11:38:02,689 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 33xuLYKFX9NXcDyTDoQTI3 - 2ndLevel
+2025-09-30 11:38:02,690 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3il3ueHhzuDHgLvbafqolg - 2ndLevel
+2025-09-30 11:38:02,695 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 12 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:02,696 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 20/34: 03
+2025-09-30 11:38:02,703 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3aiYsvo5wZ0ctvHgO$a1oK - 2ndLevel
+2025-09-30 11:38:02,705 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2c2XM0qnDgMhT1LxdfbyHg - 2ndLevel
+2025-09-30 11:38:02,707 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1qdQ4XV51P5do9wQg9C_Lz - 2ndLevel
+2025-09-30 11:38:02,709 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1a1RkiXTtyYwiwPH4atwg4 - 2ndLevel
+2025-09-30 11:38:02,711 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 18$4JWHKk5yscOC6Qqn8FN - 2ndLevel
+2025-09-30 11:38:02,712 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 196GT7aSWnKQ9W3_XcWYJe - 2ndLevel
+2025-09-30 11:38:02,713 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3QvDutlMUyMp5rrrZxO4m7 - 2ndLevel
+2025-09-30 11:38:02,715 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 14xt80M95HcQnLMOzVnwcv - 2ndLevel
+2025-09-30 11:38:02,716 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1XKJPgT8mnjlXHM1ZKFEQU - 2ndLevel
+2025-09-30 11:38:02,718 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3$cUsGmRim9PoB6$Yq_Pht - 2ndLevel
+2025-09-30 11:38:02,719 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3Tb6J409PS_R6_DMrlpoyr - 2ndLevel
+2025-09-30 11:38:02,720 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 32e9h7O09vdF9t_jKolX$x - 2ndLevel
+2025-09-30 11:38:02,723 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3LPSo6RPEIEEhXyVG$UJ5G - 2ndLevel
+2025-09-30 11:38:02,725 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2BDWKJT_U8WaEZHh7ZNZLe - 2ndLevel
+2025-09-30 11:38:02,727 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0CdXl9id$QhV3rj6HjVHUH - 2ndLevel
+2025-09-30 11:38:02,731 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 15 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:02,732 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 21/34: 03
+2025-09-30 11:38:02,740 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2gjVIKlLfWI9u90ixdETu_ - 2ndLevel
+2025-09-30 11:38:02,742 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0Tm_Ax330aJStd_QU7qo7S - 2ndLevel
+2025-09-30 11:38:02,744 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0r1r_xzRm_djRoaTJFcT$f - 2ndLevel
+2025-09-30 11:38:02,745 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 10MHmGyhDBNUpDVR4JTPP6 - 2ndLevel
+2025-09-30 11:38:02,747 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0jhU9oCoc6gkDNwkzEJ8$a - 2ndLevel
+2025-09-30 11:38:02,749 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 197jdupF5e9ULxUyUHwjBc - 2ndLevel
+2025-09-30 11:38:02,751 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3yYIttsQdBinXmq5zD$XT9 - 2ndLevel
+2025-09-30 11:38:02,752 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 00UCsrK$chN9JGsJILp0X4 - 2ndLevel
+2025-09-30 11:38:02,753 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2IfAgDskhKe_34ZUKto6sS - 2ndLevel
+2025-09-30 11:38:02,758 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 9 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:02,759 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 22/34: 04
+2025-09-30 11:38:02,768 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0nS1bga3CN0puNs9ogkAft - 2ndLevel
+2025-09-30 11:38:02,769 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3FHFQfEcHsDDCveWgXnFCj - 2ndLevel
+2025-09-30 11:38:02,771 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2fO7d_2EznCrtiMxdCCTnQ - 2ndLevel
+2025-09-30 11:38:02,772 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3QSuwOMzkIwLRsEnu7UKGM - 2ndLevel
+2025-09-30 11:38:02,774 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2NDu2ePTded89P5yJ2ZbAG - 2ndLevel
+2025-09-30 11:38:02,776 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3DfxF0NJY3LFBWtnsIf9Xx - 2ndLevel
+2025-09-30 11:38:02,777 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3C5O1JS7$eJG2y1GIteNim - 2ndLevel
+2025-09-30 11:38:02,779 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 378oKpAcLneHuH$4wzH8Lq - 2ndLevel
+2025-09-30 11:38:02,780 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1c6fNmUqKjMlj$wl_ih1t9 - 2ndLevel
+2025-09-30 11:38:02,782 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2yDCHkomYubYNch2N9coeZ - 2ndLevel
+2025-09-30 11:38:02,784 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2F08gztmfjHYYsVyCNLr1f - 2ndLevel
+2025-09-30 11:38:02,786 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3mHQZOBAFag0sUW8_CNJ2x - 2ndLevel
+2025-09-30 11:38:02,788 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0UOqLcnSpwy4J0Qm9yOoNb - 2ndLevel
+2025-09-30 11:38:02,790 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1HAr95f$hGqtsS8Qj$XHR7 - 2ndLevel
+2025-09-30 11:38:02,792 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0WoH1SnxMxcp8ctQZCMBjj - 2ndLevel
+2025-09-30 11:38:02,795 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 04x7cqq2tbx$$6qq2bLP6p - 2ndLevel
+2025-09-30 11:38:02,798 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 16 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:02,799 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 23/34: 04
+2025-09-30 11:38:02,808 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2lfdeIK6F7mKklr$h90Ovg - 2ndLevel
+2025-09-30 11:38:02,809 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1G4CG18BkYLh39WllWHrp5 - 2ndLevel
+2025-09-30 11:38:02,810 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3yLc9R5or56icP9LCr4cmn - 2ndLevel
+2025-09-30 11:38:02,813 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1FObnhjQiVa3xTWFXsNzCv - 2ndLevel
+2025-09-30 11:38:02,814 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0$CccuFk1vNfqp4E_YvnWW - 2ndLevel
+2025-09-30 11:38:02,816 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0J9UC9j844UUve2GVRaEHR - 2ndLevel
+2025-09-30 11:38:02,817 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0sAXDuMJWdzqTczOrJqgd1 - 2ndLevel
+2025-09-30 11:38:02,819 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0DP_LzkogRX_fhnfz895SR - 2ndLevel
+2025-09-30 11:38:02,820 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3v9hYoUBzAhm4Dddg_e6z8 - 2ndLevel
+2025-09-30 11:38:02,823 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1tGpud5gjKX9GyTnUXeTX1 - 2ndLevel
+2025-09-30 11:38:02,825 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0J73nwGEBRgCz9Jcv5_z_a - 2ndLevel
+2025-09-30 11:38:02,829 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 11 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:02,830 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 24/34: 04
+2025-09-30 11:38:02,839 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0tZYgdVUlxDm9sbAQXs1Hy - 2ndLevel
+2025-09-30 11:38:02,842 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1diXiTExw69AYJcM7_iiMc - 2ndLevel
+2025-09-30 11:38:02,843 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0jVkqgJInHmqLS$nv734FG - 2ndLevel
+2025-09-30 11:38:02,846 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0SrxQTE4Nwf1gyQ6z3yzUH - 2ndLevel
+2025-09-30 11:38:02,848 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3NPNyTY94qcy8CryWuzVY_ - 2ndLevel
+2025-09-30 11:38:02,850 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1fbKI3L9i$Q6yVlCVxc0MX - 2ndLevel
+2025-09-30 11:38:02,852 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1btghu6gDr8vYqPD6NM5sp - 2ndLevel
+2025-09-30 11:38:02,854 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2svYYgFWQeOTq0AKS3mP8c - 2ndLevel
+2025-09-30 11:38:02,855 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2CY_2i7pzkrTI2V8cwIDMa - 2ndLevel
+2025-09-30 11:38:02,859 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 9 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:02,860 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 25/34: 04
+2025-09-30 11:38:02,869 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 33NdUmdxlDUHWSmeD3GD79 - 2ndLevel
+2025-09-30 11:38:02,871 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 356ZMBpG2qZ8SDUAWEaVqq - 2ndLevel
+2025-09-30 11:38:02,873 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 35A3ti5AowmhI0K_BMIQB$ - 2ndLevel
+2025-09-30 11:38:02,876 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 11_Slg3$Pe5meli6U2NUbB - 2ndLevel
+2025-09-30 11:38:02,877 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0_r9e4RIUQkeVwZO0dbC3r - 2ndLevel
+2025-09-30 11:38:02,879 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2rKb8ayTE1cwEagcmiFasY - 2ndLevel
+2025-09-30 11:38:02,883 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 6 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:02,884 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 26/34: 04
+2025-09-30 11:38:02,894 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0d1gg$6xO3ucMVKXdHD$zC - 2ndLevel
+2025-09-30 11:38:02,895 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0m2mbJqIh9hQCEaIoWqWxb - 2ndLevel
+2025-09-30 11:38:02,897 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0ND0yqdeU$Tk3H4Dg7sHig - 2ndLevel
+2025-09-30 11:38:02,898 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0y_3Q9ZAAqv1UOw7CYgkQt - 2ndLevel
+2025-09-30 11:38:02,900 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3PvOqLcYEKDbuw2MPjf5Ya - 2ndLevel
+2025-09-30 11:38:02,902 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1wzjGaon5eqntOjL4E2MXM - 2ndLevel
+2025-09-30 11:38:02,904 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0p0U8alfaUjGw6ZSfbyxqj - 2ndLevel
+2025-09-30 11:38:02,906 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0ebmL72DDrtbe4RRVc8YZi - 2ndLevel
+2025-09-30 11:38:02,909 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 8 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:02,910 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 27/34: 04
+2025-09-30 11:38:02,920 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2jQx94S7PvaNle$ZWpV1ft - 2ndLevel
+2025-09-30 11:38:02,921 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0nTZd8OlBmRpfpmMr_lOaa - 2ndLevel
+2025-09-30 11:38:02,923 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1zKS1FsumCCFgm_tePRyh7 - 2ndLevel
+2025-09-30 11:38:02,924 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2zOF24Sxij9_3cfzsLxreF - 2ndLevel
+2025-09-30 11:38:02,926 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1uUNsBCx3kaxw5Vfu0uV1D - 2ndLevel
+2025-09-30 11:38:02,928 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3$a9kX$8hgGbqBiMNrBnWd - 2ndLevel
+2025-09-30 11:38:02,929 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0sXLzA6Cx0$rM4M6KaUaRy - 2ndLevel
+2025-09-30 11:38:02,931 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 18RtYmUKcEIzsrVebg82MB - 2ndLevel
+2025-09-30 11:38:02,932 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1QB46tWE_66vPGwQi3oCVU - 2ndLevel
+2025-09-30 11:38:02,933 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3X_UIK5Qv5ulukE1YZ5$ZE - 2ndLevel
+2025-09-30 11:38:02,935 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3n1KsJMQ7qyqK2rM$NMstl - 2ndLevel
+2025-09-30 11:38:02,937 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3$PeqNYZ6V1zayI5NI2DgN - 2ndLevel
+2025-09-30 11:38:02,939 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0mB3u5_vTHhZQc1Q_cF2MU - 2ndLevel
+2025-09-30 11:38:02,941 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1_0MIXEmdX1Kd2dPwOhG47 - 2ndLevel
+2025-09-30 11:38:02,944 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 14 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:02,944 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 28/34: 02
+2025-09-30 11:38:02,950 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2nt$Y3gaOQ1Q9a7bonnQ1r - 2ndLevel
+2025-09-30 11:38:02,952 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1a$xjYBopjLoKKDdDv4wvL - 2ndLevel
+2025-09-30 11:38:02,953 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0eBYYytLL6rpdwu2zakJkj - 2ndLevel
+2025-09-30 11:38:02,955 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1Lh5cYa45edqmWAR5xukBM - 2ndLevel
+2025-09-30 11:38:02,957 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2xJEqGrtY3MRwC0UN0J72g - 2ndLevel
+2025-09-30 11:38:02,959 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 24VgPWju9wAuDOEVFw942s - 2ndLevel
+2025-09-30 11:38:02,960 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2G5AxI3PEX1390S9_$v7tI - 2ndLevel
+2025-09-30 11:38:02,964 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2lo1qOP9py7JHqe2gZkStr - 2ndLevel
+2025-09-30 11:38:02,966 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1QnnPxYcuXgjR8Wnl6B_jh - 2ndLevel
+2025-09-30 11:38:02,967 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2XIqVtinGFRHuGNN2$SO7T - 2ndLevel
+2025-09-30 11:38:02,969 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3D87CACJS57o69V6JypJiI - 2ndLevel
+2025-09-30 11:38:02,970 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2RyaYOKZNETSr6Cdub7ZPs - 2ndLevel
+2025-09-30 11:38:02,972 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0YnOfDkqseayFXC92$sPC2 - 2ndLevel
+2025-09-30 11:38:02,973 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 09wCBtUXL3Jq$2TN4GL8CR - 2ndLevel
+2025-09-30 11:38:02,974 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 22OsVd7kbCozjOW2RSKJC8 - 2ndLevel
+2025-09-30 11:38:02,976 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2ObzininDr11fJ8B43dwcc - 2ndLevel
+2025-09-30 11:38:02,977 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3V47x$kYRa7Ku6zQLn95sy - 2ndLevel
+2025-09-30 11:38:02,979 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2BNXZIWWT3Fq1j9aJdKvYm - 2ndLevel
+2025-09-30 11:38:02,980 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0PXA0Pr83E_pJR_VtYoDQy - 2ndLevel
+2025-09-30 11:38:02,982 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1cNNt00Y0Bfmnlu2qiJw6p - 2ndLevel
+2025-09-30 11:38:02,983 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0QnkHy7_1RGh$6ph_gvvxW - 2ndLevel
+2025-09-30 11:38:02,985 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 26Y$yIJtlxDAN5199fnZ1D - 2ndLevel
+2025-09-30 11:38:02,986 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2d3H6GQsBU7zIytZ9mtgzZ - 2ndLevel
+2025-09-30 11:38:02,987 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1YqOJ7WqeJOd5Hmc1GFe8d - 2ndLevel
+2025-09-30 11:38:02,989 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1Of2R3y_zR1feU8FvBaQRg - 2ndLevel
+2025-09-30 11:38:02,990 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 23lJwwV9Ft4yCqjQQD19ZJ - 2ndLevel
+2025-09-30 11:38:02,992 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1puTL025psxncTzizyrH7i - 2ndLevel
+2025-09-30 11:38:02,994 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1yyPakEhC9QmFLJqQjHGM_ - 2ndLevel
+2025-09-30 11:38:02,995 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 21vIkmZpwO$FpBDx1Xs251 - 2ndLevel
+2025-09-30 11:38:02,996 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1DHtakcLCbi1hgYt15ZnIy - 2ndLevel
+2025-09-30 11:38:02,998 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0efeJiFdt_0ZigsC9$5N34 - 2ndLevel
+2025-09-30 11:38:02,999 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1Psas0weGQftpsR$Wqd221 - 2ndLevel
+2025-09-30 11:38:03,000 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3jiY$2P9cN$ztfHSdQIj6e - 2ndLevel
+2025-09-30 11:38:03,002 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3hJbYJj0wY8kW07$dYHoun - 2ndLevel
+2025-09-30 11:38:03,004 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3mSDiNdvr3G40pw_8uBDIP - 2ndLevel
+2025-09-30 11:38:03,005 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0iPhqoUnKK_IZOklM4KBk1 - 2ndLevel
+2025-09-30 11:38:03,006 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 23DtPgVfpEL85GJWNleSNc - 2ndLevel
+2025-09-30 11:38:03,008 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3Z3ljUsaYN2Gad0BceT4QK - 2ndLevel
+2025-09-30 11:38:03,010 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1beLoagMRZMT$fYg2UqWw4 - 2ndLevel
+2025-09-30 11:38:03,012 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 37jt0qfv6xZg4EtucpesJW - 2ndLevel
+2025-09-30 11:38:03,014 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1eCrJU024mdxWt9PhkEtqn - 2ndLevel
+2025-09-30 11:38:03,015 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 26wbeD2Eyb8pa0RE50Gw4R - 2ndLevel
+2025-09-30 11:38:03,016 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 00DRO0nCj7QQlnaZRTJGyp - 2ndLevel
+2025-09-30 11:38:03,018 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1AR4dAw4v$4S6RWy2JX3wZ - 2ndLevel
+2025-09-30 11:38:03,019 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3NE35WYpnuhbiEcFVyz61S - 2ndLevel
+2025-09-30 11:38:03,020 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 03J_4x0sW_23xkEAxCgTBG - 2ndLevel
+2025-09-30 11:38:03,022 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1corKMnXOE_HH50oaRhOTE - 2ndLevel
+2025-09-30 11:38:03,024 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1MvSjsTGdZkIQPfElmqncs - 2ndLevel
+2025-09-30 11:38:03,025 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2gxcA4G8_7JQTyZR_av_VQ - 2ndLevel
+2025-09-30 11:38:03,027 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2W$2Wkp5omzqoopXswhdBF - 2ndLevel
+2025-09-30 11:38:03,028 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3bK_Y79TE89votWd6Y_i2X - 2ndLevel
+2025-09-30 11:38:03,030 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2eyj_Ld7InIIKnbaum4dGM - 2ndLevel
+2025-09-30 11:38:03,031 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0rBt1ZIsvu37UrZdWJodXo - 2ndLevel
+2025-09-30 11:38:03,032 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3xtMmYfb_EDa3m_QIDb$FV - 2ndLevel
+2025-09-30 11:38:03,034 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0szkRhFVCG5wUhIOjuSsIV - 2ndLevel
+2025-09-30 11:38:03,035 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 15PepKZaFF8B5pDT95BmUb - 2ndLevel
+2025-09-30 11:38:03,036 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2AddkYytLDYaiVN2FJJxTT - 2ndLevel
+2025-09-30 11:38:03,037 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1yKTBkQ00JVM7Yx6HZAyc6 - 2ndLevel
+2025-09-30 11:38:03,039 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2Q$lVyvRo6zn4sH2BQ2BpT - 2ndLevel
+2025-09-30 11:38:03,041 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0VasBow71O3Ax0ZfrIOa4U - 2ndLevel
+2025-09-30 11:38:03,042 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3Uf7hESR4nXGlkflHxE1SO - 2ndLevel
+2025-09-30 11:38:03,044 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1aojF3$vwewy0oS8PH5V8U - 2ndLevel
+2025-09-30 11:38:03,045 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1T$xzZ4KBK4Ahny4vfFPON - 2ndLevel
+2025-09-30 11:38:03,047 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1j4dFFPUnE$nfz$vXYYuA6 - 2ndLevel
+2025-09-30 11:38:03,048 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3yYPOPzCsbFN9D7oz20bcW - 2ndLevel
+2025-09-30 11:38:03,050 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2HAdodwiRXCLwKCXiLSkvC - 2ndLevel
+2025-09-30 11:38:03,051 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 18wrvM4f$OXJIMCR77RM00 - 2ndLevel
+2025-09-30 11:38:03,052 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1s$tSuDQBjuJnHQ3v0kLr_ - 2ndLevel
+2025-09-30 11:38:03,053 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2eAlww_sxjXb2hHDou2cRw - 2ndLevel
+2025-09-30 11:38:03,055 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3hXpccDvYYWhjhn1_WsVK7 - 2ndLevel
+2025-09-30 11:38:03,056 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0DKSeeKIwJsGWsVFFcjZA9 - 2ndLevel
+2025-09-30 11:38:03,058 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3Dyls0ZGMN4TRGndeEJh2V - 2ndLevel
+2025-09-30 11:38:03,060 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 29hp150zemFBlWVj1rMRzA - 2ndLevel
+2025-09-30 11:38:03,060 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 300aGw$BqBbqLZ8V9LhLCN - 2ndLevel
+2025-09-30 11:38:03,063 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1gBk5k8ndh81ExSnQulXcr - 2ndLevel
+2025-09-30 11:38:03,065 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1Q9wVrtG2X$tm9UWuPVhB0 - 2ndLevel
+2025-09-30 11:38:03,066 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3wS4OMXPGVd9jruye$9idE - 2ndLevel
+2025-09-30 11:38:03,067 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3fwQ4CdLcli9KA1RN9pS9$ - 2ndLevel
+2025-09-30 11:38:03,068 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 12bUJtJkxHALHMYcGw8fM0 - 2ndLevel
+2025-09-30 11:38:03,070 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 33AC3uA7VHn9fVKJTEVDVj - 2ndLevel
+2025-09-30 11:38:03,072 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0e_POP52l_mfuxXdkVPJzA - 2ndLevel
+2025-09-30 11:38:03,073 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1WnL8fRSUzjeclViSCnujm - 2ndLevel
+2025-09-30 11:38:03,074 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2l1iXxJXxfjrT3O3jPIYBF - 2ndLevel
+2025-09-30 11:38:03,076 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1hI7VXIk192ONpxu9W8xuV - 2ndLevel
+2025-09-30 11:38:03,077 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2r3H_LhP4_sDcBwYNG2SBZ - 2ndLevel
+2025-09-30 11:38:03,079 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0hXfm8SnMDzQa5TiKQw1bV - 2ndLevel
+2025-09-30 11:38:03,080 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2kap5iCNJl7grPcuaffc8a - 2ndLevel
+2025-09-30 11:38:03,081 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3LvEJlp_5lM8iGY$SmVqEr - 2ndLevel
+2025-09-30 11:38:03,083 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0unU6HPYSxzJyIf4GA6JOB - 2ndLevel
+2025-09-30 11:38:03,084 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2xtkxz_4lkt_56uo24P8qU - 2ndLevel
+2025-09-30 11:38:03,086 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0rqxSQTXkpyAPVBAcwfQR1 - 2ndLevel
+2025-09-30 11:38:03,088 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1LK6JM6WmLznY8JAYfkzEm - 2ndLevel
+2025-09-30 11:38:03,090 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1p0AiK_UhzRgzIcD7aHG_3 - 2ndLevel
+2025-09-30 11:38:03,093 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2cb$qkKL4agY0vF49gyXNp - 2ndLevel
+2025-09-30 11:38:03,095 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1pC8yMBaq81hCQjnedcSXb - 2ndLevel
+2025-09-30 11:38:03,097 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0G4RTh8uSdViEyLulJazJ_ - 2ndLevel
+2025-09-30 11:38:03,098 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3nI9zPBDdscLvLvGVZLQaI - 2ndLevel
+2025-09-30 11:38:03,100 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0Rg0kRhDBggo3BgUy3mFkP - 2ndLevel
+2025-09-30 11:38:03,101 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0dDez6BIasFstMgeGcpGpP - 2ndLevel
+2025-09-30 11:38:03,103 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1JKhgk27Jje5PnzYHufJBb - 2ndLevel
+2025-09-30 11:38:03,104 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1lLwSmSRJJ$rKHuh0I2OU0 - 2ndLevel
+2025-09-30 11:38:03,105 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3QmGrP6K$wQr1N$7C9dbKw - 2ndLevel
+2025-09-30 11:38:03,107 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1uaw_jfirpUlZDAan8uKVZ - 2ndLevel
+2025-09-30 11:38:03,108 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2A$EuuVtGSau7ISfzySCS3 - 2ndLevel
+2025-09-30 11:38:03,110 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1rOf_nb_Y80A5HzWnqPyfy - 2ndLevel
+2025-09-30 11:38:03,111 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2DTXzwftsrXON1pjj$iPvp - 2ndLevel
+2025-09-30 11:38:03,113 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3OE2gxCcK8j6sfLoBgGLbJ - 2ndLevel
+2025-09-30 11:38:03,115 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 01Y4SkeI4FgnM_fIBlza1p - 2ndLevel
+2025-09-30 11:38:03,116 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 05$8vcTdnlSJXF$hgGV9kg - 2ndLevel
+2025-09-30 11:38:03,118 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2G$TOxgWTgU5l5hMlTtEuw - 2ndLevel
+2025-09-30 11:38:03,119 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 19exEOKYSUm0_6L7QomwLc - 2ndLevel
+2025-09-30 11:38:03,121 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 22WT6s1y$xjuGp_36W9ggQ - 2ndLevel
+2025-09-30 11:38:03,121 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1Om8ufRw8DuWhvrAnigNfx - 2ndLevel
+2025-09-30 11:38:03,123 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2yWB6qNk$$r_3mBDuYZeF6 - 2ndLevel
+2025-09-30 11:38:03,124 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2s_gKBRVm5s6QVDm434mWw - 2ndLevel
+2025-09-30 11:38:03,126 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3vb_miNjY5YY2Y4W21T_5W - 2ndLevel
+2025-09-30 11:38:03,128 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 311jqQZl6VKeeEY4IWRZWb - 2ndLevel
+2025-09-30 11:38:03,129 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3t6VQW0qY$lVt$GIkRafCB - 2ndLevel
+2025-09-30 11:38:03,131 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0k_LY$IkqxWKwujFO0MBKW - 2ndLevel
+2025-09-30 11:38:03,132 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2Vo0S9y7MTVBPTU9P7eHbx - 2ndLevel
+2025-09-30 11:38:03,133 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3UrOYkOV0JKa1p0oGJanTC - 2ndLevel
+2025-09-30 11:38:03,135 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1HkiLRLs3MF5n8B$NaqOxO - 2ndLevel
+2025-09-30 11:38:03,136 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 09lh0iY2IeYmxJVPSCRrrb - 2ndLevel
+2025-09-30 11:38:03,137 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2EAk5GopQBpE1xlN7Ew9CR - 2ndLevel
+2025-09-30 11:38:03,139 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 00FSVd$Duz$ABOuzDg3TSc - 2ndLevel
+2025-09-30 11:38:03,140 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3XbQ3j5F7k3UoWG9g2gF2I - 2ndLevel
+2025-09-30 11:38:03,142 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1r5yUlTwy7RelQWbWe82aJ - 2ndLevel
+2025-09-30 11:38:03,144 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1k8HsfLMpC83RMMw_rIotM - 2ndLevel
+2025-09-30 11:38:03,145 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2kistuWlnRU_3EiLL6DQL1 - 2ndLevel
+2025-09-30 11:38:03,146 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1i_zsfWhH9sEyAykZpO$P6 - 2ndLevel
+2025-09-30 11:38:03,148 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1J642Ntb17L9M0Q1smUVdF - 2ndLevel
+2025-09-30 11:38:03,150 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3r9xJPlsHzkxCy1CMZj965 - 2ndLevel
+2025-09-30 11:38:03,151 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1wbNg2sQ3GDLFmJ0qLeSaw - 2ndLevel
+2025-09-30 11:38:03,153 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3wZJco_x6rdiHLJtk_nSc0 - 2ndLevel
+2025-09-30 11:38:03,154 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0I7oAtexZXWP4Jf7X95jJj - 2ndLevel
+2025-09-30 11:38:03,155 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3SeJYy$dJP9toxhCF9X2r$ - 2ndLevel
+2025-09-30 11:38:03,156 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3zhbuZZGRqrDNzyureLrQ3 - 2ndLevel
+2025-09-30 11:38:03,158 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3BOmyx7kHr7wdDGJQQW_dN - 2ndLevel
+2025-09-30 11:38:03,160 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1bUu003OPVMjpFcSSU09HD - 2ndLevel
+2025-09-30 11:38:03,160 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1SLLMdz27wSzR01UsyRGXC - 2ndLevel
+2025-09-30 11:38:03,163 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3UtTMA$3GmDUWxeUXwTuao - 2ndLevel
+2025-09-30 11:38:03,164 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3rCPpZ8VJP$S3xVkEQDKAD - 2ndLevel
+2025-09-30 11:38:03,166 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1aSTuItzF_tMMFCDssYC64 - 2ndLevel
+2025-09-30 11:38:03,167 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2j2ydr73Key5XJY0kIfTl_ - 2ndLevel
+2025-09-30 11:38:03,169 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2mhvLowGUiPPSNsUHtrA4L - 2ndLevel
+2025-09-30 11:38:03,170 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0tvmmckkYX7rI9h8$IbRMg - 2ndLevel
+2025-09-30 11:38:03,171 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0cWrKFB1g0SxT4ZInN8nCk - 2ndLevel
+2025-09-30 11:38:03,174 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0xGMl8LZb6U1sUlFPjxDtN - 2ndLevel
+2025-09-30 11:38:03,176 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3psfy2yV8DU7eFOR8_Jo9G - 2ndLevel
+2025-09-30 11:38:03,178 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3oXvO$Nm2HY_LC7lvClNA6 - 2ndLevel
+2025-09-30 11:38:03,179 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0KAdzEGMME4CUUXiIAK0gk - 2ndLevel
+2025-09-30 11:38:03,181 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 25JGLe9yqRgo80vREFnN9O - 2ndLevel
+2025-09-30 11:38:03,183 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 19VpzWw7q$99XCzR8k1HG7 - 2ndLevel
+2025-09-30 11:38:03,184 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0ssJB4nSS8bwoP_IYbQaVI - 2ndLevel
+2025-09-30 11:38:03,186 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0bSmw$JJjJX7LTeGe8xaM_ - 2ndLevel
+2025-09-30 11:38:03,187 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3kEqe_G_S9qCWRTSRlAykd - 2ndLevel
+2025-09-30 11:38:03,189 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1Vzc9abf4OxKMjK3BvAukE - 2ndLevel
+2025-09-30 11:38:03,191 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2KSPPUgZlFKFuULFrT5Nm7 - 2ndLevel
+2025-09-30 11:38:03,193 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2_ltcNV2a8TmxHoR19wEVR - 2ndLevel
+2025-09-30 11:38:03,195 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3gi4qRKDCAb4ZDUZXU3LEp - 2ndLevel
+2025-09-30 11:38:03,196 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1R7Qi2PufGNuELJSZ3bqlI - 2ndLevel
+2025-09-30 11:38:03,198 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0YqbTQfGO$Ud3A6H2p7THR - 2ndLevel
+2025-09-30 11:38:03,199 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2fWIrOPwKvxLWhgv16mp0F - 2ndLevel
+2025-09-30 11:38:03,201 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0Cg2G2S9IAm4OKIUi2UDpq - 2ndLevel
+2025-09-30 11:38:03,203 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0rYKWjShdSfMyrp_aQ$RDx - 2ndLevel
+2025-09-30 11:38:03,204 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 17IorCmX6uAhWT3M4Nyf$7 - 2ndLevel
+2025-09-30 11:38:03,206 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0zhJ9aleqgEIPE9SkZw5vB - 2ndLevel
+2025-09-30 11:38:03,208 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3X$HIUXML$wDpvr_Wpiy9k - 2ndLevel
+2025-09-30 11:38:03,210 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0w4cVqHnkoZhN2R50a_U88 - 2ndLevel
+2025-09-30 11:38:03,212 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0c7QEJtVWK4zAT0KouMvoy - 2ndLevel
+2025-09-30 11:38:03,213 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0NOOMjySwJuh4ATAyqhptz - 2ndLevel
+2025-09-30 11:38:03,214 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1SpREMGNjhX$rOzB7ejMwH - 2ndLevel
+2025-09-30 11:38:03,216 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2$1W0coJe4A12DVdjpXp44 - 2ndLevel
+2025-09-30 11:38:03,217 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3TOa8EUnfmXwj3BmE3xfGg - 2ndLevel
+2025-09-30 11:38:03,220 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3bdxeop6qAUyOtImuiL548 - 2ndLevel
+2025-09-30 11:38:03,222 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3mftfRdoMi$IJbX$IvZoJJ - 2ndLevel
+2025-09-30 11:38:03,223 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1yw8cO4fv$Vi1dwZuJ7ZeK - 2ndLevel
+2025-09-30 11:38:03,225 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0Uu31N2vwPqN2EfCPcGtEM - 2ndLevel
+2025-09-30 11:38:03,227 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1IsH1j2e0FYrTKlvCTiQbn - 2ndLevel
+2025-09-30 11:38:03,229 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1xe5WEvMxeBpLuTu186ZS3 - 2ndLevel
+2025-09-30 11:38:03,230 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1b6$vSBWnYB9LNBkocN1jf - 2ndLevel
+2025-09-30 11:38:03,232 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2BGJJ1vFZxMm0nHeSmTHgR - 2ndLevel
+2025-09-30 11:38:03,234 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2Dm4NBVSzhiFZZd0fvYe1Z - 2ndLevel
+2025-09-30 11:38:03,236 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1JtlYLu$4M5NzuUWgix4U8 - 2ndLevel
+2025-09-30 11:38:03,237 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2ms5YQrIJcYjAZiVhoksXw - 2ndLevel
+2025-09-30 11:38:03,238 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1Fovf0KpLaLrLDIeXgq1NQ - 2ndLevel
+2025-09-30 11:38:03,240 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2qpLDV26qtQpls$$JSM$nI - 2ndLevel
+2025-09-30 11:38:03,241 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2HI_EvJHRsrzCoYNuryY8c - 2ndLevel
+2025-09-30 11:38:03,244 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2kuvmbb7n3hIjZgp5ZKAob - 2ndLevel
+2025-09-30 11:38:03,246 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0qcxGrvyWGEOG0mETeV683 - 2ndLevel
+2025-09-30 11:38:03,247 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1QIJSbe4him6q60HokVg3P - 2ndLevel
+2025-09-30 11:38:03,249 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3R8Ny40$$mgaqxcO7gFHs7 - 2ndLevel
+2025-09-30 11:38:03,250 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2_8hqvZC3LqvOxfooSzwjb - 2ndLevel
+2025-09-30 11:38:03,251 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3GnOGgoMlywyxKbRefhAwC - 2ndLevel
+2025-09-30 11:38:03,253 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1JU0684vOnSiL8EkqQTaTq - 2ndLevel
+2025-09-30 11:38:03,254 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2XueYMtnD$uNZqTHxUO9Q$ - 2ndLevel
+2025-09-30 11:38:03,255 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3lAKlRcxNWqgrahaTsKP0p - 2ndLevel
+2025-09-30 11:38:03,257 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0dLCbx4mfSx3F4lkqz8L$j - 2ndLevel
+2025-09-30 11:38:03,258 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2e9fShmE7D9r53TTZUVuUH - 2ndLevel
+2025-09-30 11:38:03,260 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 23jCxmxqAHesYzbKyDL5b6 - 2ndLevel
+2025-09-30 11:38:03,262 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0vJITACK_UIFnwWzblscPT - 2ndLevel
+2025-09-30 11:38:03,263 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3Bo4Roy3Yb3osaEY4qgiu6 - 2ndLevel
+2025-09-30 11:38:03,265 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2qYi$lNEOr$qtG2oDTeZfM - 2ndLevel
+2025-09-30 11:38:03,266 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2jJP3CWJi_73d_1VZcgA7u - 2ndLevel
+2025-09-30 11:38:03,268 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3SQIWUONmZnMjQ7DFKLyit - 2ndLevel
+2025-09-30 11:38:03,270 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0XHyooaIWVIJ_oXmQbwuv6 - 2ndLevel
+2025-09-30 11:38:03,271 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2ZZcof3TX3EION4neAuQFE - 2ndLevel
+2025-09-30 11:38:03,273 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0Rrq7v$sZq8$PB3fNaGiaN - 2ndLevel
+2025-09-30 11:38:03,275 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1R6QpSOFaq2UomrGy7fKug - 2ndLevel
+2025-09-30 11:38:03,277 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1hc_JDZR_xloR8Kb7zpx94 - 2ndLevel
+2025-09-30 11:38:03,278 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2ozU51R4rvHrst9skF6wCs - 2ndLevel
+2025-09-30 11:38:03,280 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1YbpBOk52s0bpa_fCRrRgD - 2ndLevel
+2025-09-30 11:38:03,281 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0VEn6ij89ecpspUntrtVpc - 2ndLevel
+2025-09-30 11:38:03,283 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0dUmTEEeTlhdj7qScwU2$Z - 2ndLevel
+2025-09-30 11:38:03,284 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1asI2VWV7AkaUUtrdYfvx$ - 2ndLevel
+2025-09-30 11:38:03,286 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1NLGi8A7tSnEUaSbV9w2Qf - 2ndLevel
+2025-09-30 11:38:03,287 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0DbPqV745EVTbqffVfQ65N - 2ndLevel
+2025-09-30 11:38:03,289 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2WF88Ur5$9vGC_IJA00v$f - 2ndLevel
+2025-09-30 11:38:03,290 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2yjzQs_G$XsFtpDOMSJy$a - 2ndLevel
+2025-09-30 11:38:03,292 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1P71ArnyJomtaYf3RzI79M - 2ndLevel
+2025-09-30 11:38:03,293 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2MXJFg8dla5QODgaP66Ua1 - 2ndLevel
+2025-09-30 11:38:03,294 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3rK$HoFag$GVbUQhQWeJ2f - 2ndLevel
+2025-09-30 11:38:03,296 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0LZIMM4P0Z$U5aEH0SMlza - 2ndLevel
+2025-09-30 11:38:03,297 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2fuUPcLoJAioDQLlTY5wrO - 2ndLevel
+2025-09-30 11:38:03,302 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2w1n_73SWzFDh2bpm$vpAZ - 2ndLevel
+2025-09-30 11:38:03,303 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0DaAepeGA2skKfcEIveJ_8 - 2ndLevel
+2025-09-30 11:38:03,304 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3hGtC0gbMnWyoz9ox1cRFE - 2ndLevel
+2025-09-30 11:38:03,307 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 13wTR5GAMnXQsKUywfQN8K - 2ndLevel
+2025-09-30 11:38:03,309 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1PZXx4mB0KXPoC6SGREeYk - 2ndLevel
+2025-09-30 11:38:03,311 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1$wLos02YTnSMcaXSE_31K - 2ndLevel
+2025-09-30 11:38:03,312 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1pMS$tx_cInwfzVaGkBK1l - 2ndLevel
+2025-09-30 11:38:03,313 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3kqacnBL95oNs96l7_8waH - 2ndLevel
+2025-09-30 11:38:03,314 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2b7K19deJGe6Gl2nNSK8i5 - 2ndLevel
+2025-09-30 11:38:03,316 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3sYPd7hjqjLu7Hn3HGrISM - 2ndLevel
+2025-09-30 11:38:03,317 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2VvVJulXu9su84DFEY3N55 - 2ndLevel
+2025-09-30 11:38:03,318 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3lLIQXoJ6gtaidAHWToYlj - 2ndLevel
+2025-09-30 11:38:03,320 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2ZGqy5aIwOkbUReTAQ3bkv - 2ndLevel
+2025-09-30 11:38:03,320 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3ai8azn6n$qrBsBSn8OlAL - 2ndLevel
+2025-09-30 11:38:03,323 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0szW8y46F9a1RxNaGWH6PP - 2ndLevel
+2025-09-30 11:38:03,326 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 33Kyg4maOBGo9yYtsbuco8 - 2ndLevel
+2025-09-30 11:38:03,327 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1agEtdiDxG2pkiDThkJvyP - 2ndLevel
+2025-09-30 11:38:03,329 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0eWX7BB_HsXOBUDHtPrx0u - 2ndLevel
+2025-09-30 11:38:03,330 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3VAvooXsIUsftVqxsXas_n - 2ndLevel
+2025-09-30 11:38:03,332 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 015bFKmWHXOwpnrFMz0PoN - 2ndLevel
+2025-09-30 11:38:03,333 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3YHO_62g1bZtgGRaxAXr9c - 2ndLevel
+2025-09-30 11:38:03,334 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3wMmuYFPfTqWFElw8Z7pXI - 2ndLevel
+2025-09-30 11:38:03,336 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 30yVvOkgWo9DWq3xQaDDQ0 - 2ndLevel
+2025-09-30 11:38:03,338 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2UbgZf2umYvJJElPHkgLN0 - 2ndLevel
+2025-09-30 11:38:03,339 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2fBeEVe5ouSuLBkOV_sxqb - 2ndLevel
+2025-09-30 11:38:03,340 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3lxbXaEoj$dSprGgvUoBYh - 2ndLevel
+2025-09-30 11:38:03,343 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2ce4kwLtehbsBsa3PpcLU1 - 2ndLevel
+2025-09-30 11:38:03,344 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 27dOwwhuND8dBcJLSq9d_4 - 2ndLevel
+2025-09-30 11:38:03,345 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0Lr_ifixuKkL05VViSAjBz - 2ndLevel
+2025-09-30 11:38:03,347 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 07unyD8$$SQvENV4sGNq4w - 2ndLevel
+2025-09-30 11:38:03,348 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 256Z_3TpacfOJzz3EUiZsa - 2ndLevel
+2025-09-30 11:38:03,350 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 11dER8wveq77Z1xdWb9US7 - 2ndLevel
+2025-09-30 11:38:03,352 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0yNDNceTHEJ3ipp8WRzI4X - 2ndLevel
+2025-09-30 11:38:03,355 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2E5M3nN8FuIS0ULOpnZWam - 2ndLevel
+2025-09-30 11:38:03,356 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 233_s_f$Q$yuas21DrhyTW - 2ndLevel
+2025-09-30 11:38:03,358 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2LwMKJhSJw9tO1uyDQ4EQP - 2ndLevel
+2025-09-30 11:38:03,360 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3zbC1EcxM5n$i1R8CUwFqz - 2ndLevel
+2025-09-30 11:38:03,362 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1LFaEvWz1fB0W4K5_0ILJV - 2ndLevel
+2025-09-30 11:38:03,363 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0RVXn_OTNb6RobeEY3yvCz - 2ndLevel
+2025-09-30 11:38:03,365 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3HHJxjVAV$T3NmIbLMKjNB - 2ndLevel
+2025-09-30 11:38:03,367 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3lVleGQtaHCTXutBn6vhs5 - 2ndLevel
+2025-09-30 11:38:03,369 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2pzdg91ZDu19_YUi2Hfz99 - 2ndLevel
+2025-09-30 11:38:03,371 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 36CzUvWsK7uyY_mOePGzhk - 2ndLevel
+2025-09-30 11:38:03,373 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3aGC6l6h30$a1Zgzy33ksT - 2ndLevel
+2025-09-30 11:38:03,376 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1SG1C9hBQzWlnYmTLM6itf - 2ndLevel
+2025-09-30 11:38:03,378 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3kextrQMFs5l5C7pIc7VW5 - 2ndLevel
+2025-09-30 11:38:03,380 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1_s1npfnqCyDFYyjpizhuT - 2ndLevel
+2025-09-30 11:38:03,382 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 08zPIdiKzjT7yEpNbMCUE5 - 2ndLevel
+2025-09-30 11:38:03,385 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2z0$8vRtRcRsB_Uh3Syevz - 2ndLevel
+2025-09-30 11:38:03,387 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0gpjplUlWB87xWUG7kOOJX - 2ndLevel
+2025-09-30 11:38:03,389 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 274 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:03,405 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 29/34: 03
+2025-09-30 11:38:03,417 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 08nTCdpu5RJw_P1N9CSq4J - 2ndLevel
+2025-09-30 11:38:03,418 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1Ntws1LL_2CU_yPjR7OwpI - 2ndLevel
+2025-09-30 11:38:03,420 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0o7ud8Zj46CD$WkLMJMNMT - 2ndLevel
+2025-09-30 11:38:03,421 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 38vC4uVev5EXtOoNwgWcNk - 2ndLevel
+2025-09-30 11:38:03,422 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 32UzR0dk4yNgMxhH8Irh7j - 2ndLevel
+2025-09-30 11:38:03,424 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 35UNbW3081k_PtA_HOwQWh - 2ndLevel
+2025-09-30 11:38:03,426 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 16aiL9vx7F0wlftMII9nFj - 2ndLevel
+2025-09-30 11:38:03,428 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3055jcI9qZshm4$bf5Yrtz - 2ndLevel
+2025-09-30 11:38:03,429 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2ndLNOr7UEko_Aik0r5QFO - 2ndLevel
+2025-09-30 11:38:03,431 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0kfJIeDwY0$fE3$gRjKwCH - 2ndLevel
+2025-09-30 11:38:03,432 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2B1yGJ2phdpvESnIEdyj85 - 2ndLevel
+2025-09-30 11:38:03,434 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1T3QdMWw8h9ft2n1kV57Hn - 2ndLevel
+2025-09-30 11:38:03,435 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 17qpJ2Td_0HC950DvOLCDQ - 2ndLevel
+2025-09-30 11:38:03,436 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3AW0LF$jEpZ4XDZrkILq0C - 2ndLevel
+2025-09-30 11:38:03,438 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1IXC9ip2e7hjXq2pLk6aYA - 2ndLevel
+2025-09-30 11:38:03,440 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1UcfhozxeQDkbNCtDEhnSS - 2ndLevel
+2025-09-30 11:38:03,442 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0QknDW4ZNdFp56NruRJIOO - 2ndLevel
+2025-09-30 11:38:03,444 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3qGiIuXOB5TUTfXGWKLoPW - 2ndLevel
+2025-09-30 11:38:03,445 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 37tHazPtsiITW5uIdr2kAk - 2ndLevel
+2025-09-30 11:38:03,448 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2xRODG2SoleGTIjxZ11zG6 - 2ndLevel
+2025-09-30 11:38:03,450 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3HEDASSy2xD9L05Grx2hdN - 2ndLevel
+2025-09-30 11:38:03,452 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0vBHKYPvbQ9rNSfSyXugRd - 2ndLevel
+2025-09-30 11:38:03,454 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3XBaXFdJTEdeCKXEm6oZzK - 2ndLevel
+2025-09-30 11:38:03,456 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 252QDsACBKmMgoMnAHgcAV - 2ndLevel
+2025-09-30 11:38:03,459 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3ZrLGbMd3UUyFZxPqVm9NR - 2ndLevel
+2025-09-30 11:38:03,460 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 173pohi5OWaif4DDreSS40 - 2ndLevel
+2025-09-30 11:38:03,464 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2QmiGkNKJ7OL2s630WPC1y - 2ndLevel
+2025-09-30 11:38:03,467 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0cdxj2RtMvfOy9kq9x$dU0 - 2ndLevel
+2025-09-30 11:38:03,468 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 23t1VWsZhIh6MJUIeqwLgW - 2ndLevel
+2025-09-30 11:38:03,470 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2NYDo4czUaH3h51Coa_Ve2 - 2ndLevel
+2025-09-30 11:38:03,473 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3L3gDs9uaywSW0YbUkkrtI - 2ndLevel
+2025-09-30 11:38:03,475 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0i1a3u1llXBC6prBEPaW1y - 2ndLevel
+2025-09-30 11:38:03,477 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1rI1EFv9CkT6L8SrOOYPs5 - 2ndLevel
+2025-09-30 11:38:03,478 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 33 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:03,480 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 30/34: 04
+2025-09-30 11:38:03,492 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1KGIZRyTLzCzr___D5UI_u - 2ndLevel
+2025-09-30 11:38:03,493 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1wuh4T3hfprpJFJQxqMs4Q - 2ndLevel
+2025-09-30 11:38:03,495 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 09$fdriJPmw89n92_w4B7P - 2ndLevel
+2025-09-30 11:38:03,496 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1VzSrXN7HNQbnR8zh7pz9z - 2ndLevel
+2025-09-30 11:38:03,498 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1RXwfp$CwfMkevajy3fceB - 2ndLevel
+2025-09-30 11:38:03,499 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0ETQhicmAfn8oE8LSlq5_L - 2ndLevel
+2025-09-30 11:38:03,500 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2Np7btIj$KPt2KChuCZW5b - 2ndLevel
+2025-09-30 11:38:03,502 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0_lRm2Wi_4tNFzfiOcJz$T - 2ndLevel
+2025-09-30 11:38:03,504 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1I6DLymt$rORTRAsYovvPf - 2ndLevel
+2025-09-30 11:38:03,505 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0YP4_9caxnsu4tIw1k2dsA - 2ndLevel
+2025-09-30 11:38:03,507 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 09$jrHhN_rateAQmAw7S5t - 2ndLevel
+2025-09-30 11:38:03,509 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1aBfAq9CfGnfm50WMSheyh - 2ndLevel
+2025-09-30 11:38:03,511 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1oFQMNmMGID0IaJ_ZDY_oO - 2ndLevel
+2025-09-30 11:38:03,512 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0lvdcgEqEcd$yCZt$PLbbb - 2ndLevel
+2025-09-30 11:38:03,513 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3XXAfhNDUICc9v9Wyb9gfp - 2ndLevel
+2025-09-30 11:38:03,516 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3NtsN1NsQCkyXpUioyckyi - 2ndLevel
+2025-09-30 11:38:03,517 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1o20EtcBdot4pmnXNztN8t - 2ndLevel
+2025-09-30 11:38:03,519 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1lzm6UuUy1kjAYmaTS55z9 - 2ndLevel
+2025-09-30 11:38:03,520 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3GPKa05cO2YlvneRehhK0P - 2ndLevel
+2025-09-30 11:38:03,521 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3c1gFdRym6jeUXxT7AgZey - 2ndLevel
+2025-09-30 11:38:03,524 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0AoBvgdwggPOwsQ1762Jsu - 2ndLevel
+2025-09-30 11:38:03,526 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 02HCkmzbuDThg2Ypw8J0jN - 2ndLevel
+2025-09-30 11:38:03,529 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2e7g7mTQ9SxEga0sy5WwQd - 2ndLevel
+2025-09-30 11:38:03,531 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3VywyffrYshfpWjIseMH9c - 2ndLevel
+2025-09-30 11:38:03,533 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1dEvQJeABbMknce0Q9docU - 2ndLevel
+2025-09-30 11:38:03,535 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2rP0TZye2e5hOogQwxqSji - 2ndLevel
+2025-09-30 11:38:03,538 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1KwrjZcZ65m_shgBbp9MMc - 2ndLevel
+2025-09-30 11:38:03,541 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3rfPa_pPHCq4BdWzGuaSmX - 2ndLevel
+2025-09-30 11:38:03,543 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3gpDeYMgxzCOkhYg$nBu6B - 2ndLevel
+2025-09-30 11:38:03,545 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1vfAEGOzJlNp7FjekEYOFW - 2ndLevel
+2025-09-30 11:38:03,548 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2zNQt2IdTj$Jxg$LkIfpf8 - 2ndLevel
+2025-09-30 11:38:03,550 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0qGMXX1x3UMyORawx7$9U7 - 2ndLevel
+2025-09-30 11:38:03,553 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 10Yd4cOvJsIUyz8tyGUj6f - 2ndLevel
+2025-09-30 11:38:03,555 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1Abvp_y7z99M7JESd3dSGO - 2ndLevel
+2025-09-30 11:38:03,556 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 34 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:03,558 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 31/34: 03
+2025-09-30 11:38:03,564 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2Hu9u$JoN5WE5MvI9Ldv6b - 2ndLevel
+2025-09-30 11:38:03,570 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0u2mFCRnRTMfyl5mOh2aJX - 2ndLevel
+2025-09-30 11:38:03,572 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0R4iWuvDtGTNkEV7eNyaay - 2ndLevel
+2025-09-30 11:38:03,574 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1Sz9WpIxjKYV5tyW4xn66A - 2ndLevel
+2025-09-30 11:38:03,575 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 20p4dNRosk2j0oFBlsGILz - 2ndLevel
+2025-09-30 11:38:03,577 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1INXVlje7hx_QpmaAN5AdD - 2ndLevel
+2025-09-30 11:38:03,578 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2rypqs4l7lSt75N29G0_tV - 2ndLevel
+2025-09-30 11:38:03,580 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0KsJ$JLEdR5$EsC9AvAeAa - 2ndLevel
+2025-09-30 11:38:03,583 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3yljCVMYf4gy0wHZ0KWIDH - 2ndLevel
+2025-09-30 11:38:03,585 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 28quwZ8SMxYUif4WUt2I7R - 2ndLevel
+2025-09-30 11:38:03,586 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2M3Bkqx$lcABAmxac_vj4k - 2ndLevel
+2025-09-30 11:38:03,587 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2ykAmMsDFrLf7CFfRZ$RRf - 2ndLevel
+2025-09-30 11:38:03,589 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0yX6WLrzXwQy55NVwLee3F - 2ndLevel
+2025-09-30 11:38:03,591 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0n6dl7v9E7pw$7jsQA4Eua - 2ndLevel
+2025-09-30 11:38:03,593 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 30Z3AFMgMRrEv5hHMhUkhF - 2ndLevel
+2025-09-30 11:38:03,594 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1ckOAJTe_LIKR91KCqMOJm - 2ndLevel
+2025-09-30 11:38:03,596 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0Uk10yKej6ZSyt3AVzhXeW - 2ndLevel
+2025-09-30 11:38:03,598 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3p2i$tPCHqeC$5UpS5J0Ne - 2ndLevel
+2025-09-30 11:38:03,600 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2h32iTTG17KpcLQhZGLwY5 - 2ndLevel
+2025-09-30 11:38:03,603 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0Vxrqxpo418631kg2K43o0 - 2ndLevel
+2025-09-30 11:38:03,604 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1tPQ$KJrUV9WBniRQ4Bxeo - 2ndLevel
+2025-09-30 11:38:03,606 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2T_bbRW_eH3hhhOxCLcLAQ - 2ndLevel
+2025-09-30 11:38:03,608 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 067L7VM0gr4GAznVhArvWI - 2ndLevel
+2025-09-30 11:38:03,613 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3qwNw7oX82HCgn_2b3EZBf - 2ndLevel
+2025-09-30 11:38:03,616 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 25vY04UBHu1YYJYgCLwKkD - 2ndLevel
+2025-09-30 11:38:03,618 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2PBkEE9FY5KLMAw8jI0784 - 2ndLevel
+2025-09-30 11:38:03,620 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3ieHhIWIUGo2t0jWatm3Gy - 2ndLevel
+2025-09-30 11:38:03,622 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0$f33PM2bepZ$zEU5hprTm - 2ndLevel
+2025-09-30 11:38:03,624 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0kS85SvHWdbZMByaQ8fojB - 2ndLevel
+2025-09-30 11:38:03,626 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2oASwkaXszaDF10bhbhmYs - 2ndLevel
+2025-09-30 11:38:03,627 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0ujupAzS2fDwclvse1$wzt - 2ndLevel
+2025-09-30 11:38:03,629 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1o2KczVLz56$3AyzOz1ZWZ - 2ndLevel
+2025-09-30 11:38:03,630 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 019pyfc1En13woi6iS2U26 - 2ndLevel
+2025-09-30 11:38:03,632 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1bCVnhG_sgV1z98exEP5CY - 2ndLevel
+2025-09-30 11:38:03,633 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1JpUYCc_JCPGyQqc6wWZZt - 2ndLevel
+2025-09-30 11:38:03,635 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3aqif5G6ZClHGeyTILnaVe - 2ndLevel
+2025-09-30 11:38:03,636 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3KQm565xzql3Dh4HlcWMZB - 2ndLevel
+2025-09-30 11:38:03,638 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2i4jNWyk_700tbNw7Ey9zj - 2ndLevel
+2025-09-30 11:38:03,639 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0cDHYFvkXqFQekyegruTgL - 2ndLevel
+2025-09-30 11:38:03,641 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2QOGOSINyVwo1GEIhuNXeX - 2ndLevel
+2025-09-30 11:38:03,642 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0cBRFhaNuNDB8HHzVDP_IR - 2ndLevel
+2025-09-30 11:38:03,644 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3TdeSnlAECa_4ka7sm28hc - 2ndLevel
+2025-09-30 11:38:03,645 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 42 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:03,646 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 32/34: 03
+2025-09-30 11:38:03,654 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3fAUN_8eO9hhaH1pPRW9r7 - 2ndLevel
+2025-09-30 11:38:03,656 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0qgTQX9CEUhvx5AfWpYsxa - 2ndLevel
+2025-09-30 11:38:03,658 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2FcypUHknjGMNecsTrcCz_ - 2ndLevel
+2025-09-30 11:38:03,663 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0CbnPvtcbop3Kii4caGjGS - 2ndLevel
+2025-09-30 11:38:03,665 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 21eKyHL1r_tojZXPl9xcbV - 2ndLevel
+2025-09-30 11:38:03,666 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1Za0Gq9VG1B4uHA8A0WqHf - 2ndLevel
+2025-09-30 11:38:03,668 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2kxDfkocnOLfjZuYzR4fWR - 2ndLevel
+2025-09-30 11:38:03,669 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0Abi13LdJ_zMURtLYg$7Py - 2ndLevel
+2025-09-30 11:38:03,672 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1pVqCxmxeuliH6VI1UHTYP - 2ndLevel
+2025-09-30 11:38:03,675 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0Y2WcagIqHp_UZPNk0F_xn - 2ndLevel
+2025-09-30 11:38:03,677 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 38MnbuvBDcXaDgvDxEISMr - 2ndLevel
+2025-09-30 11:38:03,679 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1djlZu3816LY3wTFn0lNvz - 2ndLevel
+2025-09-30 11:38:03,681 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3EEEly5UG1xB7j0Up8FRxT - 2ndLevel
+2025-09-30 11:38:03,683 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0kN5tzVz5nLA1uKDJ4W9NJ - 2ndLevel
+2025-09-30 11:38:03,684 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1Xsbbxktrnk7dCdyiJiY00 - 2ndLevel
+2025-09-30 11:38:03,687 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3iJrKazXzf4N_1L7pzO3Zg - 2ndLevel
+2025-09-30 11:38:03,689 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2hAfdGWIyF0pNlztVy9Iq_ - 2ndLevel
+2025-09-30 11:38:03,692 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1$JYUnAsT_OzpP$qEoh8gg - 2ndLevel
+2025-09-30 11:38:03,694 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1F788QvWH4ZIHn7ELPMsyV - 2ndLevel
+2025-09-30 11:38:03,696 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0F7ALxmCLkkHNwvoix$46E - 2ndLevel
+2025-09-30 11:38:03,698 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1cQsxp3wGX_fQXBtpg8tyK - 2ndLevel
+2025-09-30 11:38:03,700 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1nKR23RfOA3Vhvm$qDW98_ - 2ndLevel
+2025-09-30 11:38:03,701 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1W_9pFWkVOPpXfrtSz5_7F - 2ndLevel
+2025-09-30 11:38:03,703 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2MY_6iACD15cAws9ve3PKh - 2ndLevel
+2025-09-30 11:38:03,703 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1spylEJ565rLXMom1BiLky - 2ndLevel
+2025-09-30 11:38:03,704 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 25 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:03,705 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 33/34: 04
+2025-09-30 11:38:03,712 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0UNA7ige3ShIdCXvhSzC8B - 2ndLevel
+2025-09-30 11:38:03,716 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 14cKmX1y_w3kry41brSqLC - 2ndLevel
+2025-09-30 11:38:03,717 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0jG9F7k1zEwxqBXnrCgCTZ - 2ndLevel
+2025-09-30 11:38:03,719 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0KE6iqeR_9qiVePhbR3gIG - 2ndLevel
+2025-09-30 11:38:03,721 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0JVX_HdfKpeLiuDs4w_cyJ - 2ndLevel
+2025-09-30 11:38:03,724 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 24Zh9dJNHgD3k1vTSmhZdM - 2ndLevel
+2025-09-30 11:38:03,725 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 16iXM5HA7dQkeQSnUSy3s9 - 2ndLevel
+2025-09-30 11:38:03,727 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1eYOSTeq6i4koqzV4ByPso - 2ndLevel
+2025-09-30 11:38:03,729 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1hZVofUjbHoiUb12Prv87l - 2ndLevel
+2025-09-30 11:38:03,730 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0EsTEI0pjgcyDE35IkTBlY - 2ndLevel
+2025-09-30 11:38:03,731 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2wnNbNXjLkzLerYH6AhERz - 2ndLevel
+2025-09-30 11:38:03,734 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 32tgWcfH7R$yWsVaZbPLGZ - 2ndLevel
+2025-09-30 11:38:03,736 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2PvyT3NoQkqpAvCtl1Rr_T - 2ndLevel
+2025-09-30 11:38:03,737 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 00h96C9WngqK_zTVFZLdVH - 2ndLevel
+2025-09-30 11:38:03,739 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0o8W3KanHD$0WoGOmFlj7J - 2ndLevel
+2025-09-30 11:38:03,740 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1L3msuVj4UlLC01CpuOdKb - 2ndLevel
+2025-09-30 11:38:03,743 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0saVpNpzvmrJGvDIzzyya9 - 2ndLevel
+2025-09-30 11:38:03,744 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0NkZZGSHD7AxOf9LA1TUuY - 2ndLevel
+2025-09-30 11:38:03,746 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0Rz7EQwJIHIOqhz8gg2Y2C - 2ndLevel
+2025-09-30 11:38:03,747 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3ZEUxZxf9S9$aSyOGoudOu - 2ndLevel
+2025-09-30 11:38:03,749 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 02pJ770AYIfqvBnVoMdT1z - 2ndLevel
+2025-09-30 11:38:03,750 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1foNutLPQZlM8b4pgm49UV - 2ndLevel
+2025-09-30 11:38:03,752 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3RHdIU7N9_hQ9DDoNRJDXx - 2ndLevel
+2025-09-30 11:38:03,763 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0cwJJNU9kFlKZQMW_rkmJO - 2ndLevel
+2025-09-30 11:38:03,765 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1cQ28t5Xv_dKiw0b8dHXe3 - 2ndLevel
+2025-09-30 11:38:03,766 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 37LYC0X392n5R_Jsj0BlAR - 2ndLevel
+2025-09-30 11:38:03,769 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3yAPwe16gn8YE2VAF$g_65 - 2ndLevel
+2025-09-30 11:38:03,771 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1m5mDB9S3n4oE9BR2qPMnW - 2ndLevel
+2025-09-30 11:38:03,772 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0PiYwuzscAe__bSqcQhcq4 - 2ndLevel
+2025-09-30 11:38:03,774 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1Vcl88sNswBtNYby2nVKaI - 2ndLevel
+2025-09-30 11:38:03,776 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3ByIM_dxoDgI26GIO3i1ez - 2ndLevel
+2025-09-30 11:38:03,779 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2mLBo$1UyouQJ7u2J92j_d - 2ndLevel
+2025-09-30 11:38:03,781 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0WqGZwu4HUqckpvFAGpvD$ - 2ndLevel
+2025-09-30 11:38:03,783 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0d0a09irA8ob4rgpuaRDDA - 2ndLevel
+2025-09-30 11:38:03,785 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0Rj10MZzXBCWlvyTA_$7bW - 2ndLevel
+2025-09-30 11:38:03,787 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3cRDmhxCZX9tb6m44LXLaM - 2ndLevel
+2025-09-30 11:38:03,789 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2LWh5ZHiiItRcjAier88FL - 2ndLevel
+2025-09-30 11:38:03,791 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1zl7KF6DjBK$SsPvDM$Gri - 2ndLevel
+2025-09-30 11:38:03,792 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3kY9KPEolB13JL8$LSZocx - 2ndLevel
+2025-09-30 11:38:03,795 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3ZR9hG_QhVvCLVJK103JKx - 2ndLevel
+2025-09-30 11:38:03,797 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1TidGuw8mQ6os$Dz5OuCI_ - 2ndLevel
+2025-09-30 11:38:03,799 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2ZTN2N2Sgl56MFhuJYWQK4 - 2ndLevel
+2025-09-30 11:38:03,803 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0QtjLz_3pMgzOJYShdyvDJ - 2ndLevel
+2025-09-30 11:38:03,806 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3AkN664DaeQZoywKd$JlJD - 2ndLevel
+2025-09-30 11:38:03,808 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3BoRn6JAlIojjEMkEW4QMT - 2ndLevel
+2025-09-30 11:38:03,809 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3YL6rQf8AIKGQBMZhfkUsb - 2ndLevel
+2025-09-30 11:38:03,810 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2XeTekWZKLW1d_$S_L21i7 - 2ndLevel
+2025-09-30 11:38:03,813 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3Ngr3tjF9$VAXwYpFby11H - 2ndLevel
+2025-09-30 11:38:03,814 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1cU_7WVFO9zNdNjN$kzzXv - 2ndLevel
+2025-09-30 11:38:03,816 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 18CQxmmE7SP4ub5HOgYUY8 - 2ndLevel
+2025-09-30 11:38:03,817 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 062_gBnaEmUAjy7HxpWqWZ - 2ndLevel
+2025-09-30 11:38:03,819 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0qBOVDFiULA4ednmOqBgr4 - 2ndLevel
+2025-09-30 11:38:03,821 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 1YTXL7vJUu_cLypkUgrRv_ - 2ndLevel
+2025-09-30 11:38:03,821 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 53 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:03,822 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting boundaries for space 34/34: 05
+2025-09-30 11:38:03,839 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 364AIodCLrjLeod3c_lPhk - 2ndLevel
+2025-09-30 11:38:03,841 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 0vA$onimZ0WPAEwUv2Unu8 - 2ndLevel
+2025-09-30 11:38:03,844 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3ihHz9cd8PbHVWJPmWvGj2 - 2ndLevel
+2025-09-30 11:38:03,846 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3xpvfpYoFrcpr7NLkMVNDL - 2ndLevel
+2025-09-30 11:38:03,848 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 3bknSOjMdEbOGrBH7pD7QE - 2ndLevel
+2025-09-30 11:38:03,851 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Extracted space boundary: 2hVL4MXSEyiVdWSOG9IUiN - 2ndLevel
+2025-09-30 11:38:03,851 - ifc_room_schedule.utils.enhanced_logging - INFO - Successfully extracted 6 space boundaries from 886 IfcRelSpaceBoundary entities
+2025-09-30 11:38:03,851 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 1/34: 01
+2025-09-30 11:38:03,853 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 5 relationships for space 2oghQ1cAf6c9BmWD1pMdIj
+2025-09-30 11:38:03,853 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 5 relationships for space 2oghQ1cAf6c9BmWD1pMdIj: {'Contains': 2, 'DefinedBy': 3}
+2025-09-30 11:38:03,853 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 2/34: 01
+2025-09-30 11:38:03,854 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 9 relationships for space 0lvmW1C_r0DwLHYilhW$yq
+2025-09-30 11:38:03,854 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 9 relationships for space 0lvmW1C_r0DwLHYilhW$yq: {'Contains': 6, 'DefinedBy': 3}
+2025-09-30 11:38:03,854 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 3/34: 01
+2025-09-30 11:38:03,855 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 7 relationships for space 0etOdx4gn7QOeFM3DkCACZ
+2025-09-30 11:38:03,855 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 7 relationships for space 0etOdx4gn7QOeFM3DkCACZ: {'Contains': 4, 'DefinedBy': 3}
+2025-09-30 11:38:03,855 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 4/34: 01
+2025-09-30 11:38:03,857 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 15 relationships for space 0RGRVCyE13zRvWx_wbQh5R
+2025-09-30 11:38:03,857 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 15 relationships for space 0RGRVCyE13zRvWx_wbQh5R: {'Contains': 12, 'DefinedBy': 3}
+2025-09-30 11:38:03,857 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 5/34: 01
+2025-09-30 11:38:03,858 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 3 relationships for space 0Lfq9rWmDEZAgA0xL$m$Bk
+2025-09-30 11:38:03,858 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 3 relationships for space 0Lfq9rWmDEZAgA0xL$m$Bk: {'DefinedBy': 3}
+2025-09-30 11:38:03,858 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 6/34: 02
+2025-09-30 11:38:03,859 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 5 relationships for space 3JXfZI11rEbPVPppj4Jxf1
+2025-09-30 11:38:03,859 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 5 relationships for space 3JXfZI11rEbPVPppj4Jxf1: {'Contains': 2, 'DefinedBy': 3}
+2025-09-30 11:38:03,859 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 7/34: 02
+2025-09-30 11:38:03,860 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 5 relationships for space 0rF7q_xCj62PipnnzfNzKW
+2025-09-30 11:38:03,860 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 5 relationships for space 0rF7q_xCj62PipnnzfNzKW: {'Contains': 2, 'DefinedBy': 3}
+2025-09-30 11:38:03,861 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 8/34: 02
+2025-09-30 11:38:03,861 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 6 relationships for space 30Mh9i1JvBjAVAs5qwyGFC
+2025-09-30 11:38:03,862 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 6 relationships for space 30Mh9i1JvBjAVAs5qwyGFC: {'Contains': 3, 'DefinedBy': 3}
+2025-09-30 11:38:03,862 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 9/34: 02
+2025-09-30 11:38:03,862 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 10 relationships for space 1a0oo6Njb7gxF512nxSYuJ
+2025-09-30 11:38:03,863 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 10 relationships for space 1a0oo6Njb7gxF512nxSYuJ: {'Contains': 7, 'DefinedBy': 3}
+2025-09-30 11:38:03,863 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 10/34: 02
+2025-09-30 11:38:03,864 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 14 relationships for space 1hcSgXD6nB8Qls7RqiVt36
+2025-09-30 11:38:03,864 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 14 relationships for space 1hcSgXD6nB8Qls7RqiVt36: {'Contains': 11, 'DefinedBy': 3}
+2025-09-30 11:38:03,865 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 11/34: 01
+2025-09-30 11:38:03,865 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 3 relationships for space 2g7n5wXHHFjvfjzRMFL7Ag
+2025-09-30 11:38:03,866 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 3 relationships for space 2g7n5wXHHFjvfjzRMFL7Ag: {'DefinedBy': 3}
+2025-09-30 11:38:03,866 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 12/34: 02
+2025-09-30 11:38:03,866 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 3 relationships for space 3ueW3dBRL2R9WoR8xGTA9E
+2025-09-30 11:38:03,866 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 3 relationships for space 3ueW3dBRL2R9WoR8xGTA9E: {'DefinedBy': 3}
+2025-09-30 11:38:03,867 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 13/34: 02
+2025-09-30 11:38:03,867 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 3 relationships for space 0pwWNonAvEzRBvwhqxSoC6
+2025-09-30 11:38:03,867 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 3 relationships for space 0pwWNonAvEzRBvwhqxSoC6: {'DefinedBy': 3}
+2025-09-30 11:38:03,868 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 14/34: 01
+2025-09-30 11:38:03,870 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 24 relationships for space 1lBJWr459BIP7TCLnlZ7Rr
+2025-09-30 11:38:03,870 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 24 relationships for space 1lBJWr459BIP7TCLnlZ7Rr: {'Contains': 21, 'DefinedBy': 3}
+2025-09-30 11:38:03,870 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 15/34: 01
+2025-09-30 11:38:03,872 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 3 relationships for space 32WTxU1Oj9QRi0av4ikK8J
+2025-09-30 11:38:03,872 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 3 relationships for space 32WTxU1Oj9QRi0av4ikK8J: {'DefinedBy': 3}
+2025-09-30 11:38:03,872 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 16/34: 03
+2025-09-30 11:38:03,873 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 5 relationships for space 1BdfIYzF1BSQ8tBqjv4keq
+2025-09-30 11:38:03,873 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 5 relationships for space 1BdfIYzF1BSQ8tBqjv4keq: {'Contains': 2, 'DefinedBy': 3}
+2025-09-30 11:38:03,873 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 17/34: 03
+2025-09-30 11:38:03,874 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 5 relationships for space 1Chpbbz1P2zRAU0ARRIKOs
+2025-09-30 11:38:03,874 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 5 relationships for space 1Chpbbz1P2zRAU0ARRIKOs: {'Contains': 2, 'DefinedBy': 3}
+2025-09-30 11:38:03,874 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 18/34: 03
+2025-09-30 11:38:03,875 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 9 relationships for space 1PXeoJQRHDY9mYm_2dV5Zw
+2025-09-30 11:38:03,875 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 9 relationships for space 1PXeoJQRHDY9mYm_2dV5Zw: {'Contains': 6, 'DefinedBy': 3}
+2025-09-30 11:38:03,875 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 19/34: 03
+2025-09-30 11:38:03,876 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 7 relationships for space 1Abuh2hqP3MxoJVtTeNJZJ
+2025-09-30 11:38:03,876 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 7 relationships for space 1Abuh2hqP3MxoJVtTeNJZJ: {'Contains': 4, 'DefinedBy': 3}
+2025-09-30 11:38:03,877 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 20/34: 03
+2025-09-30 11:38:03,877 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 5 relationships for space 20e785kif8MhL29lIzXRhQ
+2025-09-30 11:38:03,877 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 5 relationships for space 20e785kif8MhL29lIzXRhQ: {'Contains': 2, 'DefinedBy': 3}
+2025-09-30 11:38:03,878 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 21/34: 03
+2025-09-30 11:38:03,878 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 3 relationships for space 37au_BtkfEU8d59K6L2ldX
+2025-09-30 11:38:03,878 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 3 relationships for space 37au_BtkfEU8d59K6L2ldX: {'DefinedBy': 3}
+2025-09-30 11:38:03,879 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 22/34: 04
+2025-09-30 11:38:03,879 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 5 relationships for space 02sq4HuYP3E9UVow$9C7Ud
+2025-09-30 11:38:03,880 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 5 relationships for space 02sq4HuYP3E9UVow$9C7Ud: {'Contains': 2, 'DefinedBy': 3}
+2025-09-30 11:38:03,880 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 23/34: 04
+2025-09-30 11:38:03,880 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 5 relationships for space 1kqaFJe_n95uburgU8d__1
+2025-09-30 11:38:03,880 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 5 relationships for space 1kqaFJe_n95uburgU8d__1: {'Contains': 2, 'DefinedBy': 3}
+2025-09-30 11:38:03,880 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 24/34: 04
+2025-09-30 11:38:03,882 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 6 relationships for space 3rYbhuSJj32fm1Vmztk9Qe
+2025-09-30 11:38:03,882 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 6 relationships for space 3rYbhuSJj32fm1Vmztk9Qe: {'Contains': 3, 'DefinedBy': 3}
+2025-09-30 11:38:03,882 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 25/34: 04
+2025-09-30 11:38:03,883 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 10 relationships for space 2oJi_gbc12FBtZgPM9SlEi
+2025-09-30 11:38:03,883 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 10 relationships for space 2oJi_gbc12FBtZgPM9SlEi: {'Contains': 7, 'DefinedBy': 3}
+2025-09-30 11:38:03,884 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 26/34: 04
+2025-09-30 11:38:03,884 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 3 relationships for space 2J6Ny8LSj3LeIMUsY4hI2s
+2025-09-30 11:38:03,884 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 3 relationships for space 2J6Ny8LSj3LeIMUsY4hI2s: {'DefinedBy': 3}
+2025-09-30 11:38:03,885 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 27/34: 04
+2025-09-30 11:38:03,885 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 5 relationships for space 0hcW2B0zjFoesYviOiMrjT
+2025-09-30 11:38:03,886 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 5 relationships for space 0hcW2B0zjFoesYviOiMrjT: {'Contains': 2, 'DefinedBy': 3}
+2025-09-30 11:38:03,886 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 28/34: 02
+2025-09-30 11:38:03,893 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 37 relationships for space 3qGJVsrovCCOERwRIM9M9F
+2025-09-30 11:38:03,893 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 37 relationships for space 3qGJVsrovCCOERwRIM9M9F: {'Contains': 34, 'DefinedBy': 3}
+2025-09-30 11:38:03,893 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 29/34: 03
+2025-09-30 11:38:03,894 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 8 relationships for space 3quWfdPA12heO5M9sToywJ
+2025-09-30 11:38:03,894 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 8 relationships for space 3quWfdPA12heO5M9sToywJ: {'Contains': 5, 'DefinedBy': 3}
+2025-09-30 11:38:03,894 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 30/34: 04
+2025-09-30 11:38:03,896 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 8 relationships for space 2ygnsTAGr3ruU6hrha99xQ
+2025-09-30 11:38:03,896 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 8 relationships for space 2ygnsTAGr3ruU6hrha99xQ: {'Contains': 5, 'DefinedBy': 3}
+2025-09-30 11:38:03,896 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 31/34: 03
+2025-09-30 11:38:03,898 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 10 relationships for space 0hmZNwjDX0ZwJbO6AmrrjO
+2025-09-30 11:38:03,898 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 10 relationships for space 0hmZNwjDX0ZwJbO6AmrrjO: {'Contains': 7, 'DefinedBy': 3}
+2025-09-30 11:38:03,898 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 32/34: 03
+2025-09-30 11:38:03,899 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 9 relationships for space 02MoDbUmz2fQYwzHjhQuhV
+2025-09-30 11:38:03,899 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 9 relationships for space 02MoDbUmz2fQYwzHjhQuhV: {'Contains': 6, 'DefinedBy': 3}
+2025-09-30 11:38:03,899 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 33/34: 04
+2025-09-30 11:38:03,901 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 6 relationships for space 1fmOvhTur4SAytWzlO9cvT
+2025-09-30 11:38:03,901 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 6 relationships for space 1fmOvhTur4SAytWzlO9cvT: {'Contains': 3, 'DefinedBy': 3}
+2025-09-30 11:38:03,901 - ifc_room_schedule.utils.enhanced_logging - INFO - Extracting relationships for space 34/34: 05
+2025-09-30 11:38:03,901 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 6 relationships for space 0xyvjA51vBzPon8HIwA$o0
+2025-09-30 11:38:03,901 - ifc_room_schedule.utils.enhanced_logging - INFO - Found 6 relationships for space 0xyvjA51vBzPon8HIwA$o0: {'Contains': 3, 'DefinedBy': 3}
+2025-09-30 11:38:03,965 - ifc_room_schedule.utils.enhanced_logging - DEBUG - Resource cleanup verification: all clean

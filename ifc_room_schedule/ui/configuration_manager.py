@@ -10,15 +10,15 @@ from typing import Dict, List, Any, Optional, Callable
 from pathlib import Path
 from datetime import datetime
 
-from PyQt5.QtWidgets import (
+from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QGridLayout, QFormLayout,
     QLabel, QLineEdit, QComboBox, QCheckBox, QSpinBox, QDoubleSpinBox,
     QPushButton, QGroupBox, QTabWidget, QListWidget, QListWidgetItem,
     QTextEdit, QFileDialog, QMessageBox, QSplitter, QScrollArea,
     QTableWidget, QTableWidgetItem, QHeaderView, QFrame
 )
-from PyQt5.QtCore import Qt, pyqtSignal, QSettings
-from PyQt5.QtGui import QFont, QIcon, QPixmap
+from PyQt6.QtCore import Qt, pyqtSignal, QSettings
+from PyQt6.QtGui import QFont, QIcon, QPixmap
 
 
 class ExportProfileManager:
@@ -311,10 +311,10 @@ class ProfileEditorWidget(QWidget):
         reply = QMessageBox.question(
             self, "Delete Profile", 
             f"Are you sure you want to delete profile '{self.current_profile_id}'?",
-            QMessageBox.Yes | QMessageBox.No
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
         )
         
-        if reply == QMessageBox.Yes:
+        if reply == QMessageBox.StandardButton.Yes:
             try:
                 self.profile_manager.delete_profile(self.current_profile_id)
                 self.load_profiles()
@@ -617,10 +617,10 @@ class SettingsWidget(QWidget):
         reply = QMessageBox.question(
             self, "Reset Settings", 
             "Are you sure you want to reset all settings to defaults?",
-            QMessageBox.Yes | QMessageBox.No
+            QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No
         )
         
-        if reply == QMessageBox.Yes:
+        if reply == QMessageBox.StandardButton.Yes:
             self.settings_manager.settings.clear()
             self.settings_manager._load_defaults()
             self.load_settings()
@@ -669,11 +669,11 @@ class ConfigurationManagerDialog(QDialog):
 # Example usage
 if __name__ == "__main__":
     import sys
-    from PyQt5.QtWidgets import QApplication, QInputDialog
+    from PyQt6.QtWidgets import QApplication, QInputDialog
     
     app = QApplication(sys.argv)
     
     dialog = ConfigurationManagerDialog()
     dialog.show()
     
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
