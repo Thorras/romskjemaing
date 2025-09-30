@@ -57,6 +57,7 @@ class SpaceListWidget(QWidget):
         search_container.setStyleSheet("""
             QWidget {
                 background-color: white;
+                color: black;
                 border: 1px solid #ced4da;
                 border-radius: 6px;
                 padding: 4px;
@@ -112,6 +113,7 @@ class SpaceListWidget(QWidget):
         self.space_list.setStyleSheet("""
             QListWidget {
                 background-color: white;
+                color: black;
                 border: 1px solid #ced4da;
                 border-radius: 6px;
                 padding: 4px;
@@ -122,9 +124,11 @@ class SpaceListWidget(QWidget):
                 border-bottom: 1px solid #f1f3f4;
                 border-radius: 4px;
                 margin: 1px;
+                color: black;
             }
             QListWidget::item:hover {
                 background-color: #f8f9fa;
+                color: black;
             }
             QListWidget::item:selected {
                 background-color: #007bff;
@@ -167,6 +171,7 @@ class SpaceListWidget(QWidget):
                 left: 8px;
                 padding: 0 8px 0 8px;
                 background-color: white;
+                color: black;
             }
         """)
         info_layout = QVBoxLayout()

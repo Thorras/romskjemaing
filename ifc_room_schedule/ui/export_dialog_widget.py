@@ -256,24 +256,27 @@ class ExportDialogWidget(QDialog):
                 background-color: #f8f9fa;
             }
             QLabel {
-                color: #495057;
+                color: black;
             }
             QLineEdit, QComboBox, QSpinBox {
                 padding: 6px;
                 border: 1px solid #ced4da;
                 border-radius: 4px;
                 background-color: white;
+                color: black;
             }
             QTextEdit {
                 border: 1px solid #ced4da;
                 border-radius: 4px;
                 background-color: white;
+                color: black;
             }
             QPushButton {
                 padding: 8px 16px;
                 border: 1px solid #ced4da;
                 border-radius: 4px;
                 background-color: white;
+                color: black;
             }
             QPushButton:hover {
                 background-color: #e9ecef;

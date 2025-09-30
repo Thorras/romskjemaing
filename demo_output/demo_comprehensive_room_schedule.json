@@ -1,0 +1,388 @@
+[
+  {
+    "meta": {
+      "schema_version": "1.1.0",
+      "locale": "nb-NO",
+      "created_at": "2025-09-30T12:21:30.325595",
+      "revised_at": null,
+      "created_by": "Demo Bruker",
+      "revised_by": null,
+      "revision": 0,
+      "status": {
+        "phase": "Detaljprosjektering",
+        "state": "Utkast"
+      }
+    },
+    "identification": {
+      "project_id": "PRJ-2024-DEMO",
+      "project_name": "Demo Boligprosjekt",
+      "building_id": "BLD-A",
+      "building_name": "Blokk A - Sentrum",
+      "storey_name": "02",
+      "storey_elevation_m": null,
+      "room_number": "003",
+      "room_name": "SPC-02-A101-111-003",
+      "function": "111",
+      "occupancy_type": null
+    },
+    "ifc": {
+      "space_global_id": "demo-space-001",
+      "space_long_name": "Stue | 02/A101 | NS3940:111",
+      "space_number": "003",
+      "site_guid": null,
+      "building_guid": null,
+      "storey_guid": null,
+      "model_source": {
+        "file_name": "demo_building.ifc",
+        "file_version": "IFC4",
+        "discipline": "ARK"
+      }
+    },
+    "classification": {
+      "ns3451": null,
+      "tfm": null,
+      "custom_codes": []
+    },
+    "geometry": {
+      "area_nett_m2": 25.5,
+      "area_brutto_m2": 27.0,
+      "perimeter_m": 20.0,
+      "length_m": 5.049752469181039,
+      "width_m": 5.049752469181039,
+      "clear_height_m": 2.4,
+      "floor_load_kN_m2": null,
+      "room_local_origin": {
+        "x_m": 0.0,
+        "y_m": 0.0,
+        "z_m": 0.0,
+        "description": "Lokal 0,0,0 for rom SPC-02-A101-111-003"
+      }
+    },
+    "performance_requirements": {
+      "fire": {
+        "fire_compartment": null,
+        "fire_class": "Standard",
+        "door_rating": "EI30",
+        "penetration_sealing_class": null
+      },
+      "acoustics": {
+        "class_ns8175": "B",
+        "rw_dB": 45.0,
+        "ln_w_dB": null,
+        "background_noise_dB": null
+      },
+      "thermal": {
+        "setpoint_heating_C": null,
+        "setpoint_cooling_C": null,
+        "u_values": {
+          "walls_W_m2K": null,
+          "floor_W_m2K": null,
+          "ceiling_W_m2K": null,
+          "window_W_m2K": null
+        }
+      },
+      "ventilation": {
+        "airflow_supply_m3h": null,
+        "airflow_extract_m3h": null,
+        "co2_setpoint_ppm": null,
+        "pressure_room_Pa": null
+      },
+      "lighting": {
+        "task_lux": null,
+        "emergency_lighting": false,
+        "color_rendering_CRI": null,
+        "UGR_max": null
+      },
+      "power_data": {
+        "sockets_count": null,
+        "data_outlets_count": null,
+        "cleaning_socket": false,
+        "circuits": []
+      },
+      "water_sanitary": {
+        "fixtures": [],
+        "hot_cold_water": false,
+        "drainage_required": false
+      }
+    },
+    "fixtures_and_equipment": [],
+    "attachments": [],
+    "notes": "Hovedoppholdsrom med god dagslysstilgang",
+    "deviations": [],
+    "finishes": {
+      "floor": {
+        "system": "Parkett",
+        "layers": [
+          {
+            "product": "Eik parkett 3-stav",
+            "thickness_mm": 14,
+            "supplier": "Tarkett",
+            "color_code": "Naturell"
+          }
+        ]
+      },
+      "ceiling": {
+        "system": "Malt gips",
+        "height_m": 2.4,
+        "acoustic_class": "C"
+      },
+      "walls": [
+        {
+          "name": "Alle vegger",
+          "system": "Malt gips",
+          "finish": "Matt maling",
+          "color_code": "RAL 9010"
+        }
+      ]
+    }
+  },
+  {
+    "meta": {
+      "schema_version": "1.1.0",
+      "locale": "nb-NO",
+      "created_at": "2025-09-30T12:21:30.326595",
+      "revised_at": null,
+      "created_by": "Demo Bruker",
+      "revised_by": null,
+      "revision": 0,
+      "status": {
+        "phase": "Detaljprosjektering",
+        "state": "Utkast"
+      }
+    },
+    "identification": {
+      "project_id": "PRJ-2024-DEMO",
+      "project_name": "Demo Boligprosjekt",
+      "building_id": "BLD-A",
+      "building_name": "Blokk A - Sentrum",
+      "storey_name": "02",
+      "storey_elevation_m": null,
+      "room_number": "001",
+      "room_name": "SPC-02-A101-130-001",
+      "function": "130",
+      "occupancy_type": null
+    },
+    "ifc": {
+      "space_global_id": "demo-space-002",
+      "space_long_name": "Bad | 02/A101 | NS3940:130",
+      "space_number": "001",
+      "site_guid": null,
+      "building_guid": null,
+      "storey_guid": null,
+      "model_source": {
+        "file_name": "demo_building.ifc",
+        "file_version": "IFC4",
+        "discipline": "ARK"
+      }
+    },
+    "classification": {
+      "ns3451": null,
+      "tfm": null,
+      "custom_codes": []
+    },
+    "geometry": {
+      "area_nett_m2": 5.2,
+      "area_brutto_m2": 5.8,
+      "perimeter_m": 9.4,
+      "length_m": 2.280350850198276,
+      "width_m": 2.280350850198276,
+      "clear_height_m": 2.4,
+      "floor_load_kN_m2": null,
+      "room_local_origin": {
+        "x_m": 0.0,
+        "y_m": 0.0,
+        "z_m": 0.0,
+        "description": "Lokal 0,0,0 for rom SPC-02-A101-130-001"
+      }
+    },
+    "performance_requirements": {
+      "fire": {
+        "fire_compartment": null,
+        "fire_class": "Standard",
+        "door_rating": "EI30",
+        "penetration_sealing_class": null
+      },
+      "acoustics": {
+        "class_ns8175": "C",
+        "rw_dB": 40.0,
+        "ln_w_dB": null,
+        "background_noise_dB": null
+      },
+      "thermal": {
+        "setpoint_heating_C": null,
+        "setpoint_cooling_C": null,
+        "u_values": {
+          "walls_W_m2K": null,
+          "floor_W_m2K": null,
+          "ceiling_W_m2K": null,
+          "window_W_m2K": null
+        }
+      },
+      "ventilation": {
+        "airflow_supply_m3h": null,
+        "airflow_extract_m3h": null,
+        "co2_setpoint_ppm": null,
+        "pressure_room_Pa": null
+      },
+      "lighting": {
+        "task_lux": null,
+        "emergency_lighting": false,
+        "color_rendering_CRI": null,
+        "UGR_max": null
+      },
+      "power_data": {
+        "sockets_count": null,
+        "data_outlets_count": null,
+        "cleaning_socket": false,
+        "circuits": []
+      },
+      "water_sanitary": {
+        "fixtures": [],
+        "hot_cold_water": false,
+        "drainage_required": false
+      }
+    },
+    "fixtures_and_equipment": [],
+    "attachments": [],
+    "notes": "Våtrom med dusjnisje og god ventilasjon",
+    "deviations": [],
+    "finishes": {
+      "floor": {
+        "system": "Keramiske fliser",
+        "layers": [
+          {
+            "product": "Porselensfliser 30x60",
+            "thickness_mm": 10,
+            "supplier": "Marazzi",
+            "color_code": "Grå"
+          }
+        ]
+      },
+      "walls": [
+        {
+          "name": "Dusjsone",
+          "system": "Keramiske fliser",
+          "finish": "Porselensfliser 30x60",
+          "color_code": "Grå"
+        },
+        {
+          "name": "Øvrige vegger",
+          "system": "Malt gips",
+          "finish": "Fuktsikker maling",
+          "color_code": "RAL 9010"
+        }
+      ]
+    }
+  },
+  {
+    "meta": {
+      "schema_version": "1.1.0",
+      "locale": "nb-NO",
+      "created_at": "2025-09-30T12:21:30.326595",
+      "revised_at": null,
+      "created_by": "Demo Bruker",
+      "revised_by": null,
+      "revision": 0,
+      "status": {
+        "phase": "Detaljprosjektering",
+        "state": "Utkast"
+      }
+    },
+    "identification": {
+      "project_id": "PRJ-2024-DEMO",
+      "project_name": "Demo Boligprosjekt",
+      "building_id": "BLD-A",
+      "building_name": "Blokk A - Sentrum",
+      "storey_name": "02",
+      "storey_elevation_m": null,
+      "room_number": "002",
+      "room_name": "SPC-02-A101-140-002",
+      "function": "140",
+      "occupancy_type": null
+    },
+    "ifc": {
+      "space_global_id": "demo-space-003",
+      "space_long_name": "Kjøkken | 02/A101 | NS3940:140",
+      "space_number": "002",
+      "site_guid": null,
+      "building_guid": null,
+      "storey_guid": null,
+      "model_source": {
+        "file_name": "demo_building.ifc",
+        "file_version": "IFC4",
+        "discipline": "ARK"
+      }
+    },
+    "classification": {
+      "ns3451": null,
+      "tfm": null,
+      "custom_codes": []
+    },
+    "geometry": {
+      "area_nett_m2": 12.8,
+      "area_brutto_m2": 13.5,
+      "perimeter_m": 15.2,
+      "length_m": 3.5777087639996634,
+      "width_m": 3.5777087639996634,
+      "clear_height_m": 2.4,
+      "floor_load_kN_m2": null,
+      "room_local_origin": {
+        "x_m": 0.0,
+        "y_m": 0.0,
+        "z_m": 0.0,
+        "description": "Lokal 0,0,0 for rom SPC-02-A101-140-002"
+      }
+    },
+    "performance_requirements": {
+      "fire": {
+        "fire_compartment": null,
+        "fire_class": "Forhøyet",
+        "door_rating": "EI30",
+        "penetration_sealing_class": null
+      },
+      "acoustics": {
+        "class_ns8175": null,
+        "rw_dB": null,
+        "ln_w_dB": null,
+        "background_noise_dB": null
+      },
+      "thermal": {
+        "setpoint_heating_C": null,
+        "setpoint_cooling_C": null,
+        "u_values": {
+          "walls_W_m2K": null,
+          "floor_W_m2K": null,
+          "ceiling_W_m2K": null,
+          "window_W_m2K": null
+        }
+      },
+      "ventilation": {
+        "airflow_supply_m3h": null,
+        "airflow_extract_m3h": null,
+        "co2_setpoint_ppm": null,
+        "pressure_room_Pa": null
+      },
+      "lighting": {
+        "task_lux": null,
+        "emergency_lighting": false,
+        "color_rendering_CRI": null,
+        "UGR_max": null
+      },
+      "power_data": {
+        "sockets_count": null,
+        "data_outlets_count": null,
+        "cleaning_socket": false,
+        "circuits": []
+      },
+      "water_sanitary": {
+        "fixtures": [],
+        "hot_cold_water": false,
+        "drainage_required": false
+      }
+    },
+    "fixtures_and_equipment": [],
+    "attachments": [],
+    "notes": "Moderne kjøkken med kjøkkenøy og god arbeidsflyt",
+    "deviations": []
+  }
+]

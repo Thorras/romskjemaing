@@ -2112,7 +2112,7 @@ class MainWindow(QMainWindow):
                 background-color: white;
                 border: 1px solid #ced4da;
                 border-radius: 4px;
-                color: #495057;
+                color: black;
                 font-size: 13px;
             }
         """)
@@ -2219,6 +2219,7 @@ class MainWindow(QMainWindow):
         right_panel.setStyleSheet("""
             QWidget {
                 background-color: white;
+                color: black;
             }
         """)
         right_layout = QVBoxLayout()
@@ -2481,6 +2482,15 @@ class MainWindow(QMainWindow):
         export_json_action.triggered.connect(self.export_json)
         export_menu.addAction(export_json_action)
         self.export_action = export_json_action
+        
+        # Comprehensive JSON export
+        export_comprehensive_action = QAction('Export &Comprehensive JSON...', self)
+        export_comprehensive_action.setShortcut('Ctrl+Shift+E')
+        export_comprehensive_action.setStatusTip('Export comprehensive room schedule data to JSON file')
+        export_comprehensive_action.setEnabled(False)
+        export_comprehensive_action.triggered.connect(self.export_comprehensive_json)
+        export_menu.addAction(export_comprehensive_action)
+        self.export_comprehensive_action = export_comprehensive_action
         
         # Additional export formats (for future implementation)
         export_csv_action = QAction('Export as &CSV...', self)
@@ -3605,6 +3615,41 @@ class MainWindow(QMainWindow):
                 "error"
             )
     
+    def export_comprehensive_json(self):
+        """Export space data to comprehensive JSON file with enhanced error handling."""
+        if not self.spaces:
+            self.show_enhanced_error_message(
+                "No Data", 
+                "No space data available for export. Please load an IFC file first.",
+                "",
+                "warning"
+            )
+            return
+        
+        try:
+            # Create and show comprehensive export dialog
+            from .comprehensive_export_dialog import ComprehensiveExportDialog
+            export_dialog = ComprehensiveExportDialog(
+                spaces=self.spaces,
+                source_file_path=self.current_file_path,
+                parent=self
+            )
+            
+            # Connect export completion signal
+            export_dialog.export_completed.connect(self.on_export_completed)
+            
+            # Show dialog
+            export_dialog.exec()
+            
+        except Exception as e:
+            error_details = traceback.format_exc()
+            self.show_enhanced_error_message(
+                "Comprehensive Export Dialog Error",
+                f"Failed to open comprehensive export dialog: {str(e)}",
+                error_details,
+                "error"
+            )
+    
     def on_export_completed(self, success: bool, message: str):
         """Handle export completion from export dialog."""
         if success:
@@ -3659,6 +3704,7 @@ class MainWindow(QMainWindow):
         self.close_action.setEnabled(file_loaded)
         self.refresh_action.setEnabled(file_loaded)
         self.export_action.setEnabled(has_spaces)
+        self.export_comprehensive_action.setEnabled(has_spaces)
         self.next_space_action.setEnabled(has_spaces)
         self.prev_space_action.setEnabled(has_spaces)
         self.goto_space_action.setEnabled(has_spaces)

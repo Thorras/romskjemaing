@@ -1,0 +1,71 @@
+{
+  "space_guid": "demo-space-001",
+  "space_name": "SPC-02-A101-111-003",
+  "performance_requirements": {
+    "fire": {
+      "fire_compartment": null,
+      "fire_class": null,
+      "door_rating": null,
+      "penetration_sealing_class": null
+    },
+    "acoustics": {
+      "class_ns8175": null,
+      "rw_dB": null,
+      "ln_w_dB": null,
+      "background_noise_dB": null
+    },
+    "thermal": {
+      "setpoint_heating_C": null,
+      "setpoint_cooling_C": null,
+      "u_values": {
+        "walls_W_m2K": null,
+        "floor_W_m2K": null,
+        "ceiling_W_m2K": null,
+        "window_W_m2K": null
+      }
+    },
+    "ventilation": {
+      "airflow_supply_m3h": null,
+      "airflow_extract_m3h": null,
+      "co2_setpoint_ppm": null,
+      "pressure_room_Pa": null
+    },
+    "lighting": {
+      "task_lux": null,
+      "emergency_lighting": false,
+      "color_rendering_CRI": null,
+      "UGR_max": null
+    },
+    "power_data": {
+      "sockets_count": null,
+      "data_outlets_count": null,
+      "cleaning_socket": false,
+      "circuits": []
+    },
+    "water_sanitary": {
+      "fixtures": [],
+      "hot_cold_water": false,
+      "drainage_required": false
+    }
+  },
+  "finishes": {
+    "floor": {
+      "system": null,
+      "layers": [],
+      "tolerances": {}
+    },
+    "ceiling": {
+      "system": null,
+      "height_m": null,
+      "acoustic_class": null,
+      "notes": null
+    },
+    "walls": [],
+    "skirting": {
+      "type": null,
+      "height_mm": null,
+      "material": null
+    }
+  },
+  "notes": null
+}
