@@ -1,8 +1,9 @@
 @echo off
-REM Quick launcher for IFC Room Schedule Application
+REM Quick launcher for Romskjema Generator - Enhanced Room Schedule Application
 
 echo ========================================
-echo IFC Room Schedule Application Launcher
+echo Romskjema Generator v2.0.0 Launcher
+echo Enhanced Room Schedule Generator
 echo ========================================
 
 REM Check if Python is available
@@ -27,7 +28,7 @@ if not exist main.py (
 
 REM Check if requirements are installed
 echo Checking dependencies...
-python -c "import PyQt6, ifcopenshell, pandas" >nul 2>&1
+python -c "import ifcopenshell, pandas, numpy" >nul 2>&1
 if errorlevel 1 (
     echo Installing missing dependencies...
     pip install -r requirements.txt
@@ -40,11 +41,15 @@ if errorlevel 1 (
 
 echo Dependencies OK!
 echo.
-echo Starting IFC Room Schedule Application...
+echo Starting Romskjema Generator...
+echo.
+echo Available modes:
+echo   GUI Mode: python main.py --gui
+echo   CLI Mode: python main.py --help
 echo.
 
-REM Run the application
-python main.py
+REM Run the application in GUI mode by default
+python main.py --gui
 
 REM Keep window open if there was an error
 if errorlevel 1 (
