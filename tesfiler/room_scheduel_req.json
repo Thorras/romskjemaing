@@ -1,182 +1,230 @@
 {
-    "IfcSpace_Schema": {
-      "meta": {
-        "version": "1.0-no",
-        "purpose": "Standardisert romskjema for IfcSpace med NS 8360-navngivning og NS 3940-klassifisering."
+  "IfcSpace_Schema": {
+    "meta": {
+      "version": "1.0-no",
+      "purpose": "Standardisert romskjema for IfcSpace med NS 8360-navngivning og NS 3940-klassifisering."
+    },
+    "fields": {
+      "GlobalId": "IFC GUID (valgfritt her, obligatorisk i faktisk IFC)",
+      "ifc_class": "IfcSpace",
+      "Name": "IfcSpace.Name (må følge NS 8360-mønster, se naming.rules)",
+      "LongName": "IfcSpace.LongName (utvidet tekstnavn; følger også NS 8360 struktur, men mer lesbart)",
+      "Description": "Valgfritt",
+      "classification": {
+        "ns3940": {
+          "code": "f.eks. 111 (Oppholdsrom), 130 (Våtrom)",
+          "label": "tekst fra NS 3940 som matcher code"
+        }
       },
-      "fields": {
-        "GlobalId": "IFC GUID (valgfritt her, obligatorisk i faktisk IFC)",
+      "structure": {
+        "Site": "ref",
+        "Building": "ref",
+        "BuildingStorey": "ref",
+        "Zone": "valgfri ref (f.eks. leilighet/bruksenhet/risikosone)"
+      },
+      "Psets": {
+        "Pset_SpaceCommon": {
+          "OccupancyType": "Opphold | Våtrom | Kjøkken | Soverom | ...",
+          "Category": "Bolig | Kontor | ...",
+          "IsWetRoom": "true|false"
+        }
+      },
+      "Qtos": {
+        "Qto_SpaceBaseQuantities": {
+          "GrossArea": "number m2",
+          "NetArea": "number m2",
+          "Perimeter": "number m",
+          "Height": "number m  (floor-to-ceiling)",
+          "Volume": "number m3"
+        }
+      },
+      "Relations": {
+        "Boundaries": [
+          "IfcRelSpaceBoundary refs (vegger, gulv, tak)"
+        ],
+        "ContainedElements": [
+          "refs til IfcElement i rommet (valgfritt)"
+        ]
+      }
+    },
+    "naming": {
+      "standard": "NS 8360",
+      "rules": {
+        "rationale": "Rom skal ha konsistent, maskinlesbar navngivning for søk/filtrering. Bruk NS 8360-prinsipp: kort, entydig, og med koder som bærer mening.",
+        "components": {
+          "prefix": "SPC (fast prefiks for rom, anbefalt)",
+          "storey": "etasjekode (f.eks. U1, 01, 02, M for mesanin)",
+          "zone": "sonekode/bruksenhet (f.eks. A101 for leilighet, S1 for sone 1) – valgfri men anbefalt",
+          "func": "NS 3940 funksjonskode (3 siffer, f.eks. 111, 130)",
+          "seq": "løpenummer innen sone/etasje (3 siffer)"
+        },
+        "pattern_primary": {
+          "name": "IfcSpace.Name",
+          "format": "SPC-{storey}-{zone}-{func}-{seq}",
+          "regex": "^SPC-[A-Z0-9]{1,3}-[A-Z0-9]{1,6}-\\d{3}-\\d{3}$",
+          "examples": [
+            "SPC-02-A101-111-003",
+            "SPC-01-A101-130-001"
+          ]
+        },
+        "pattern_nozone": {
+          "name": "IfcSpace.Name (uten zone)",
+          "format": "SPC-{storey}-{func}-{seq}",
+          "regex": "^SPC-[A-Z0-9]{1,3}-\\d{3}-\\d{3}$",
+          "examples": [
+            "SPC-02-111-003",
+            "SPC-01-130-001"
+          ]
+        },
+        "longname": {
+          "name": "IfcSpace.LongName",
+          "format": "{HumanLabel} | {Storey}/{Zone} | NS3940:{func}",
+          "examples": [
+            "Stue | 02/A101 | NS3940:111",
+            "Bad | 01/A101 | NS3940:130"
+          ]
+        },
+        "constraints": [
+          "NS 3940 code (func) skal alltid være med i Name",
+          "seq skal alltid være 3 siffer (001..999)",
+          "storey skal ha fast konvensjon i prosjektet (dokumentér i BIM-krav)",
+          "zone anbefales for bolig/bruksenheter; kan sløyfes i små prosjekter"
+        ]
+      }
+    },
+    "validation_rules": [
+      {
+        "id": "R-NS8360-Name-Pattern",
+        "if": {
+          "field": "Name"
+        },
+        "then": {
+          "valid_if_regex_any_of": [
+            "^SPC-[A-Z0-9]{1,3}-[A-Z0-9]{1,6}-\\d{3}-\\d{3}$",
+            "^SPC-[A-Z0-9]{1,3}-\\d{3}-\\d{3}$"
+          ],
+          "error": "IfcSpace.Name oppfyller ikke NS 8360-mønsteret."
+        }
+      },
+      {
+        "id": "R-NS3940-Required",
+        "if": {
+          "field": "classification.ns3940.code"
+        },
+        "then": {
+          "valid_if_regex": "^\\d{3}$",
+          "error": "NS 3940-koden må være 3 siffer (f.eks. 111, 130)."
+        }
+      },
+      {
+        "id": "R-NS3940-Name-Consistency",
+        "if": {
+          "fields": [
+            "Name",
+            "classification.ns3940.code"
+          ]
+        },
+        "then": {
+          "logic": "Name må inneholde ns3940.code som egen blokk (func).",
+          "error": "IfcSpace.Name og NS 3940-koden er inkonsistente."
+        }
+      },
+      {
+        "id": "R-WetRoom-Consistency",
+        "if": {
+          "fields": [
+            "classification.ns3940.code",
+            "Psets.Pset_SpaceCommon.IsWetRoom"
+          ]
+        },
+        "then": {
+          "logic": "Hvis ns3940.code er i ['130','131','132'], forvent IsWetRoom=true.",
+          "error": "Våtromskonsistens: NS 3940-kode indikerer våtrom, men IsWetRoom er ikke true."
+        }
+      },
+      {
+        "id": "R-Quantities-Completeness",
+        "if": {
+          "fields": [
+            "Qtos.Qto_SpaceBaseQuantities.GrossArea",
+            "Qtos.Qto_SpaceBaseQuantities.NetArea",
+            "Qtos.Qto_SpaceBaseQuantities.Height",
+            "Qtos.Qto_SpaceBaseQuantities.Volume"
+          ]
+        },
+        "then": {
+          "logic": "Alle fire bør finnes. I tillegg: Volume ≈ NetArea * Height (toleranse ±7%).",
+          "error": "Mengdekonsistens: mangler felt eller volum avviker mer enn toleranse."
+        }
+      }
+    ],
+    "examples": [
+      {
+        "GlobalId": "GUID-STUE",
         "ifc_class": "IfcSpace",
-        "Name": "IfcSpace.Name (må følge NS 8360-mønster, se naming.rules)",
-        "LongName": "IfcSpace.LongName (utvidet tekstnavn; følger også NS 8360 struktur, men mer lesbart)",
-        "Description": "Valgfritt",
+        "Name": "SPC-02-A101-111-003",
+        "LongName": "Stue | 02/A101 | NS3940:111",
+        "Description": "Oppholdsrom i A101",
         "classification": {
           "ns3940": {
-            "code": "f.eks. 111 (Oppholdsrom), 130 (Våtrom)",
-            "label": "tekst fra NS 3940 som matcher code"
+            "code": "111",
+            "label": "Oppholdsrom"
           }
         },
         "structure": {
-          "Site": "ref",
-          "Building": "ref",
-          "BuildingStorey": "ref",
-          "Zone": "valgfri ref (f.eks. leilighet/bruksenhet/risikosone)"
+          "BuildingStorey": "02",
+          "Zone": "A101"
         },
         "Psets": {
           "Pset_SpaceCommon": {
-            "OccupancyType": "Opphold | Våtrom | Kjøkken | Soverom | ...",
-            "Category": "Bolig | Kontor | ...",
-            "IsWetRoom": "true|false"
+            "OccupancyType": "Opphold",
+            "Category": "Bolig",
+            "IsWetRoom": false
           }
         },
         "Qtos": {
           "Qto_SpaceBaseQuantities": {
-            "GrossArea": "number m2",
-            "NetArea": "number m2",
-            "Perimeter": "number m",
-            "Height": "number m  (floor-to-ceiling)",
-            "Volume": "number m3"
+            "GrossArea": 25.5,
+            "NetArea": 24.0,
+            "Perimeter": 21.0,
+            "Height": 2.4,
+            "Volume": 57.6
           }
-        },
-        "Relations": {
-          "Boundaries": ["IfcRelSpaceBoundary refs (vegger, gulv, tak)"],
-          "ContainedElements": ["refs til IfcElement i rommet (valgfritt)"]
         }
       },
-      "naming": {
-        "standard": "NS 8360",
-        "rules": {
-          "rationale": "Rom skal ha konsistent, maskinlesbar navngivning for søk/filtrering. Bruk NS 8360-prinsipp: kort, entydig, og med koder som bærer mening.",
-          "components": {
-            "prefix": "SPC (fast prefiks for rom, anbefalt)",
-            "storey": "etasjekode (f.eks. U1, 01, 02, M for mesanin)",
-            "zone": "sonekode/bruksenhet (f.eks. A101 for leilighet, S1 for sone 1) – valgfri men anbefalt",
-            "func": "NS 3940 funksjonskode (3 siffer, f.eks. 111, 130)",
-            "seq": "løpenummer innen sone/etasje (3 siffer)"
-          },
-          "pattern_primary": {
-            "name": "IfcSpace.Name",
-            "format": "SPC-{storey}-{zone}-{func}-{seq}",
-            "regex": "^SPC-[A-Z0-9]{1,3}-[A-Z0-9]{1,6}-\\d{3}-\\d{3}$",
-            "examples": [
-              "SPC-02-A101-111-003",
-              "SPC-01-A101-130-001"
-            ]
-          },
-          "pattern_nozone": {
-            "name": "IfcSpace.Name (uten zone)",
-            "format": "SPC-{storey}-{func}-{seq}",
-            "regex": "^SPC-[A-Z0-9]{1,3}-\\d{3}-\\d{3}$",
-            "examples": [
-              "SPC-02-111-003",
-              "SPC-01-130-001"
-            ]
-          },
-          "longname": {
-            "name": "IfcSpace.LongName",
-            "format": "{HumanLabel} | {Storey}/{Zone} | NS3940:{func}",
-            "examples": [
-              "Stue | 02/A101 | NS3940:111",
-              "Bad | 01/A101 | NS3940:130"
-            ]
-          },
-          "constraints": [
-            "NS 3940 code (func) skal alltid være med i Name",
-            "seq skal alltid være 3 siffer (001..999)",
-            "storey skal ha fast konvensjon i prosjektet (dokumentér i BIM-krav)",
-            "zone anbefales for bolig/bruksenheter; kan sløyfes i små prosjekter"
-          ]
-        }
-      },
-      "validation_rules": [
-        {
-          "id": "R-NS8360-Name-Pattern",
-          "if": {"field": "Name"},
-          "then": {
-            "valid_if_regex_any_of": [
-              "^SPC-[A-Z0-9]{1,3}-[A-Z0-9]{1,6}-\\d{3}-\\d{3}$",
-              "^SPC-[A-Z0-9]{1,3}-\\d{3}-\\d{3}$"
-            ],
-            "error": "IfcSpace.Name oppfyller ikke NS 8360-mønsteret."
+      {
+        "GlobalId": "GUID-BAD",
+        "ifc_class": "IfcSpace",
+        "Name": "SPC-01-A101-130-001",
+        "LongName": "Bad | 01/A101 | NS3940:130",
+        "Description": "Bad med dusj og WC",
+        "classification": {
+          "ns3940": {
+            "code": "130",
+            "label": "Våtrom"
           }
         },
-        {
-          "id": "R-NS3940-Required",
-          "if": {"field": "classification.ns3940.code"},
-          "then": {
-            "valid_if_regex": "^\\d{3}$",
-            "error": "NS 3940-koden må være 3 siffer (f.eks. 111, 130)."
+        "structure": {
+          "BuildingStorey": "01",
+          "Zone": "A101"
+        },
+        "Psets": {
+          "Pset_SpaceCommon": {
+            "OccupancyType": "Våtrom",
+            "Category": "Bolig",
+            "IsWetRoom": true
           }
         },
-        {
-          "id": "R-NS3940-Name-Consistency",
-          "if": {"fields": ["Name", "classification.ns3940.code"]},
-          "then": {
-            "logic": "Name må inneholde ns3940.code som egen blokk (func).",
-            "error": "IfcSpace.Name og NS 3940-koden er inkonsistente."
-          }
-        },
-        {
-          "id": "R-WetRoom-Consistency",
-          "if": {"fields": ["classification.ns3940.code", "Psets.Pset_SpaceCommon.IsWetRoom"]},
-          "then": {
-            "logic": "Hvis ns3940.code er i ['130','131','132'], forvent IsWetRoom=true.",
-            "error": "Våtromskonsistens: NS 3940-kode indikerer våtrom, men IsWetRoom er ikke true."
-          }
-        },
-        {
-          "id": "R-Quantities-Completeness",
-          "if": {"fields": ["Qtos.Qto_SpaceBaseQuantities.GrossArea","Qtos.Qto_SpaceBaseQuantities.NetArea","Qtos.Qto_SpaceBaseQuantities.Height","Qtos.Qto_SpaceBaseQuantities.Volume"]},
-          "then": {
-            "logic": "Alle fire bør finnes. I tillegg: Volume ≈ NetArea * Height (toleranse ±7%).",
-            "error": "Mengdekonsistens: mangler felt eller volum avviker mer enn toleranse."
+        "Qtos": {
+          "Qto_SpaceBaseQuantities": {
+            "GrossArea": 5.2,
+            "NetArea": 4.8,
+            "Perimeter": 9.4,
+            "Height": 2.4,
+            "Volume": 11.5
           }
         }
-      ],
-      "examples": [
-        {
-          "GlobalId": "GUID-STUE",
-          "ifc_class": "IfcSpace",
-          "Name": "SPC-02-A101-111-003",
-          "LongName": "Stue | 02/A101 | NS3940:111",
-          "Description": "Oppholdsrom i A101",
-          "classification": { "ns3940": { "code": "111", "label": "Oppholdsrom" } },
-          "structure": { "BuildingStorey": "02", "Zone": "A101" },
-          "Psets": {
-            "Pset_SpaceCommon": { "OccupancyType": "Opphold", "Category": "Bolig", "IsWetRoom": false }
-          },
-          "Qtos": {
-            "Qto_SpaceBaseQuantities": {
-              "GrossArea": 25.5,
-              "NetArea": 24.0,
-              "Perimeter": 21.0,
-              "Height": 2.4,
-              "Volume": 57.6
-            }
-          }
-        },
-        {
-          "GlobalId": "GUID-BAD",
-          "ifc_class": "IfcSpace",
-          "Name": "SPC-01-A101-130-001",
-          "LongName": "Bad | 01/A101 | NS3940:130",
-          "Description": "Bad med dusj og WC",
-          "classification": { "ns3940": { "code": "130", "label": "Våtrom" } },
-          "structure": { "BuildingStorey": "01", "Zone": "A101" },
-          "Psets": {
-            "Pset_SpaceCommon": { "OccupancyType": "Våtrom", "Category": "Bolig", "IsWetRoom": true }
-          },
-          "Qtos": {
-            "Qto_SpaceBaseQuantities": {
-              "GrossArea": 5.2,
-              "NetArea": 4.8,
-              "Perimeter": 9.4,
-              "Height": 2.4,
-              "Volume": 11.5
-            }
-          }
-        }
-      ]
-    }
+      }
+    ]
   }
-  
+}
