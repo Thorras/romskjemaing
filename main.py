@@ -19,6 +19,7 @@ project_root = Path(__file__).parent
 sys.path.insert(0, str(project_root))
 
 from ifc_room_schedule.parser.ifc_file_reader import IfcFileReader
+from ifc_room_schedule.parser.ifc_space_extractor import IfcSpaceExtractor
 from ifc_room_schedule.export.enhanced_json_builder import EnhancedJsonBuilder
 from ifc_room_schedule.analysis.data_quality_analyzer import DataQualityAnalyzer
 from ifc_room_schedule.parser.batch_processor import BatchProcessor
@@ -26,6 +27,7 @@ from ifc_room_schedule.utils.caching_manager import CachingManager, CacheConfig
 from ifc_room_schedule.export.csv_exporter import CsvExporter
 from ifc_room_schedule.export.excel_exporter import ExcelExporter
 from ifc_room_schedule.export.pdf_exporter import PdfExporter
+from ifc_room_schedule.export.azure_sql_exporter import AzureSQLExporter
 from ifc_room_schedule.data.space_model import SpaceData
 
 
@@ -36,6 +38,7 @@ class RomskjemaGenerator:
         """Initialize the application."""
         self.version = "2.0.0"
         self.ifc_reader = IfcFileReader()
+        self.space_extractor = IfcSpaceExtractor()
         self.json_builder = EnhancedJsonBuilder()
         self.quality_analyzer = DataQualityAnalyzer()
         self.batch_processor = BatchProcessor()
@@ -45,6 +48,7 @@ class RomskjemaGenerator:
         self.csv_exporter = CsvExporter()
         self.excel_exporter = ExcelExporter()
         self.pdf_exporter = PdfExporter()
+        self.sql_exporter = None  # Initialized when needed
     
     def process_ifc_file(self, 
                         ifc_path: str, 
@@ -52,7 +56,9 @@ class RomskjemaGenerator:
                         export_profile: str = "production",
                         export_format: str = "json",
                         batch_mode: bool = False,
-                        chunk_size: int = 100) -> Dict[str, Any]:
+                        chunk_size: int = 100,
+                        azure_connection_string: str = None,
+                        azure_table_name: str = "room_schedule") -> Dict[str, Any]:
         """
         Process IFC file and generate room schedule.
         
@@ -60,9 +66,11 @@ class RomskjemaGenerator:
             ifc_path: Path to IFC file
             output_path: Path for output file
             export_profile: Export profile (core, advanced, production)
-            export_format: Export format (json, csv, excel, pdf)
+            export_format: Export format (json, csv, excel, pdf, azure-sql)
             batch_mode: Enable batch processing
             chunk_size: Chunk size for batch processing
+            azure_connection_string: Azure SQL connection string (required for azure-sql export)
+            azure_table_name: Azure SQL table name for export
             
         Returns:
             Processing statistics
@@ -75,7 +83,13 @@ class RomskjemaGenerator:
         try:
             # Load IFC file
             print(f"Loading IFC file: {ifc_path}")
-            spaces = self.ifc_reader.load_spaces(ifc_path)
+            success, message = self.ifc_reader.load_file(ifc_path)
+            if not success:
+                return {"error": f"Failed to load IFC file: {message}"}
+            
+            # Extract spaces
+            self.space_extractor.set_ifc_file(self.ifc_reader.get_ifc_file())
+            spaces = self.space_extractor.extract_spaces()
             print(f"Loaded {len(spaces)} spaces")
             
             if not spaces:
@@ -90,10 +104,10 @@ class RomskjemaGenerator:
             # Process spaces
             if batch_mode and len(spaces) > chunk_size:
                 print(f"Processing {len(spaces)} spaces in batch mode (chunk size: {chunk_size})")
-                stats = self._process_batch(spaces, output_path, export_profile, export_format, chunk_size)
+                stats = self._process_batch(spaces, output_path, export_profile, export_format, chunk_size, azure_connection_string, azure_table_name)
             else:
                 print(f"Processing {len(spaces)} spaces in standard mode")
-                stats = self._process_standard(spaces, output_path, export_profile, export_format)
+                stats = self._process_standard(spaces, output_path, export_profile, export_format, azure_connection_string, azure_table_name)
             
             # Final statistics
             processing_time = time.time() - start_time
@@ -113,7 +127,9 @@ class RomskjemaGenerator:
                          spaces: List[SpaceData], 
                          output_path: str,
                          export_profile: str,
-                         export_format: str) -> Dict[str, Any]:
+                         export_format: str,
+                         azure_connection_string: str = None,
+                         azure_table_name: str = "room_schedule") -> Dict[str, Any]:
         """Process spaces in standard mode."""
         try:
             if export_format == "json":
@@ -141,6 +157,28 @@ class RomskjemaGenerator:
                 success = self.pdf_exporter.export_to_pdf(spaces, output_path)
                 return {"success": success, "format": "pdf"}
             
+            elif export_format == "azure-sql":
+                if not azure_connection_string:
+                    return {"error": "Azure SQL connection string is required for azure-sql format"}
+                
+                try:
+                    # Initialize SQL exporter if not already done
+                    if not self.sql_exporter:
+                        self.sql_exporter = AzureSQLExporter(azure_connection_string)
+                    
+                    # Build enhanced JSON structure for SQL export
+                    enhanced_data = self.json_builder.build_enhanced_json_structure(
+                        spaces=spaces,
+                        export_profile=export_profile
+                    )
+                    
+                    # Export to Azure SQL
+                    success = self.sql_exporter.export_data(enhanced_data, azure_table_name)
+                    return {"success": success, "format": "azure-sql"}
+                    
+                except Exception as e:
+                    return {"error": f"Azure SQL export failed: {str(e)}"}
+            
             else:
                 return {"error": f"Unsupported export format: {export_format}"}
                 
@@ -152,7 +190,9 @@ class RomskjemaGenerator:
                       output_path: str,
                       export_profile: str,
                       export_format: str,
-                      chunk_size: int) -> Dict[str, Any]:
+                      chunk_size: int,
+                      azure_connection_string: str = None,
+                      azure_table_name: str = "room_schedule") -> Dict[str, Any]:
         """Process spaces in batch mode."""
         try:
             if export_format == "json":
@@ -166,7 +206,7 @@ class RomskjemaGenerator:
             
             else:
                 # For other formats, use standard processing
-                return self._process_standard(spaces, output_path, export_profile, export_format)
+                return self._process_standard(spaces, output_path, export_profile, export_format, azure_connection_string, azure_table_name)
                 
         except Exception as e:
             return {"error": str(e)}
@@ -235,6 +275,12 @@ class RomskjemaGenerator:
             input_name = Path(args.input).stem
             output_path = f"{input_name}_room_schedule.{args.format}"
         
+        # Validate Azure SQL parameters if needed
+        if args.format == "azure-sql":
+            if not args.azure_connection_string:
+                print("Error: --azure-connection-string is required for azure-sql format")
+                return 1
+        
         # Process IFC file
         stats = self.process_ifc_file(
             ifc_path=args.input,
@@ -242,7 +288,9 @@ class RomskjemaGenerator:
             export_profile=args.profile,
             export_format=args.format,
             batch_mode=args.batch,
-            chunk_size=args.chunk_size
+            chunk_size=args.chunk_size,
+            azure_connection_string=getattr(args, 'azure_connection_string', None),
+            azure_table_name=getattr(args, 'azure_table_name', None)
         )
         
         if "error" in stats:
@@ -278,6 +326,9 @@ Examples:
   python main.py --input building.ifc --output room_schedule.xlsx --format excel
   python main.py --input building.ifc --output room_schedule.pdf --format pdf
   
+  # Export to Azure SQL
+  python main.py --input building.ifc --format azure-sql --azure-connection-string "Server=..." --azure-table-name "rooms"
+  
   # GUI mode
   python main.py --gui
         """
@@ -302,7 +353,7 @@ Examples:
     
     parser.add_argument(
         "--format", "-f",
-        choices=["json", "csv", "excel", "pdf"],
+        choices=["json", "csv", "excel", "pdf", "azure-sql"],
         default="json",
         help="Export format (default: json)"
     )
@@ -324,6 +375,17 @@ Examples:
         "--gui",
         action="store_true",
         help="Run in GUI mode"
+    )
+    
+    parser.add_argument(
+        "--azure-connection-string",
+        help="Azure SQL connection string (required for azure-sql format)"
+    )
+    
+    parser.add_argument(
+        "--azure-table-name",
+        default="room_schedule",
+        help="Azure SQL table name (default: room_schedule)"
     )
     
     parser.add_argument(
