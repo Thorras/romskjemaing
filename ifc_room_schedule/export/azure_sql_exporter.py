@@ -22,16 +22,24 @@ except ImportError:
 
 from ..data.space_model import SpaceData
 
+# Import database config with proper path handling
+import sys
+from pathlib import Path
+project_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(project_root))
+from config.database_config import DatabaseConfig
+
 
 class AzureSQLExporter:
     """Exports room schedule data to Azure SQL Database."""
     
-    def __init__(self, connection_string: str):
+    def __init__(self, connection_string: str = None, use_default_config: bool = False):
         """
         Initialize Azure SQL exporter.
         
         Args:
-            connection_string: Azure SQL connection string
+            connection_string: Azure SQL connection string (optional if using default config)
+            use_default_config: Use default database configuration
         """
         if not SQL_AVAILABLE:
             raise ImportError(
@@ -39,7 +47,21 @@ class AzureSQLExporter:
                 "pip install pyodbc sqlalchemy"
             )
         
-        self.connection_string = connection_string
+        # Determine connection string to use
+        if use_default_config:
+            try:
+                self.connection_string = DatabaseConfig.get_default_connection_string()
+                self.logger.info("Using default database configuration")
+            except ValueError as e:
+                self.logger.error(f"Failed to get default connection string: {e}")
+                raise
+        elif connection_string:
+            self.connection_string = connection_string
+        else:
+            raise ValueError(
+                "Either provide connection_string or set use_default_config=True"
+            )
+        
         self.engine = None
         self.metadata = MetaData()
         self.logger = logging.getLogger(__name__)
@@ -357,11 +379,31 @@ class AzureSQLExporter:
         Returns:
             Connection string template with placeholders
         """
-        return (
-            "mssql+pyodbc://{username}:{password}@{server}.database.windows.net:1433/"
-            "{database}?driver=ODBC+Driver+17+for+SQL+Server&Encrypt=yes&"
-            "TrustServerCertificate=no&Connection+Timeout=30"
-        )
+        return DatabaseConfig.CONNECTION_STRING_TEMPLATE
+    
+    @classmethod
+    def create_with_default_config(cls):
+        """
+        Create exporter instance with default database configuration.
+        
+        Returns:
+            AzureSQLExporter instance configured with default settings
+        """
+        return cls(use_default_config=True)
+    
+    @classmethod
+    def create_with_local_db(cls, database_name: str = "RomskjemaDB"):
+        """
+        Create exporter instance for local SQL Server Express.
+        
+        Args:
+            database_name: Name of local database
+            
+        Returns:
+            AzureSQLExporter instance configured for local database
+        """
+        connection_string = DatabaseConfig.get_local_connection_string(database_name)
+        return cls(connection_string)
     
     def test_connection(self) -> Dict[str, Any]:
         """

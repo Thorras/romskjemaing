@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "export_date": "2025-10-01T08:49:39.640794",
+    "export_date": "2025-10-01T11:04:24.245822",
     "application_version": "1.0.0",
     "source_file": "AkkordSvingen 23_ARK.ifc",
     "source_file_path": "C:/Users/johtho/OneDrive - Backe/General - Utvikling - Backe/Prosjekt 00 - Prosjektoppfølging/Ifc/AkkordSvingen 23_ARK.ifc"
@@ -55,7 +55,7 @@
           "material": "Platekledning - Vegg",
           "ifc_type": "IfcWall",
           "related_space_guid": "2oghQ1cAf6c9BmWD1pMdIj",
-          "user_description": "Her kan jeg også skriuve smarte ting",
+          "user_description": "kuk\n",
           "properties": {
             "name": "AVC.001",
             "description": "Yttervegger av tre"
@@ -954,7 +954,7 @@
           "GrossVolume": 12.76797296974152,
           "NetVolume": 12.76797296974152
         },
-        "processed": false,
+        "processed": true,
         "user_descriptions": {}
       },
       "surfaces": [
@@ -1017,7 +1017,7 @@
           "material": "Platekledning - Vegg",
           "ifc_type": "IfcWall",
           "related_space_guid": "0etOdx4gn7QOeFM3DkCACZ",
-          "user_description": "",
+          "user_description": "kuk",
           "properties": {
             "name": "AVD.002",
             "description": "Isolert bindingsverk mellom våtrom og opphold"
@@ -36320,7 +36320,7 @@
   ],
   "summary": {
     "total_spaces": 34,
-    "processed_spaces": 1,
+    "processed_spaces": 2,
     "total_surface_area": 2095.23,
     "surface_area_by_type": {
       "Opening": 139.95,

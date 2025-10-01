@@ -159,7 +159,7 @@ class TestMainAzureSQLIntegration:
     def test_process_ifc_file_with_azure_parameters(self):
         """Test that process_ifc_file passes Azure parameters correctly"""
         with patch.object(self.app.ifc_reader, 'load_file') as mock_load_file:
-            mock_load.return_value = self.mock_spaces
+            mock_load_file.return_value = self.mock_spaces
             
             with patch.object(self.app.quality_analyzer, 'analyze_spaces_quality') as mock_analyze:
                 mock_analyze.return_value = {"total_spaces": 2}

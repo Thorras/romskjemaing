@@ -21,6 +21,14 @@ from ..export.json_builder import JsonBuilder
 from ..export.csv_exporter import CsvExporter
 from ..export.excel_exporter import ExcelExporter
 from ..export.pdf_exporter import PdfExporter
+from ..export.azure_sql_exporter import AzureSQLExporter
+
+# Import database config with proper path handling
+import sys
+from pathlib import Path
+project_root = Path(__file__).parent.parent.parent
+sys.path.insert(0, str(project_root))
+from config.database_config import DatabaseConfig, DEFAULT_CONNECTION_CONFIG
 
 
 class ExportWorker(QObject):
@@ -42,6 +50,7 @@ class ExportWorker(QObject):
         self.csv_exporter = CsvExporter()
         self.excel_exporter = ExcelExporter()
         self.pdf_exporter = PdfExporter()
+        self.azure_sql_exporter = None  # Initialized when needed
     
     def run_export(self):
         """Execute the export operation."""
@@ -75,6 +84,8 @@ class ExportWorker(QObject):
                 success, message = self._export_excel()
             elif format_name == "PDF":
                 success, message = self._export_pdf()
+            elif format_name == "Azure SQL":
+                success, message = self._export_azure_sql()
             else:
                 success, message = False, f"Unsupported export format: {format_name}"
             
@@ -172,6 +183,47 @@ class ExportWorker(QObject):
             include_boundaries=include_boundaries,
             include_relationships=include_relationships
         )
+    
+    def _export_azure_sql(self) -> Tuple[bool, str]:
+        """Export to Azure SQL format."""
+        self.status_updated.emit("Connecting to Azure SQL...")
+        self.progress_updated.emit(40)
+        
+        # Get Azure SQL connection details from export options
+        use_default_config = self.export_options.get('use_default_config', False)
+        connection_string = self.export_options.get('azure_connection_string')
+        table_name = self.export_options.get('azure_table_name', 'room_schedule')
+        
+        try:
+            # Initialize Azure SQL exporter
+            if not self.azure_sql_exporter:
+                if use_default_config:
+                    self.azure_sql_exporter = AzureSQLExporter.create_with_default_config()
+                elif connection_string:
+                    self.azure_sql_exporter = AzureSQLExporter(connection_string)
+                else:
+                    return False, "Azure SQL connection string is required when not using default configuration"
+            
+            self.status_updated.emit("Preparing data for Azure SQL...")
+            self.progress_updated.emit(60)
+            
+            # Build JSON structure for SQL export
+            metadata = self.export_options.get('metadata', {})
+            json_data = self.json_builder.build_json_structure(self.spaces, metadata)
+            
+            self.status_updated.emit("Uploading to Azure SQL...")
+            self.progress_updated.emit(80)
+            
+            # Export to Azure SQL
+            success = self.azure_sql_exporter.export_data(json_data, table_name)
+            
+            if success:
+                return True, f"Successfully exported {len(self.spaces)} spaces to Azure SQL table '{table_name}'"
+            else:
+                return False, "Failed to export to Azure SQL"
+                
+        except Exception as e:
+            return False, f"Azure SQL export failed: {str(e)}"
     
     def _format_file_size(self, size_bytes: int) -> str:
         """Format file size in human-readable format."""
@@ -328,7 +380,7 @@ class ExportDialogWidget(QDialog):
         
         # Export format selection
         self.format_combo = QComboBox()
-        self.format_combo.addItems(["JSON", "CSV", "Excel", "PDF"])
+        self.format_combo.addItems(["JSON", "CSV", "Excel", "PDF", "Azure SQL"])
         self.format_combo.setCurrentText("JSON")
         self.format_combo.setToolTip("Select export format")
         self.format_combo.currentTextChanged.connect(self.on_format_changed)
@@ -346,6 +398,39 @@ class ExportDialogWidget(QDialog):
         json_options_layout.addRow("JSON Indentation:", self.indent_spinbox)
         
         options_layout.addRow("", self.json_options_frame)
+        
+        # Azure SQL options (initially hidden)
+        self.azure_sql_options_frame = QFrame()
+        azure_sql_options_layout = QFormLayout()
+        self.azure_sql_options_frame.setLayout(azure_sql_options_layout)
+        
+        # Use default configuration checkbox
+        self.use_default_config_checkbox = QCheckBox("Use default database configuration")
+        self.use_default_config_checkbox.setChecked(True)
+        self.use_default_config_checkbox.setToolTip("Use predefined database settings")
+        self.use_default_config_checkbox.toggled.connect(self.on_default_config_toggled)
+        azure_sql_options_layout.addRow("", self.use_default_config_checkbox)
+        
+        # Connection string (disabled when using default config)
+        self.azure_connection_string_edit = QLineEdit()
+        self.azure_connection_string_edit.setPlaceholderText("Leave empty to use default configuration")
+        self.azure_connection_string_edit.setToolTip("Azure SQL Database connection string (optional)")
+        self.azure_connection_string_edit.setEnabled(False)
+        azure_sql_options_layout.addRow("Connection String:", self.azure_connection_string_edit)
+        
+        # Table name
+        self.azure_table_name_edit = QLineEdit()
+        self.azure_table_name_edit.setText(DEFAULT_CONNECTION_CONFIG['table_name'])
+        self.azure_table_name_edit.setToolTip("Name of the table to create/update in Azure SQL")
+        azure_sql_options_layout.addRow("Table Name:", self.azure_table_name_edit)
+        
+        # Show default configuration info
+        config_info = QLabel(f"Default: {DEFAULT_CONNECTION_CONFIG['server']}.database.windows.net/{DEFAULT_CONNECTION_CONFIG['database']}")
+        config_info.setStyleSheet("color: #6c757d; font-size: 11px; font-style: italic;")
+        azure_sql_options_layout.addRow("", config_info)
+        
+        self.azure_sql_options_frame.setVisible(False)
+        options_layout.addRow("", self.azure_sql_options_frame)
         
         # Data inclusion options
         self.include_surfaces_checkbox = QCheckBox("Include surfaces data")
@@ -464,33 +549,58 @@ class ExportDialogWidget(QDialog):
     def connect_signals(self):
         """Connect widget signals."""
         self.file_path_edit.textChanged.connect(self.update_export_button_state)
+        self.azure_connection_string_edit.textChanged.connect(self.update_export_button_state)
+    
+    def on_default_config_toggled(self, checked: bool):
+        """Handle default configuration checkbox toggle."""
+        self.azure_connection_string_edit.setEnabled(not checked)
+        if checked:
+            self.azure_connection_string_edit.setPlaceholderText("Using default configuration")
+        else:
+            self.azure_connection_string_edit.setPlaceholderText("Server=myserver.database.windows.net;Database=mydatabase;...")
+        self.update_export_button_state()
     
     def on_format_changed(self, format_name: str):
         """Handle export format change."""
-        # Show/hide JSON-specific options
+        # Show/hide format-specific options
         self.json_options_frame.setVisible(format_name == "JSON")
+        self.azure_sql_options_frame.setVisible(format_name == "Azure SQL")
         
         # Update export button text
         self.export_button.setText(f"Export {format_name}")
         
-        # Clear current file path to force user to select new file
-        current_path = self.file_path_edit.text()
-        if current_path:
-            # Update extension based on format
-            path_obj = Path(current_path)
-            base_name = path_obj.stem
+        # For Azure SQL, we don't need a file path
+        if format_name == "Azure SQL":
+            self.file_path_edit.setText("Azure SQL Database")
+            self.file_path_edit.setReadOnly(True)
+            self.browse_button.setEnabled(False)
+            self.file_info_label.setText("Data will be exported directly to Azure SQL Database")
+            self.file_info_label.setStyleSheet("color: #17a2b8; font-size: 12px;")
+        else:
+            self.file_path_edit.setReadOnly(True)
+            self.browse_button.setEnabled(True)
             
-            extension_map = {
-                "JSON": ".json",
-                "CSV": ".csv", 
-                "Excel": ".xlsx",
-                "PDF": ".pdf"
-            }
-            
-            new_extension = extension_map.get(format_name, ".json")
-            new_path = path_obj.parent / (base_name + new_extension)
-            self.file_path_edit.setText(str(new_path))
-            self.update_file_info(str(new_path))
+            # Clear current file path to force user to select new file
+            current_path = self.file_path_edit.text()
+            if current_path and current_path != "Azure SQL Database":
+                # Update extension based on format
+                path_obj = Path(current_path)
+                base_name = path_obj.stem
+                
+                extension_map = {
+                    "JSON": ".json",
+                    "CSV": ".csv", 
+                    "Excel": ".xlsx",
+                    "PDF": ".pdf"
+                }
+                
+                new_extension = extension_map.get(format_name, ".json")
+                new_path = path_obj.parent / (base_name + new_extension)
+                self.file_path_edit.setText(str(new_path))
+                self.update_file_info(str(new_path))
+            else:
+                self.file_path_edit.setText("")
+                self.file_info_label.setText("No file selected")
     
     def validate_data_completeness(self):
         """Validate data completeness and show warnings if needed."""
@@ -580,9 +690,18 @@ class ExportDialogWidget(QDialog):
     
     def update_export_button_state(self):
         """Update the export button enabled state."""
-        has_file_path = bool(self.file_path_edit.text().strip())
         has_spaces = bool(self.spaces)
-        self.export_button.setEnabled(has_file_path and has_spaces)
+        format_name = self.format_combo.currentText()
+        
+        if format_name == "Azure SQL":
+            # For Azure SQL, check if using default config or connection string is provided
+            using_default = self.use_default_config_checkbox.isChecked()
+            has_connection = bool(self.azure_connection_string_edit.text().strip())
+            self.export_button.setEnabled(has_spaces and (using_default or has_connection))
+        else:
+            # For file exports, check if file path is provided
+            has_file_path = bool(self.file_path_edit.text().strip()) and self.file_path_edit.text() != "Azure SQL Database"
+            self.export_button.setEnabled(has_file_path and has_spaces)
     
     def start_export(self):
         """Start the export process."""
@@ -614,6 +733,12 @@ class ExportDialogWidget(QDialog):
             'include_boundaries': self.include_boundaries_checkbox.isChecked(),
             'include_relationships': self.include_relationships_checkbox.isChecked()
         }
+        
+        # Add Azure SQL specific options if needed
+        if self.format_combo.currentText() == "Azure SQL":
+            export_options['use_default_config'] = self.use_default_config_checkbox.isChecked()
+            export_options['azure_connection_string'] = self.azure_connection_string_edit.text().strip()
+            export_options['azure_table_name'] = self.azure_table_name_edit.text().strip()
         
         if self.source_file_path:
             export_options['source_file'] = self.source_file_path

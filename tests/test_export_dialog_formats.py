@@ -68,11 +68,12 @@ class TestExportDialogFormats:
         
         # Check format combo box has all expected formats
         format_combo = dialog.format_combo
-        assert format_combo.count() == 4
+        assert format_combo.count() == 5
         assert format_combo.itemText(0) == "JSON"
         assert format_combo.itemText(1) == "CSV"
         assert format_combo.itemText(2) == "Excel"
         assert format_combo.itemText(3) == "PDF"
+        assert format_combo.itemText(4) == "Azure SQL"
         
         # Check default selection
         assert format_combo.currentText() == "JSON"

@@ -199,9 +199,12 @@ class EnhancedLogger:
         
         if timing.file_size_mb:
             context_info.append(f"file_size={timing.file_size_mb:.1f}MB")
-            # Calculate processing rate
-            rate_mb_per_sec = timing.file_size_mb / timing.duration_seconds
-            context_info.append(f"rate={rate_mb_per_sec:.2f}MB/s")
+            # Calculate processing rate (avoid division by zero)
+            if timing.duration_seconds > 0:
+                rate_mb_per_sec = timing.file_size_mb / timing.duration_seconds
+                context_info.append(f"rate={rate_mb_per_sec:.2f}MB/s")
+            else:
+                context_info.append("rate=instant")
         
         if timing.memory_usage_mb:
             context_info.append(f"memory_usage={timing.memory_usage_mb:.1f}MB")

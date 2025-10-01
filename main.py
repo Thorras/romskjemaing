@@ -158,13 +158,16 @@ class RomskjemaGenerator:
                 return {"success": success, "format": "pdf"}
             
             elif export_format == "azure-sql":
-                if not azure_connection_string:
-                    return {"error": "Azure SQL connection string is required for azure-sql format"}
-                
                 try:
                     # Initialize SQL exporter if not already done
                     if not self.sql_exporter:
-                        self.sql_exporter = AzureSQLExporter(azure_connection_string)
+                        if azure_connection_string:
+                            # Use provided connection string
+                            self.sql_exporter = AzureSQLExporter(azure_connection_string)
+                        else:
+                            # Use default configuration
+                            self.sql_exporter = AzureSQLExporter.create_with_default_config()
+                            print("Using default Azure SQL database configuration")
                     
                     # Build enhanced JSON structure for SQL export
                     enhanced_data = self.json_builder.build_enhanced_json_structure(
@@ -172,8 +175,11 @@ class RomskjemaGenerator:
                         export_profile=export_profile
                     )
                     
+                    # Use provided table name or default
+                    table_name = azure_table_name or "room_schedule"
+                    
                     # Export to Azure SQL
-                    success = self.sql_exporter.export_data(enhanced_data, azure_table_name)
+                    success = self.sql_exporter.export_data(enhanced_data, table_name)
                     return {"success": success, "format": "azure-sql"}
                     
                 except Exception as e:
@@ -278,8 +284,8 @@ class RomskjemaGenerator:
         # Validate Azure SQL parameters if needed
         if args.format == "azure-sql":
             if not args.azure_connection_string:
-                print("Error: --azure-connection-string is required for azure-sql format")
-                return 1
+                print("Info: Using default Azure SQL database configuration")
+                print("Set AZURE_SQL_PASSWORD environment variable or use --azure-connection-string")
         
         # Process IFC file
         stats = self.process_ifc_file(
@@ -326,7 +332,10 @@ Examples:
   python main.py --input building.ifc --output room_schedule.xlsx --format excel
   python main.py --input building.ifc --output room_schedule.pdf --format pdf
   
-  # Export to Azure SQL
+  # Export to Azure SQL (using default configuration)
+  python main.py --input building.ifc --format azure-sql
+  
+  # Export to Azure SQL (with custom connection)
   python main.py --input building.ifc --format azure-sql --azure-connection-string "Server=..." --azure-table-name "rooms"
   
   # GUI mode
