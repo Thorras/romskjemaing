@@ -363,6 +363,32 @@ class NS3940Classifier:
     def is_wet_room(self, function_code: str) -> bool:
         """Check if function code represents a wet room."""
         return function_code in self.get_wet_room_codes()
+    
+    def classify_space(self, space_name: str, long_name: str = None) -> Optional[RoomClassification]:
+        """
+        Classify space using both name and long name for better accuracy.
+        
+        Args:
+            space_name: Primary space name
+            long_name: Optional long name for additional context
+            
+        Returns:
+            RoomClassification if classification successful, None otherwise
+        """
+        # Try primary name first
+        classification = self.classify_from_name(space_name)
+        if classification:
+            return classification
+        
+        # Try long name if available
+        if long_name:
+            classification = self.classify_from_name(long_name)
+            if classification:
+                # Slightly lower confidence for long name inference
+                classification.confidence *= 0.9
+                return classification
+        
+        return None
 
 
 # Example usage and testing

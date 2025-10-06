@@ -115,7 +115,7 @@ class ComprehensiveRoomMapper:
             try:
                 classification = self.classifier.classify_space(space.name)
                 if classification:
-                    schedule.identification.occupancy_type = classification.get('occupancy_type')
+                    schedule.identification.occupancy_type = classification.occupancy_type
             except Exception as e:
                 self.logger.warning(f"Failed to classify space '{space.name}': {e}")
     
@@ -149,11 +149,7 @@ class ComprehensiveRoomMapper:
                 # Try to extract NS 3451 code from name or classification
                 classification = self.classifier.classify_space(space.name)
                 if classification:
-                    schedule.classification.ns3451 = classification.get('ns3940_code')
-                    
-                    # Add custom codes if available
-                    if 'custom_codes' in classification:
-                        schedule.classification.custom_codes = classification['custom_codes']
+                    schedule.classification.ns3451 = classification.function_code
             except Exception as e:
                 self.logger.warning(f"Failed to classify space for NS codes '{space.name}': {e}")
     

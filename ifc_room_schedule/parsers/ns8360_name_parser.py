@@ -108,6 +108,18 @@ class NS8360NameParser:
         """
         return self.parse(space_name).is_valid
     
+    def parse_space_name(self, space_name: str) -> NS8360ParsedName:
+        """
+        Alias for parse method for backward compatibility.
+        
+        Args:
+            space_name: Space name to parse
+            
+        Returns:
+            NS8360ParsedName with parsed components
+        """
+        return self.parse(space_name)
+    
     def _infer_from_norwegian_name(self, space_name: str) -> Optional[NS8360ParsedName]:
         """
         Attempt to infer NS 8360 components from Norwegian room names.

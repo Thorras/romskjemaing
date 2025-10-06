@@ -170,36 +170,70 @@ class DataQualityAnalyzer:
         
         return recommendations
     
-    def analyze_ifc_coverage(self, ifc_file: str) -> CoverageReport:
+    def analyze_ifc_coverage(self, ifc_file_or_spaces) -> Dict[str, Any]:
         """
         Analyze IFC file coverage against room schedule template.
         
         Args:
-            ifc_file: Path to IFC file
+            ifc_file_or_spaces: Path to IFC file or list of SpaceData objects
             
         Returns:
             CoverageReport with detailed analysis
         """
-        if not isinstance(ifc_file, str) or not os.path.exists(ifc_file):
-            raise FileNotFoundError(f"IFC file not found: {ifc_file}")
-        
-        # Load IFC file and extract spaces
-        reader = IfcFileReader()
-        success, message = reader.load_file(ifc_file)
-        
-        if not success:
-            raise ValueError(f"Failed to load IFC file: {ifc_file} - {message}")
-        
-        # Get the loaded IFC file
-        ifc_data = reader.ifc_file
-        if not ifc_data:
-            raise ValueError(f"No IFC data loaded from file: {ifc_file}")
-        
-        extractor = IfcSpaceExtractor()
-        extractor.set_ifc_file(ifc_data)
-        spaces = extractor.extract_spaces()
+        # Handle both file paths and space lists
+        if isinstance(ifc_file_or_spaces, str):
+            # It's a file path
+            ifc_file = ifc_file_or_spaces
+            if not os.path.exists(ifc_file):
+                raise FileNotFoundError(f"IFC file not found: {ifc_file}")
+            
+            # Load IFC file and extract spaces
+            reader = IfcFileReader()
+            success, message = reader.load_file(ifc_file)
+            
+            if not success:
+                raise ValueError(f"Failed to load IFC file: {ifc_file} - {message}")
+            
+            # Get the loaded IFC file
+            ifc_data = reader.ifc_file
+            if not ifc_data:
+                raise ValueError(f"No IFC data loaded from file: {ifc_file}")
+            
+            extractor = IfcSpaceExtractor()
+            extractor.set_ifc_file(ifc_data)
+            spaces = extractor.extract_spaces()
+        elif isinstance(ifc_file_or_spaces, list):
+            # It's a list of spaces
+            spaces = ifc_file_or_spaces
+            ifc_file = "<direct_spaces_input>"  # Placeholder for when spaces are passed directly
+        else:
+            raise ValueError("Input must be either a file path string or a list of SpaceData objects")
         
         return self._analyze_spaces(spaces, ifc_file)
+    
+    def analyze_space_quality(self, space: SpaceData) -> Dict[str, Any]:
+        """
+        Analyze quality of a single space.
+        
+        Args:
+            space: SpaceData object to analyze
+            
+        Returns:
+            Dictionary with quality analysis results
+        """
+        report = self._analyze_single_space(space)
+        return {
+            "space_guid": report.space_guid,
+            "space_name": report.space_name,
+            "ns8360_compliant": report.ns8360_compliant,
+            "ns3940_classified": report.ns3940_classified,
+            "quantities_complete": report.quantities_complete,
+            "surfaces_present": report.surfaces_present,
+            "boundaries_present": report.boundaries_present,
+            "relationships_present": report.relationships_present,
+            "missing_sections": report.missing_sections,
+            "recommendations": report.recommendations
+        }
     
     def identify_missing_sections(self, spaces: List[SpaceData]) -> MissingDataReport:
         """
@@ -380,34 +414,39 @@ class DataQualityAnalyzer:
         
         return recommendations
     
-    def _analyze_spaces(self, spaces: List[SpaceData], ifc_file: str) -> CoverageReport:
+    def _analyze_spaces(self, spaces: List[SpaceData], ifc_file: str) -> Dict[str, Any]:
         """Analyze spaces and generate coverage report."""
         total_spaces = len(spaces)
         
         if total_spaces == 0:
-            return CoverageReport(
-                total_spaces=0,
-                spaces_with_names=0,
-                spaces_with_ns8360_compliant_names=0,
-                spaces_with_classification=0,
-                spaces_with_quantities=0,
-                spaces_with_surfaces=0,
-                spaces_with_boundaries=0,
-                spaces_with_relationships=0,
-                ns8360_compliance_rate=0.0,
-                ns3940_classification_rate=0.0,
-                name_completeness=0.0,
-                quantity_completeness=0.0,
-                surface_completeness=0.0,
-                boundary_completeness=0.0,
-                relationship_completeness=0.0,
-                overall_quality_score=0.0,
-                missing_name_count=0,
-                missing_quantities_count=0,
-                missing_surfaces_count=0,
-                missing_boundaries_count=0,
-                missing_relationships_count=0
-            )
+            return {
+                "total_spaces": 0,
+                "spaces_with_names": 0,
+                "spaces_with_ns8360_compliant_names": 0,
+                "spaces_with_classification": 0,
+                "spaces_with_quantities": 0,
+                "spaces_with_surfaces": 0,
+                "spaces_with_boundaries": 0,
+                "spaces_with_relationships": 0,
+                "ns8360_compliance_rate": 0.0,
+                "ns3940_classification_rate": 0.0,
+                "name_completeness": 0.0,
+                "quantity_completeness": 0.0,
+                "surface_completeness": 0.0,
+                "boundary_completeness": 0.0,
+                "relationship_completeness": 0.0,
+                "overall_quality_score": 0.0,
+                "missing_name_count": 0,
+                "missing_quantities_count": 0,
+                "missing_surfaces_count": 0,
+                "missing_boundaries_count": 0,
+                "missing_relationships_count": 0,
+                "compliance_stats": {
+                    "ns8360_compliant": 0,
+                    "ns3940_classified": 0,
+                    "total_spaces": 0
+                }
+            }
         
         # Count spaces with data
         spaces_with_names = sum(1 for s in spaces if s.name and s.name.strip())
@@ -454,29 +493,34 @@ class DataQualityAnalyzer:
         ]
         overall_quality_score = sum(component_scores) / len(component_scores)
         
-        return CoverageReport(
-            total_spaces=total_spaces,
-            spaces_with_names=spaces_with_names,
-            spaces_with_ns8360_compliant_names=ns8360_compliant,
-            spaces_with_classification=ns3940_classified,
-            spaces_with_quantities=spaces_with_quantities,
-            spaces_with_surfaces=spaces_with_surfaces,
-            spaces_with_boundaries=spaces_with_boundaries,
-            spaces_with_relationships=spaces_with_relationships,
-            ns8360_compliance_rate=ns8360_compliance_rate,
-            ns3940_classification_rate=ns3940_classification_rate,
-            name_completeness=name_completeness,
-            quantity_completeness=quantity_completeness,
-            surface_completeness=surface_completeness,
-            boundary_completeness=boundary_completeness,
-            relationship_completeness=relationship_completeness,
-            overall_quality_score=overall_quality_score,
-            missing_name_count=total_spaces - spaces_with_names,
-            missing_quantities_count=total_spaces - spaces_with_quantities,
-            missing_surfaces_count=total_spaces - spaces_with_surfaces,
-            missing_boundaries_count=total_spaces - spaces_with_boundaries,
-            missing_relationships_count=total_spaces - spaces_with_relationships
-        )
+        return {
+            "total_spaces": total_spaces,
+            "spaces_with_names": spaces_with_names,
+            "spaces_with_ns8360_compliant_names": ns8360_compliant,
+            "spaces_with_classification": ns3940_classified,
+            "spaces_with_quantities": spaces_with_quantities,
+            "spaces_with_surfaces": spaces_with_surfaces,
+            "spaces_with_boundaries": spaces_with_boundaries,
+            "spaces_with_relationships": spaces_with_relationships,
+            "ns8360_compliance_rate": ns8360_compliance_rate,
+            "ns3940_classification_rate": ns3940_classification_rate,
+            "name_completeness": name_completeness,
+            "quantity_completeness": quantity_completeness,
+            "surface_completeness": surface_completeness,
+            "boundary_completeness": boundary_completeness,
+            "relationship_completeness": relationship_completeness,
+            "overall_quality_score": overall_quality_score,
+            "missing_name_count": total_spaces - spaces_with_names,
+            "missing_quantities_count": total_spaces - spaces_with_quantities,
+            "missing_surfaces_count": total_spaces - spaces_with_surfaces,
+            "missing_boundaries_count": total_spaces - spaces_with_boundaries,
+            "missing_relationships_count": total_spaces - spaces_with_relationships,
+            "compliance_stats": {
+                "ns8360_compliant": ns8360_compliant,
+                "ns3940_classified": ns3940_classified,
+                "total_spaces": total_spaces
+            }
+        }
     
     def _generate_recommendations(self, missing_names: List[str], missing_quantities: List[str],
                                 missing_surfaces: List[str], missing_boundaries: List[str],

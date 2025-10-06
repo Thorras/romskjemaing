@@ -31,6 +31,9 @@ from .space_list_widget import SpaceListWidget
 from .space_detail_widget import SpaceDetailWidget
 from .surface_editor_widget import SurfaceEditorWidget
 from .export_dialog_widget import ExportDialogWidget
+from ..visualization.floor_plan_canvas import FloorPlanCanvas
+from ..visualization.geometry_extractor import GeometryExtractor
+from .floor_plan_widget import FloorPlanWidget
 
 
 class FileSizeCategory(Enum):
@@ -290,8 +293,11 @@ class MainWindow(QMainWindow):
         self.surface_extractor = IfcSurfaceExtractor()
         self.boundary_parser = IfcSpaceBoundaryParser()
         self.relationship_parser = IfcRelationshipParser()
+        self.geometry_extractor = GeometryExtractor()
         self.current_file_path = None
         self.spaces = []
+        self.floor_geometry = None
+        self.floor_geometries = {}
         
         # Enhanced error handling state with detailed tracking
         self.error_count = 0
@@ -2214,7 +2220,7 @@ class MainWindow(QMainWindow):
         left_panel.setMaximumWidth(450)
         self.main_splitter.addWidget(left_panel)
         
-        # Right panel: Space details and editor with enhanced container
+        # Right panel: Tab widget for different views
         right_panel = QWidget()
         right_panel.setStyleSheet("""
             QWidget {
@@ -2225,6 +2231,37 @@ class MainWindow(QMainWindow):
         right_layout = QVBoxLayout()
         right_layout.setContentsMargins(8, 8, 8, 8)
         right_panel.setLayout(right_layout)
+        
+        # Create tab widget for different views
+        self.tab_widget = QTabWidget()
+        self.tab_widget.setStyleSheet("""
+            QTabWidget::pane {
+                border: 1px solid #dee2e6;
+                background-color: white;
+            }
+            QTabWidget::tab-bar {
+                alignment: left;
+            }
+            QTabBar::tab {
+                background-color: #f8f9fa;
+                border: 1px solid #dee2e6;
+                border-bottom: none;
+                padding: 8px 16px;
+                margin-right: 2px;
+            }
+            QTabBar::tab:selected {
+                background-color: white;
+                border-bottom: 1px solid white;
+            }
+            QTabBar::tab:hover {
+                background-color: #e9ecef;
+            }
+        """)
+        
+        # Tab 1: Space Details and Editor
+        details_tab = QWidget()
+        details_tab_layout = QVBoxLayout()
+        details_tab.setLayout(details_tab_layout)
         
         # Create horizontal splitter for details and editor
         self.details_splitter = QSplitter(Qt.Orientation.Horizontal)
@@ -2249,7 +2286,25 @@ class MainWindow(QMainWindow):
         # Set proportions (60% details, 40% editor)
         self.details_splitter.setSizes([600, 400])
         
-        right_layout.addWidget(self.details_splitter)
+        details_tab_layout.addWidget(self.details_splitter)
+        self.tab_widget.addTab(details_tab, "📋 Details & Editor")
+        
+        # Tab 2: 2D Floor Plan Visualization
+        floor_plan_tab = QWidget()
+        floor_plan_layout = QVBoxLayout()
+        floor_plan_layout.setContentsMargins(0, 0, 0, 0)
+        floor_plan_tab.setLayout(floor_plan_layout)
+        
+        # Floor plan widget (replaces direct canvas usage)
+        self.floor_plan_widget = FloorPlanWidget()
+        floor_plan_layout.addWidget(self.floor_plan_widget)
+        
+        # Keep reference to canvas for backward compatibility
+        self.floor_plan_canvas = self.floor_plan_widget.floor_plan_canvas
+        
+        self.tab_widget.addTab(floor_plan_tab, "🏗️ 2D Floor Plan")
+        
+        right_layout.addWidget(self.tab_widget)
         self.main_splitter.addWidget(right_panel)
         
         # Set splitter proportions (30% left, 70% right)
@@ -2644,10 +2699,23 @@ class MainWindow(QMainWindow):
         toolbar.addWidget(self.toolbar_status_label)
         
     def setup_status_bar(self):
-        """Set up the status bar with enhanced styling."""
+        """Set up the status bar with enhanced styling and floor information."""
         self.status_bar = QStatusBar()
         self.setStatusBar(self.status_bar)
         self.status_bar.showMessage("Ready to load IFC file...")
+        
+        # Add floor information widget to status bar
+        self.floor_info_label = QLabel("No floors loaded")
+        self.floor_info_label.setStyleSheet("""
+            QLabel {
+                color: #6c757d;
+                font-size: 11px;
+                padding: 2px 8px;
+                border-left: 1px solid #dee2e6;
+                margin-left: 8px;
+            }
+        """)
+        self.status_bar.addPermanentWidget(self.floor_info_label)
         
         # Style the status bar
         self.status_bar.setStyleSheet("""
@@ -2664,6 +2732,9 @@ class MainWindow(QMainWindow):
         # Connect space list signals
         self.space_list_widget.space_selected.connect(self.on_space_selected)
         self.space_list_widget.spaces_loaded.connect(self.on_spaces_loaded)
+        self.space_list_widget.spaces_selection_changed.connect(self.on_spaces_selection_changed)
+        self.space_list_widget.floor_filter_changed.connect(self.on_floor_filter_changed)
+        self.space_list_widget.zoom_to_spaces_requested.connect(self.on_zoom_to_spaces_requested)
         
         # Connect space detail signals
         self.space_detail_widget.surface_selected.connect(self.on_surface_selected)
@@ -2672,6 +2743,11 @@ class MainWindow(QMainWindow):
         # Connect surface editor signals
         self.surface_editor_widget.surface_description_changed.connect(self.on_surface_description_changed)
         self.surface_editor_widget.boundary_description_changed.connect(self.on_boundary_description_changed)
+        
+        # Connect floor plan widget signals
+        self.floor_plan_widget.space_selected.connect(self.on_floor_plan_room_clicked)
+        self.floor_plan_widget.spaces_selection_changed.connect(self.on_floor_plan_selection_changed)
+        self.floor_plan_widget.floor_changed.connect(self.on_floor_changed)
         
     def load_ifc_file(self):
         """Open file dialog and load selected IFC file."""
@@ -3025,6 +3101,9 @@ class MainWindow(QMainWindow):
                 self.extract_boundaries_for_spaces_with_error_handling()
                 self.extract_relationships_for_spaces_with_error_handling()
                 
+                # Extract floor geometry for 2D visualization
+                self.extract_floor_geometry()
+                
                 # Load spaces into the list widget (must be done in main thread)
                 if hasattr(self, '_testing_mode') and self._testing_mode:
                     # In test mode, call directly to avoid timing issues
@@ -3079,12 +3158,29 @@ class MainWindow(QMainWindow):
             # Load spaces into the list widget
             self.space_list_widget.load_spaces(self.spaces)
             
+            # Set floor data for space list widget if available
+            if hasattr(self, 'geometry_extractor') and hasattr(self.geometry_extractor, 'floor_levels'):
+                self.space_list_widget.set_floors(self.geometry_extractor.floor_levels)
+                
+                # Set spaces with geometry information
+                spaces_with_geometry = set()
+                if hasattr(self.geometry_extractor, 'floor_geometries'):
+                    for floor_geometry in self.geometry_extractor.floor_geometries.values():
+                        for polygon in floor_geometry.room_polygons:
+                            spaces_with_geometry.add(polygon.space_guid)
+                
+                self.space_list_widget.set_spaces_with_geometry(spaces_with_geometry)
+                self.logger.debug(f"Set floor data: {len(self.geometry_extractor.floor_levels)} floors, {len(spaces_with_geometry)} spaces with geometry")
+            
             # Show the main interface
             self.main_splitter.setVisible(True)
             self.welcome_label.setVisible(False)
             
             # Update UI state with spaces loaded
             self.update_ui_state(True)
+            
+            # Update floor plan canvas with geometry
+            self.update_floor_plan_canvas()
             
             total_surfaces = sum(len(space.surfaces) for space in self.spaces)
             total_boundaries = sum(len(getattr(space, 'space_boundaries', [])) for space in self.spaces)
@@ -3317,25 +3413,56 @@ class MainWindow(QMainWindow):
         return self.boundary_parser
         
     def on_space_selected(self, space_guid: str):
-        """Handle space selection from the space list."""
-        # Find the space by GUID
-        selected_space = None
-        for space in self.spaces:
-            if space.guid == space_guid:
-                selected_space = space
-                break
+        """Handle space selection from the space list - with full UI synchronization."""
+        try:
+            # Find the space object by GUID
+            space = None
+            if hasattr(self, 'spaces') and self.spaces:
+                for s in self.spaces:
+                    if s.guid == space_guid:
+                        space = s
+                        break
+            
+            if space:
+                # Display space details
+                self.space_detail_widget.display_space(space)
                 
-        if selected_space:
-            # Display space details
-            self.space_detail_widget.display_space(selected_space)
-            
-            # Set space context in surface editor and show empty state
-            self.surface_editor_widget.set_space_context(selected_space.guid)
-            self.surface_editor_widget.show_empty_state()
-            
-            self.status_bar.showMessage(f"Selected space: {selected_space.number} - {selected_space.name}")
-        else:
-            self.status_bar.showMessage("Space not found")
+                # Set space context in surface editor and show empty state
+                self.surface_editor_widget.set_space_context(space.guid)
+                self.surface_editor_widget.show_empty_state()
+                
+                # Auto-switch to the floor containing this space
+                target_floor_id = None
+                if hasattr(self, 'geometry_extractor') and hasattr(self.geometry_extractor, 'floor_geometries'):
+                    for floor_id, floor_geometry in self.geometry_extractor.floor_geometries.items():
+                        if any(polygon.space_guid == space_guid for polygon in floor_geometry.room_polygons):
+                            target_floor_id = floor_id
+                            break
+                
+                # Switch floor if needed
+                if target_floor_id:
+                    current_floor = self.floor_plan_widget.get_current_floor_id()
+                    if current_floor != target_floor_id:
+                        self.floor_plan_widget.set_current_floor(target_floor_id)
+                        self.logger.debug(f"Auto-switched to floor {target_floor_id} for space selection")
+                
+                # Sync with floor plan widget
+                self.floor_plan_widget.highlight_spaces([space.guid])
+                
+                # Update status bar
+                self.status_bar.showMessage(f"Selected space: {space.number} - {space.name}")
+                self.logger.debug(f"Synced floor plan highlight with selected space: {space.guid}")
+            else:
+                # Clear selection if space not found
+                self.floor_plan_widget.clear_selection()
+                self.status_bar.showMessage("Space not found")
+                self.logger.warning(f"Space with GUID {space_guid} not found")
+                
+        except Exception as e:
+            self.logger.error(f"Error handling space selection: {str(e)}")
+            # Clear selection on error
+            self.floor_plan_widget.clear_selection()
+            self.status_bar.showMessage("Error selecting space")
             
     def on_spaces_loaded(self, count: int):
         """Handle spaces loaded event."""
@@ -3718,10 +3845,14 @@ class MainWindow(QMainWindow):
         self.toolbar_prev_action.setEnabled(has_spaces)
         self.toolbar_validate_action.setEnabled(has_spaces)
         
-        # Update toolbar status
+        # Update toolbar status with floor information
         if file_loaded:
             if has_spaces:
-                self.toolbar_status_label.setText(f"{len(self.spaces)} spaces loaded")
+                floor_info = ""
+                if hasattr(self, 'floor_geometries') and self.floor_geometries:
+                    floor_count = len(self.floor_geometries)
+                    floor_info = f", {floor_count} floors"
+                self.toolbar_status_label.setText(f"{len(self.spaces)} spaces loaded{floor_info}")
             else:
                 self.toolbar_status_label.setText("File loaded, no spaces found")
         else:
@@ -3902,3 +4033,275 @@ class MainWindow(QMainWindow):
         about_dialog.setText(about_text)
         about_dialog.setStandardButtons(QMessageBox.StandardButton.Ok)
         about_dialog.exec()
+    
+    # Floor Plan Canvas Integration Methods
+    
+    def extract_floor_geometry(self):
+        """Extract floor geometry for 2D visualization with multi-floor support."""
+        try:
+            if not self.ifc_reader.is_loaded():
+                self.logger.warning("No IFC file loaded for geometry extraction")
+                return
+            
+            self.logger.info("Extracting floor geometry for 2D visualization...")
+            
+            # Extract floor geometry directly with IFC file
+            ifc_file = self.ifc_reader.get_ifc_file()
+            floor_geometries = self.geometry_extractor.extract_floor_geometry(ifc_file)
+            
+            if floor_geometries:
+                # Store all floor geometries for multi-floor support
+                self.floor_geometries = floor_geometries
+                
+                # Keep backward compatibility - set first floor as primary
+                first_floor_id = list(floor_geometries.keys())[0]
+                self.floor_geometry = floor_geometries[first_floor_id]
+                
+                total_rooms = sum(geom.get_room_count() for geom in floor_geometries.values())
+                self.logger.info(f"Successfully extracted geometry for {len(floor_geometries)} floors with {total_rooms} total rooms")
+            else:
+                self.floor_geometries = {}
+                self.floor_geometry = None
+                self.logger.warning("No floor geometry extracted")
+                
+        except Exception as e:
+            self.logger.error(f"Error extracting floor geometry: {str(e)}")
+            self.show_enhanced_error_message(
+                "Geometry Extraction Error",
+                f"Failed to extract floor geometry: {str(e)}",
+                traceback.format_exc(),
+                "warning"
+            )
+    
+    def update_floor_plan_canvas(self):
+        """Update the floor plan widget with extracted geometry."""
+        try:
+            if hasattr(self, 'floor_geometries') and self.floor_geometries:
+                # Set all floor geometries in the widget
+                self.floor_plan_widget.set_floor_geometry(self.floor_geometries)
+                
+                total_rooms = sum(geom.get_room_count() for geom in self.floor_geometries.values())
+                floor_count = len(self.floor_geometries)
+                
+                # Update floor information in status bar
+                self.update_floor_info_display()
+                
+                self.logger.info(f"Floor plan widget updated with {floor_count} floors and {total_rooms} total rooms")
+            else:
+                # Clear floor plan widget
+                self.floor_plan_widget.set_floor_geometry({})
+                
+                # Clear floor information
+                if hasattr(self, 'floor_info_label'):
+                    self.floor_info_label.setText("No floors loaded")
+                
+                self.logger.info("Floor plan widget cleared - no geometry data")
+                
+        except Exception as e:
+            self.logger.error(f"Error updating floor plan widget: {str(e)}")
+            self.show_enhanced_error_message(
+                "Floor Plan Update Error",
+                f"Failed to update floor plan display: {str(e)}",
+                traceback.format_exc(),
+                "warning"
+            )
+    
+
+    
+
+
+    def on_floor_plan_room_clicked(self, space_guid: str, ctrl_pressed: bool):
+        """Handle room click from floor plan canvas."""
+        try:
+            # Find the space object by GUID
+            space = None
+            if hasattr(self, 'spaces') and self.spaces:
+                for s in self.spaces:
+                    if s.guid == space_guid:
+                        space = s
+                        break
+            
+            if space:
+                # Display space details
+                self.space_detail_widget.display_space(space)
+                self.surface_editor_widget.clear()
+                
+                # Sync with space list widget
+                if ctrl_pressed:
+                    # Multi-selection mode - add to current selection
+                    current_selection = self.space_list_widget.get_selected_space_guids()
+                    if space_guid not in current_selection:
+                        current_selection.append(space_guid)
+                    self.space_list_widget.select_spaces_by_guids(current_selection)
+                else:
+                    # Single selection mode
+                    self.space_list_widget.select_spaces_by_guids([space_guid])
+                
+                self.logger.debug(f"Synced space list selection with floor plan click: {space_guid}")
+            else:
+                self.logger.warning(f"Space with GUID {space_guid} not found")
+                
+        except Exception as e:
+            self.logger.error(f"Error handling floor plan room click: {str(e)}")
+
+    def on_floor_plan_selection_changed(self, selected_space_guids: List[str]):
+        """Handle selection change from floor plan canvas."""
+        try:
+            if selected_space_guids:
+                # Sync with space list widget
+                self.space_list_widget.sync_with_floor_plan_selection(selected_space_guids)
+                
+                # Display details for the first selected space
+                space = None
+                if hasattr(self, 'spaces') and self.spaces:
+                    for s in self.spaces:
+                        if s.guid == selected_space_guids[0]:
+                            space = s
+                            break
+                
+                if space:
+                    self.space_detail_widget.display_space(space)
+                    self.surface_editor_widget.clear()
+                    self.status_bar.showMessage(f"Selected {len(selected_space_guids)} space(s) from floor plan")
+                
+                self.logger.debug(f"Synced space list with floor plan selection: {len(selected_space_guids)} spaces")
+            else:
+                # Clear selection in all components
+                self.space_list_widget.clear_selection()
+                self.space_detail_widget.clear_selection()
+                self.surface_editor_widget.clear()
+                self.status_bar.showMessage("Selection cleared")
+                self.logger.debug("Floor plan selection cleared - synchronized all components")
+                
+        except Exception as e:
+            self.logger.error(f"Error handling floor plan selection change: {str(e)}")
+    
+    def on_floor_changed(self, floor_id: str):
+        """Handle floor change from floor plan widget."""
+        try:
+            self.logger.info(f"Floor changed to: {floor_id}")
+            
+            # Update UI state for the new floor
+            if hasattr(self, 'floor_geometries') and floor_id in self.floor_geometries:
+                floor_geometry = self.floor_geometries[floor_id]
+                room_count = floor_geometry.get_room_count()
+                
+                # Update floor information display
+                self.update_floor_info_display(current_floor_id=floor_id)
+                
+                # Optionally sync space list filter if it's not set to "all"
+                current_filter = self.space_list_widget.get_current_floor_filter()
+                if current_filter is not None and current_filter != floor_id:
+                    # Only update if the user has a specific floor filter active
+                    # This prevents overriding the user's "All Floors" preference
+                    self.space_list_widget.set_floor_filter(floor_id)
+                    self.logger.debug(f"Synchronized space list filter to floor: {floor_id}")
+                
+                # Update status message
+                floor_name = floor_geometry.level.name if hasattr(floor_geometry, 'level') else floor_id
+                self.status_bar.showMessage(f"Viewing floor: {floor_name} ({room_count} spaces)")
+                
+                self.logger.debug(f"Switched to floor {floor_id} with {room_count} rooms")
+            
+        except Exception as e:
+            self.logger.error(f"Error handling floor change: {str(e)}")
+    
+    def update_floor_info_display(self, current_floor_id: Optional[str] = None):
+        """Update the floor information display in the status bar."""
+        try:
+            if not hasattr(self, 'floor_info_label'):
+                return
+            
+            if hasattr(self, 'floor_geometries') and self.floor_geometries:
+                floor_count = len(self.floor_geometries)
+                total_rooms = sum(geom.get_room_count() for geom in self.floor_geometries.values())
+                
+                # Get current floor info if specified
+                current_floor_info = ""
+                if current_floor_id and current_floor_id in self.floor_geometries:
+                    current_geometry = self.floor_geometries[current_floor_id]
+                    current_floor_name = current_geometry.level.name if hasattr(current_geometry, 'level') else current_floor_id
+                    current_floor_info = f" | Current: {current_floor_name}"
+                
+                info_text = f"{floor_count} floors, {total_rooms} spaces{current_floor_info}"
+                self.floor_info_label.setText(info_text)
+            else:
+                self.floor_info_label.setText("No floors loaded")
+                
+        except Exception as e:
+            self.logger.error(f"Error updating floor info display: {str(e)}")
+            if hasattr(self, 'floor_info_label'):
+                self.floor_info_label.setText("Floor info error")
+    
+    def on_spaces_selection_changed(self, selected_space_guids: List[str]):
+        """Handle multi-selection change from space list widget."""
+        try:
+            if selected_space_guids:
+                # Sync with floor plan widget
+                self.floor_plan_widget.highlight_spaces(selected_space_guids)
+                
+                # Display details for the first selected space
+                space = None
+                if hasattr(self, 'spaces') and self.spaces:
+                    for s in self.spaces:
+                        if s.guid == selected_space_guids[0]:
+                            space = s
+                            break
+                
+                if space:
+                    self.space_detail_widget.display_space(space)
+                    self.surface_editor_widget.clear()
+                    self.status_bar.showMessage(f"Selected {len(selected_space_guids)} space(s) from list")
+                
+                self.logger.debug(f"Synced floor plan with space list selection: {len(selected_space_guids)} spaces")
+            else:
+                # Clear selection in all components
+                self.floor_plan_widget.clear_selection()
+                self.space_detail_widget.clear_selection()
+                self.surface_editor_widget.clear()
+                self.status_bar.showMessage("Selection cleared")
+                self.logger.debug("Space list selection cleared - synchronized all components")
+                
+        except Exception as e:
+            self.logger.error(f"Error handling spaces selection change: {str(e)}")
+
+    def on_floor_filter_changed(self, floor_id: str):
+        """Handle floor filter change from space list widget."""
+        try:
+            if floor_id != "all":
+                # Switch floor plan to the selected floor
+                if hasattr(self, 'floor_plan_widget'):
+                    self.floor_plan_widget.set_current_floor(floor_id)
+                    self.logger.debug(f"Switched floor plan to floor: {floor_id}")
+                
+        except Exception as e:
+            self.logger.error(f"Error handling floor filter change: {str(e)}")
+
+    def on_zoom_to_spaces_requested(self, space_guids: List[str]):
+        """Handle zoom to spaces request from space list widget."""
+        try:
+            if space_guids and hasattr(self, 'floor_plan_canvas'):
+                # First, ensure we're on the correct floor for the first space
+                first_space_guid = space_guids[0]
+                
+                # Find which floor contains this space
+                target_floor_id = None
+                if hasattr(self, 'geometry_extractor') and hasattr(self.geometry_extractor, 'floor_geometries'):
+                    for floor_id, floor_geometry in self.geometry_extractor.floor_geometries.items():
+                        if any(polygon.space_guid == first_space_guid for polygon in floor_geometry.room_polygons):
+                            target_floor_id = floor_id
+                            break
+                
+                # Switch to the target floor if needed
+                if target_floor_id:
+                    current_floor = self.floor_plan_widget.get_current_floor_id()
+                    if current_floor != target_floor_id:
+                        self.floor_plan_widget.set_current_floor(target_floor_id)
+                        self.logger.debug(f"Switched to floor {target_floor_id} for zoom operation")
+                
+                # Zoom to the spaces
+                self.floor_plan_widget.zoom_to_spaces(space_guids)
+                self.logger.debug(f"Zoomed to {len(space_guids)} spaces")
+                
+        except Exception as e:
+            self.logger.error(f"Error handling zoom to spaces request: {str(e)}")

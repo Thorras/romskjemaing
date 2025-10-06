@@ -18,6 +18,13 @@ from ifc_room_schedule.analysis.data_quality_analyzer import DataQualityAnalyzer
 from ifc_room_schedule.parser.batch_processor import BatchProcessor
 from ifc_room_schedule.utils.caching_manager import CachingManager, CacheConfig
 from ifc_room_schedule.data.space_model import SpaceData
+
+
+@pytest.fixture
+def temp_output_dir():
+    """Create temporary output directory."""
+    with tempfile.TemporaryDirectory() as temp_dir:
+        yield temp_dir
 from ifc_room_schedule.mappers.ns3940_classifier import NS3940Classifier
 from ifc_room_schedule.parsers.ns8360_name_parser import NS8360NameParser
 
@@ -73,11 +80,7 @@ class TestComprehensiveIntegration:
             )
         ]
     
-    @pytest.fixture
-    def temp_output_dir(self):
-        """Create temporary output directory."""
-        with tempfile.TemporaryDirectory() as temp_dir:
-            yield temp_dir
+
     
     def test_end_to_end_export_pipeline(self, sample_spaces, temp_output_dir):
         """Test complete export pipeline from spaces to JSON."""
@@ -250,8 +253,9 @@ class TestComprehensiveIntegration:
             # Test NS 3940 classification
             classification = classifier.classify_space(space.name, space.long_name)
             assert classification is not None
-            assert "function_code" in classification
-            assert "function_name" in classification
+            assert hasattr(classification, 'function_code')
+            assert hasattr(classification, 'label')
+            assert classification.function_code is not None
     
     def test_export_formats_integration(self, sample_spaces, temp_output_dir):
         """Test integration with all export formats."""

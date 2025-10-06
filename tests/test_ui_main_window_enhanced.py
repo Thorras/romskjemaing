@@ -302,3 +302,148 @@ class TestEnhancedSpaceListWidget:
 
 if __name__ == "__main__":
     pytest.main([__file__])
+
+
+class TestUIComponentSynchronization:
+    """Test cases for UI component synchronization functionality."""
+
+    def test_space_selection_synchronization(self, qapp, sample_spaces):
+        """Test synchronization between space list and floor plan selection."""
+        window = MainWindow()
+        window._testing_mode = True  # Prevent dialog boxes during testing
+        
+        # Mock the floor plan widget and space list widget
+        window.floor_plan_widget = Mock()
+        window.space_list_widget = Mock()
+        window.space_detail_widget = Mock()
+        window.surface_editor_widget = Mock()
+        
+        # Set up spaces
+        window.spaces = sample_spaces
+        
+        # Test space selection from space list
+        window.on_space_selected(sample_spaces[0].guid)
+        
+        # Verify floor plan widget was called to highlight the space
+        window.floor_plan_widget.highlight_spaces.assert_called_with([sample_spaces[0].guid])
+        
+        # Verify space detail widget was called to display the space
+        window.space_detail_widget.display_space.assert_called_with(sample_spaces[0])
+
+    def test_floor_plan_selection_synchronization(self, qapp, sample_spaces):
+        """Test synchronization from floor plan to space list."""
+        window = MainWindow()
+        window._testing_mode = True
+        
+        # Mock the widgets
+        window.floor_plan_widget = Mock()
+        window.space_list_widget = Mock()
+        window.space_detail_widget = Mock()
+        window.surface_editor_widget = Mock()
+        
+        # Set up spaces
+        window.spaces = sample_spaces
+        
+        # Test floor plan room click
+        window.on_floor_plan_room_clicked(sample_spaces[0].guid, False)
+        
+        # Verify space list widget was called to sync selection
+        window.space_list_widget.select_spaces_by_guids.assert_called_with([sample_spaces[0].guid])
+        
+        # Verify space detail widget was called to display the space
+        window.space_detail_widget.display_space.assert_called_with(sample_spaces[0])
+
+    def test_multi_selection_synchronization(self, qapp, sample_spaces):
+        """Test multi-selection synchronization between components."""
+        window = MainWindow()
+        window._testing_mode = True
+        
+        # Mock the widgets
+        window.floor_plan_widget = Mock()
+        window.space_list_widget = Mock()
+        window.space_detail_widget = Mock()
+        window.surface_editor_widget = Mock()
+        
+        # Set up spaces
+        window.spaces = sample_spaces
+        
+        # Test multi-selection from space list
+        selected_guids = [sample_spaces[0].guid, sample_spaces[1].guid]
+        window.on_spaces_selection_changed(selected_guids)
+        
+        # Verify floor plan widget was called to highlight multiple spaces
+        window.floor_plan_widget.highlight_spaces.assert_called_with(selected_guids)
+        
+        # Verify space detail widget shows the first selected space
+        window.space_detail_widget.display_space.assert_called_with(sample_spaces[0])
+
+    def test_floor_change_synchronization(self, qapp):
+        """Test floor change synchronization."""
+        window = MainWindow()
+        window._testing_mode = True
+        
+        # Mock the widgets and geometry data
+        window.floor_plan_widget = Mock()
+        window.space_list_widget = Mock()
+        window.space_list_widget.get_current_floor_filter.return_value = "FLOOR001"
+        
+        # Mock floor geometries
+        mock_floor_geometry = Mock()
+        mock_floor_geometry.get_room_count.return_value = 5
+        mock_floor_geometry.level.name = "Ground Floor"
+        
+        window.floor_geometries = {"FLOOR002": mock_floor_geometry}
+        
+        # Test floor change
+        window.on_floor_changed("FLOOR002")
+        
+        # Verify space list filter was updated since user had a specific floor filter
+        window.space_list_widget.set_floor_filter.assert_called_with("FLOOR002")
+
+    def test_selection_clearing_synchronization(self, qapp):
+        """Test that clearing selection in one component clears it in all components."""
+        window = MainWindow()
+        window._testing_mode = True
+        
+        # Mock the widgets
+        window.floor_plan_widget = Mock()
+        window.space_list_widget = Mock()
+        window.space_detail_widget = Mock()
+        window.surface_editor_widget = Mock()
+        
+        # Test clearing selection from floor plan
+        window.on_floor_plan_selection_changed([])
+        
+        # Verify all components were cleared
+        window.space_list_widget.clear_selection.assert_called_once()
+        window.space_detail_widget.clear_selection.assert_called_once()
+        window.surface_editor_widget.clear.assert_called_once()
+
+    def test_zoom_to_spaces_with_floor_switching(self, qapp, sample_spaces):
+        """Test zoom to spaces functionality with automatic floor switching."""
+        window = MainWindow()
+        window._testing_mode = True
+        
+        # Mock the widgets and geometry data
+        window.floor_plan_widget = Mock()
+        window.floor_plan_widget.get_current_floor_id.return_value = "FLOOR001"
+        
+        # Mock geometry extractor with floor data
+        window.geometry_extractor = Mock()
+        mock_floor_geometry = Mock()
+        mock_polygon = Mock()
+        mock_polygon.space_guid = sample_spaces[0].guid
+        mock_floor_geometry.room_polygons = [mock_polygon]
+        
+        window.geometry_extractor.floor_geometries = {
+            "FLOOR002": mock_floor_geometry
+        }
+        
+        # Test zoom to spaces request
+        window.on_zoom_to_spaces_requested([sample_spaces[0].guid])
+        
+        # Verify floor was switched to the target floor
+        window.floor_plan_widget.set_current_floor.assert_called_with("FLOOR002")
+        
+        # Verify zoom was called
+        window.floor_plan_widget.zoom_to_spaces.assert_called_with([sample_spaces[0].guid])

@@ -172,69 +172,72 @@ class EnhancedJsonBuilder:
             }
         }
         
-        # Add NS standards sections based on export profile
+        # Add NS standards sections (always include basic sections)
+        # Identification section
+        identification = self.identification_mapper.map_identification(space, self.source_file_path)
+        space_dict["identification"] = {
+            "project_id": identification.project_id,
+            "project_name": identification.project_name,
+            "building_id": identification.building_id,
+            "building_name": identification.building_name,
+            "storey_name": identification.storey_name,
+            "storey_elevation_m": identification.storey_elevation_m,
+            "room_number": identification.room_number,
+            "room_name": identification.room_name,
+            "function": identification.function,
+            "occupancy_type": identification.occupancy_type
+        }
+        
+        # IFC metadata section
+        ifc_metadata = self.identification_mapper.map_ifc_metadata(space, self.source_file_path)
+        space_dict["ifc_metadata"] = {
+            "space_global_id": ifc_metadata.space_global_id,
+            "space_long_name": ifc_metadata.space_long_name,
+            "space_number": ifc_metadata.space_number,
+            "ns8360_compliant": ifc_metadata.ns8360_compliant,
+            "parsed_name_components": ifc_metadata.parsed_name_components,
+            "model_source": ifc_metadata.model_source
+        }
+        
+        # Enhanced geometry section (always include)
+        geometry = self.geometry_mapper.calculate_enhanced_geometry(space)
+        space_dict["geometry"] = {
+            "length_m": geometry.length_m,
+            "width_m": geometry.width_m,
+            "height_m": geometry.height_m,
+            "net_floor_area_m2": geometry.net_floor_area_m2,
+            "gross_floor_area_m2": geometry.gross_floor_area_m2,
+            "wall_area_m2": geometry.wall_area_m2,
+            "ceiling_area_m2": geometry.ceiling_area_m2,
+            "net_volume_m3": geometry.net_volume_m3,
+            "gross_volume_m3": geometry.gross_volume_m3,
+            "room_origin": geometry.room_origin,
+            "room_orientation_deg": geometry.room_orientation_deg,
+            "room_shape_type": geometry.room_shape_type,
+            "room_aspect_ratio": geometry.room_aspect_ratio,
+            "clear_width_m": geometry.clear_width_m,
+            "clear_height_m": geometry.clear_height_m,
+            "turning_radius_m": geometry.turning_radius_m,
+            "estimated_dimensions": geometry.estimated_dimensions,
+            "estimation_confidence": geometry.estimation_confidence,
+            "estimation_method": geometry.estimation_method
+        }
+        
+        # Enhanced classification section (always include)
+        classification = self.classification_mapper.map_classification(space)
+        space_dict["classification"] = {
+            "ns3940": classification.ns3940,
+            "ns8360_compliance": classification.ns8360_compliance,
+            "tfm": classification.tfm,
+            "custom_codes": classification.custom_codes,
+            "validation_status": classification.validation_status,
+            "overall_confidence": classification.overall_confidence,
+            "classification_source": classification.classification_source
+        }
+        
+        # Add advanced sections based on export profile
         if export_profile in ["advanced", "production"]:
-            # Identification section
-            identification = self.identification_mapper.map_identification(space, self.source_file_path)
-            space_dict["identification"] = {
-                "project_id": identification.project_id,
-                "project_name": identification.project_name,
-                "building_id": identification.building_id,
-                "building_name": identification.building_name,
-                "storey_name": identification.storey_name,
-                "storey_elevation_m": identification.storey_elevation_m,
-                "room_number": identification.room_number,
-                "room_name": identification.room_name,
-                "function": identification.function,
-                "occupancy_type": identification.occupancy_type
-            }
-            
-            # IFC metadata section
-            ifc_metadata = self.identification_mapper.map_ifc_metadata(space, self.source_file_path)
-            space_dict["ifc_metadata"] = {
-                "space_global_id": ifc_metadata.space_global_id,
-                "space_long_name": ifc_metadata.space_long_name,
-                "space_number": ifc_metadata.space_number,
-                "ns8360_compliant": ifc_metadata.ns8360_compliant,
-                "parsed_name_components": ifc_metadata.parsed_name_components,
-                "model_source": ifc_metadata.model_source
-            }
-            
-            # Enhanced geometry section
-            geometry = self.geometry_mapper.calculate_enhanced_geometry(space)
-            space_dict["geometry"] = {
-                "length_m": geometry.length_m,
-                "width_m": geometry.width_m,
-                "height_m": geometry.height_m,
-                "net_floor_area_m2": geometry.net_floor_area_m2,
-                "gross_floor_area_m2": geometry.gross_floor_area_m2,
-                "wall_area_m2": geometry.wall_area_m2,
-                "ceiling_area_m2": geometry.ceiling_area_m2,
-                "net_volume_m3": geometry.net_volume_m3,
-                "gross_volume_m3": geometry.gross_volume_m3,
-                "room_origin": geometry.room_origin,
-                "room_orientation_deg": geometry.room_orientation_deg,
-                "room_shape_type": geometry.room_shape_type,
-                "room_aspect_ratio": geometry.room_aspect_ratio,
-                "clear_width_m": geometry.clear_width_m,
-                "clear_height_m": geometry.clear_height_m,
-                "turning_radius_m": geometry.turning_radius_m,
-                "estimated_dimensions": geometry.estimated_dimensions,
-                "estimation_confidence": geometry.estimation_confidence,
-                "estimation_method": geometry.estimation_method
-            }
-            
-            # Enhanced classification section
-            classification = self.classification_mapper.map_classification(space)
-            space_dict["classification"] = {
-                "ns3940": classification.ns3940,
-                "ns8360_compliance": classification.ns8360_compliance,
-                "tfm": classification.tfm,
-                "custom_codes": classification.custom_codes,
-                "validation_status": classification.validation_status,
-                "overall_confidence": classification.overall_confidence,
-                "classification_source": classification.classification_source
-            }
+            pass  # Advanced sections already included above
             
             # Phase 2B: Performance requirements section
             if export_profile == "production":

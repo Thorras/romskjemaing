@@ -6,12 +6,13 @@ Widget for displaying and navigating through IFC spaces.
 
 from PyQt6.QtWidgets import (QWidget, QVBoxLayout, QHBoxLayout, QListWidget,
                              QListWidgetItem, QLabel, QPushButton, QLineEdit,
-                             QGroupBox)
-from PyQt6.QtCore import Qt, pyqtSignal
-from PyQt6.QtGui import QFont
-from typing import List, Optional
+                             QGroupBox, QComboBox, QCheckBox, QMenu)
+from PyQt6.QtCore import Qt, pyqtSignal, QPoint
+from PyQt6.QtGui import QFont, QIcon, QAction
+from typing import List, Optional, Dict
 
 from ..data.space_model import SpaceData
+from ..visualization.geometry_models import FloorLevel
 
 
 class SpaceListWidget(QWidget):
@@ -20,11 +21,18 @@ class SpaceListWidget(QWidget):
     # Signals
     space_selected = pyqtSignal(str)  # Emitted when a space is selected (GUID)
     spaces_loaded = pyqtSignal(int)   # Emitted when spaces are loaded (count)
+    floor_filter_changed = pyqtSignal(str)  # Emitted when floor filter changes (floor_id or "all")
+    spaces_selection_changed = pyqtSignal(list)  # Emitted when multiple spaces are selected
+    zoom_to_spaces_requested = pyqtSignal(list)  # Emitted when zoom to spaces is requested
 
     def __init__(self, parent=None):
         super().__init__(parent)
         self.spaces = []  # List of SpaceData objects
         self.current_space_guid = None
+        self.floors: List[FloorLevel] = []  # Available floors
+        self.current_floor_filter: Optional[str] = None  # Current floor filter ("all" or floor_id)
+        self.spaces_with_geometry: set = set()  # Set of space GUIDs that have geometry
+        self.selected_space_guids: List[str] = []  # Multiple selection support
 
         self.setup_ui()
 
@@ -51,6 +59,68 @@ class SpaceListWidget(QWidget):
             }
         """)
         layout.addWidget(title_label)
+
+        # Floor filter section
+        floor_filter_container = QWidget()
+        floor_filter_container.setStyleSheet("""
+            QWidget {
+                background-color: white;
+                color: black;
+                border: 1px solid #ced4da;
+                border-radius: 6px;
+                padding: 4px;
+                margin-bottom: 4px;
+            }
+        """)
+        floor_filter_layout = QHBoxLayout()
+        floor_filter_layout.setContentsMargins(8, 4, 8, 4)
+        floor_filter_container.setLayout(floor_filter_layout)
+
+        floor_label = QLabel("🏢")
+        floor_label.setStyleSheet("border: none; background: transparent; color: #6c757d;")
+        
+        self.floor_filter_combo = QComboBox()
+        self.floor_filter_combo.setStyleSheet("""
+            QComboBox {
+                border: none;
+                background: transparent;
+                font-size: 13px;
+                padding: 4px;
+                min-width: 120px;
+            }
+            QComboBox:focus {
+                background-color: #f8f9fa;
+            }
+            QComboBox::drop-down {
+                border: none;
+            }
+            QComboBox::down-arrow {
+                image: none;
+                border: none;
+            }
+        """)
+        self.floor_filter_combo.addItem("All Floors", "all")
+        self.floor_filter_combo.currentTextChanged.connect(self.on_floor_filter_changed)
+
+        # Show geometry indicator checkbox
+        self.show_geometry_only = QCheckBox("📐 With geometry only")
+        self.show_geometry_only.setStyleSheet("""
+            QCheckBox {
+                border: none;
+                background: transparent;
+                color: #6c757d;
+                font-size: 12px;
+            }
+            QCheckBox:hover {
+                color: #495057;
+            }
+        """)
+        self.show_geometry_only.stateChanged.connect(self.filter_spaces_by_current_criteria)
+
+        floor_filter_layout.addWidget(floor_label)
+        floor_filter_layout.addWidget(self.floor_filter_combo, 1)
+        floor_filter_layout.addWidget(self.show_geometry_only)
+        layout.addWidget(floor_filter_container)
 
         # Search/filter section with enhanced styling
         search_container = QWidget()
@@ -82,7 +152,7 @@ class SpaceListWidget(QWidget):
                 background-color: #f8f9fa;
             }
         """)
-        self.search_input.textChanged.connect(self.filter_spaces)
+        self.search_input.textChanged.connect(self.filter_spaces_by_current_criteria)
 
         # Clear search button
         self.clear_search_button = QPushButton("✕")
@@ -108,8 +178,9 @@ class SpaceListWidget(QWidget):
         search_layout.addWidget(self.clear_search_button)
         layout.addWidget(search_container)
 
-        # Space list with enhanced styling
+        # Space list with enhanced styling and multi-selection support
         self.space_list = QListWidget()
+        self.space_list.setSelectionMode(QListWidget.SelectionMode.ExtendedSelection)  # Enable multi-selection
         self.space_list.setStyleSheet("""
             QListWidget {
                 background-color: white;
@@ -140,6 +211,9 @@ class SpaceListWidget(QWidget):
         """)
         self.space_list.itemClicked.connect(self.on_space_clicked)
         self.space_list.itemDoubleClicked.connect(self.on_space_double_clicked)
+        self.space_list.itemSelectionChanged.connect(self.on_selection_changed)
+        self.space_list.setContextMenuPolicy(Qt.ContextMenuPolicy.CustomContextMenu)
+        self.space_list.customContextMenuRequested.connect(self.show_context_menu)
         layout.addWidget(self.space_list, 1)  # Give it most of the space
 
         # Space count label
@@ -288,45 +362,51 @@ class SpaceListWidget(QWidget):
             self.update_count_label(0)
             return
 
-        # Filter spaces if filter text is provided
-        filtered_spaces = self.spaces
-        if filter_text:
-            filter_lower = filter_text.lower()
-            filtered_spaces = [
-                space for space in self.spaces
-                if (filter_lower in space.name.lower() or
-                    filter_lower in space.long_name.lower() or
-                    filter_lower in space.object_type.lower() or
-                    filter_lower in space.zone_category.lower() or
-                    filter_lower in space.number.lower())
-            ]
+        # Get filtered spaces using all current criteria
+        filtered_spaces = self.get_filtered_spaces(filter_text)
 
         # Update count label
-        if filter_text:
-            self.update_count_label(len(self.spaces), len(filtered_spaces))
+        total_spaces = len(self.spaces)
+        filtered_count = len(filtered_spaces)
+        
+        if self.current_floor_filter or self.show_geometry_only.isChecked() or filter_text:
+            self.update_count_label(total_spaces, filtered_count)
         else:
-            self.update_count_label(len(self.spaces))
+            self.update_count_label(total_spaces)
 
         # Add spaces to list
         for space in filtered_spaces:
-            item_text = self.format_space_display_text(space)
+            item_text = self.format_space_display_text_with_indicators(space)
             item = QListWidgetItem(item_text)
             item.setData(Qt.ItemDataRole.UserRole, space.guid)  # Store GUID
 
             # Add tooltip with more details
-            tooltip = self.format_space_tooltip(space)
+            tooltip = self.format_space_tooltip_with_floor_info(space)
             item.setToolTip(tooltip)
 
-            # Add icon based on space type
-            icon = self.get_space_type_icon(space.object_type)
+            # Add icon based on space type and geometry availability
+            icon = self.get_space_type_icon_with_geometry(space)
             if icon:
                 item.setText(f"{icon} {item_text}")
+
+            # Style item based on geometry availability
+            if space.guid not in self.spaces_with_geometry:
+                item.setForeground(Qt.GlobalColor.gray)
 
             self.space_list.addItem(item)
 
         # Show "no results" message if filtered and empty
-        if filter_text and len(filtered_spaces) == 0:
-            item = QListWidgetItem("🔍 No spaces match your search")
+        if filtered_count == 0:
+            if filter_text:
+                message = "🔍 No spaces match your search criteria"
+            elif self.current_floor_filter:
+                message = "🏢 No spaces found on selected floor"
+            elif self.show_geometry_only.isChecked():
+                message = "📐 No spaces with geometry found"
+            else:
+                message = "📭 No spaces found"
+                
+            item = QListWidgetItem(message)
             item.setFlags(Qt.ItemFlag.NoItemFlags)
             item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
             self.space_list.addItem(item)
@@ -352,6 +432,17 @@ class SpaceListWidget(QWidget):
         }
         return type_icons.get(object_type, "🏠")
 
+    def get_space_type_icon_with_geometry(self, space: SpaceData) -> str:
+        """Get an icon for the space type with geometry indicator."""
+        base_icon = self.get_space_type_icon(space.object_type)
+        
+        # Add geometry indicator
+        has_geometry = space.guid in self.spaces_with_geometry
+        if has_geometry:
+            return f"📐{base_icon}"  # Geometry available
+        else:
+            return f"📋{base_icon}"  # No geometry
+
     def format_space_display_text(self, space: SpaceData) -> str:
         """Format the display text for a space in the list."""
         # Primary text: number and name
@@ -370,6 +461,30 @@ class SpaceListWidget(QWidget):
             return f"{primary}\n{secondary}"
         else:
             return primary
+
+    def format_space_display_text_with_indicators(self, space: SpaceData) -> str:
+        """Format the display text for a space with geometry and floor indicators."""
+        base_text = self.format_space_display_text(space)
+        
+        # Add geometry indicator
+        has_geometry = space.guid in self.spaces_with_geometry
+        geometry_indicator = "📐" if has_geometry else "📋"
+        
+        # Add floor information if multiple floors exist
+        floor_info = ""
+        if len(self.floors) > 1:
+            space_floor = self.get_floor_for_space(space.guid)
+            if space_floor:
+                floor_info = f" [{space_floor.name}]"
+        
+        return f"{base_text}{floor_info}"
+
+    def get_floor_for_space(self, space_guid: str) -> Optional[FloorLevel]:
+        """Get the floor that contains the given space."""
+        for floor in self.floors:
+            if space_guid in floor.spaces:
+                return floor
+        return None
 
     def format_space_tooltip(self, space: SpaceData) -> str:
         """Format the tooltip text for a space."""
@@ -390,9 +505,25 @@ class SpaceListWidget(QWidget):
 
         return "\n".join(tooltip_parts)
 
+    def format_space_tooltip_with_floor_info(self, space: SpaceData) -> str:
+        """Format the tooltip text for a space with floor and geometry information."""
+        base_tooltip = self.format_space_tooltip(space)
+        
+        # Add floor information
+        space_floor = self.get_floor_for_space(space.guid)
+        if space_floor:
+            base_tooltip += f"\nFloor: {space_floor.name} (Elevation: {space_floor.elevation}m)"
+        
+        # Add geometry availability
+        has_geometry = space.guid in self.spaces_with_geometry
+        geometry_status = "Available" if has_geometry else "Not available"
+        base_tooltip += f"\nGeometry: {geometry_status}"
+        
+        return base_tooltip
+
     def filter_spaces(self, text: str):
-        """Filter spaces based on search text."""
-        self.populate_space_list(text)
+        """Filter spaces based on search text (legacy method)."""
+        self.filter_spaces_by_current_criteria()
         
         # Show/hide clear search button
         self.clear_search_button.setVisible(bool(text))
@@ -508,3 +639,267 @@ class SpaceListWidget(QWidget):
 
             return True
         return False
+
+    # Floor filtering and geometry support methods
+
+    def set_floors(self, floors: List[FloorLevel]):
+        """Set available floors for filtering."""
+        self.floors = floors
+        self.update_floor_filter_combo()
+
+    def update_floor_filter_combo(self):
+        """Update the floor filter combo box with available floors."""
+        # Clear existing items except "All Floors"
+        self.floor_filter_combo.clear()
+        self.floor_filter_combo.addItem("All Floors", "all")
+        
+        # Add floors sorted by elevation
+        sorted_floors = sorted(self.floors, key=lambda f: f.elevation)
+        for floor in sorted_floors:
+            space_count = len(floor.spaces)
+            display_text = f"{floor.name} ({space_count} spaces)"
+            self.floor_filter_combo.addItem(display_text, floor.id)
+
+    def set_spaces_with_geometry(self, space_guids: set):
+        """Set which spaces have geometry data available."""
+        self.spaces_with_geometry = space_guids
+        self.refresh_spaces()
+
+    def set_floor_filter(self, floor_id: Optional[str]):
+        """Set the current floor filter."""
+        if floor_id is None or floor_id == "all":
+            self.current_floor_filter = None
+            self.floor_filter_combo.setCurrentIndex(0)  # "All Floors"
+        else:
+            self.current_floor_filter = floor_id
+            # Find and select the floor in combo box
+            for i in range(self.floor_filter_combo.count()):
+                if self.floor_filter_combo.itemData(i) == floor_id:
+                    self.floor_filter_combo.setCurrentIndex(i)
+                    break
+        
+        self.filter_spaces_by_current_criteria()
+
+    def on_floor_filter_changed(self):
+        """Handle floor filter combo box changes."""
+        current_data = self.floor_filter_combo.currentData()
+        if current_data == "all":
+            self.current_floor_filter = None
+        else:
+            self.current_floor_filter = current_data
+        
+        self.filter_spaces_by_current_criteria()
+        self.floor_filter_changed.emit(current_data or "all")
+
+    def filter_spaces_by_current_criteria(self):
+        """Filter spaces based on current search text, floor filter, and geometry filter."""
+        search_text = self.search_input.text()
+        self.populate_space_list(search_text)
+
+    def get_filtered_spaces(self, search_text: str = "") -> List[SpaceData]:
+        """Get spaces filtered by current criteria."""
+        filtered_spaces = self.spaces
+
+        # Apply floor filter
+        if self.current_floor_filter:
+            floor_space_guids = set()
+            for floor in self.floors:
+                if floor.id == self.current_floor_filter:
+                    floor_space_guids = set(floor.spaces)
+                    break
+            
+            filtered_spaces = [
+                space for space in filtered_spaces
+                if space.guid in floor_space_guids
+            ]
+
+        # Apply geometry filter
+        if self.show_geometry_only.isChecked():
+            filtered_spaces = [
+                space for space in filtered_spaces
+                if space.guid in self.spaces_with_geometry
+            ]
+
+        # Apply search filter
+        if search_text:
+            search_lower = search_text.lower()
+            filtered_spaces = [
+                space for space in filtered_spaces
+                if (search_lower in space.name.lower() or
+                    search_lower in space.long_name.lower() or
+                    search_lower in space.object_type.lower() or
+                    search_lower in space.zone_category.lower() or
+                    search_lower in space.number.lower())
+            ]
+
+        return filtered_spaces
+
+    def on_selection_changed(self):
+        """Handle selection changes in the space list."""
+        selected_items = self.space_list.selectedItems()
+        selected_guids = []
+        
+        for item in selected_items:
+            guid = item.data(Qt.ItemDataRole.UserRole)
+            if guid:  # Only include items with valid GUIDs
+                selected_guids.append(guid)
+        
+        self.selected_space_guids = selected_guids
+        
+        # Update single selection for backward compatibility
+        if selected_guids:
+            self.current_space_guid = selected_guids[0]
+            space = self.get_space_by_guid(selected_guids[0])
+            if space:
+                self.update_space_info(space)
+                self.clear_button.setEnabled(True)
+        else:
+            self.current_space_guid = None
+            self.info_label.setText("No space selected")
+            self.clear_button.setEnabled(False)
+        
+        # Emit selection change signal
+        self.spaces_selection_changed.emit(selected_guids)
+        
+        # Emit single selection signal for backward compatibility
+        if selected_guids:
+            self.space_selected.emit(selected_guids[0])
+
+    def highlight_spaces_on_floor_plan(self, space_guids: List[str]):
+        """Highlight spaces in the list that are selected on the floor plan."""
+        # Clear current selection
+        self.space_list.clearSelection()
+        
+        # Select items corresponding to the space GUIDs
+        for i in range(self.space_list.count()):
+            item = self.space_list.item(i)
+            guid = item.data(Qt.ItemDataRole.UserRole)
+            if guid and guid in space_guids:
+                item.setSelected(True)
+
+    def sync_with_floor_plan_selection(self, space_guids: List[str]):
+        """Synchronize selection with floor plan selection."""
+        self.highlight_spaces_on_floor_plan(space_guids)
+
+    def get_selected_space_guids(self) -> List[str]:
+        """Get all currently selected space GUIDs."""
+        return self.selected_space_guids.copy()
+
+    def select_spaces_by_guids(self, space_guids: List[str]):
+        """Select spaces by their GUIDs."""
+        self.space_list.clearSelection()
+        
+        for i in range(self.space_list.count()):
+            item = self.space_list.item(i)
+            guid = item.data(Qt.ItemDataRole.UserRole)
+            if guid and guid in space_guids:
+                item.setSelected(True)
+
+    def get_current_floor_filter(self) -> Optional[str]:
+        """Get the current floor filter."""
+        return self.current_floor_filter
+
+    # Floor-aware navigation methods
+
+    def zoom_to_selected_spaces(self):
+        """Request zoom to currently selected spaces."""
+        if self.selected_space_guids:
+            self.zoom_to_spaces_requested.emit(self.selected_space_guids)
+
+    def switch_to_space_floor(self, space_guid: str):
+        """Switch to the floor containing the specified space."""
+        space_floor = self.get_floor_for_space(space_guid)
+        if space_floor and space_floor.id != self.current_floor_filter:
+            self.set_floor_filter(space_floor.id)
+            return True
+        return False
+
+    def navigate_to_space(self, space_guid: str, zoom_to_space: bool = True):
+        """Navigate to a specific space (switch floor if needed and optionally zoom)."""
+        # Switch to the floor containing this space
+        floor_switched = self.switch_to_space_floor(space_guid)
+        
+        # Select the space
+        self.select_spaces_by_guids([space_guid])
+        
+        # Request zoom if requested
+        if zoom_to_space:
+            self.zoom_to_spaces_requested.emit([space_guid])
+        
+        return floor_switched
+
+    def get_spaces_on_floor(self, floor_id: str) -> List[SpaceData]:
+        """Get all spaces on a specific floor."""
+        floor_space_guids = set()
+        for floor in self.floors:
+            if floor.id == floor_id:
+                floor_space_guids = set(floor.spaces)
+                break
+        
+        return [
+            space for space in self.spaces
+            if space.guid in floor_space_guids
+        ]
+
+    def get_related_spaces(self, space_guid: str) -> List[str]:
+        """Get spaces related to the given space (placeholder for future relationship support)."""
+        # This is a placeholder for future implementation of space relationships
+        # Could include adjacent spaces, spaces in same zone, etc.
+        return []
+
+    def navigate_to_related_spaces(self, space_guid: str):
+        """Navigate to spaces related to the given space."""
+        related_guids = self.get_related_spaces(space_guid)
+        if related_guids:
+            # Switch to appropriate floor if needed
+            primary_space_floor = self.get_floor_for_space(space_guid)
+            if primary_space_floor:
+                self.set_floor_filter(primary_space_floor.id)
+            
+            # Select all related spaces
+            all_guids = [space_guid] + related_guids
+            self.select_spaces_by_guids(all_guids)
+            
+            # Request zoom to all related spaces
+            self.zoom_to_spaces_requested.emit(all_guids)
+
+    def show_context_menu(self, position: QPoint):
+        """Show context menu for space list items."""
+        item = self.space_list.itemAt(position)
+        if not item:
+            return
+        
+        space_guid = item.data(Qt.ItemDataRole.UserRole)
+        if not space_guid:
+            return
+        
+        menu = QMenu(self)
+        
+        # Zoom to space action
+        zoom_action = QAction("🔍 Zoom to Space", self)
+        zoom_action.triggered.connect(lambda: self.zoom_to_spaces_requested.emit([space_guid]))
+        menu.addAction(zoom_action)
+        
+        # Navigate to space action (switch floor + zoom)
+        navigate_action = QAction("🧭 Navigate to Space", self)
+        navigate_action.triggered.connect(lambda: self.navigate_to_space(space_guid, True))
+        menu.addAction(navigate_action)
+        
+        menu.addSeparator()
+        
+        # Switch to space floor action
+        space_floor = self.get_floor_for_space(space_guid)
+        if space_floor and space_floor.id != self.current_floor_filter:
+            switch_floor_action = QAction(f"🏢 Switch to {space_floor.name}", self)
+            switch_floor_action.triggered.connect(lambda: self.set_floor_filter(space_floor.id))
+            menu.addAction(switch_floor_action)
+        
+        # Show related spaces (if any)
+        related_spaces = self.get_related_spaces(space_guid)
+        if related_spaces:
+            related_action = QAction(f"🔗 Show Related Spaces ({len(related_spaces)})", self)
+            related_action.triggered.connect(lambda: self.navigate_to_related_spaces(space_guid))
+            menu.addAction(related_action)
+        
+        # Show context menu
+        menu.exec(self.space_list.mapToGlobal(position))

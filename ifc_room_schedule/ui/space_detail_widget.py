@@ -26,6 +26,7 @@ class SpaceDetailWidget(QWidget):
         self.current_space = None
         
         self.setup_ui()
+        self._validate_interface()
         
     def setup_ui(self):
         """Set up the user interface."""
@@ -454,3 +455,61 @@ class SpaceDetailWidget(QWidget):
     def get_current_space(self) -> Optional[SpaceData]:
         """Get the currently displayed space."""
         return self.current_space
+        
+    def _validate_interface(self):
+        """Validate that all expected interface methods exist and are properly named."""
+        required_methods = [
+            'display_space',      # Main method for showing space details
+            'clear_selection',    # Method for clearing current selection
+            'get_current_space'   # Method for getting currently displayed space
+        ]
+        
+        # Check that all required methods exist
+        for method_name in required_methods:
+            if not hasattr(self, method_name):
+                raise AttributeError(f"Required method '{method_name}' not implemented in SpaceDetailWidget")
+            
+            # Ensure the method is callable
+            method = getattr(self, method_name)
+            if not callable(method):
+                raise AttributeError(f"Required attribute '{method_name}' is not callable in SpaceDetailWidget")
+        
+        # Check for deprecated method names that should not exist
+        # Note: We only check for methods, not attributes like self.current_space
+        deprecated_methods = [
+            'load_space',         # Should be 'display_space'
+            'show_space_details', # Should be 'display_space'
+            'clear_space',        # Should be 'clear_selection'
+        ]
+        
+        for deprecated_method in deprecated_methods:
+            if hasattr(self, deprecated_method) and callable(getattr(self, deprecated_method)):
+                raise AttributeError(
+                    f"Deprecated method '{deprecated_method}' found in SpaceDetailWidget. "
+                    f"This method should not exist to prevent interface confusion."
+                )
+                
+        # Log successful validation
+        import logging
+        logger = logging.getLogger(__name__)
+        logger.debug("SpaceDetailWidget interface validation completed successfully")
+        
+    def __getattr__(self, name):
+        """Handle calls to deprecated method names with helpful error messages."""
+        # Only handle method calls, not attribute access
+        deprecated_method_mappings = {
+            'load_space': 'display_space',
+            'show_space_details': 'display_space', 
+            'clear_space': 'clear_selection'
+        }
+        
+        if name in deprecated_method_mappings:
+            correct_method = deprecated_method_mappings[name]
+            raise AttributeError(
+                f"Method '{name}' does not exist in SpaceDetailWidget. "
+                f"Use '{correct_method}' instead. "
+                f"This error indicates an interface inconsistency that needs to be fixed."
+            )
+        
+        # For any other missing attributes, use the default behavior
+        raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")

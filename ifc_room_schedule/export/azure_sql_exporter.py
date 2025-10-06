@@ -47,6 +47,9 @@ class AzureSQLExporter:
                 "pip install pyodbc sqlalchemy"
             )
         
+        # Initialize logger first
+        self.logger = logging.getLogger(__name__)
+        
         # Determine connection string to use
         if use_default_config:
             try:
@@ -64,7 +67,6 @@ class AzureSQLExporter:
         
         self.engine = None
         self.metadata = MetaData()
-        self.logger = logging.getLogger(__name__)
         
         # Define table schemas
         self._define_schemas()

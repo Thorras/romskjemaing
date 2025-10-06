@@ -56,9 +56,16 @@ class MetaData:
     building_id: Optional[str] = None
     building_name: Optional[str] = None
     
+    # Additional fields for compatibility with MetaMapper
+    ns_compliance: Optional[Dict[str, Any]] = None
+    application_info: Optional[Dict[str, Any]] = None
+    file_info: Optional[Dict[str, Any]] = None
+    project_info: Optional[Dict[str, Any]] = None
+    timestamps: Optional[Dict[str, Any]] = None
+    
     def to_dict(self) -> Dict[str, Any]:
         """Convert metadata to dictionary for export."""
-        return {
+        result = {
             "schema_version": self.schema_version,
             "locale": self.locale,
             "created_at": self.created_at.isoformat() if self.created_at else None,
@@ -72,6 +79,20 @@ class MetaData:
             "building_id": self.building_id,
             "building_name": self.building_name
         }
+        
+        # Add additional fields if present
+        if self.ns_compliance:
+            result["ns_compliance"] = self.ns_compliance
+        if self.application_info:
+            result["application_info"] = self.application_info
+        if self.file_info:
+            result["file_info"] = self.file_info
+        if self.project_info:
+            result["project_info"] = self.project_info
+        if self.timestamps:
+            result["timestamps"] = self.timestamps
+            
+        return result
 
 
 @dataclass
