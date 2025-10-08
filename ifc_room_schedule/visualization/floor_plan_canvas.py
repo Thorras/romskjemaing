@@ -501,18 +501,19 @@ class FloorPlanCanvas(QWidget):
         
         # Add room number if available and enabled
         if self.show_room_numbers and hasattr(polygon, 'room_number') and polygon.room_number:
-            parts.append(polygon.room_number)
+            parts.append(str(polygon.room_number))
         
         # Add space name if available and enabled
-        if self.show_room_labels and polygon.space_name:
-            if detailed:
-                parts.append(polygon.space_name)
-            else:
-                # Truncate long names for non-detailed view
-                name = polygon.space_name
-                if len(name) > 15:
-                    name = name[:12] + "..."
-                parts.append(name)
+        if self.show_room_labels and polygon.space_name and polygon.space_name.strip():
+            name = polygon.space_name.strip()
+            if name and name != "Unknown Space":
+                if detailed:
+                    parts.append(name)
+                else:
+                    # Truncate long names for non-detailed view
+                    if len(name) > 15:
+                        name = name[:12] + "..."
+                    parts.append(name)
         
         # Fallback to truncated GUID if no other info
         if not parts:
@@ -652,31 +653,61 @@ class FloorPlanCanvas(QWidget):
             self.logger.debug("Room selection cleared")
     
     def zoom_to_fit(self) -> None:
-        """Zoom and pan to fit all room geometry in the view."""
+        """Zoom and pan to fit all room geometry in the view with improved handling."""
+        self.logger.debug("Starting zoom_to_fit")
+        
         # Get bounds for current floor
         bounds = self.get_floor_bounds()
         if not bounds:
+            # If no bounds available, try to calculate from visible rooms
+            if self.floor_geometry and self.floor_geometry.room_polygons:
+                all_bounds = [polygon.get_bounds() for polygon in self.floor_geometry.room_polygons]
+                if all_bounds:
+                    min_x = min(b[0] for b in all_bounds)
+                    min_y = min(b[1] for b in all_bounds)
+                    max_x = max(b[2] for b in all_bounds)
+                    max_y = max(b[3] for b in all_bounds)
+                    bounds = (min_x, min_y, max_x, max_y)
+                    self.logger.debug(f"Calculated bounds from polygons: {bounds}")
+        
+        if not bounds:
+            self.logger.warning("No bounds available for zoom_to_fit")
             return
         
         # Get geometry bounds
         min_x, min_y, max_x, max_y = bounds
+        self.logger.debug(f"Original bounds: ({min_x:.1f}, {min_y:.1f}, {max_x:.1f}, {max_y:.1f})")
         
-        if max_x <= min_x or max_y <= min_y:
-            return
-        
-        # Calculate required zoom to fit geometry
-        widget_width = self.width() - 40  # Margin
-        widget_height = self.height() - 40
+        # Add padding around the geometry
+        padding = max(2.0, (max_x - min_x) * 0.15, (max_y - min_y) * 0.15)
+        min_x -= padding
+        min_y -= padding
+        max_x += padding
+        max_y += padding
         
         geometry_width = max_x - min_x
         geometry_height = max_y - min_y
         
+        if geometry_width <= 0 or geometry_height <= 0:
+            self.logger.warning(f"Invalid geometry dimensions: {geometry_width} x {geometry_height}")
+            return
+        
+        # Calculate required zoom to fit geometry
+        widget_width = self.width() - 60  # More margin
+        widget_height = self.height() - 60
+        
         zoom_x = widget_width / geometry_width if geometry_width > 0 else 1.0
         zoom_y = widget_height / geometry_height if geometry_height > 0 else 1.0
         
-        # Use smaller zoom to fit both dimensions
+        # Use smaller zoom to fit both dimensions, but ensure minimum visibility
         self.zoom_level = min(zoom_x, zoom_y, self.max_zoom)
         self.zoom_level = max(self.zoom_level, self.min_zoom)
+        
+        # Ensure reasonable zoom level
+        if self.zoom_level < 0.01:
+            self.zoom_level = 0.1
+        elif self.zoom_level > 100:
+            self.zoom_level = 10.0
         
         # Center the geometry
         center_x = (min_x + max_x) / 2
@@ -693,7 +724,7 @@ class FloorPlanCanvas(QWidget):
         self._update_view_transform()
         self.update()
         
-        self.logger.debug(f"Zoomed to fit: zoom={self.zoom_level:.2f}")
+        self.logger.info(f"Zoomed to fit: zoom={self.zoom_level:.2f}, bounds=({min_x:.1f},{min_y:.1f},{max_x:.1f},{max_y:.1f}), center=({center_x:.1f},{center_y:.1f})")
     
     def zoom_to_rooms(self, room_guids: List[str]) -> None:
         """
@@ -791,9 +822,13 @@ class FloorPlanCanvas(QWidget):
         # Clear background
         painter.fillRect(self.rect(), self.COLOR_BACKGROUND)
         
+        self.logger.debug(f"Paint event - widget size: {self.width()}x{self.height()}")
+        
         if not self.floor_geometry:
             self._draw_no_data_message(painter)
             return
+        
+        self.logger.debug(f"Drawing floor with {len(self.floor_geometry.room_polygons)} rooms")
         
         # Set up coordinate transformation
         painter.setTransform(self.view_transform)
@@ -810,6 +845,9 @@ class FloorPlanCanvas(QWidget):
         
         # Draw selection highlights (on top of hover)
         self._draw_selection_highlights(painter)
+        
+        # Draw debug grid and coordinate system
+        self._draw_debug_info(painter)
         
         # Draw room labels (top layer for visibility)
         if self._should_show_labels():
@@ -987,40 +1025,87 @@ class FloorPlanCanvas(QWidget):
         """Update the list of visible rooms for performance optimization."""
         if not self.floor_geometry:
             self.visible_rooms = []
+            self.logger.debug("No floor geometry available")
             return
         
         visible_rect = self._get_visible_floor_rect()
+        self.logger.debug(f"Visible rect: {visible_rect.x():.1f}, {visible_rect.y():.1f}, {visible_rect.width():.1f}, {visible_rect.height():.1f}")
         
         # Simple bounds checking - could be optimized with spatial indexing
         self.visible_rooms = []
-        for polygon in self.floor_geometry.room_polygons:
+        total_rooms = len(self.floor_geometry.room_polygons)
+        
+        for i, polygon in enumerate(self.floor_geometry.room_polygons):
             bounds = polygon.get_bounds()
             room_rect = QRectF(bounds[0], bounds[1], bounds[2] - bounds[0], bounds[3] - bounds[1])
             
-            if visible_rect.intersects(room_rect):
-                self.visible_rooms.append(polygon)
+            # Log first few rooms for debugging
+            if i < 3:
+                self.logger.debug(f"Room {i} ({polygon.space_name}): bounds=({bounds[0]:.1f}, {bounds[1]:.1f}, {bounds[2]:.1f}, {bounds[3]:.1f})")
+                self.logger.debug(f"Room rect: {room_rect.x():.1f}, {room_rect.y():.1f}, {room_rect.width():.1f}, {room_rect.height():.1f}")
+                self.logger.debug(f"Intersects visible: {visible_rect.intersects(room_rect)}")
+            
+            # Include all rooms for now to ensure visibility
+            self.visible_rooms.append(polygon)
+        
+        self.logger.debug(f"Updated visible rooms: {len(self.visible_rooms)}/{total_rooms} rooms visible")
     
     def _draw_room_polygons(self, painter: QPainter) -> None:
-        """Draw room polygon outlines and fills."""
-        # Set up pen
-        pen = QPen(self.COLOR_ROOM_BORDER, self.ROOM_BORDER_WIDTH / self.zoom_level)
-        painter.setPen(pen)
+        """Draw room polygon outlines and fills with enhanced visibility."""
+        if not self.visible_rooms:
+            self.logger.debug("No visible rooms to draw")
+            return
+        
+        self.logger.debug(f"Drawing {len(self.visible_rooms)} visible rooms at zoom {self.zoom_level:.2f}")
         
         # Draw visible rooms with appropriate colors
-        for polygon in self.visible_rooms:
-            # Get color for this space
-            if self.use_color_coding:
-                fill_color = self.get_space_color(polygon.space_guid)
-                # Make fill color semi-transparent
-                fill_color.setAlpha(100)
-            else:
-                fill_color = self.COLOR_ROOM_FILL
-            
-            brush = QBrush(fill_color)
-            painter.setBrush(brush)
-            
-            qt_polygon = self._polygon_to_qt(polygon)
-            painter.drawPolygon(qt_polygon)
+        for i, polygon in enumerate(self.visible_rooms):
+            try:
+                # Get color for this space - use more contrasting colors
+                if self.use_color_coding:
+                    fill_color = self.get_space_color(polygon.space_guid)
+                    # Make fill color more opaque for better visibility
+                    fill_color.setAlpha(180)
+                else:
+                    # Use alternating colors for better distinction
+                    colors = [
+                        QColor(173, 216, 230, 180),  # Light blue
+                        QColor(144, 238, 144, 180),  # Light green
+                        QColor(255, 218, 185, 180),  # Peach
+                        QColor(221, 160, 221, 180),  # Plum
+                        QColor(255, 255, 224, 180),  # Light yellow
+                    ]
+                    fill_color = colors[i % len(colors)]
+                
+                # Set up brush for fill
+                brush = QBrush(fill_color)
+                painter.setBrush(brush)
+                
+                # Set up pen for border - make it very visible
+                border_width = max(2.0, 3.0 / self.zoom_level)  # Minimum 2px border
+                pen = QPen(QColor(0, 0, 0), border_width)  # Black border
+                painter.setPen(pen)
+                
+                qt_polygon = self._polygon_to_qt(polygon)
+                
+                # Debug: Log polygon info
+                if i < 3:  # Log first 3 polygons
+                    bounds = polygon.get_bounds()
+                    self.logger.debug(f"Drawing polygon {i}: {polygon.space_name} at bounds ({bounds[0]:.1f}, {bounds[1]:.1f}, {bounds[2]:.1f}, {bounds[3]:.1f})")
+                    self.logger.debug(f"Qt polygon has {qt_polygon.size()} points")
+                
+                # Draw the filled polygon
+                painter.drawPolygon(qt_polygon)
+                
+                # Draw an additional outline for extra visibility
+                outline_pen = QPen(QColor(50, 50, 50), border_width * 0.5)
+                painter.setPen(outline_pen)
+                painter.setBrush(Qt.BrushStyle.NoBrush)
+                painter.drawPolygon(qt_polygon)
+                
+            except Exception as e:
+                self.logger.warning(f"Failed to draw polygon {i}: {e}")
+                continue
     
     def _draw_room_labels(self, painter: QPainter) -> None:
         """Draw enhanced room labels with zoom-appropriate visibility."""
@@ -1154,6 +1239,64 @@ class FloorPlanCanvas(QWidget):
         
         message = "No floor plan data available"
         painter.drawText(self.rect(), Qt.AlignmentFlag.AlignCenter, message)
+    
+    def _draw_debug_info(self, painter: QPainter) -> None:
+        """Draw debug information like coordinate system and grid."""
+        if not self.floor_geometry:
+            return
+        
+        # Save current painter state
+        painter.save()
+        
+        # Draw coordinate system axes
+        pen = QPen(QColor(255, 0, 0, 100), 1.0)  # Semi-transparent red
+        painter.setPen(pen)
+        painter.setBrush(Qt.BrushStyle.NoBrush)
+        
+        # Draw X axis
+        painter.drawLine(QPointF(-1000, 0), QPointF(1000, 0))
+        # Draw Y axis  
+        painter.drawLine(QPointF(0, -1000), QPointF(0, 1000))
+        
+        # Draw grid
+        if self.zoom_level > 0.1:
+            grid_pen = QPen(QColor(200, 200, 200, 50), 0.5)
+            painter.setPen(grid_pen)
+            
+            # Grid spacing based on zoom level
+            grid_spacing = 5.0 if self.zoom_level > 0.5 else 10.0
+            
+            # Get visible area
+            visible_rect = self._get_visible_floor_rect()
+            
+            # Draw vertical grid lines
+            start_x = int(visible_rect.left() / grid_spacing) * grid_spacing
+            end_x = visible_rect.right()
+            x = start_x
+            while x <= end_x:
+                painter.drawLine(QPointF(x, visible_rect.top()), QPointF(x, visible_rect.bottom()))
+                x += grid_spacing
+            
+            # Draw horizontal grid lines
+            start_y = int(visible_rect.top() / grid_spacing) * grid_spacing
+            end_y = visible_rect.bottom()
+            y = start_y
+            while y <= end_y:
+                painter.drawLine(QPointF(visible_rect.left(), y), QPointF(visible_rect.right(), y))
+                y += grid_spacing
+        
+        # Draw floor bounds rectangle
+        if self.floor_geometry.bounds:
+            bounds = self.floor_geometry.bounds
+            bounds_rect = QRectF(bounds[0], bounds[1], bounds[2] - bounds[0], bounds[3] - bounds[1])
+            
+            bounds_pen = QPen(QColor(0, 255, 0, 150), 2.0)  # Green bounds
+            painter.setPen(bounds_pen)
+            painter.setBrush(Qt.BrushStyle.NoBrush)
+            painter.drawRect(bounds_rect)
+        
+        # Restore painter state
+        painter.restore()
     
     def _polygon_to_qt(self, polygon: Polygon2D) -> QPolygonF:
         """Convert Polygon2D to Qt QPolygonF."""

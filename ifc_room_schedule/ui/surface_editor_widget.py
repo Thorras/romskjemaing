@@ -492,3 +492,18 @@ class SurfaceEditorWidget(QWidget):
         if self.save_timer.isActive():
             self.save_timer.stop()
             self.auto_save()
+    
+    def clear(self):
+        """Clear the current selection and show empty state."""
+        # Force save any pending changes
+        self.force_save()
+        
+        # Clear current editing state
+        self.current_surface_id = None
+        self.current_boundary_guid = None
+        self.current_space_guid = None
+        
+        # Show empty state
+        self.show_empty_state()
+        
+        self.logger.debug("Surface editor cleared")

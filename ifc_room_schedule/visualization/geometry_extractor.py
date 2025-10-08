@@ -333,58 +333,104 @@ class GeometryExtractor:
             except Exception as e:
                 self.logger.debug(f"Related elements extraction failed: {e}")
             
-            # Method 4: Generate fallback geometry based on space properties
+            # Method 4: Generate fallback geometry only if space has meaningful properties
             try:
-                polygon = self._generate_fallback_geometry(ifc_space, space_guid, space_name)
-                if polygon and self._validate_polygon(polygon):
-                    polygons.append(polygon)
-                    self.logger.debug(f"Generated fallback geometry for space")
-                    return polygons
+                # Only generate fallback if we have a real space name and GUID
+                if space_name and space_name != "Unknown Space" and space_guid and space_guid != "unknown":
+                    polygon = self._generate_fallback_geometry(ifc_space, space_guid, space_name)
+                    if polygon and self._validate_polygon(polygon):
+                        polygons.append(polygon)
+                        self.logger.debug(f"Generated fallback geometry for space {space_name}")
+                        return polygons
             except Exception as e:
                 self.logger.debug(f"Fallback geometry generation failed: {e}")
             
             # If all methods fail, log warning but don't crash
-            self.logger.warning(f"Could not extract any geometry for space {space_name} ({space_guid})")
+            self.logger.debug(f"Could not extract any geometry for space {space_name} ({space_guid})")
             return []
             
         except Exception as e:
             self.logger.error(f"Failed to extract space boundaries for {space_name}: {e}")
             return []
     
-    def convert_to_2d_coordinates(self, geometry_3d) -> Optional[Polygon2D]:
+    def convert_to_2d_coordinates(self, geometry_3d, space_guid: str = "unknown", space_name: str = "Unknown Space") -> Optional[Polygon2D]:
         """
-        Convert 3D IFC geometry to 2D floor plan coordinates.
+        Convert 3D IFC geometry to 2D floor plan coordinates with enhanced processing.
+        IFC coordinates are in millimeters, so we convert to meters for display.
         
         Args:
             geometry_3d: 3D geometry data from IFC
+            space_guid: GUID of the space
+            space_name: Name of the space
             
         Returns:
             Polygon2D object or None if conversion fails
         """
         try:
-            # This is a simplified implementation
-            # In a full implementation, you would use ifcopenshell.geom
-            # to properly extract and convert 3D geometry
+            if not geometry_3d:
+                return None
             
+            # Handle different geometry types
             if hasattr(geometry_3d, 'verts') and hasattr(geometry_3d, 'faces'):
                 # Extract vertices and project to 2D (ignore Z coordinate)
                 vertices = geometry_3d.verts
-                points = []
+                faces = geometry_3d.faces
                 
-                # Take every 3rd coordinate (x, y, z) and use only x, y
+                if not vertices or len(vertices) < 9:  # Need at least 3 points (x,y,z each)
+                    return None
+                
+                # Convert vertices to 2D points (convert from mm to meters)
+                points_3d = []
                 for i in range(0, len(vertices), 3):
-                    if i + 1 < len(vertices):
-                        x = vertices[i]
-                        y = vertices[i + 1]
-                        points.append(Point2D(x, y))
+                    if i + 2 < len(vertices):
+                        # Convert from millimeters to meters
+                        x = vertices[i] / 1000.0
+                        y = vertices[i + 1] / 1000.0
+                        z = vertices[i + 2] / 1000.0
+                        points_3d.append((x, y, z))
                 
-                if len(points) >= 3:
-                    return Polygon2D(points, "unknown", "Unknown Space")
+                if len(points_3d) < 3:
+                    return None
+                
+                # Find the dominant plane (usually XY plane for floor plans)
+                # Calculate the average Z coordinate to determine floor level
+                avg_z = sum(p[2] for p in points_3d) / len(points_3d)
+                
+                # Filter points that are close to the floor level (within 0.5 meters)
+                floor_points = []
+                for x, y, z in points_3d:
+                    if abs(z - avg_z) < 0.5:  # Points close to floor level
+                        floor_points.append(Point2D(x, y))
+                
+                if len(floor_points) < 3:
+                    # Fallback: use all points projected to XY plane
+                    floor_points = [Point2D(x, y) for x, y, z in points_3d]
+                
+                if len(floor_points) >= 3:
+                    # Remove duplicate points (now in meters, so use smaller threshold)
+                    unique_points = []
+                    for point in floor_points:
+                        is_duplicate = False
+                        for existing in unique_points:
+                            if abs(point.x - existing.x) < 0.001 and abs(point.y - existing.y) < 0.001:  # 1mm tolerance
+                                is_duplicate = True
+                                break
+                        if not is_duplicate:
+                            unique_points.append(point)
+                    
+                    if len(unique_points) >= 3:
+                        # Create polygon and validate
+                        polygon = Polygon2D(unique_points, space_guid, space_name)
+                        
+                        # Validate polygon area (now in square meters)
+                        area = polygon.get_area()
+                        if area > 0.1:  # Minimum area threshold (0.1 m²)
+                            return polygon
             
             return None
             
         except Exception as e:
-            self.logger.error(f"Failed to convert 3D geometry to 2D: {e}")
+            self.logger.debug(f"Failed to convert 3D geometry to 2D for {space_name}: {e}")
             return None
     
     def _extract_floor_level_geometry_enhanced(self, ifc_file, floor_level: FloorLevel) -> Optional[FloorGeometry]:
@@ -404,9 +450,15 @@ class GeometryExtractor:
                 if hasattr(space, 'GlobalId') and space.GlobalId in floor_level.spaces:
                     space_entities[space.GlobalId] = space
             
+            # Track processed spaces to avoid duplicates
+            processed_spaces = set()
+            
             # Extract geometry for each space
             for space_guid in floor_level.spaces:
                 try:
+                    if space_guid in processed_spaces:
+                        continue
+                    
                     space_entity = space_entities.get(space_guid)
                     if not space_entity:
                         self.logger.debug(f"Space entity not found for GUID: {space_guid}")
@@ -417,13 +469,22 @@ class GeometryExtractor:
                     space_polygons = self.extract_space_boundaries(space_entity)
                     
                     if space_polygons:
-                        room_polygons.extend(space_polygons)
-                        extraction_stats['successful_extractions'] += 1
-                        
-                        # Check if any polygons were generated using fallback methods
-                        for polygon in space_polygons:
-                            if self._is_fallback_geometry(polygon):
+                        # Merge multiple polygons for the same space into one if possible
+                        merged_polygon = self._merge_space_polygons(space_polygons, space_guid)
+                        if merged_polygon:
+                            room_polygons.append(merged_polygon)
+                            extraction_stats['successful_extractions'] += 1
+                            processed_spaces.add(space_guid)
+                            
+                            # Check if polygon was generated using fallback methods
+                            if self._is_fallback_geometry(merged_polygon):
                                 extraction_stats['fallback_geometries'] += 1
+                        else:
+                            # If merging fails, use the largest polygon
+                            largest_polygon = max(space_polygons, key=lambda p: p.get_area())
+                            room_polygons.append(largest_polygon)
+                            extraction_stats['successful_extractions'] += 1
+                            processed_spaces.add(space_guid)
                     else:
                         extraction_stats['failed_extractions'] += 1
                     
@@ -1059,13 +1120,7 @@ class GeometryExtractor:
                 if polygon:
                     return polygon
             
-            # Method 3: Create boundary from physical or virtual indication
-            if hasattr(boundary, 'PhysicalOrVirtualBoundary'):
-                boundary_type = boundary.PhysicalOrVirtualBoundary
-                if boundary_type == "PHYSICAL":
-                    # Try to create a simple boundary representation
-                    return self._create_simple_boundary_polygon(space_guid, space_name)
-            
+            # Don't create fallback geometry from boundaries - this creates too many duplicates
             return None
             
         except Exception as e:
@@ -1112,7 +1167,7 @@ class GeometryExtractor:
                 try:
                     shape = ifcopenshell.geom.create_shape(settings, element)
                     if shape:
-                        return self.convert_to_2d_coordinates(shape.geometry)
+                        return self.convert_to_2d_coordinates(shape.geometry, space_guid, space_name)
                 except Exception as e:
                     self.logger.debug(f"Failed to create shape for element: {e}")
             
@@ -1123,22 +1178,9 @@ class GeometryExtractor:
             return None
     
     def _create_simple_boundary_polygon(self, space_guid: str, space_name: str) -> Optional[Polygon2D]:
-        """Create a simple boundary polygon as fallback."""
-        try:
-            # Create a simple rectangular boundary
-            points = [
-                Point2D(0, 0),
-                Point2D(3, 0),
-                Point2D(3, 2),
-                Point2D(0, 2),
-                Point2D(0, 0)
-            ]
-            
-            return Polygon2D(points, space_guid, space_name)
-            
-        except Exception as e:
-            self.logger.debug(f"Failed to create simple boundary polygon: {e}")
-            return None
+        """Create a simple boundary polygon as fallback - DISABLED to avoid duplicates."""
+        # This method is disabled to prevent creating too many duplicate fallback geometries
+        return None
     
     def _extract_space_geometry_enhanced(self, ifc_space, space_guid: str, space_name: str) -> Optional[Polygon2D]:
         """Extract geometry directly from IFC space entity with enhanced processing."""
@@ -1167,25 +1209,35 @@ class GeometryExtractor:
     def _extract_with_ifcopenshell_geom(self, ifc_space, space_guid: str, space_name: str) -> Optional[Polygon2D]:
         """Extract geometry using ifcopenshell.geom with multiple settings."""
         try:
-            # Try different geometry settings
+            # Try different geometry settings with more comprehensive options
             settings_configs = [
-                {"USE_WORLD_COORDS": True, "WELD_VERTICES": True},
-                {"USE_WORLD_COORDS": True, "WELD_VERTICES": False},
-                {"USE_WORLD_COORDS": False, "WELD_VERTICES": True},
+                {"USE_WORLD_COORDS": True, "WELD_VERTICES": True, "USE_BREP_DATA": True},
+                {"USE_WORLD_COORDS": True, "WELD_VERTICES": False, "USE_BREP_DATA": True},
+                {"USE_WORLD_COORDS": False, "WELD_VERTICES": True, "USE_BREP_DATA": False},
+                {"USE_WORLD_COORDS": True, "WELD_VERTICES": True, "USE_BREP_DATA": False},
             ]
             
             for config in settings_configs:
                 try:
                     settings = ifcopenshell.geom.settings()
                     for key, value in config.items():
-                        settings.set(getattr(settings, key), value)
+                        if hasattr(settings, key):
+                            settings.set(getattr(settings, key), value)
                     
                     shape = ifcopenshell.geom.create_shape(settings, ifc_space)
                     if shape and shape.geometry:
-                        polygon = self.convert_to_2d_coordinates(shape.geometry)
+                        polygon = self.convert_to_2d_coordinates(shape.geometry, space_guid, space_name)
                         if polygon and self._validate_polygon(polygon):
-                            self.logger.debug(f"Successfully extracted geometry with config: {config}")
-                            return polygon
+                            # Check if this is a meaningful geometry (not just a fallback-like rectangle)
+                            area = polygon.get_area()
+                            bounds = polygon.get_bounds()
+                            width = bounds[2] - bounds[0]
+                            height = bounds[3] - bounds[1]
+                            
+                            # Skip if it looks like a generic template (dimensions now in meters)
+                            if not (abs(width - 13.7) < 0.1 and abs(height - 5.6) < 0.1 and abs(area - 77.7) < 0.1):
+                                self.logger.debug(f"Successfully extracted geometry with config: {config} (area: {area:.1f} m², dims: {width:.1f}x{height:.1f}m)")
+                                return polygon
                         
                 except Exception as e:
                     self.logger.debug(f"Failed with config {config}: {e}")
@@ -1467,24 +1519,50 @@ class GeometryExtractor:
             return None
     
     def _generate_fallback_geometry(self, ifc_space, space_guid: str, space_name: str) -> Optional[Polygon2D]:
-        """Generate fallback geometry when all other methods fail."""
+        """Generate fallback geometry when all other methods fail. Coordinates in meters."""
         try:
             self.logger.debug(f"Generating fallback geometry for space {space_name}")
             
-            # Use default dimensions based on space type or name
+            # Use default dimensions based on space type or name (in square meters)
             default_area = self._estimate_area_from_space_info(ifc_space)
-            side_length = math.sqrt(default_area)
             
-            # Add some randomization to avoid overlapping fallback geometries
+            # Create more varied shapes based on space type
+            import hashlib
+            hash_value = int(hashlib.md5(space_guid.encode()).hexdigest()[:8], 16)
+            
+            # Create a grid layout with appropriate spacing for meters
+            grid_size = 8.0  # 8 meters between grid points
+            grid_x = (hash_value % 20) * grid_size  # 20x20 grid
+            grid_y = ((hash_value // 20) % 20) * grid_size
+            
+            # Add consistent offset based on GUID to spread out rooms
             import random
-            offset_x = random.uniform(-2, 2)
-            offset_y = random.uniform(-2, 2)
+            random.seed(hash_value)
+            offset_x = grid_x + random.uniform(0, 2)
+            offset_y = grid_y + random.uniform(0, 2)
+            
+            # Create varied room shapes based on area and hash
+            if default_area < 10:  # Small rooms - more square
+                width = math.sqrt(default_area) + random.uniform(-0.5, 0.5)
+                height = default_area / width if width > 0 else default_area
+            elif default_area < 25:  # Medium rooms - rectangular
+                aspect_ratio = 1.2 + random.uniform(-0.3, 0.3)
+                width = math.sqrt(default_area * aspect_ratio)
+                height = default_area / width if width > 0 else default_area
+            else:  # Large rooms - more varied shapes
+                aspect_ratio = 1.5 + random.uniform(-0.5, 0.8)
+                width = math.sqrt(default_area * aspect_ratio)
+                height = default_area / width if width > 0 else default_area
+            
+            # Ensure minimum dimensions (in meters)
+            width = max(1.5, width)
+            height = max(1.5, height)
             
             points = [
                 Point2D(offset_x, offset_y),
-                Point2D(offset_x + side_length, offset_y),
-                Point2D(offset_x + side_length, offset_y + side_length),
-                Point2D(offset_x, offset_y + side_length),
+                Point2D(offset_x + width, offset_y),
+                Point2D(offset_x + width, offset_y + height),
+                Point2D(offset_x, offset_y + height),
                 Point2D(offset_x, offset_y)
             ]
             
@@ -1530,6 +1608,55 @@ class GeometryExtractor:
             self.logger.debug(f"Failed to estimate area from space info: {e}")
             return 20.0  # Default area
     
+    def _merge_space_polygons(self, polygons: List[Polygon2D], space_guid: str) -> Optional[Polygon2D]:
+        """Merge multiple polygons for the same space into one representative polygon."""
+        try:
+            if not polygons:
+                return None
+            
+            if len(polygons) == 1:
+                return polygons[0]
+            
+            # For now, use the largest polygon as the representative
+            # In the future, this could be enhanced to actually merge geometries
+            largest_polygon = max(polygons, key=lambda p: p.get_area())
+            
+            self.logger.debug(f"Merged {len(polygons)} polygons for space {space_guid}, using largest ({largest_polygon.get_area():.1f} m²)")
+            return largest_polygon
+            
+        except Exception as e:
+            self.logger.debug(f"Failed to merge polygons for space {space_guid}: {e}")
+            return polygons[0] if polygons else None
+    
+    def _merge_space_polygons(self, polygons: List[Polygon2D], space_guid: str) -> Optional[Polygon2D]:
+        """
+        Merge multiple polygons for the same space into a single representative polygon.
+        
+        Args:
+            polygons: List of polygons for the same space
+            space_guid: GUID of the space
+            
+        Returns:
+            Merged polygon or None if merging fails
+        """
+        try:
+            if not polygons:
+                return None
+            
+            if len(polygons) == 1:
+                return polygons[0]
+            
+            # For now, use the largest polygon as the representative
+            # In the future, this could be enhanced to actually merge geometries
+            largest_polygon = max(polygons, key=lambda p: p.get_area())
+            
+            self.logger.debug(f"Merged {len(polygons)} polygons for space {space_guid}, using largest ({largest_polygon.get_area():.1f} m²)")
+            return largest_polygon
+            
+        except Exception as e:
+            self.logger.debug(f"Failed to merge polygons for space {space_guid}: {e}")
+            return polygons[0] if polygons else None
+
     def _validate_polygon(self, polygon: Polygon2D) -> bool:
         """Validate that a polygon is suitable for floor plan display."""
         try:
@@ -1540,18 +1667,18 @@ class GeometryExtractor:
             if len(polygon.points) < 4:  # At least 3 points + closing point
                 return False
             
-            # Check for reasonable area
+            # Check for reasonable area (in square meters)
             area = polygon.get_area()
-            if area < 0.1 or area > 10000:  # Between 0.1 m² and 10,000 m²
+            if area < 0.5 or area > 10000:  # Between 0.5 m² and 10,000 m²
                 self.logger.debug(f"Polygon area {area:.2f} m² is outside reasonable range")
                 return False
             
-            # Check for reasonable bounds
+            # Check for reasonable bounds (in meters)
             bounds = polygon.get_bounds()
             width = bounds[2] - bounds[0]
             height = bounds[3] - bounds[1]
             
-            if width < 0.1 or height < 0.1 or width > 200 or height > 200:
+            if width < 0.5 or height < 0.5 or width > 500 or height > 500:
                 self.logger.debug(f"Polygon dimensions {width:.2f}x{height:.2f} m are outside reasonable range")
                 return False
             

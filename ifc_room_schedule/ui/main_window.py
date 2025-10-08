@@ -4161,7 +4161,9 @@ class MainWindow(QMainWindow):
                 
                 if space:
                     self.space_detail_widget.display_space(space)
-                    self.surface_editor_widget.clear()
+                    # Set space context and show empty state instead of full clear
+                    self.surface_editor_widget.set_space_context(space.guid)
+                    self.surface_editor_widget.show_empty_state()
                     self.status_bar.showMessage(f"Selected {len(selected_space_guids)} space(s) from floor plan")
                 
                 self.logger.debug(f"Synced space list with floor plan selection: {len(selected_space_guids)} spaces")
@@ -4250,7 +4252,9 @@ class MainWindow(QMainWindow):
                 
                 if space:
                     self.space_detail_widget.display_space(space)
-                    self.surface_editor_widget.clear()
+                    # Set space context and show empty state instead of full clear
+                    self.surface_editor_widget.set_space_context(space.guid)
+                    self.surface_editor_widget.show_empty_state()
                     self.status_bar.showMessage(f"Selected {len(selected_space_guids)} space(s) from list")
                 
                 self.logger.debug(f"Synced floor plan with space list selection: {len(selected_space_guids)} spaces")
