@@ -294,7 +294,17 @@ class GeometryExtractor:
             
             self.logger.debug(f"Extracting boundaries for space: {space_name} ({space_guid})")
             
-            # Method 1: Try to extract from space boundaries (most accurate)
+            # Method 1: Try IfcOpenShell direct geometry extraction (most accurate)
+            try:
+                polygon = self._extract_polygon_with_ifcopenshell(ifc_space, space_guid, space_name)
+                if polygon and self._validate_polygon(polygon):
+                    polygons.append(polygon)
+                    self.logger.debug(f"Extracted polygon using IfcOpenShell for space {space_name}")
+                    return polygons
+            except Exception as e:
+                self.logger.debug(f"IfcOpenShell extraction failed: {e}")
+            
+            # Method 2: Try to extract from space boundaries (fallback)
             try:
                 boundaries = self._get_space_boundaries_enhanced(ifc_space)
                 if boundaries:
@@ -313,7 +323,7 @@ class GeometryExtractor:
             except Exception as e:
                 self.logger.debug(f"Space boundary extraction failed: {e}")
             
-            # Method 2: Try to get geometry directly from space representation
+            # Method 3: Try to get geometry directly from space representation
             try:
                 polygon = self._extract_space_geometry_enhanced(ifc_space, space_guid, space_name)
                 if polygon and self._validate_polygon(polygon):
@@ -323,7 +333,7 @@ class GeometryExtractor:
             except Exception as e:
                 self.logger.debug(f"Direct geometry extraction failed: {e}")
             
-            # Method 3: Try to extract from related building elements
+            # Method 4: Try to extract from related building elements
             try:
                 polygon = self._extract_geometry_from_related_elements(ifc_space, space_guid, space_name)
                 if polygon and self._validate_polygon(polygon):
@@ -333,7 +343,7 @@ class GeometryExtractor:
             except Exception as e:
                 self.logger.debug(f"Related elements extraction failed: {e}")
             
-            # Method 4: Generate fallback geometry only if space has meaningful properties
+            # Method 5: Generate fallback geometry only if space has meaningful properties
             try:
                 # Only generate fallback if we have a real space name and GUID
                 if space_name and space_name != "Unknown Space" and space_guid and space_guid != "unknown":
@@ -1507,6 +1517,119 @@ class GeometryExtractor:
             self.logger.debug(f"Failed to get elements in spatial structure: {e}")
             return []
     
+    def _extract_polygon_with_ifcopenshell(self, ifc_space, space_guid: str, space_name: str) -> Optional[Polygon2D]:
+        """Extract 2D polygon using IfcOpenShell geometry processing."""
+        try:
+            # Create geometry settings for 2D extraction
+            settings = ifcopenshell.geom.settings()
+            settings.set(settings.USE_WORLD_COORDS, True)
+            settings.set(settings.INCLUDE_CURVES, True)
+            
+            # Extract 3D geometry
+            shape = ifcopenshell.geom.create_shape(settings, ifc_space)
+            if not shape:
+                return None
+            
+            geometry = shape.geometry
+            if not hasattr(geometry, 'verts') or not geometry.verts:
+                return None
+            
+            # Get vertices (they come as flat array: x1,y1,z1,x2,y2,z2,...)
+            verts = geometry.verts
+            vertices_3d = []
+            
+            for i in range(0, len(verts), 3):
+                x, y, z = verts[i], verts[i+1], verts[i+2]
+                vertices_3d.append((x, y, z))
+            
+            if len(vertices_3d) < 3:
+                return None
+            
+            # Convert to 2D by projecting to XY plane and finding boundary
+            points_2d = [(x, y) for x, y, z in vertices_3d]
+            
+            # Remove duplicate points
+            unique_points = []
+            tolerance = 0.001  # 1mm tolerance
+            
+            for point in points_2d:
+                is_duplicate = False
+                for existing in unique_points:
+                    if abs(point[0] - existing[0]) < tolerance and abs(point[1] - existing[1]) < tolerance:
+                        is_duplicate = True
+                        break
+                if not is_duplicate:
+                    unique_points.append(point)
+            
+            if len(unique_points) < 3:
+                return None
+            
+            # Find convex hull or boundary of the points
+            boundary_points = self._find_2d_boundary(unique_points)
+            
+            if len(boundary_points) < 3:
+                return None
+            
+            # Convert to Point2D objects (coordinates might be in meters already)
+            polygon_points = []
+            for x, y in boundary_points:
+                # Check if coordinates seem to be in mm (very large values) or meters (reasonable values)
+                if abs(x) > 1000 or abs(y) > 1000:
+                    # Likely in mm, convert to meters
+                    polygon_points.append(Point2D(x / 1000.0, y / 1000.0))
+                else:
+                    # Likely already in meters
+                    polygon_points.append(Point2D(x, y))
+            
+            # Close the polygon if not already closed
+            if len(polygon_points) > 0:
+                first_point = polygon_points[0]
+                last_point = polygon_points[-1]
+                if abs(first_point.x - last_point.x) > 0.001 or abs(first_point.y - last_point.y) > 0.001:
+                    polygon_points.append(Point2D(first_point.x, first_point.y))
+            
+            return Polygon2D(polygon_points, space_guid, space_name)
+            
+        except Exception as e:
+            self.logger.debug(f"IfcOpenShell polygon extraction failed: {e}")
+            return None
+    
+    def _find_2d_boundary(self, points: List[Tuple[float, float]]) -> List[Tuple[float, float]]:
+        """Find the boundary/convex hull of 2D points."""
+        try:
+            if len(points) < 3:
+                return points
+            
+            # Simple convex hull algorithm (Graham scan)
+            def cross_product(o, a, b):
+                return (a[0] - o[0]) * (b[1] - o[1]) - (a[1] - o[1]) * (b[0] - o[0])
+            
+            # Sort points lexicographically
+            points = sorted(set(points))
+            if len(points) <= 1:
+                return points
+            
+            # Build lower hull
+            lower = []
+            for p in points:
+                while len(lower) >= 2 and cross_product(lower[-2], lower[-1], p) <= 0:
+                    lower.pop()
+                lower.append(p)
+            
+            # Build upper hull
+            upper = []
+            for p in reversed(points):
+                while len(upper) >= 2 and cross_product(upper[-2], upper[-1], p) <= 0:
+                    upper.pop()
+                upper.append(p)
+            
+            # Remove last point of each half because it's repeated
+            return lower[:-1] + upper[:-1]
+            
+        except Exception as e:
+            self.logger.debug(f"Boundary finding failed: {e}")
+            return points
+
     def _create_boundary_from_walls(self, elements, space_guid: str, space_name: str) -> Optional[Polygon2D]:
         """Create space boundary from surrounding wall elements."""
         try:

@@ -218,14 +218,16 @@ class FloorPlanCanvas(QWidget):
     SELECTION_GLOW_WIDTH = 5
     HOVER_GLOW_WIDTH = 3
     
-    # Colors
-    COLOR_BACKGROUND = QColor(250, 250, 250)
-    COLOR_ROOM_BORDER = QColor(100, 100, 100)
-    COLOR_ROOM_FILL = QColor(240, 240, 240, 100)
+    # Colors - Professional ArchiCAD-style
+    COLOR_BACKGROUND = QColor(255, 255, 255)  # Pure white background
+    COLOR_ROOM_BORDER = QColor(0, 0, 0)       # Black borders like ArchiCAD
+    COLOR_ROOM_FILL = QColor(255, 255, 255, 0)  # No fill by default (transparent)
     COLOR_ROOM_SELECTED = QColor(0, 120, 215)
-    COLOR_ROOM_HOVER = QColor(0, 120, 215, 100)
-    COLOR_ROOM_TEXT = QColor(50, 50, 50)
+    COLOR_ROOM_HOVER = QColor(0, 120, 215, 50)
+    COLOR_ROOM_TEXT = QColor(0, 0, 0)         # Black text like ArchiCAD
     COLOR_NO_GEOMETRY = QColor(200, 200, 200, 150)
+    COLOR_GRID = QColor(220, 220, 220)        # Light gray grid
+    COLOR_GRID_MAJOR = QColor(180, 180, 180)  # Darker major grid lines
     
     # Enhanced selection colors
     COLOR_SELECTION_GLOW = QColor(0, 120, 215, 80)
@@ -265,15 +267,17 @@ class FloorPlanCanvas(QWidget):
         self.is_panning = False
         self.last_pan_point = QPointF()
         
-        # Enhanced labeling and visual feedback
+        # Enhanced labeling and visual feedback - ArchiCAD style
         self.show_room_labels = True
         self.show_room_numbers = True
-        self.label_min_zoom = 0.3  # Minimum zoom level to show labels
-        self.detailed_label_min_zoom = 0.8  # Minimum zoom for detailed labels
-        self.label_font_size = 10
+        self.show_room_areas = True  # Show area like ArchiCAD
+        self.label_min_zoom = 0.4  # Show labels at reasonable zoom to avoid clutter
+        self.detailed_label_min_zoom = 0.8  # Show detailed labels at higher zoom
+        self.label_font_size = 10  # Professional font size
         
-        # Color scheme support
-        self.use_color_coding = True
+        # Professional drawing style
+        self.use_color_coding = False  # Default to no fill like ArchiCAD
+        self.use_professional_style = True  # Clean, architectural drawing style
         self.space_color_scheme: Dict[str, QColor] = {}  # space_guid -> color
         
         # Performance optimization
@@ -404,12 +408,39 @@ class FloorPlanCanvas(QWidget):
             enabled: Whether to enable color coding
         """
         self.use_color_coding = enabled
+        self.use_professional_style = not enabled  # Professional style when no colors
+        
         if enabled:
             self._update_color_scheme_for_current_floor()
         else:
             self.space_color_scheme.clear()
         self.update()
         self.logger.debug(f"NS 3940 color coding {'enabled' if enabled else 'disabled'}")
+    
+    def set_professional_style(self, enabled: bool = True) -> None:
+        """
+        Enable or disable professional ArchiCAD-style drawing.
+        
+        Args:
+            enabled: Whether to use professional style (no fill, black borders)
+        """
+        self.use_professional_style = enabled
+        if enabled:
+            self.use_color_coding = False  # Disable colors in professional mode
+            self.space_color_scheme.clear()
+        self.update()
+        self.logger.debug(f"Professional style {'enabled' if enabled else 'disabled'}")
+    
+    def set_show_room_areas(self, show: bool = True) -> None:
+        """
+        Enable or disable room area display.
+        
+        Args:
+            show: Whether to show room areas in labels
+        """
+        self.show_room_areas = show
+        self.update()
+        self.logger.debug(f"Room areas {'shown' if show else 'hidden'}")
     
     def _update_color_scheme_for_current_floor(self) -> None:
         """Update color scheme for spaces on the current floor."""
@@ -488,48 +519,118 @@ class FloorPlanCanvas(QWidget):
     
     def _get_space_label_text(self, polygon: Polygon2D, detailed: bool = False) -> str:
         """
-        Get appropriate label text for a space polygon.
+        Get appropriate label text for a space polygon in ArchiCAD style.
         
         Args:
             polygon: Space polygon
             detailed: Whether to show detailed information
             
         Returns:
-            Label text string
+            Label text string formatted like ArchiCAD (room number + name + area)
         """
-        parts = []
+        lines = []
         
-        # Add room number if available and enabled
-        if self.show_room_numbers and hasattr(polygon, 'room_number') and polygon.room_number:
-            parts.append(str(polygon.room_number))
+        # Extract room number from space name if available
+        room_number = None
+        space_name = polygon.space_name.strip() if polygon.space_name else ""
         
-        # Add space name if available and enabled
-        if self.show_room_labels and polygon.space_name and polygon.space_name.strip():
-            name = polygon.space_name.strip()
-            if name and name != "Unknown Space":
-                if detailed:
-                    parts.append(name)
-                else:
-                    # Truncate long names for non-detailed view
-                    if len(name) > 15:
-                        name = name[:12] + "..."
-                    parts.append(name)
+        # Try to extract room number from the beginning of space name
+        import re
+        if space_name:
+            # Look for patterns like "01", "201", "2.01", etc.
+            number_match = re.match(r'^(\d+\.?\d*)\s*(.*)$', space_name)
+            if number_match:
+                room_number = number_match.group(1)
+                remaining_name = number_match.group(2).strip()
+                if remaining_name:
+                    space_name = remaining_name
         
-        # Fallback to truncated GUID if no other info
-        if not parts:
-            parts.append(polygon.space_guid[:8])
+        # Room number on first line (like "01", "201" in ArchiCAD)
+        if room_number and self.show_room_numbers:
+            lines.append(room_number)
+        elif hasattr(polygon, 'room_number') and polygon.room_number:
+            lines.append(str(polygon.room_number))
         
-        return "\n".join(parts)
+        # Space name on second line (like "Stue", "Sov", "Bad" in ArchiCAD)
+        if self.show_room_labels and space_name:
+            # Clean up common Norwegian room names to match ArchiCAD style
+            name_mapping = {
+                'stue': 'Stue',
+                'soverom': 'Sov', 
+                'sov': 'Sov',
+                'bad': 'Bad',
+                'gang': 'Gang',
+                'kjøkken': 'Kjøkken',
+                'wc': 'WC',
+                'toalett': 'WC',
+                'entre': 'Entre',
+                'bod': 'Bod',
+                'lager': 'Lager'
+            }
+            
+            # Check for mapped names
+            name_lower = space_name.lower()
+            mapped_name = None
+            for key, value in name_mapping.items():
+                if key in name_lower:
+                    mapped_name = value
+                    break
+            
+            if mapped_name:
+                lines.append(mapped_name)
+            else:
+                # Use original name, truncated if necessary
+                if not detailed and len(space_name) > 10:
+                    space_name = space_name[:8] + ".."
+                lines.append(space_name)
+        
+        # Area on third line (like "37.6 m²" in ArchiCAD) - only if detailed or room is large
+        if self.show_room_areas:
+            area = polygon.get_area()
+            if area > 0:
+                # Show area if detailed view, or if room is large enough, or if zoom is high
+                show_area = (detailed or 
+                           area > 10.0 or  # Large rooms always show area
+                           self.zoom_level > 1.0)  # High zoom shows all areas
+                
+                if show_area:
+                    lines.append(f"{area:.1f} m²")
+        
+        # Fallback if no meaningful info
+        if not lines:
+            # Use truncated GUID as last resort
+            lines.append(polygon.space_guid[:6])
+        
+        return "\n".join(lines)
     
-    def _get_label_font(self) -> QFont:
-        """Get font for labels based on current zoom level."""
-        # Adjust font size based on zoom level
-        adjusted_size = max(6, int(self.label_font_size / max(0.5, self.zoom_level)))
+    def _get_label_font(self, line_type: str = "normal") -> QFont:
+        """Get font for labels based on current zoom level and line type."""
+        # Base font size adjusted for zoom level - more conservative scaling
+        base_size = self.label_font_size
+        
+        # Scale font size more gradually with zoom
+        if self.zoom_level >= 1.0:
+            adjusted_size = base_size
+        elif self.zoom_level >= 0.5:
+            adjusted_size = max(8, int(base_size * 0.9))
+        else:
+            adjusted_size = max(7, int(base_size * 0.8))
+        
+        # Professional font like ArchiCAD
         font = QFont("Arial", adjusted_size)
         
-        # Make font bold for better visibility at small sizes
-        if adjusted_size <= 8:
-            font.setBold(True)
+        # Different weights for different line types
+        if line_type == "room_number":
+            font.setBold(True)  # Room numbers bold
+            font.setPointSize(adjusted_size)
+        elif line_type == "room_name":
+            font.setBold(False)  # Room names normal weight
+            font.setPointSize(adjusted_size)
+        elif line_type == "area":
+            font.setBold(False)  # Area normal weight
+            font.setPointSize(max(6, adjusted_size - 1))  # Slightly smaller for area
+        else:
+            font.setBold(adjusted_size <= 8)  # Bold for small sizes
         
         return font
     
@@ -817,10 +918,14 @@ class FloorPlanCanvas(QWidget):
     def paintEvent(self, event: QPaintEvent) -> None:
         """Handle paint events to render the floor plan."""
         painter = QPainter(self)
-        painter.setRenderHint(QPainter.RenderHint.Antialiasing)
         
-        # Clear background
-        painter.fillRect(self.rect(), self.COLOR_BACKGROUND)
+        # Enhanced rendering quality
+        painter.setRenderHint(QPainter.RenderHint.Antialiasing, True)
+        painter.setRenderHint(QPainter.RenderHint.SmoothPixmapTransform, True)
+        painter.setRenderHint(QPainter.RenderHint.TextAntialiasing, True)
+        
+        # Clear background with subtle gradient
+        self._draw_background(painter)
         
         self.logger.debug(f"Paint event - widget size: {self.width()}x{self.height()}")
         
@@ -849,9 +954,17 @@ class FloorPlanCanvas(QWidget):
         # Draw debug grid and coordinate system
         self._draw_debug_info(painter)
         
+        # Draw professional overlays
+        self._draw_grid_overlay(painter)
+        
         # Draw room labels (top layer for visibility)
         if self._should_show_labels():
             self._draw_room_labels(painter)
+        
+        # Draw professional indicators (not affected by transform)
+        painter.resetTransform()
+        self._draw_scale_indicator(painter)
+        self._draw_north_arrow(painter)
     
     def wheelEvent(self, event: QWheelEvent) -> None:
         """Handle mouse wheel events for zooming."""
@@ -1051,40 +1164,41 @@ class FloorPlanCanvas(QWidget):
         self.logger.debug(f"Updated visible rooms: {len(self.visible_rooms)}/{total_rooms} rooms visible")
     
     def _draw_room_polygons(self, painter: QPainter) -> None:
-        """Draw room polygon outlines and fills with enhanced visibility."""
+        """Draw room polygon outlines in professional ArchiCAD style."""
         if not self.visible_rooms:
             self.logger.debug("No visible rooms to draw")
             return
         
         self.logger.debug(f"Drawing {len(self.visible_rooms)} visible rooms at zoom {self.zoom_level:.2f}")
         
-        # Draw visible rooms with appropriate colors
+        # Draw visible rooms in professional architectural style
         for i, polygon in enumerate(self.visible_rooms):
             try:
-                # Get color for this space - use more contrasting colors
-                if self.use_color_coding:
-                    fill_color = self.get_space_color(polygon.space_guid)
-                    # Make fill color more opaque for better visibility
-                    fill_color.setAlpha(180)
-                else:
-                    # Use alternating colors for better distinction
-                    colors = [
-                        QColor(173, 216, 230, 180),  # Light blue
-                        QColor(144, 238, 144, 180),  # Light green
-                        QColor(255, 218, 185, 180),  # Peach
-                        QColor(221, 160, 221, 180),  # Plum
-                        QColor(255, 255, 224, 180),  # Light yellow
-                    ]
-                    fill_color = colors[i % len(colors)]
+                # Always draw room borders - essential for floor plans
+                # Use cosmetic pen that doesn't scale with coordinate system (important for mm coordinates)
+                border_width = 1.0  # Always 1 pixel wide on screen
                 
-                # Set up brush for fill
-                brush = QBrush(fill_color)
-                painter.setBrush(brush)
-                
-                # Set up pen for border - make it very visible
-                border_width = max(2.0, 3.0 / self.zoom_level)  # Minimum 2px border
-                pen = QPen(QColor(0, 0, 0), border_width)  # Black border
+                # Create cosmetic pen for room borders - always visible regardless of coordinate scale
+                pen = QPen(self.COLOR_ROOM_BORDER, border_width)
+                pen.setCosmetic(True)  # CRITICAL: Pen width in screen pixels, not world coordinates
+                pen.setJoinStyle(Qt.PenJoinStyle.MiterJoin)  # Sharp corners like ArchiCAD
+                pen.setCapStyle(Qt.PenCapStyle.SquareCap)    # Square line ends
                 painter.setPen(pen)
+                
+                # Set fill based on style
+                if self.use_professional_style:
+                    # No fill (transparent) like ArchiCAD
+                    painter.setBrush(Qt.BrushStyle.NoBrush)
+                else:
+                    # Colored style for when color coding is enabled
+                    if self.use_color_coding:
+                        fill_color = self.get_space_color(polygon.space_guid)
+                        fill_color.setAlpha(120)  # Semi-transparent
+                    else:
+                        # Light fill for better room distinction
+                        fill_color = QColor(245, 245, 245, 80)
+                    
+                    painter.setBrush(QBrush(fill_color))
                 
                 qt_polygon = self._polygon_to_qt(polygon)
                 
@@ -1094,13 +1208,7 @@ class FloorPlanCanvas(QWidget):
                     self.logger.debug(f"Drawing polygon {i}: {polygon.space_name} at bounds ({bounds[0]:.1f}, {bounds[1]:.1f}, {bounds[2]:.1f}, {bounds[3]:.1f})")
                     self.logger.debug(f"Qt polygon has {qt_polygon.size()} points")
                 
-                # Draw the filled polygon
-                painter.drawPolygon(qt_polygon)
-                
-                # Draw an additional outline for extra visibility
-                outline_pen = QPen(QColor(50, 50, 50), border_width * 0.5)
-                painter.setPen(outline_pen)
-                painter.setBrush(Qt.BrushStyle.NoBrush)
+                # Draw the polygon
                 painter.drawPolygon(qt_polygon)
                 
             except Exception as e:
@@ -1108,76 +1216,261 @@ class FloorPlanCanvas(QWidget):
                 continue
     
     def _draw_room_labels(self, painter: QPainter) -> None:
-        """Draw enhanced room labels with zoom-appropriate visibility."""
+        """Draw enhanced room labels with zoom-appropriate visibility and collision avoidance."""
         if not self._should_show_labels():
             return
-        
-        # Set up font and pen
-        font = self._get_label_font()
-        painter.setFont(font)
-        
-        # Use contrasting text color
-        painter.setPen(QPen(self.COLOR_ROOM_TEXT))
         
         # Check if we should show detailed labels
         detailed = self._should_show_detailed_labels()
         
-        # Draw labels for visible rooms
+        # Only show labels at appropriate zoom levels to avoid clutter
+        if self.zoom_level < 0.3:
+            return
+        
+        # Collect label information for collision detection
+        label_info = []
+        
         for polygon in self.visible_rooms:
-            centroid = polygon.get_centroid()
-            label_point = QPointF(centroid.x, centroid.y)
+            # Get room bounds to determine if it's large enough for labels
+            bounds = polygon.get_bounds()
+            room_width = bounds[2] - bounds[0]
+            room_height = bounds[3] - bounds[1]
+            
+            # Skip very small rooms at low zoom levels
+            min_size_for_labels = 3.0 / self.zoom_level  # Minimum 3 screen units
+            if room_width < min_size_for_labels or room_height < min_size_for_labels:
+                continue
             
             # Get appropriate label text
             label_text = self._get_space_label_text(polygon, detailed)
+            if not label_text:
+                continue
             
-            if label_text:
-                # Draw text with background for better visibility
-                self._draw_text_with_background(painter, label_point, label_text)
+            # Calculate optimal label position
+            centroid = polygon.get_centroid()
+            
+            # Ensure label is within room bounds with some margin
+            margin = 0.5
+            label_x = max(bounds[0] + margin, min(bounds[2] - margin, centroid.x))
+            label_y = max(bounds[1] + margin, min(bounds[3] - margin, centroid.y))
+            
+            label_info.append({
+                'polygon': polygon,
+                'text': label_text,
+                'position': QPointF(label_x, label_y),
+                'bounds': bounds
+            })
+        
+        # Draw labels with collision avoidance
+        self._draw_labels_with_collision_avoidance(painter, label_info, detailed)
     
     def _draw_text_with_background(self, painter: QPainter, position: QPointF, text: str) -> None:
         """
-        Draw text with a semi-transparent background for better visibility.
+        Draw text in professional ArchiCAD style without background.
         
         Args:
             painter: QPainter instance
             position: Position to draw text
             text: Text to draw
         """
-        # Calculate text bounds
-        font_metrics = painter.fontMetrics()
-        
-        # Handle multi-line text
+        # Handle multi-line text with different formatting per line
         lines = text.split('\n')
-        line_height = font_metrics.height()
-        max_width = max(font_metrics.horizontalAdvance(line) for line in lines)
-        total_height = line_height * len(lines)
+        if not lines:
+            return
         
-        # Create background rectangle
-        padding = 2
-        bg_rect = QRectF(
-            position.x() - max_width / 2 - padding,
-            position.y() - total_height / 2 - padding,
-            max_width + 2 * padding,
-            total_height + 2 * padding
-        )
+        # Calculate total height for centering
+        line_heights = []
+        total_height = 0
         
-        # Draw semi-transparent background
-        bg_color = QColor(255, 255, 255, 180)  # Semi-transparent white
-        painter.fillRect(bg_rect, bg_color)
+        for i, line in enumerate(lines):
+            if i == 0:
+                font = self._get_label_font("room_number")  # First line (room number)
+            elif i == len(lines) - 1 and "m²" in line:
+                font = self._get_label_font("area")  # Last line if it's area
+            else:
+                font = self._get_label_font("room_name")  # Middle lines (room name)
+            
+            painter.setFont(font)
+            font_metrics = painter.fontMetrics()
+            line_height = font_metrics.height()
+            line_heights.append(line_height)
+            total_height += line_height
         
-        # Draw border around background
-        border_pen = QPen(QColor(200, 200, 200), 1)
-        painter.setPen(border_pen)
-        painter.drawRect(bg_rect)
-        
-        # Restore text pen and draw text
+        # Professional black text without background (like ArchiCAD)
         painter.setPen(QPen(self.COLOR_ROOM_TEXT))
         
-        # Draw each line of text
+        # Draw each line with appropriate formatting
+        current_y = position.y() - total_height / 2
+        
         for i, line in enumerate(lines):
-            line_y = position.y() - total_height / 2 + (i + 0.8) * line_height
-            line_pos = QPointF(position.x() - font_metrics.horizontalAdvance(line) / 2, line_y)
-            painter.drawText(line_pos, line)
+            if not line.strip():
+                continue
+                
+            # Set appropriate font for this line
+            if i == 0:
+                font = self._get_label_font("room_number")
+            elif i == len(lines) - 1 and "m²" in line:
+                font = self._get_label_font("area")
+            else:
+                font = self._get_label_font("room_name")
+            
+            painter.setFont(font)
+            font_metrics = painter.fontMetrics()
+            
+            # Center the text horizontally
+            text_width = font_metrics.horizontalAdvance(line)
+            line_x = position.x() - text_width / 2
+            line_y = current_y + font_metrics.ascent()
+            
+            # Draw the text
+            painter.drawText(QPointF(line_x, line_y), line)
+            
+            # Move to next line
+            current_y += line_heights[i]
+    
+    def _draw_labels_with_collision_avoidance(self, painter: QPainter, label_info: List[Dict], detailed: bool) -> None:
+        """
+        Draw room labels with collision avoidance to prevent overlap.
+        
+        Args:
+            painter: QPainter instance
+            label_info: List of label information dictionaries
+            detailed: Whether to show detailed labels
+        """
+        # Sort by room size (largest first) to prioritize important rooms
+        label_info.sort(key=lambda x: (x['bounds'][2] - x['bounds'][0]) * (x['bounds'][3] - x['bounds'][1]), reverse=True)
+        
+        drawn_labels = []  # Track drawn label positions to avoid overlap
+        
+        for info in label_info:
+            text = info['text']
+            position = info['position']
+            bounds = info['bounds']
+            
+            # Calculate text dimensions
+            lines = text.split('\n')
+            if not lines:
+                continue
+            
+            # Get maximum text width and total height
+            max_width = 0
+            total_height = 0
+            
+            for i, line in enumerate(lines):
+                if i == 0:
+                    font = self._get_label_font("room_number")
+                elif i == len(lines) - 1 and "m²" in line:
+                    font = self._get_label_font("area")
+                else:
+                    font = self._get_label_font("room_name")
+                
+                painter.setFont(font)
+                font_metrics = painter.fontMetrics()
+                line_width = font_metrics.horizontalAdvance(line)
+                line_height = font_metrics.height()
+                
+                max_width = max(max_width, line_width)
+                total_height += line_height
+            
+            # Convert to screen coordinates for collision detection
+            screen_pos = self.view_transform.map(position)
+            screen_width = max_width * self.zoom_level
+            screen_height = total_height * self.zoom_level
+            
+            # Create label rectangle in screen coordinates
+            label_rect = QRectF(
+                screen_pos.x() - screen_width / 2,
+                screen_pos.y() - screen_height / 2,
+                screen_width,
+                screen_height
+            )
+            
+            # Check for collision with existing labels
+            collision = False
+            for existing_rect in drawn_labels:
+                if label_rect.intersects(existing_rect):
+                    collision = True
+                    break
+            
+            # Skip if there's a collision and room is small
+            room_area = (bounds[2] - bounds[0]) * (bounds[3] - bounds[1])
+            if collision and room_area < 15.0:  # Skip small rooms if collision
+                continue
+            
+            # Draw the label
+            self._draw_single_room_label(painter, position, text, detailed)
+            
+            # Add to drawn labels list
+            drawn_labels.append(label_rect)
+    
+    def _draw_single_room_label(self, painter: QPainter, position: QPointF, text: str, detailed: bool) -> None:
+        """
+        Draw a single room label with proper formatting.
+        
+        Args:
+            painter: QPainter instance
+            position: Position to draw text
+            text: Text to draw
+            detailed: Whether this is detailed view
+        """
+        lines = text.split('\n')
+        if not lines:
+            return
+        
+        # Calculate line spacing based on zoom level
+        base_spacing = 1.2  # Base line spacing multiplier
+        zoom_spacing = max(0.8, min(1.5, 1.0 / self.zoom_level))  # Adjust for zoom
+        line_spacing = base_spacing * zoom_spacing
+        
+        # Calculate total height for centering
+        total_height = 0
+        line_heights = []
+        
+        for i, line in enumerate(lines):
+            if i == 0:
+                font = self._get_label_font("room_number")
+            elif i == len(lines) - 1 and "m²" in line:
+                font = self._get_label_font("area")
+            else:
+                font = self._get_label_font("room_name")
+            
+            painter.setFont(font)
+            font_metrics = painter.fontMetrics()
+            line_height = font_metrics.height() * line_spacing
+            line_heights.append(line_height)
+            total_height += line_height
+        
+        # Start drawing from top
+        current_y = position.y() - total_height / 2
+        
+        for i, line in enumerate(lines):
+            if not line.strip():
+                continue
+            
+            # Set appropriate font and color for this line
+            if i == 0:
+                font = self._get_label_font("room_number")
+                painter.setPen(QPen(QColor(0, 0, 0)))  # Black for room number
+            elif i == len(lines) - 1 and "m²" in line:
+                font = self._get_label_font("area")
+                painter.setPen(QPen(QColor(80, 80, 80)))  # Slightly gray for area
+            else:
+                font = self._get_label_font("room_name")
+                painter.setPen(QPen(QColor(40, 40, 40)))  # Dark gray for room name
+            
+            painter.setFont(font)
+            font_metrics = painter.fontMetrics()
+            
+            # Center the text horizontally
+            text_width = font_metrics.horizontalAdvance(line)
+            line_x = position.x() - text_width / 2
+            line_y = current_y + font_metrics.ascent()
+            
+            # Draw the text
+            painter.drawText(QPointF(line_x, line_y), line)
+            
+            # Move to next line
+            current_y += line_heights[i]
     
     def _draw_selection_highlights(self, painter: QPainter) -> None:
         """Draw enhanced highlights for selected rooms."""
@@ -1190,14 +1483,16 @@ class FloorPlanCanvas(QWidget):
                 qt_polygon = self._polygon_to_qt(polygon)
                 
                 # Draw glow effect (outer highlight)
-                glow_pen = QPen(self.COLOR_SELECTION_GLOW, self.SELECTION_GLOW_WIDTH / self.zoom_level)
+                glow_pen = QPen(self.COLOR_SELECTION_GLOW, self.SELECTION_GLOW_WIDTH)
+                glow_pen.setCosmetic(True)  # Screen pixels, not world coordinates
                 glow_brush = QBrush(self.COLOR_SELECTION_GLOW)
                 painter.setPen(glow_pen)
                 painter.setBrush(glow_brush)
                 painter.drawPolygon(qt_polygon)
                 
                 # Draw main selection border
-                selection_pen = QPen(self.COLOR_SELECTION_BORDER, self.ROOM_SELECTED_WIDTH / self.zoom_level)
+                selection_pen = QPen(self.COLOR_SELECTION_BORDER, self.ROOM_SELECTED_WIDTH)
+                selection_pen.setCosmetic(True)  # Screen pixels, not world coordinates
                 painter.setPen(selection_pen)
                 painter.setBrush(Qt.BrushStyle.NoBrush)
                 painter.drawPolygon(qt_polygon)
@@ -1220,14 +1515,16 @@ class FloorPlanCanvas(QWidget):
             # Don't draw hover if room is already selected
             if hovered_polygon.space_guid not in self.selected_rooms:
                 # Draw subtle glow effect
-                glow_pen = QPen(self.COLOR_HOVER_GLOW, self.HOVER_GLOW_WIDTH / self.zoom_level)
+                glow_pen = QPen(self.COLOR_HOVER_GLOW, self.HOVER_GLOW_WIDTH)
+                glow_pen.setCosmetic(True)  # Screen pixels, not world coordinates
                 glow_brush = QBrush(self.COLOR_HOVER_GLOW)
                 painter.setPen(glow_pen)
                 painter.setBrush(glow_brush)
                 painter.drawPolygon(qt_polygon)
                 
                 # Draw hover border
-                hover_pen = QPen(self.COLOR_HOVER_BORDER, self.ROOM_HOVER_WIDTH / self.zoom_level)
+                hover_pen = QPen(self.COLOR_HOVER_BORDER, self.ROOM_HOVER_WIDTH)
+                hover_pen.setCosmetic(True)  # Screen pixels, not world coordinates
                 painter.setPen(hover_pen)
                 painter.setBrush(Qt.BrushStyle.NoBrush)
                 painter.drawPolygon(qt_polygon)
@@ -1240,9 +1537,173 @@ class FloorPlanCanvas(QWidget):
         message = "No floor plan data available"
         painter.drawText(self.rect(), Qt.AlignmentFlag.AlignCenter, message)
     
+    def _draw_background(self, painter: QPainter) -> None:
+        """Draw clean white background like ArchiCAD."""
+        # Pure white background for professional architectural drawings
+        painter.fillRect(self.rect(), self.COLOR_BACKGROUND)
+    
+    def _draw_grid_overlay(self, painter: QPainter) -> None:
+        """Draw professional grid overlay like ArchiCAD."""
+        if not self.floor_geometry or self.zoom_level < 0.15:
+            return
+        
+        # Save current painter state
+        painter.save()
+        
+        # Grid configuration based on zoom level - more subtle like ArchiCAD
+        if self.zoom_level > 1.5:
+            grid_spacing = 1.0  # 1m grid for high zoom
+            show_grid = True
+        elif self.zoom_level > 0.5:
+            grid_spacing = 2.5  # 2.5m grid for medium zoom
+            show_grid = True
+        elif self.zoom_level > 0.25:
+            grid_spacing = 5.0  # 5m grid for lower zoom
+            show_grid = True
+        else:
+            grid_spacing = 10.0  # 10m grid for very low zoom
+            show_grid = self.zoom_level > 0.15
+        
+        if not show_grid:
+            painter.restore()
+            return
+        
+        # Very light grid like ArchiCAD
+        grid_pen = QPen(self.COLOR_GRID, 0.25)
+        grid_pen.setCosmetic(True)  # Screen pixels, not world coordinates
+        painter.setPen(grid_pen)
+        
+        # Get visible area
+        visible_rect = self._get_visible_floor_rect()
+        
+        # Draw vertical grid lines
+        start_x = int(visible_rect.left() / grid_spacing) * grid_spacing
+        end_x = visible_rect.right()
+        x = start_x
+        while x <= end_x:
+            painter.drawLine(QPointF(x, visible_rect.top()), QPointF(x, visible_rect.bottom()))
+            x += grid_spacing
+        
+        # Draw horizontal grid lines
+        start_y = int(visible_rect.top() / grid_spacing) * grid_spacing
+        end_y = visible_rect.bottom()
+        y = start_y
+        while y <= end_y:
+            painter.drawLine(QPointF(visible_rect.left(), y), QPointF(visible_rect.right(), y))
+            y += grid_spacing
+        
+        # Draw major grid lines (every 5m or 10m) with slightly stronger emphasis
+        major_spacing = 5.0 if grid_spacing <= 2.5 else 10.0
+        if major_spacing > grid_spacing:
+            major_pen = QPen(self.COLOR_GRID_MAJOR, 0.5)
+            major_pen.setCosmetic(True)  # Screen pixels, not world coordinates
+            painter.setPen(major_pen)
+            
+            # Major vertical lines
+            major_x = int(visible_rect.left() / major_spacing) * major_spacing
+            while major_x <= visible_rect.right():
+                painter.drawLine(QPointF(major_x, visible_rect.top()), QPointF(major_x, visible_rect.bottom()))
+                major_x += major_spacing
+            
+            # Major horizontal lines
+            major_y = int(visible_rect.top() / major_spacing) * major_spacing
+            while major_y <= visible_rect.bottom():
+                painter.drawLine(QPointF(visible_rect.left(), major_y), QPointF(visible_rect.right(), major_y))
+                major_y += major_spacing
+        
+        # Restore painter state
+        painter.restore()
+    
+    def _draw_scale_indicator(self, painter: QPainter) -> None:
+        """Draw scale indicator in bottom-right corner."""
+        if not self.floor_geometry:
+            return
+        
+        painter.save()
+        
+        # Calculate scale bar length in meters
+        if self.zoom_level > 2.0:
+            scale_length_m = 5.0
+        elif self.zoom_level > 0.5:
+            scale_length_m = 10.0
+        elif self.zoom_level > 0.2:
+            scale_length_m = 25.0
+        else:
+            scale_length_m = 50.0
+        
+        # Convert to screen pixels
+        scale_length_px = scale_length_m * self.zoom_level
+        
+        # Position in bottom-right corner
+        margin = 20
+        start_x = self.width() - margin - scale_length_px - 60
+        start_y = self.height() - margin - 30
+        
+        # Draw scale bar background
+        bg_rect = QRectF(start_x - 10, start_y - 15, scale_length_px + 80, 35)
+        painter.fillRect(bg_rect, QColor(255, 255, 255, 200))
+        painter.setPen(QPen(QColor(200, 200, 200), 1))
+        painter.drawRect(bg_rect)
+        
+        # Draw scale bar
+        painter.setPen(QPen(QColor(0, 0, 0), 2))
+        painter.drawLine(QPointF(start_x, start_y), QPointF(start_x + scale_length_px, start_y))
+        
+        # Draw tick marks
+        painter.drawLine(QPointF(start_x, start_y - 5), QPointF(start_x, start_y + 5))
+        painter.drawLine(QPointF(start_x + scale_length_px, start_y - 5), QPointF(start_x + scale_length_px, start_y + 5))
+        
+        # Draw scale text
+        painter.setFont(QFont("Arial", 10, QFont.Weight.Bold))
+        scale_text = f"{scale_length_m:.0f}m"
+        painter.drawText(QPointF(start_x + scale_length_px + 10, start_y + 5), scale_text)
+        
+        painter.restore()
+    
+    def _draw_north_arrow(self, painter: QPainter) -> None:
+        """Draw north arrow in top-right corner."""
+        painter.save()
+        
+        # Position in top-right corner
+        margin = 20
+        center_x = self.width() - margin - 25
+        center_y = margin + 25
+        
+        # Draw background circle
+        painter.setBrush(QBrush(QColor(255, 255, 255, 200)))
+        painter.setPen(QPen(QColor(200, 200, 200), 1))
+        painter.drawEllipse(QPointF(center_x, center_y), 20, 20)
+        
+        # Draw north arrow
+        painter.setBrush(QBrush(QColor(220, 50, 50)))  # Red arrow
+        painter.setPen(QPen(QColor(0, 0, 0), 1))
+        
+        # Arrow points
+        arrow_points = [
+            QPointF(center_x, center_y - 15),      # Top point
+            QPointF(center_x - 6, center_y + 5),   # Bottom left
+            QPointF(center_x, center_y),           # Center
+            QPointF(center_x + 6, center_y + 5),   # Bottom right
+        ]
+        
+        from PyQt6.QtGui import QPolygonF
+        arrow_polygon = QPolygonF(arrow_points)
+        painter.drawPolygon(arrow_polygon)
+        
+        # Draw "N" label
+        painter.setFont(QFont("Arial", 8, QFont.Weight.Bold))
+        painter.setPen(QPen(QColor(0, 0, 0)))
+        painter.drawText(QPointF(center_x - 4, center_y + 18), "N")
+        
+        painter.restore()
+    
     def _draw_debug_info(self, painter: QPainter) -> None:
         """Draw debug information like coordinate system and grid."""
         if not self.floor_geometry:
+            return
+        
+        # Only show debug info in debug mode
+        if not getattr(self, 'debug_mode', False):
             return
         
         # Save current painter state
@@ -1257,33 +1718,6 @@ class FloorPlanCanvas(QWidget):
         painter.drawLine(QPointF(-1000, 0), QPointF(1000, 0))
         # Draw Y axis  
         painter.drawLine(QPointF(0, -1000), QPointF(0, 1000))
-        
-        # Draw grid
-        if self.zoom_level > 0.1:
-            grid_pen = QPen(QColor(200, 200, 200, 50), 0.5)
-            painter.setPen(grid_pen)
-            
-            # Grid spacing based on zoom level
-            grid_spacing = 5.0 if self.zoom_level > 0.5 else 10.0
-            
-            # Get visible area
-            visible_rect = self._get_visible_floor_rect()
-            
-            # Draw vertical grid lines
-            start_x = int(visible_rect.left() / grid_spacing) * grid_spacing
-            end_x = visible_rect.right()
-            x = start_x
-            while x <= end_x:
-                painter.drawLine(QPointF(x, visible_rect.top()), QPointF(x, visible_rect.bottom()))
-                x += grid_spacing
-            
-            # Draw horizontal grid lines
-            start_y = int(visible_rect.top() / grid_spacing) * grid_spacing
-            end_y = visible_rect.bottom()
-            y = start_y
-            while y <= end_y:
-                painter.drawLine(QPointF(visible_rect.left(), y), QPointF(visible_rect.right(), y))
-                y += grid_spacing
         
         # Draw floor bounds rectangle
         if self.floor_geometry.bounds:

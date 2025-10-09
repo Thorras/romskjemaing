@@ -9,7 +9,7 @@ import logging
 from typing import Optional, List, Dict, Any
 from PyQt6.QtWidgets import (
     QWidget, QVBoxLayout, QHBoxLayout, QPushButton, QLabel, 
-    QComboBox, QToolButton, QFrame, QSizePolicy, QSpacerItem
+    QComboBox, QToolButton, QFrame, QSizePolicy, QSpacerItem, QCheckBox
 )
 from PyQt6.QtCore import Qt, pyqtSignal, QSize
 from PyQt6.QtGui import QIcon, QFont
@@ -135,6 +135,8 @@ class NavigationControls(QWidget):
     zoom_out_requested = pyqtSignal()
     zoom_fit_requested = pyqtSignal()
     pan_reset_requested = pyqtSignal()
+    professional_style_toggled = pyqtSignal(bool)
+    show_areas_toggled = pyqtSignal(bool)
     
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -171,6 +173,26 @@ class NavigationControls(QWidget):
         self.reset_pan_btn = self._create_tool_button("⌖", "Reset View")
         self.reset_pan_btn.clicked.connect(self.pan_reset_requested.emit)
         layout.addWidget(self.reset_pan_btn)
+        
+        # Separator
+        separator2 = QFrame()
+        separator2.setFrameShape(QFrame.Shape.VLine)
+        separator2.setFrameShadow(QFrame.Shadow.Sunken)
+        layout.addWidget(separator2)
+        
+        # Professional style toggle
+        self.professional_style_cb = QCheckBox("ArchiCAD Style")
+        self.professional_style_cb.setToolTip("Toggle professional architectural drawing style")
+        self.professional_style_cb.setChecked(True)  # Default to professional style
+        self.professional_style_cb.toggled.connect(self.professional_style_toggled.emit)
+        layout.addWidget(self.professional_style_cb)
+        
+        # Show areas toggle
+        self.show_areas_cb = QCheckBox("Show Areas")
+        self.show_areas_cb.setToolTip("Show room areas in labels")
+        self.show_areas_cb.setChecked(True)
+        self.show_areas_cb.toggled.connect(self.show_areas_toggled.emit)
+        layout.addWidget(self.show_areas_cb)
         
         # Spacer to push controls to the left
         layout.addItem(QSpacerItem(40, 20, QSizePolicy.Policy.Expanding, QSizePolicy.Policy.Minimum))
@@ -282,6 +304,8 @@ class FloorPlanWidget(QWidget):
         self.navigation_controls.zoom_out_requested.connect(self._zoom_out)
         self.navigation_controls.zoom_fit_requested.connect(self._zoom_to_fit)
         self.navigation_controls.pan_reset_requested.connect(self._reset_view)
+        self.navigation_controls.professional_style_toggled.connect(self._toggle_professional_style)
+        self.navigation_controls.show_areas_toggled.connect(self._toggle_show_areas)
         
         # Floor plan canvas signals
         self.floor_plan_canvas.room_clicked.connect(self._on_space_clicked)
@@ -394,3 +418,11 @@ class FloorPlanWidget(QWidget):
     def _reset_view(self):
         """Handle reset view request."""
         self.floor_plan_canvas.zoom_to_fit()
+    
+    def _toggle_professional_style(self, enabled: bool):
+        """Handle professional style toggle."""
+        self.floor_plan_canvas.set_professional_style(enabled)
+    
+    def _toggle_show_areas(self, enabled: bool):
+        """Handle show areas toggle."""
+        self.floor_plan_canvas.set_show_room_areas(enabled)
