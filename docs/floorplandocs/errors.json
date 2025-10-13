@@ -1,0 +1,9 @@
+{
+  "errors": [
+    { "code": "IFC_OPEN_FAILED", "message": "Kunne ikke åpne IFC-filen.", "action": "Kontroller sti og filtilgang." },
+    { "code": "NO_STOREYS_FOUND", "message": "Fant ingen IfcBuildingStorey.", "action": "Kontroller IFC-romstruktur." },
+    { "code": "EMPTY_CUT_RESULT", "message": "Snitt ga ingen segmenter for etasje.", "action": "Verifiser cut_z og elementfiltre." },
+    { "code": "GEOMETRY_SHAPE_FAILED", "message": "Shape-generering feilet for ett eller flere elementer.", "action": "Sjekk representasjoner og åpningsinnstillinger." },
+    { "code": "WRITE_FAILED", "message": "Klarte ikke å skrive utdata (SVG/manifest).", "action": "Kontroller skrive-rettigheter og diskplass." }
+  ]
+}

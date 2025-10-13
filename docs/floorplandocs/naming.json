@@ -1,0 +1,6 @@
+{
+  "naming": {
+    "svg_filename_pattern": "{index:02d}_{storey_name_sanitized}.svg",
+    "geojson_filename_pattern": "{index:02d}_{storey_name_sanitized}.geo.json",
+    "sanitize": "Erstatt skråstreker, kolon o.l. med understrek og trim whitespace."
+  }

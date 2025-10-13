@@ -1,0 +1,11 @@
+{
+  "interoperability": {
+    "polylines_semantics": "Hvis du senere vil eksportere til GeoJSON, lag gjerne både 'ifc_class' og 'kategori' der sistnevnte har norske verdier.",
+    "example_feature_properties": {
+      "ifc_class": "IfcWall",
+      "kategori": "Vegg",
+      "linjetype": "snitt",
+      "etasjenavn": "Plan 02"
+    }
+  }
+}

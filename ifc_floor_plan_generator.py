@@ -135,15 +135,17 @@ class IFCFloorPlanGenerator:
                     if hasattr(rel, 'RelatedElements'):
                         elements.extend(rel.RelatedElements)
             
-            # Also check for elements that reference this storey
-            all_elements = (
-                self.ifc_file.by_type('IfcWall') +
-                self.ifc_file.by_type('IfcSlab') +
-                self.ifc_file.by_type('IfcColumn') +
-                self.ifc_file.by_type('IfcBeam') +
-                self.ifc_file.by_type('IfcDoor') +
-                self.ifc_file.by_type('IfcWindow')
-            )
+            # Get all relevant IFC element types
+            element_types = [
+                'IfcWall', 'IfcSlab', 'IfcColumn', 'IfcBeam', 
+                'IfcDoor', 'IfcWindow', 'IfcStair', 'IfcRailing',
+                'IfcCurtainWall', 'IfcBuildingElementProxy'
+            ]
+            
+            all_elements = []
+            for element_type in element_types:
+                if self.config.should_include_ifc_class(element_type):
+                    all_elements.extend(self.ifc_file.by_type(element_type))
             
             for element in all_elements:
                 if self._element_belongs_to_storey(element, storey):
@@ -191,25 +193,38 @@ class IFCFloorPlanGenerator:
         lines = []
         element_type = element.is_a()
         element_name = getattr(element, 'Name', '') or f'{element_type}_{element.id()}'
+        element_guid = getattr(element, 'GlobalId', f'NO_GUID_{element.id()}')
         
         try:
+            # Check cache first
+            cache_key = f"{element_guid}_{cut_height}" if self.geometry_cache is not None else None
+            if cache_key and cache_key in self.geometry_cache:
+                cached_result = self.geometry_cache[cache_key]
+                return SliceResult(cached_result, element_type, element_name, element_guid)
+            
             # Create geometry settings
             settings = ifcopenshell.geom.settings()
-            settings.set(settings.USE_WORLD_COORDS, self.config.use_world_coords)
-            settings.set(settings.DISABLE_OPENING_SUBTRACTIONS, not self.config.subtract_openings)
-            settings.set(settings.SEW_SHELLS, self.config.sew_shells)
+            settings.set(settings.USE_WORLD_COORDS, self.config.geometry.use_world_coords)
+            settings.set(settings.DISABLE_OPENING_SUBTRACTIONS, not self.config.geometry.subtract_openings)
+            settings.set(settings.SEW_SHELLS, self.config.geometry.sew_shells)
             
             # Get element shape
             shape = ifcopenshell.geom.create_shape(settings, element)
             if not shape:
-                return SliceResult(lines, element_type, element_name)
+                result = SliceResult(lines, element_type, element_name, element_guid)
+                if cache_key:
+                    self.geometry_cache[cache_key] = lines
+                return result
             
             # Get vertices and faces
             verts = shape.geometry.verts
             faces = shape.geometry.faces
             
             if not verts or not faces:
-                return SliceResult(lines, element_type, element_name)
+                result = SliceResult(lines, element_type, element_name, element_guid)
+                if cache_key:
+                    self.geometry_cache[cache_key] = lines
+                return result
             
             # Convert vertices to 3D points
             vertices = []
@@ -240,10 +255,14 @@ class IFCFloorPlanGenerator:
                     line = ((p1[0], p1[1]), (p2[0], p2[1]))
                     lines.append(line)
             
+            # Cache result
+            if cache_key:
+                self.geometry_cache[cache_key] = lines
+            
         except Exception as e:
             print(f"[WARNING] Error slicing {element_name}: {e}")
         
-        return SliceResult(lines, element_type, element_name)
+        return SliceResult(lines, element_type, element_name, element_guid)
     
     def _intersect_triangle_with_plane(self, v1: Tuple[float, float, float], 
                                      v2: Tuple[float, float, float], 
@@ -259,8 +278,8 @@ class IFCFloorPlanGenerator:
                 # Check if intersection is already in list (within tolerance)
                 is_duplicate = False
                 for existing in intersections:
-                    if (abs(existing[0] - intersection[0]) < self.config.slice_tol and
-                        abs(existing[1] - intersection[1]) < self.config.slice_tol):
+                    if (abs(existing[0] - intersection[0]) < self.config.tolerances.slice_tol and
+                        abs(existing[1] - intersection[1]) < self.config.tolerances.slice_tol):
                         is_duplicate = True
                         break
                 
@@ -277,9 +296,9 @@ class IFCFloorPlanGenerator:
         
         # Check if line crosses the plane
         if (z1 <= plane_z <= z2) or (z2 <= plane_z <= z1):
-            if abs(z2 - z1) < self.config.slice_tol:
+            if abs(z2 - z1) < self.config.tolerances.slice_tol:
                 # Line is parallel to plane
-                if abs(z1 - plane_z) < self.config.slice_tol:
+                if abs(z1 - plane_z) < self.config.tolerances.slice_tol:
                     return p1  # Line lies on plane
                 return None
             
@@ -291,15 +310,39 @@ class IFCFloorPlanGenerator:
         
         return None
     
-    def generate_floor_plan_svg(self, storey, output_path: str) -> bool:
+    def _sanitize_filename(self, name: str) -> str:
+        """Sanitize a string for use in filenames"""
+        # Replace problematic characters
+        sanitized = re.sub(r'[<>:"/\\|?*]', '_', name)
+        sanitized = re.sub(r'\s+', '_', sanitized)
+        return sanitized.strip('_')
+
+    def generate_floor_plan_svg(self, storey, storey_index: int) -> Optional[StoreyManifest]:
         """Generate SVG floor plan for a specific storey"""
         try:
             storey_name = getattr(storey, 'Name', '') or f'Storey_{storey.id()}'
+            storey_name_sanitized = self._sanitize_filename(storey_name)
             elevation = self.get_storey_elevation(storey)
-            cut_height = elevation + self.config.cut_offset_m
+            cut_height = self.config.get_cut_height_for_storey(storey_name, elevation)
             
             print(f"\nGenerating floor plan for {storey_name}")
             print(f"  Elevation: {elevation:.2f}m, Cut height: {cut_height:.2f}m")
+            
+            # Generate filenames
+            svg_filename = self.config.output.svg_filename_pattern.format(
+                index=storey_index,
+                storey_name_sanitized=storey_name_sanitized
+            )
+            svg_path = os.path.join(self.config.output_dir, svg_filename)
+            
+            geojson_filename = None
+            geojson_path = None
+            if self.config.output.write_geojson:
+                geojson_filename = self.config.output.geojson_filename_pattern.format(
+                    index=storey_index,
+                    storey_name_sanitized=storey_name_sanitized
+                )
+                geojson_path = os.path.join(self.config.output_dir, geojson_filename)
             
             # Get elements in this storey
             elements = self.get_storey_elements(storey)
@@ -307,39 +350,52 @@ class IFCFloorPlanGenerator:
             
             if not elements:
                 print(f"  [WARNING] No elements found for {storey_name}")
-                return False
+                return None
             
             # Slice all elements
             all_lines = []
             element_counts = {}
+            lines_by_class = {}
             
             for element in elements:
                 slice_result = self.slice_element_geometry(element, cut_height)
                 if slice_result.lines:
-                    all_lines.extend(slice_result.lines)
                     element_type = slice_result.element_type
                     element_counts[element_type] = element_counts.get(element_type, 0) + 1
+                    
+                    if element_type not in lines_by_class:
+                        lines_by_class[element_type] = []
+                    lines_by_class[element_type].extend(slice_result.lines)
+                    all_lines.extend(slice_result.lines)
             
             print(f"  Element summary: {dict(element_counts)}")
             print(f"  Generated {len(all_lines)} line segments")
             
             if not all_lines:
                 print(f"  [WARNING] No geometry lines generated for {storey_name}")
-                return False
+                return None
             
             # Create matplotlib figure for SVG export
             fig, ax = plt.subplots(1, 1, figsize=(16, 12))
             
-            # Draw all lines
-            for line in all_lines:
-                (x1, y1), (x2, y2) = line
+            # Set background color if specified
+            if self.config.rendering.background:
+                fig.patch.set_facecolor(self.config.rendering.background)
+                ax.set_facecolor(self.config.rendering.background)
+            
+            # Draw lines by class with appropriate styling
+            for element_type, lines in lines_by_class.items():
+                style = self.config.get_style_for_class(element_type)
                 
-                if self.config.invert_y:
-                    y1, y2 = -y1, -y2
-                
-                ax.plot([x1, x2], [y1, y2], 
-                       color=self.config.color_hex, 
-                       linewidth=self.config.linewidth_px)
+                for line in lines:
+                    (x1, y1), (x2, y2) = line
+                    
+                    if self.config.rendering.invert_y:
+                        y1, y2 = -y1, -y2
+                    
+                    ax.plot([x1, x2], [y1, y2], 
+                           color=style.color, 
+                           linewidth=style.linewidth_px)
             
             # Set up the plot
             ax.set_aspect('equal')
@@ -350,24 +406,74 @@ class IFCFloorPlanGenerator:
             
             # Save as SVG
             plt.tight_layout()
-            plt.savefig(output_path, format='svg', bbox_inches='tight', dpi=150)
+            plt.savefig(svg_path, format='svg', bbox_inches='tight', dpi=150)
             plt.close()
             
-            print(f"  [OK] Floor plan saved: {output_path}")
-            return True
+            print(f"  [OK] Floor plan saved: {svg_path}")
+            
+            # Generate GeoJSON if requested
+            if geojson_path:
+                self._write_geojson(all_lines, geojson_path)
+                print(f"  [OK] GeoJSON saved: {geojson_path}")
+            
+            # Create manifest entry
+            manifest = StoreyManifest(
+                index=storey_index,
+                storey_name=storey_name,
+                storey_name_sanitized=storey_name_sanitized,
+                elevation=elevation,
+                cut_height=cut_height,
+                svg_filename=svg_filename,
+                geojson_filename=geojson_filename,
+                element_count=len(elements),
+                line_count=len(all_lines)
+            )
+            
+            return manifest
             
         except Exception as e:
             print(f"  [ERROR] Failed to generate floor plan: {e}")
-            return False
+            return None
     
-    def generate_all_floor_plans(self, output_dir: str = "floor_plans") -> int:
+    def _write_geojson(self, lines: List[Tuple[Tuple[float, float], Tuple[float, float]]], output_path: str):
+        """Write lines to GeoJSON format"""
+        features = []
+        
+        for i, line in enumerate(lines):
+            (x1, y1), (x2, y2) = line
+            
+            if self.config.rendering.invert_y:
+                y1, y2 = -y1, -y2
+            
+            feature = {
+                "type": "Feature",
+                "properties": {
+                    "id": i,
+                    "type": "floor_plan_line"
+                },
+                "geometry": {
+                    "type": "LineString",
+                    "coordinates": [[x1, y1], [x2, y2]]
+                }
+            }
+            features.append(feature)
+        
+        geojson = {
+            "type": "FeatureCollection",
+            "features": features
+        }
+        
+        with open(output_path, 'w', encoding='utf-8') as f:
+            json.dump(geojson, f, indent=2)
+
+    def generate_all_floor_plans(self) -> int:
         """Generate floor plans for all building storeys"""
         if not self.ifc_file:
             print("[ERROR] No IFC file loaded")
             return 0
         
         # Create output directory
-        os.makedirs(output_dir, exist_ok=True)
+        os.makedirs(self.config.output_dir, exist_ok=True)
         
         # Get all building storeys
         storeys = self.get_building_storeys()
@@ -377,15 +483,40 @@ class IFCFloorPlanGenerator:
             print("[WARNING] No building storeys found in IFC file")
             return 0
         
+        # Sort storeys by elevation
+        storeys_with_elevation = []
+        for storey in storeys:
+            elevation = self.get_storey_elevation(storey)
+            storeys_with_elevation.append((elevation, storey))
+        
+        storeys_with_elevation.sort(key=lambda x: x[0])
+        
         # Generate floor plan for each storey
+        manifests = []
         success_count = 0
-        for i, storey in enumerate(storeys):
-            storey_name = getattr(storey, 'Name', '') or f'Storey_{storey.id()}'
-            safe_name = "".join(c for c in storey_name if c.isalnum() or c in (' ', '-', '_')).rstrip()
-            output_path = os.path.join(output_dir, f"{safe_name}_floor_plan.svg")
-            
-            if self.generate_floor_plan_svg(storey, output_path):
+        
+        for i, (elevation, storey) in enumerate(storeys_with_elevation):
+            manifest = self.generate_floor_plan_svg(storey, i)
+            if manifest:
+                manifests.append(manifest)
                 success_count += 1
+        
+        # Write manifest file
+        if manifests:
+            manifest_path = os.path.join(self.config.output_dir, self.config.output.manifest_filename)
+            manifest_data = {
+                "generated_at": str(Path().absolute()),
+                "input_file": self.config.input_path,
+                "total_storeys": len(storeys),
+                "successful_storeys": success_count,
+                "unit_scale": self.unit_scale,
+                "storeys": [manifest.__dict__ for manifest in manifests]
+            }
+            
+            with open(manifest_path, 'w', encoding='utf-8') as f:
+                json.dump(manifest_data, f, indent=2, ensure_ascii=False)
+            
+            print(f"[OK] Manifest saved: {manifest_path}")
         
         print(f"\n[OK] Generated {success_count}/{len(storeys)} floor plans")
         return success_count

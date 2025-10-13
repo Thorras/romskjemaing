@@ -1,0 +1,140 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ifc-planview config schema",
+  "type": "object",
+  "properties": {
+    "input_path": {
+      "type": "string",
+      "description": "Sti til IFC-fil som skal prosesseres."
+    },
+    "output_dir": {
+      "type": "string",
+      "description": "Katalog der SVG og manifest lagres."
+    },
+    "cut_offset_m": {
+      "type": "number",
+      "description": "Standard snitthøyde over etasjens nivå i meter."
+    },
+    "per_storey_overrides": {
+      "type": "object",
+      "description": "Overstyring per etasje, f.eks. spesifikk snitthøyde.",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "cut_offset_m": { "type": "number", "description": "Egen snitthøyde for denne etasjen." }
+        },
+        "additionalProperties": false
+      }
+    },
+    "class_filters": {
+      "type": "object",
+      "description": "Filtre for IFC-klasser som inngår i snitt.",
+      "properties": {
+        "include_ifc_classes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "IFC-klasser som skal med. Tom betyr alle relevante."
+        },
+        "exclude_ifc_classes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "IFC-klasser som skal ekskluderes."
+        }
+      },
+      "additionalProperties": false
+    },
+    "units": {
+      "type": "object",
+      "description": "Enhetshåndtering.",
+      "properties": {
+        "unit_scale_to_m": {
+          "type": "number",
+          "description": "Manuell skalering til meter (overstyr automatisk deteksjon)."
+        },
+        "auto_detect_units": {
+          "type": "boolean",
+          "description": "Forsøk å detektere skalering fra IFC-enheter til meter."
+        }
+      },
+      "additionalProperties": false
+    },
+    "geometry": {
+      "type": "object",
+      "description": "Geometrigenerering via IfcOpenShell.",
+      "properties": {
+        "use_world_coords": { "type": "boolean", "description": "Bruk globale koordinater for shape." },
+        "subtract_openings": { "type": "boolean", "description": "Trekk fra åpninger i vegger etc." },
+        "sew_shells": { "type": "boolean", "description": "Søm skall for renere mesh." }
+      },
+      "additionalProperties": false
+    },
+    "tolerances": {
+      "type": "object",
+      "description": "Numeriske toleranser for snitt og kjeding.",
+      "properties": {
+        "slice_tol": { "type": "number", "description": "Toleranse for plan-snitt." },
+        "chain_tol": { "type": "number", "description": "Toleranse for polylinje-kjeding." }
+      },
+      "additionalProperties": false
+    },
+    "rendering": {
+      "type": "object",
+      "description": "Stil for tegning i SVG.",
+      "properties": {
+        "invert_y": { "type": "boolean", "description": "Inverter Y-aksen for klassisk 2D-tegning." },
+        "background": { "type": "string", "description": "Bakgrunnsfarge (HEX), tom for transparent." },
+        "default_color": { "type": "string", "description": "Standard linjefarge (HEX)." },
+        "default_linewidth_px": { "type": "number", "description": "Standard linjetykkelse i piksler." },
+        "class_styles": {
+          "type": "object",
+          "description": "Overstyr stil per IFC-klasse.",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "color": { "type": "string", "description": "Linjefarge (HEX)." },
+              "linewidth_px": { "type": "number", "description": "Linjetykkelse i piksler." }
+            },
+            "additionalProperties": false
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "output": {
+      "type": "object",
+      "description": "Utdata og navnekonvensjoner.",
+      "properties": {
+        "svg_filename_pattern": {
+          "type": "string",
+          "description": "Mønster for SVG-filnavn.",
+          "examples": ["{index:02d}_{storey_name_sanitized}.svg"]
+        },
+        "manifest_filename": {
+          "type": "string",
+          "description": "Navn på manifestfilen."
+        },
+        "write_geojson": {
+          "type": "boolean",
+          "description": "Skriv også GeoJSON (linjer) for web-bruk."
+        },
+        "geojson_filename_pattern": {
+          "type": "string",
+          "description": "Mønster for GeoJSON-filnavn."
+        }
+      },
+      "additionalProperties": false
+    },
+    "performance": {
+      "type": "object",
+      "description": "Ytelsesinnstillinger.",
+      "properties": {
+        "multiprocessing": { "type": "boolean", "description": "Parallell kjøring per etasje/element." },
+        "max_workers": { "type": "integer", "description": "Antall worker-tråder/prosesser." },
+        "cache_geometry": { "type": "boolean", "description": "Cache geometri per GUID for gjenbruk." }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": ["input_path", "output_dir"],
+  "additionalProperties": false
+}

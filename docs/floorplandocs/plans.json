@@ -1,0 +1,30 @@
+{
+  "spec": "ifc-planview",
+  "version": "1.0.0",
+  "source_ifc": "data/modell.ifc",
+  "generated_utc": "2025-10-09T08:12:34Z",
+  "unit_scale_to_m": 1.0,
+  "storeys": [
+    {
+      "index": 0,
+      "storey_guid": "3fGk$9H2T2QO6n5tYV",
+      "storey_name": "Plan 01",
+      "elevation_m": 0.0,
+      "cut_z_m": 1.05,
+      "svg_path": "out/plans/00_Plan_01.svg",
+      "bbox_xy": [ -12.4, -7.2, 18.3, 22.5 ],
+      "stats": { "segments": 8240, "polylines": 1135, "elements_processed": 612, "duration_ms": 1540 },
+      "notes": "Snittede kanter tegnet som heltrukne linjer."
+    },
+    {
+      "index": 1,
+      "storey_guid": "0Qj1afgkV_2x1r44de",
+      "storey_name": "Plan 02",
+      "elevation_m": 3.3,
+      "cut_z_m": 4.4,
+      "svg_path": "out/plans/01_Plan_02.svg",
+      "bbox_xy": [ -12.4, -7.2, 18.3, 22.5 ],
+      "stats": { "segments": 8012, "polylines": 1107, "elements_processed": 590, "duration_ms": 1488 },
+      "notes": ""
+    }
+  ]

@@ -1,0 +1,6 @@
+{
+  "tolerances_guidance": {
+    "slice_tol": "1e-6 til 1e-4; øk ved hakkete konturer eller floating point-støy.",
+    "chain_tol": "1e-6 til 1e-4; øk hvis polylinjer ikke kjedes som forventet."
+  }
+}

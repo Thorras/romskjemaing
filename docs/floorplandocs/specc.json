@@ -1,0 +1,28 @@
+{
+  "spec": "ifc-planview",
+  "version": "1.0.0",
+  "title": "Etasjevise planvisninger fra IFC som SVG",
+  "goal": "For hver IfcBuildingStorey lage en 2D plan (SVG) basert på et horisontalt snitt, der snittede kanter tegnes som heltrukne linjer.",
+  "technology": "ifcopenshell + egen 'mesh slicing' i Python + matplotlib (for SVG). Ingen behov for pythonocc.",
+  "assumptions": [
+    "IFC-koordinater tolkes i meter, eller skaleres til meter via unit scale.",
+    "Snitthøyde settes relativt til etasjens nivå (Elevation) eller global plassering.",
+    "Kun geometri med gyldig shape (verts/faces) behandles.",
+    "Dør-/vindusåpninger subtraheres ved å aktivere opening-subtractions."
+  ],
+  "defaults": {
+    "cut_offset_m": 1.10,
+    "use_world_coords": true,
+    "subtract_openings": true,
+    "sew_shells": true,
+    "tolerances": {
+      "slice_tol": 1e-6,
+      "chain_tol": 1e-6
+    },
+    "rendering": {
+      "invert_y": true,
+      "linewidth_px": 0.8,
+      "color_hex": "#000000"
+    }
+  }
+}

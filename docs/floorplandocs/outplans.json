@@ -1,0 +1,49 @@
+{
+  "input_path": "data/modell.ifc",
+  "output_dir": "out/plans",
+  "cut_offset_m": 1.10,
+  "per_storey_overrides": {
+    "Plan 01": { "cut_offset_m": 1.05 }
+  },
+  "class_filters": {
+    "include_ifc_classes": ["IfcWall", "IfcSlab", "IfcColumn", "IfcDoor", "IfcWindow", "IfcStair", "IfcRailing"],
+    "exclude_ifc_classes": ["IfcSpace", "IfcCovering"]
+  },
+  "units": {
+    "unit_scale_to_m": 1.0,
+    "auto_detect_units": true
+  },
+  "geometry": {
+    "use_world_coords": true,
+    "subtract_openings": true,
+    "sew_shells": true
+  },
+  "tolerances": {
+    "slice_tol": 1e-6,
+    "chain_tol": 1e-6
+  },
+  "rendering": {
+    "invert_y": true,
+    "background": "",
+    "default_color": "#000000",
+    "default_linewidth_px": 0.8,
+    "class_styles": {
+      "IfcWall":   { "color": "#000000", "linewidth_px": 1.2 },
+      "IfcSlab":   { "color": "#111111", "linewidth_px": 0.9 },
+      "IfcColumn": { "color": "#000000", "linewidth_px": 1.1 },
+      "IfcDoor":   { "color": "#000000", "linewidth_px": 0.8 },
+      "IfcWindow": { "color": "#000000", "linewidth_px": 0.8 }
+    }
+  },
+  "output": {
+    "svg_filename_pattern": "{index:02d}_{storey_name_sanitized}.svg",
+    "manifest_filename": "plan_manifest.json",
+    "write_geojson": false,
+    "geojson_filename_pattern": "{index:02d}_{storey_name_sanitized}.geo.json"
+  },
+  "performance": {
+    "multiprocessing": false,
+    "max_workers": 4,
+    "cache_geometry": true
+  }
+}

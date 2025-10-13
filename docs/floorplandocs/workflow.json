@@ -1,0 +1,101 @@
+{
+  "workflow": [
+    {
+      "id": "load_ifc",
+      "description": "Åpne IFC og forbered enhetsskala.",
+      "inputs": ["config.input_path", "config.units.*"],
+      "outputs": ["ctx.ifc_handle", "ctx.unit_scale_to_m"],
+      "logic": [
+        "ifc = ifcopenshell.open(input_path)",
+        "unit_scale = auto_detect_units ? detect_scale(ifc) : config.units.unit_scale_to_m",
+        "ctx.unit_scale_to_m = unit_scale"
+      ]
+    },
+    {
+      "id": "collect_storeys",
+      "description": "Hent og sorter IfcBuildingStorey etter høyde.",
+      "inputs": ["ctx.ifc_handle"],
+      "outputs": ["ctx.storeys[]"],
+      "logic": [
+        "storeys = ifc.by_type('IfcBuildingStorey')",
+        "sorter på Elevation (fallback plassering)"
+      ]
+    },
+    {
+      "id": "resolve_cut_heights",
+      "description": "Bestem snitthøyde per etasje.",
+      "inputs": ["ctx.storeys[]", "config.cut_offset_m", "config.per_storey_overrides.*"],
+      "outputs": ["ctx.storey_params[storey].cut_z"],
+      "logic": [
+        "base_z = storey.Elevation eller global Z",
+        "cut_offset = override for navn || default config",
+        "cut_z = base_z + cut_offset"
+      ]
+    },
+    {
+      "id": "collect_elements",
+      "description": "Finn elementer i etasjen med geometri, filtrert på IFC-klasser.",
+      "inputs": ["ctx.ifc_handle", "ctx.storeys[]", "config.class_filters.*"],
+      "outputs": ["ctx.elements_by_storey[storey][]"],
+      "logic": [
+        "for rel in inverse(storey): IfcRelContainedInSpatialStructure",
+        "ta med product med Representation != None",
+        "filtrer på include/exclude-klasser"
+      ]
+    },
+    {
+      "id": "mesh_generation",
+      "description": "Generer trekantmesh for hvert element (verts/faces).",
+      "inputs": ["ctx.elements_by_storey[storey][]", "config.geometry.*"],
+      "outputs": ["ctx.meshes_by_element[element]"],
+      "logic": [
+        "settings.USE_WORLD_COORDS = true/false",
+        "settings.DISABLE_OPENING_SUBTRACTIONS = !subtract_openings",
+        "settings.SEW_SHELLS = sew_shells",
+        "shape = geom.create_shape(settings, element)"
+      ]
+    },
+    {
+      "id": "slice_mesh_by_plane",
+      "description": "Skjær mesh med horisontalt plan Z = cut_z, samle snitt-segmenter.",
+      "inputs": ["ctx.meshes_by_element[element]", "ctx.storey_params[storey].cut_z", "config.tolerances.slice_tol"],
+      "outputs": ["ctx.segments_by_storey[storey][]"],
+      "logic": [
+        "for hvert triangel: test kant-kryss med Z=cut_z",
+        "interpoler punkt for kryss",
+        "legg til 2D (XY) segmenter"
+      ]
+    },
+    {
+      "id": "chain_segments",
+      "description": "Kjede segmenter til polylinjer basert på endepunktmatching.",
+      "inputs": ["ctx.segments_by_storey[storey][]", "config.tolerances.chain_tol"],
+      "outputs": ["ctx.polylines_by_storey[storey][]"],
+      "logic": [
+        "kvantiser noder (tol)",
+        "bygg polylinjer ved å følge naboskap"
+      ]
+    },
+    {
+      "id": "render_svg",
+      "description": "Tegn polylinjer i SVG (matplotlib) med linjestiler.",
+      "inputs": ["ctx.polylines_by_storey[storey][]", "config.rendering.*", "config.output.svg_filename_pattern"],
+      "outputs": ["file.svg_path"],
+      "logic": [
+        "sett like akseskala, eventuelt invert_y",
+        "klassestyrt farge/tykkelse om tilgjengelig",
+        "lagre til utdata-katalog"
+      ]
+    },
+    {
+      "id": "write_manifest",
+      "description": "Skriv manifest over produserte filer og metadata.",
+      "inputs": ["alle steg-outputs", "config.output.manifest_filename"],
+      "outputs": ["file.plan_manifest.json"],
+      "logic": [
+        "summer stats per etasje (segmenter, polylinjer, tidsbruk)",
+        "inkluder cut_z, elevation, filstier"
+      ]
+    }
+  ]
+}

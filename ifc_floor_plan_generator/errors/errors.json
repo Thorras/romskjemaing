@@ -1,0 +1,127 @@
+{
+  "error_messages": {
+    "IFC_OPEN_FAILED": {
+      "message": "Kunne ikke åpne IFC-fil: {file_path}",
+      "description": "IFC-filen kan ikke åpnes eller leses",
+      "suggested_actions": [
+        "Kontroller at filen eksisterer og er tilgjengelig",
+        "Sjekk at filen har riktig IFC-format",
+        "Verifiser filrettigheter og at filen ikke er i bruk"
+      ]
+    },
+    "NO_STOREYS_FOUND": {
+      "message": "Ingen IfcBuildingStorey elementer funnet i IFC-filen",
+      "description": "IFC-filen inneholder ingen etasjer som kan prosesseres",
+      "suggested_actions": [
+        "Kontroller romstrukturen i IFC-filen",
+        "Sjekk at bygningsmodellen inneholder IfcBuildingStorey elementer",
+        "Verifiser at IFC-filen er komplett og ikke korrupt"
+      ]
+    },
+    "EMPTY_CUT_RESULT": {
+      "message": "Snitt på høyde {cut_height}m ga ingen segmenter for etasje '{storey_name}'",
+      "description": "Det horisontale snittet produserte ingen geometri",
+      "suggested_actions": [
+        "Verifiser at cut_z høyden er korrekt for etasjen",
+        "Sjekk elementfiltrene (include/exclude_ifc_classes)",
+        "Kontroller at det finnes elementer på den spesifiserte høyden",
+        "Prøv å justere snitthøyden eller toleransene"
+      ]
+    },
+    "GEOMETRY_SHAPE_FAILED": {
+      "message": "Shape-generering feilet for {ifc_class} element {element_guid}",
+      "description": "Kunne ikke generere 3D geometri for elementet",
+      "suggested_actions": [
+        "Sjekk elementets representasjoner i IFC-filen",
+        "Prøv å endre åpningsinnstillinger (subtract_openings)",
+        "Kontroller geometri-innstillinger (use_world_coords, sew_shells)",
+        "Elementet kan ha korrupt eller ugyldig geometri"
+      ]
+    },
+    "WRITE_FAILED": {
+      "message": "Kunne ikke skrive fil: {file_path}",
+      "description": "Filen kunne ikke skrives til disk",
+      "suggested_actions": [
+        "Sjekk rettigheter til output-mappen",
+        "Kontroller tilgjengelig diskplass",
+        "Verifiser at filbanen er gyldig",
+        "Sjekk at filen ikke er åpen i andre programmer"
+      ]
+    },
+    "CONFIG_ERROR": {
+      "message": "Konfigurasjonsfeil: {details}",
+      "description": "Ugyldig eller manglende konfigurasjon",
+      "suggested_actions": [
+        "Kontroller JSON-syntaksen i konfigurasjonsfilen",
+        "Verifiser at alle påkrevde felt er tilstede",
+        "Sjekk at verdiene er innenfor gyldige områder",
+        "Se dokumentasjonen for korrekt konfigurasjonsformat"
+      ]
+    },
+    "UNITS_DETECTION_FAILED": {
+      "message": "Kunne ikke detektere enheter fra IFC-fil",
+      "description": "Automatisk enhetsdeteksjon feilet",
+      "suggested_actions": [
+        "Spesifiser unit_scale_to_m manuelt i konfigurasjonen",
+        "Kontroller at IFC-filen inneholder enhetsopplysninger",
+        "Bruk standard skalering (1.0) som fallback"
+      ]
+    },
+    "MULTIPROCESSING_ERROR": {
+      "message": "Feil i parallell prosessering: {details}",
+      "description": "Multiprocessing operasjon feilet",
+      "suggested_actions": [
+        "Prøv å redusere antall worker-prosesser",
+        "Deaktiver multiprocessing midlertidig",
+        "Sjekk systemressurser og minnebruk",
+        "Kontroller at alle avhengigheter er tilgjengelige"
+      ]
+    },
+    "CACHE_ERROR": {
+      "message": "Feil i geometri-cache: {details}",
+      "description": "Cache-operasjon feilet",
+      "suggested_actions": [
+        "Deaktiver geometri-caching midlertidig",
+        "Sjekk tilgjengelig minne",
+        "Rens cache og prøv på nytt",
+        "Kontroller cache-konfigurasjon"
+      ]
+    },
+    "TOLERANCE_ERROR": {
+      "message": "Ugyldig toleranse-verdi: {tolerance_type} = {value}",
+      "description": "Toleranse-verdien er utenfor gyldig område",
+      "suggested_actions": [
+        "Bruk positive verdier for toleranser",
+        "Sjekk at toleransene er rimelige (ikke for små eller store)",
+        "Se dokumentasjonen for anbefalte toleranse-verdier"
+      ]
+    },
+    "RECOVERY_FAILED": {
+      "message": "Feilhåndtering feilet for {original_error_code}: {recovery_error}",
+      "description": "Kunne ikke håndtere feilen på en elegant måte",
+      "suggested_actions": [
+        "Sjekk den opprinnelige feilen",
+        "Kontroller systemressurser",
+        "Prøv å kjøre operasjonen på nytt"
+      ]
+    }
+  },
+  "warning_messages": {
+    "ELEMENT_SKIPPED": {
+      "message": "Hoppet over element {element_guid} ({ifc_class}): {reason}",
+      "description": "Element ble ikke prosessert"
+    },
+    "FALLBACK_UNITS": {
+      "message": "Bruker fallback enhets-skalering: {scale}",
+      "description": "Automatisk enhetsdeteksjon feilet, bruker standard"
+    },
+    "CACHE_MISS": {
+      "message": "Cache miss for element {element_guid}",
+      "description": "Element ikke funnet i cache, regenererer geometri"
+    },
+    "PERFORMANCE_WARNING": {
+      "message": "Ytelsesadvarsel: {details}",
+      "description": "Operasjon tar lengre tid enn forventet"
+    }
+  }
+}

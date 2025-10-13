@@ -1,0 +1,47 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ifc-planview output manifest",
+  "type": "object",
+  "properties": {
+    "spec": { "type": "string", "description": "Navn på spesifikasjonen." },
+    "version": { "type": "string", "description": "Versjon av spesifikasjonen." },
+    "source_ifc": { "type": "string", "description": "Kilde-IFC filsti." },
+    "generated_utc": { "type": "string", "format": "date-time", "description": "Tidspunkt for generering (UTC)." },
+    "unit_scale_to_m": { "type": "number", "description": "Skaleringsfaktor til meter." },
+    "storeys": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "index": { "type": "integer", "description": "Løpenummer for sorterte etasjer." },
+          "storey_guid": { "type": "string", "description": "GUID til etasjen." },
+          "storey_name": { "type": "string", "description": "Etasjens navn." },
+          "elevation_m": { "type": "number", "description": "Etasjens høyde (m)." },
+          "cut_z_m": { "type": "number", "description": "Z-nivå for snitt (m)." },
+          "svg_path": { "type": "string", "description": "Sti til generert SVG." },
+          "bbox_xy": {
+            "type": "array",
+            "description": "Boks [minx, miny, maxx, maxy] for tegningen.",
+            "items": { "type": "number" },
+            "minItems": 4,
+            "maxItems": 4
+          },
+          "stats": {
+            "type": "object",
+            "properties": {
+              "segments": { "type": "integer", "description": "Antall snitt-segmenter." },
+              "polylines": { "type": "integer", "description": "Antall polylinjer." },
+              "elements_processed": { "type": "integer", "description": "Antall elementer behandlet." },
+              "duration_ms": { "type": "number", "description": "Kjøretid for etasje (ms)." }
+            },
+            "additionalProperties": false
+          },
+          "notes": { "type": "string", "description": "Eventuelle notater (f.eks. tom snitt)." }
+        },
+        "required": ["index", "storey_guid", "storey_name", "cut_z_m", "svg_path"]
+      }
+    }
+  },
+  "required": ["spec", "version", "source_ifc", "generated_utc", "storeys"],
+  "additionalProperties": false
+}
