@@ -1,0 +1,55 @@
+{
+  "input_path": "tesfiler/DEICH_Test.ifc",
+  "output_dir": "floor_plans",
+  "cut_offset_m": 1.05,
+  
+  "per_storey_overrides": {
+    "Ground Floor": {"cut_offset_m": 0.8},
+    "First Floor": {"cut_offset_m": 1.2}
+  },
+  
+  "class_filters": {
+    "include_ifc_classes": [],
+    "exclude_ifc_classes": ["IfcSpace", "IfcOpeningElement"]
+  },
+  
+  "units": {
+    "auto_detect_units": true,
+    "unit_scale_to_m": null
+  },
+  
+  "geometry": {
+    "use_world_coords": true,
+    "subtract_openings": true,
+    "sew_shells": true
+  },
+  
+  "tolerances": {
+    "slice_tol": 1e-6,
+    "chain_tol": 1e-3
+  },
+  
+  "rendering": {
+    "default_color": "#000000",
+    "default_linewidth_px": 1.0,
+    "background": null,
+    "invert_y": true,
+    "class_styles": {
+      "IfcWall": {"color": "#FF0000", "linewidth_px": 2.0},
+      "IfcSlab": {"color": "#00FF00", "linewidth_px": 1.5},
+      "IfcColumn": {"color": "#0000FF", "linewidth_px": 2.5}
+    }
+  },
+  
+  "output": {
+    "svg_filename_pattern": "{index:02d}_{storey_name}.svg",
+    "geojson_filename_pattern": "{index:02d}_{storey_name}.geo.json",
+    "manifest_filename": "manifest.json",
+    "write_geojson": true
+  },
+  
+  "performance": {
+    "multiprocessing": false,
+    "max_workers": null
+  }
+}

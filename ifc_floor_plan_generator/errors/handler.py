@@ -286,7 +286,10 @@ class ErrorHandler:
             "EMPTY_CUT_RESULT": self._handle_empty_cut,
             "ELEMENT_SKIPPED": self._handle_element_skip,
             "CACHE_ERROR": self._handle_cache_error,
-            "UNITS_DETECTION_FAILED": self._handle_units_fallback
+            "UNITS_DETECTION_FAILED": self._handle_units_fallback,
+            "MULTIPROCESSING_ERROR": self._handle_multiprocessing_error,
+            "TOLERANCE_ERROR": self._handle_tolerance_error,
+            "VALIDATION_ERROR": self._handle_validation_error
         }
         
         if error_code in recoverable_errors:
@@ -379,3 +382,48 @@ class ErrorHandler:
         fallback_scale = context.get('fallback_scale', 1.0)
         self.log_warning(f"Bruker fallback enhets-skalering: {fallback_scale}", context)
         return True
+    
+    def _handle_multiprocessing_error(self, context: Dict[str, Any]) -> bool:
+        """Handle multiprocessing error by falling back to sequential processing.
+        
+        Args:
+            context: Error context containing multiprocessing information
+            
+        Returns:
+            bool: True (fallback to sequential processing)
+        """
+        self.log_warning("Multiprocessing feilet, faller tilbake til sekvensiell prosessering", context)
+        return True
+    
+    def _handle_tolerance_error(self, context: Dict[str, Any]) -> bool:
+        """Handle tolerance error by using default values.
+        
+        Args:
+            context: Error context containing tolerance information
+            
+        Returns:
+            bool: True (default tolerance used, processing continues)
+        """
+        tolerance_type = context.get('tolerance_type', 'unknown')
+        default_value = context.get('default_value', 0.01)
+        self.log_warning(f"Ugyldig {tolerance_type}, bruker standard verdi: {default_value}", context)
+        return True
+    
+    def _handle_validation_error(self, context: Dict[str, Any]) -> bool:
+        """Handle validation error by using default values or skipping.
+        
+        Args:
+            context: Error context containing validation information
+            
+        Returns:
+            bool: True if error can be handled, False if critical
+        """
+        field = context.get('field', 'unknown')
+        severity = context.get('severity', 'warning')
+        
+        if severity == 'critical':
+            self.log_error("VALIDATION_ERROR", context)
+            return False
+        else:
+            self.log_warning(f"Valideringsfeil for {field}, bruker standard verdi", context)
+            return True

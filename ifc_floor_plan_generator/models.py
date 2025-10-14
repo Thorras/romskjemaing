@@ -62,9 +62,11 @@ class BoundingBox:
 class StoreyResult:
     """Results from processing a single building storey."""
     storey_name: str
-    polylines: List[Polyline2D]
-    bounds: BoundingBox
+    storey_index: int
+    elevation: float
     cut_height: float
+    polylines: List[Polyline2D]
+    bounds: Dict[str, float]  # Changed from BoundingBox to Dict for compatibility
     element_count: int
     svg_file: Optional[str] = None
     geojson_file: Optional[str] = None
@@ -75,6 +77,8 @@ class StoreyResult:
             raise ValueError("Storey name is required")
         if self.element_count < 0:
             raise ValueError("Element count cannot be negative")
+        if self.storey_index < 0:
+            raise ValueError("Storey index cannot be negative")
 
 
 @dataclass
@@ -118,7 +122,10 @@ class ProcessingResult:
     manifest: ManifestData
     errors: List[ProcessingError] = field(default_factory=list)
     warnings: List[str] = field(default_factory=list)
+    processing_time: float = 0.0
+    unit_scale: float = 1.0
     success: bool = True
+    error_message: Optional[str] = None
     
     def __post_init__(self):
         """Validate processing result after initialization."""

@@ -12,7 +12,12 @@ from .exceptions import (
     EmptyCutResultError,
     GeometryShapeError,
     WriteFailedError,
-    ConfigurationError
+    ConfigurationError,
+    UnitsDetectionError,
+    MultiprocessingError,
+    CacheError,
+    ToleranceError,
+    ValidationError
 )
 
 __all__ = [
@@ -23,5 +28,10 @@ __all__ = [
     "EmptyCutResultError",
     "GeometryShapeError",
     "WriteFailedError",
-    "ConfigurationError"
+    "ConfigurationError",
+    "UnitsDetectionError",
+    "MultiprocessingError",
+    "CacheError",
+    "ToleranceError",
+    "ValidationError"
 ]

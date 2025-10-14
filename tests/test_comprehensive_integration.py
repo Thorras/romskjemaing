@@ -1,7 +1,8 @@
+#!/usr/bin/env python3
 """
-Comprehensive Integration Tests
+Comprehensive Integration Test for IFC Floor Plan Generator
 
-End-to-end integration tests for the complete room schedule generation pipeline.
+This test validates the complete system integration.
 """
 
 import pytest
@@ -20,13 +21,15 @@ from ifc_room_schedule.utils.caching_manager import CachingManager, CacheConfig
 from ifc_room_schedule.data.space_model import SpaceData
 
 
+from ifc_room_schedule.mappers.ns3940_classifier import NS3940Classifier
+from ifc_room_schedule.parsers.ns8360_name_parser import NS8360NameParser
+
+
 @pytest.fixture
 def temp_output_dir():
     """Create temporary output directory."""
     with tempfile.TemporaryDirectory() as temp_dir:
         yield temp_dir
-from ifc_room_schedule.mappers.ns3940_classifier import NS3940Classifier
-from ifc_room_schedule.parsers.ns8360_name_parser import NS8360NameParser
 
 
 class TestComprehensiveIntegration:
@@ -79,8 +82,6 @@ class TestComprehensiveIntegration:
                 relationships=[]
             )
         ]
-    
-
     
     def test_end_to_end_export_pipeline(self, sample_spaces, temp_output_dir):
         """Test complete export pipeline from spaces to JSON."""

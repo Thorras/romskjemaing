@@ -1,0 +1,2 @@
+2025-10-14 11:31:15,531 - ifc_floor_plan_generator.errors.handler - INFO - Loaded 11 error messages and 4 warning messages
+2025-10-14 11:31:15,531 - ifc_floor_plan_generator.geometry.section_processor - WARNING - OpenCASCADE not available - section processing will be limited. Install with: conda install -c conda-forge opencascade

@@ -1,0 +1,78 @@
+{
+  "input_path": "path/to/your/complex-building.ifc",
+  "output_dir": "floor_plans_advanced",
+  "cut_offset_m": 1.05,
+  
+  "per_storey_overrides": {
+    "Basement": {"cut_offset_m": 0.8},
+    "Ground Floor": {"cut_offset_m": 1.0},
+    "First Floor": {"cut_offset_m": 1.2},
+    "Second Floor": {"cut_offset_m": 1.1},
+    "Roof Level": {"cut_offset_m": 0.5}
+  },
+  
+  "class_filters": {
+    "include_ifc_classes": [
+      "IfcWall", 
+      "IfcSlab", 
+      "IfcColumn", 
+      "IfcBeam", 
+      "IfcStair", 
+      "IfcRailing",
+      "IfcDoor",
+      "IfcWindow"
+    ],
+    "exclude_ifc_classes": [
+      "IfcSpace", 
+      "IfcOpeningElement", 
+      "IfcFurnishingElement",
+      "IfcDistributionElement"
+    ]
+  },
+  
+  "units": {
+    "auto_detect_units": true,
+    "unit_scale_to_m": null
+  },
+  
+  "geometry": {
+    "use_world_coords": true,
+    "subtract_openings": true,
+    "sew_shells": true
+  },
+  
+  "tolerances": {
+    "slice_tol": 5e-7,
+    "chain_tol": 5e-4
+  },
+  
+  "rendering": {
+    "default_color": "#333333",
+    "default_linewidth_px": 1.0,
+    "background": "#FFFFFF",
+    "invert_y": true,
+    "class_styles": {
+      "IfcWall": {"color": "#FF0000", "linewidth_px": 2.5},
+      "IfcSlab": {"color": "#808080", "linewidth_px": 1.5},
+      "IfcColumn": {"color": "#0000FF", "linewidth_px": 3.0},
+      "IfcBeam": {"color": "#8B4513", "linewidth_px": 2.0},
+      "IfcStair": {"color": "#FFA500", "linewidth_px": 2.0},
+      "IfcRailing": {"color": "#32CD32", "linewidth_px": 1.5},
+      "IfcDoor": {"color": "#8B0000", "linewidth_px": 1.0},
+      "IfcWindow": {"color": "#4169E1", "linewidth_px": 1.0}
+    }
+  },
+  
+  "output": {
+    "svg_filename_pattern": "{index:02d}_{storey_name_sanitized}.svg",
+    "geojson_filename_pattern": "{index:02d}_{storey_name_sanitized}.geo.json",
+    "manifest_filename": "advanced_manifest.json",
+    "write_geojson": true
+  },
+  
+  "performance": {
+    "multiprocessing": true,
+    "max_workers": 4,
+    "cache_geometry": true
+  }
+}

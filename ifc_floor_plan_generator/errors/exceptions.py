@@ -113,3 +113,62 @@ class ConfigurationError(ProcessingError):
             message=f"Konfigurasjonsfeil: {message}",
             context=context
         )
+
+
+class UnitsDetectionError(ProcessingError):
+    """Exception raised when units detection fails."""
+    
+    def __init__(self, file_path: str, fallback_scale: float = 1.0):
+        super().__init__(
+            error_code="UNITS_DETECTION_FAILED",
+            message="Kunne ikke detektere enheter fra IFC-fil",
+            context={"file_path": file_path, "fallback_scale": fallback_scale}
+        )
+
+
+class MultiprocessingError(ProcessingError):
+    """Exception raised for multiprocessing-related errors."""
+    
+    def __init__(self, details: str, context: Optional[Dict[str, Any]] = None):
+        super().__init__(
+            error_code="MULTIPROCESSING_ERROR",
+            message=f"Feil i parallell prosessering: {details}",
+            context=context
+        )
+
+
+class CacheError(ProcessingError):
+    """Exception raised for cache-related errors."""
+    
+    def __init__(self, details: str, context: Optional[Dict[str, Any]] = None):
+        super().__init__(
+            error_code="CACHE_ERROR",
+            message=f"Feil i geometri-cache: {details}",
+            context=context
+        )
+
+
+class ToleranceError(ProcessingError):
+    """Exception raised for invalid tolerance values."""
+    
+    def __init__(self, tolerance_type: str, value: float, context: Optional[Dict[str, Any]] = None):
+        context = context or {}
+        context.update({"tolerance_type": tolerance_type, "value": value})
+        super().__init__(
+            error_code="TOLERANCE_ERROR",
+            message=f"Ugyldig toleranse-verdi: {tolerance_type} = {value}",
+            context=context
+        )
+
+
+class ValidationError(ProcessingError):
+    """Exception raised for input validation errors."""
+    
+    def __init__(self, field: str, value: Any, reason: str, context: Optional[Dict[str, Any]] = None):
+        context = context or {}
+        context.update({"field": field, "value": value, "reason": reason})
+        super().__init__(
+            error_code="VALIDATION_ERROR",
+            message=f"Valideringsfeil for {field}: {reason}",
+            context=context
+        )

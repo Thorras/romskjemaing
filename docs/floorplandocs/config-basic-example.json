@@ -1,0 +1,47 @@
+{
+  "input_path": "path/to/your/building.ifc",
+  "output_dir": "floor_plans",
+  "cut_offset_m": 1.05,
+  
+  "class_filters": {
+    "include_ifc_classes": [],
+    "exclude_ifc_classes": ["IfcSpace", "IfcOpeningElement"]
+  },
+  
+  "units": {
+    "auto_detect_units": true
+  },
+  
+  "geometry": {
+    "use_world_coords": true,
+    "subtract_openings": true,
+    "sew_shells": true
+  },
+  
+  "tolerances": {
+    "slice_tol": 1e-6,
+    "chain_tol": 1e-3
+  },
+  
+  "rendering": {
+    "default_color": "#000000",
+    "default_linewidth_px": 1.0,
+    "invert_y": true,
+    "class_styles": {
+      "IfcWall": {"color": "#FF0000", "linewidth_px": 2.0},
+      "IfcSlab": {"color": "#808080", "linewidth_px": 1.5},
+      "IfcColumn": {"color": "#0000FF", "linewidth_px": 2.5}
+    }
+  },
+  
+  "output": {
+    "svg_filename_pattern": "{index:02d}_{storey_name_sanitized}.svg",
+    "manifest_filename": "manifest.json",
+    "write_geojson": false
+  },
+  
+  "performance": {
+    "multiprocessing": false,
+    "cache_geometry": true
+  }
+}
